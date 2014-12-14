@@ -30,6 +30,17 @@ module.exports = function (grunt) {
     // Project settings
     yeoman: appConfig,
 
+
+    gitBuild: {
+    tasks: ['default'],
+      packageConfig: 'pkg',
+      packages: '*.json',
+      jsonSpace: 2,
+      jsonReplacer: undefined,
+      gitAdd: '--all'
+    },
+
+
     // Watches files for changes and runs tasks based on the changed files
     watch: {
       bower: {
