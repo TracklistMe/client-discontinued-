@@ -23,7 +23,7 @@ module.exports = function (grunt) {
     app: require('./bower.json').appPath || 'app',
     dist: 'dist'
   };
-
+  grunt.loadNpmTasks('grunt-exec');
   // Define the configuration for all the tasks
   grunt.initConfig({
 
@@ -31,14 +31,18 @@ module.exports = function (grunt) {
     yeoman: appConfig,
 
 
-    gitBuild: {
-    tasks: ['default'],
-      packageConfig: 'pkg',
-      packages: '*.json',
-      jsonSpace: 2,
-      jsonReplacer: undefined,
-      gitAdd: '--all'
-    },
+   exec: {
+    git: {
+      cmd: function(message) {
+        if (message == null){
+          grunt.log.error('You need a message for your commit'); 
+          return
+        } else {
+           return 'git commit -ma ' + message;
+        }
+      }
+    }
+  },
 
 
     // Watches files for changes and runs tasks based on the changed files
@@ -411,6 +415,8 @@ module.exports = function (grunt) {
     grunt.log.warn('The `server` task has been deprecated. Use `grunt serve` to start a server.');
     grunt.task.run(['serve:' + target]);
   });
+
+  
 
   grunt.registerTask('test', [
     'clean:server',
