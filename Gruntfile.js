@@ -359,7 +359,7 @@ module.exports = function (grunt) {
     // COMMIT 
     buildcontrol: {
         options: {
-          dir: 'tracklistme/dist',
+          dir: './',
           commit: true,
           push: true,
           message: 'Built %sourceName% from commit %sourceCommit% on branch %sourceBranch%'
@@ -379,8 +379,8 @@ module.exports = function (grunt) {
         },
         local: {
           options: {
-            remote: 'tracklistme/',
-            branch: 'master'
+            remote: '../',
+            branch: 'build'
           }
         }
       }
