@@ -364,7 +364,7 @@ module.exports = function (grunt) {
           push: true,
           message: 'Built %sourceName% from commit %sourceCommit% on branch %sourceBranch%'
         },
-        pages: {
+        github: {
           options: {
             remote: 'git@github.com:nicolabortignon/tracklistme.git',
             branch: 'master'
