@@ -67,6 +67,8 @@ module.exports = function (grunt) {
       }
     },
 
+ 
+
     // The actual grunt server settings
     connect: {
       options: {
@@ -430,8 +432,8 @@ module.exports = function (grunt) {
   ]);
 
   grunt.registerTask('commit',[
-      'buildcontrol'
-    ])
+      'buildcontrol:github'
+    ]);
 
   grunt.registerTask('default', [
     'newer:jshint',
