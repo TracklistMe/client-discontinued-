@@ -38,7 +38,7 @@ module.exports = function (grunt) {
           grunt.log.error('You need a message for your commit'); 
           return
         } else {
-           return 'git commit -ma ' + message;
+           return 'git commit -am ' + message;
         }
       }
     }
