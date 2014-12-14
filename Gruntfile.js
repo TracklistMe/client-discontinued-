@@ -30,21 +30,7 @@ module.exports = function (grunt) {
     // Project settings
     yeoman: appConfig,
 
-
-   exec: {
-    git: {
-      cmd: function(message) {
-        if (message == null){
-          grunt.log.error('You need a message for your commit'); 
-          return
-        } else {
-           return 'git commit -am ' + message;
-        }
-      }
-    }
-  },
-
-
+ 
     // Watches files for changes and runs tasks based on the changed files
     watch: {
       bower: {
@@ -442,6 +428,10 @@ module.exports = function (grunt) {
     'usemin',
     'htmlmin'
   ]);
+
+  grunt.registerTask('commit',[
+      'buildcontrol'
+    ])
 
   grunt.registerTask('default', [
     'newer:jshint',
