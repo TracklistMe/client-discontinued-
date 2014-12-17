@@ -11,27 +11,53 @@
 angular
   .module('tracklistmeApp', [
     'ngAnimate',
+    'ui.router',
     'ngCookies',
     'ngResource',
     'ngRoute',
     'ngSanitize',
-    'ngTouch'
+    'ngTouch',
+    'satellizer'
   ])
-  .config(function ($routeProvider) {
-    $routeProvider
-      .when('/', {
-        templateUrl: 'views/main.html',
-        controller: 'MainCtrl'
+  .config(function($stateProvider, $urlRouterProvider, $authProvider) {
+ 
+
+    $stateProvider
+      .state('main', {
+        url: '/',
+        templateUrl: 'views/main.html'
       })
-      .when('/about', {
-        templateUrl: 'views/about.html',
-        controller: 'AboutCtrl'
+      .state('login', {
+        url: '/login',
+        templateUrl: 'partials/login.html',
+        controller: 'LoginCtrl'
       })
-      .when('/admin', {
-        templateUrl: 'views/admin.html',
-        controller: 'AdminCtrl'
+      .state('signup', {
+        url: '/signup',
+        templateUrl: 'views/signup.html',
+        controller: 'SignupCtrl'
       })
-      .otherwise({
-        redirectTo: '/'
+      .state('logout', {
+        url: '/logout',
+        template: null,
+        controller: 'LogoutCtrl'
+      })
+      .state('profile', {
+        url: '/profile',
+        templateUrl: 'partials/profile.html',
+        controller: 'ProfileCtrl',
+        resolve: {
+          authenticated: function($location, $auth) {
+            if (!$auth.isAuthenticated()) {
+              return $location.path('/login');
+            }
+          }
+        }
       });
+    $urlRouterProvider.otherwise('/');
+
+    /* Auth Providers for 3rd parties auth services */
+    $authProvider.twitter({
+      url: '/auth/twitter'
+    });
   });
