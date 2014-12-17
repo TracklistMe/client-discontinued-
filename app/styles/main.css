@@ -1,7 +1,7 @@
 /* Space out content a bit */
 body {
-  padding-top: 20px;
-  padding-bottom: 20px;
+
+
 }
 
 /* Everything but the jumbotron gets side spacing for mobile first views */
@@ -58,6 +58,9 @@ body {
 .marketing p + h4 {
   margin-top: 28px;
 }
+
+
+ 
 
 /* Responsive: Portrait tablets and up */
 @media screen and (min-width: 768px) {
