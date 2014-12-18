@@ -8,7 +8,7 @@
  * Controller of the tracklistmeApp
  */
 angular.module('tracklistmeApp')
-  .controller('SignupCtrl', function($scope,$alert, $auth) {
+  .controller('SignupCtrl', function($scope, $alert, $auth) {
     $scope.signup = function() {
       $auth.signup({
         displayName: $scope.displayName,

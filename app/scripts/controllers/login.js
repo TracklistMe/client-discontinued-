@@ -21,7 +21,6 @@ angular.module('tracklistmeApp')
           });
         })
         .catch(function(response) {
-         
           $alert({
             content: response.data.message,
             animation: 'fadeZoom',
