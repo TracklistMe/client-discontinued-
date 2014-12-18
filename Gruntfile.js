@@ -23,6 +23,7 @@ module.exports = function (grunt) {
     app: require('./bower.json').appPath || 'app',
     dist: 'dist'
   };
+  grunt.loadNpmTasks('grunt-nodemon');
   grunt.loadNpmTasks('grunt-exec');
   // Define the configuration for all the tasks
   grunt.initConfig({
@@ -174,6 +175,13 @@ module.exports = function (grunt) {
       }
     },
 
+    // nodemon plugin for starting the server 
+    // 
+    nodemon: {
+      dev: {
+        script: 'server/server.js'
+      }
+    },
     // Renames files for browser caching purposes
     filerev: {
       dist: {
@@ -338,8 +346,14 @@ module.exports = function (grunt) {
 
     // Run some tasks in parallel to speed up the build process
     concurrent: {
+      nodemonAndWatch: {
+            tasks: ['nodemon', 'watch'],
+            options: {
+                logConcurrentOutput: true
+            }
+        },
       server: [
-        'copy:styles'
+        'copy:styles' 
       ],
       test: [
         'copy:styles'
@@ -348,7 +362,7 @@ module.exports = function (grunt) {
         'copy:styles',
         'imagemin',
         'svgmin'
-      ]
+      ] 
     },
 
     // Test settings
@@ -394,7 +408,7 @@ module.exports = function (grunt) {
       'wiredep',
       'concurrent:server',
       'autoprefixer',
-      'connect:livereload',
+      'connect:livereload', 
       'watch'
     ]);
   });
