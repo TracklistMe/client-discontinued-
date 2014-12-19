@@ -23,9 +23,10 @@
       <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
     <![endif]-->
 
-<div ng-controller="NavbarCtrl" class="navbar navbar-default navbar-static-top">
+<div ng-controller="NavbarCtrl" class="navbar navbar-default  navbar-fixed-top">
   <div class="navbar-header">
-    <a class="navbar-brand" href="/#/"><i class="ion-ios7-pulse-strong"></i> Tracklist.me</a>
+    <a class="navbar-brand" href="/#/"><i class="ion-ios7-pulse-strong"></i><img src="images/logo.png" /></a>
+
   </div>
   <ul class="nav navbar-nav"> 
     <li ng-if="isAuthenticated()"><a href="/#/profile">Profile</a></li>
@@ -34,9 +35,20 @@
     <li><a href="/#/login">Login</a></li>
     <li><a href="/#/signup">Sign up</a></li>
   </ul>
-  <ul ng-if="isAuthenticated()" class="nav navbar-nav pull-right">
-    <li><a href="/#/logout">Logout</a></li>
+   
+  <ul ng-if="isAuthenticated()"  class="nav navbar-nav navbar-right ">
+ 
+                         <img  ng-click="showHideDropDown()" src="https://scontent-b.xx.fbcdn.net/hphotos-xfa1/v/t1.0-9/403965_199820350146468_61231958_n.jpg?oh=6d84b50ef419218d8ef19e7d1fd24591&oe=54FD36B6" class="img-circle special-img">
+  
   </ul>
+
+  <div ng-show="">
+    TESTO 123
+    123
+    12
+    312
+    312
+  </div>
 </div>
     <!-- Add your site or application content here -->
 <div ui-view class="fadeZoom"></div>
