@@ -38,11 +38,11 @@
    
   <ul ng-if="isAuthenticated()"  class="nav navbar-nav navbar-right ">
  
-                         <img  ng-click="showHideDropDown()" src="https://scontent-b.xx.fbcdn.net/hphotos-xfa1/v/t1.0-9/403965_199820350146468_61231958_n.jpg?oh=6d84b50ef419218d8ef19e7d1fd24591&oe=54FD36B6" class="img-circle special-img">
+                         <img  ng-click="showAccountDropDown = false" src="https://scontent-b.xx.fbcdn.net/hphotos-xfa1/v/t1.0-9/403965_199820350146468_61231958_n.jpg?oh=6d84b50ef419218d8ef19e7d1fd24591&oe=54FD36B6" class="img-circle special-img">
   
   </ul>
 
-  <div ng-show="">
+  <div ng-show="showAccountDropDown">
     TESTO 123
     123
     12
