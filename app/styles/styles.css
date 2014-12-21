@@ -1,7 +1,7 @@
 body {
  
-  background: #f3f3f3;
-  padding-top: 76px;
+  background: #f4efe9;
+  padding-top: 80px;
 }
 
 h1, h2, h3, h4, h5, h6 {
@@ -66,13 +66,29 @@ a {
     top: 15px;
     float: left;
     right: 15px;
-      box-shadow: 0 2px 5px 0 rgba(0, 0, 0, .10);
+    box-shadow: 0 2px 5px 0 rgba(0, 0, 0, .10);
 }
 
-.dropdown-menu{
-  margin-left: 20px;
-  width: 300px;
+.dropDownNavProfile{
+  right: 0px;
+  top: 72px;
+  position: absolute;
+  background-color: #fff;
+  box-shadow: 0 2px 5px 0 rgba(0, 0, 0, .10);
 }
+.dropDownNavProfile:after {
+    content: "";
+    position: absolute;
+    top: -7px;
+    right: 29px;
+    border-style: solid;
+    border-width: 0 7px 7px;
+    border-color: #fff transparent;
+    display: block;
+    width: 0;
+    z-index: 1;
+}
+
  
 
 .navbar-brand {
