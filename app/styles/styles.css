@@ -1,7 +1,7 @@
 body {
  
   background: #f4efe9;
-  padding-top: 80px;
+  padding-top: 86px;
 }
 
 h1, h2, h3, h4, h5, h6 {
@@ -66,7 +66,11 @@ a {
     top: 15px;
     float: left;
     right: 15px;
-    box-shadow: 0 2px 5px 0 rgba(0, 0, 0, .10);
+    -webkit-backface-visibility: hidden; 
+    -webkit-background-clip: content-box;
+    cursor: pointer; 
+    cursor: hand;
+    box-shadow: 0 2px 2px 0 rgba(0, 0, 0, .15);
 }
 
 .dropDownNavProfile{

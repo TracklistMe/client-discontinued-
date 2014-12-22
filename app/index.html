@@ -15,6 +15,7 @@
     <!-- build:css(.tmp) styles/main.css -->
     <link rel="stylesheet" href="styles/main.css">
     <link rel="stylesheet" href="styles/styles.css">
+    <link rel="stylesheet" href="styles/dropImageProfile.css">
 
     <!-- endbuild -->
   </head>
@@ -42,7 +43,7 @@
                               
   <ul ng-if="isAuthenticated()"  class="nav navbar-nav navbar-right ">
  
-                         <img  ng-click="$parent.showAccountDropDown = !$parent.showAccountDropDown" src="https://scontent-b.xx.fbcdn.net/hphotos-xfa1/v/t1.0-9/403965_199820350146468_61231958_n.jpg?oh=6d84b50ef419218d8ef19e7d1fd24591&oe=54FD36B6" class="img-circle special-img">
+                         <img  ng-click="$parent.showAccountDropDown = !$parent.showAccountDropDown" src="http://neatlock.com/wp-content/uploads/2014/07/person-placeholder.jpg" class="img-circle special-img">
   </ul>
 
    
@@ -83,6 +84,8 @@
     <script src="bower_components/angular-ui-router/release/angular-ui-router.js"></script>
     <script src="bower_components/angular-strap/dist/angular-strap.js"></script>
     <script src="bower_components/angular-strap/dist/angular-strap.tpl.js"></script>
+    <script src="bower_components/ng-file-upload/angular-file-upload.js"></script>
+    <script src="bower_components/ng-file-upload-shim/angular-file-upload-shim.js"></script>
     <!-- endbower -->
     <!-- endbuild -->
 

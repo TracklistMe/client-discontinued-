@@ -18,7 +18,8 @@ angular
     'ngSanitize',
     'ngTouch',
     'satellizer',
-    'mgcrea.ngStrap'
+    'mgcrea.ngStrap',
+    'angularFileUpload'
   ])
   .config(function($stateProvider, $urlRouterProvider, $authProvider) {
  
