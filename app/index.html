@@ -15,6 +15,7 @@
     <!-- build:css(.tmp) styles/main.css -->
     <link rel="stylesheet" href="styles/main.css">
     <link rel="stylesheet" href="styles/styles.css">
+    <link rel="stylesheet" href="styles/dropImageProfile.css">
 
     <!-- endbuild -->
   </head>
@@ -23,20 +24,29 @@
       <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
     <![endif]-->
 
-<div ng-controller="NavbarCtrl" class="navbar navbar-default navbar-static-top">
+<div ng-controller="NavbarCtrl" class="navbar navbar-default  navbar-fixed-top">
   <div class="navbar-header">
-    <a class="navbar-brand" href="/#/"><i class="ion-ios7-pulse-strong"></i> Tracklist.me</a>
+    <a class="navbar-brand" href="/#/"><i class="ion-ios7-pulse-strong"></i><img src="images/logo.png" /></a>
   </div>
-  <ul class="nav navbar-nav"> 
-    <li ng-if="isAuthenticated()"><a href="/#/profile">Profile</a></li>
-  </ul>
+   
   <ul ng-if="!isAuthenticated()" class="nav navbar-nav pull-right">
     <li><a href="/#/login">Login</a></li>
     <li><a href="/#/signup">Sign up</a></li>
   </ul>
-  <ul ng-if="isAuthenticated()" class="nav navbar-nav pull-right">
-    <li><a href="/#/logout">Logout</a></li>
+  <div ng-click="$parent.showAccountDropDown = !$parent.showAccountDropDown" 
+        class="col-lg-2 col-xs-12 col-sm-6 dropDownNavProfile" 
+        ng-if="isAuthenticated() && showAccountDropDown">
+      <a href="/#/logout"><button class="btn">Logout</button></a>
+      <a href="/#/profile"><button class="btn">Profile</button></a>
+  </div>
+                 
+                              
+  <ul ng-if="isAuthenticated()"  class="nav navbar-nav navbar-right ">
+ 
+                         <img  ng-click="$parent.showAccountDropDown = !$parent.showAccountDropDown" src="http://neatlock.com/wp-content/uploads/2014/07/person-placeholder.jpg" class="img-circle special-img">
   </ul>
+
+   
 </div>
     <!-- Add your site or application content here -->
 <div ui-view class="fadeZoom"></div>
@@ -74,6 +84,8 @@
     <script src="bower_components/angular-ui-router/release/angular-ui-router.js"></script>
     <script src="bower_components/angular-strap/dist/angular-strap.js"></script>
     <script src="bower_components/angular-strap/dist/angular-strap.tpl.js"></script>
+    <script src="bower_components/ng-file-upload/angular-file-upload.js"></script>
+    <script src="bower_components/ng-file-upload-shim/angular-file-upload-shim.js"></script>
     <!-- endbower -->
     <!-- endbuild -->
 

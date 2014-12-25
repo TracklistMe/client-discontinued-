@@ -5,8 +5,12 @@
  */
 
 var path = require('path');
+var fs = require('fs-extra');       //File System - for file manipulation
+var util = require('util'); 
+var busboy = require('connect-busboy'); 
 var qs = require('querystring');
-
+var config = require('./config');
+var http = require('http');
 var async = require('async');
 var bcrypt = require('bcryptjs');
 var bodyParser = require('body-parser');
@@ -16,14 +20,14 @@ var jwt = require('jwt-simple');
 var moment = require('moment');
 var mongoose = require('mongoose');
 var request = require('request');
-var Sequelize = require('sequelize')
+var Sequelize = require('sequelize');
+var multipart = require('connect-multiparty');
 var sequelize = new Sequelize(config.MYSQL_DATABASE, config.MYSQL_USER, config.MYSQL_PASSWORD, {
   host: config.MYSQL_HOST,
   dialect: 'mysql'
 });
 
-
-var config = require('./config');
+ 
 
 
 var User = sequelize.define('User', {
@@ -41,7 +45,7 @@ var User = sequelize.define('User', {
   }, {
     instanceMethods: {
       comparePassword : function(password)  { 
-        console.log(this.password)
+        
         return bcrypt.compareSync(password,this.password)
       }
     }
@@ -66,15 +70,7 @@ User.beforeCreate(function(user, fn) {
   )
  */
 
-sequelize.sync().success(function() {
-  User.create({
-    email: 'a@a.it',
-      password: 'test',
-      displayName: 'asdasd',
-  }).success(function(sdepold) {
-    console.log("object created")
-  })
-})
+ 
  
 /*
 var userSchema = new mongoose.Schema({
@@ -124,7 +120,23 @@ app.set('port', process.env.PORT || 3000);
 app.use(logger('dev'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
+app.use(function (req, res, next) {
 
+    // Website you wish to allow to connect
+    res.setHeader('Access-Control-Allow-Origin', 'http://localhost:9000');
+    // Request methods you wish to allow
+    res.setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS, PUT, PATCH, DELETE');
+
+    // Request headers you wish to allow
+    res.setHeader('Access-Control-Allow-Headers', 'my-header,X-Requested-With,content-type,Authorization');
+
+    // Set to true if you need the website to include cookies in the requests sent
+    // to the API (e.g. in case you use sessions)
+    res.setHeader('Access-Control-Allow-Credentials', true);
+
+    // Pass to next layer of middleware
+    next();
+});
 // Force HTTPS on Heroku
 if (app.get('env') === 'production') {
   app.use(function(req, res, next) {
@@ -133,12 +145,111 @@ if (app.get('env') === 'production') {
   });
 } 
 
+/* ========================================================== 
+Use busboy middleware
+============================================================ */
+app.use(busboy());
+
+app.post('/upload',function (req, res, next) {
+    var arr;
+    var fstream;
+    var filesize = 0;
+    req.pipe(req.busboy);
+
+      //--------------------------------------------------------------------------
+    req.busboy.on('file', function (fieldname, file, filename, encoding, mimetype) {
+      //uploaded file name, encoding, MIME type
+      console.log('File [' + fieldname +']: filename:' + filename + ', encoding:' + encoding + ', MIME type:'+ mimetype);
+      //uploaded file size
+      file.on('data', function(data) {
+      console.log('File [' + fieldname + '] got ' + data.length + ' bytes');
+      fileSize = data.length;
+      console.log("fileSize= " + fileSize);
+    });
+
+    file.on('end', function() {
+      console.log('File [' + fieldname + '] ENDed');
+      console.log("-------------------------");
+    });
+
+    //populate array
+    //I am collecting file info in data read about the file. It may be more correct to read 
+    //file data after the file has been saved to img folder i.e. after file.pipe(stream) completes
+    //the file size can be got using stats.size as shown below
+    arr= [{fieldname: fieldname, filename: filename, encoding: encoding, MIMEtype: mimetype}];
+    
+          //Path where image will be uploaded
+        fstream = fs.createWriteStream(__dirname + '/uploadFolder/img/' + filename); //create a writable stream
+        console.log(__dirname + '/uploadFolder/img/' + filename)
+        file.pipe(fstream);   //pipe the post data to the file
+
+
+    //stream Ended - (data written) send the post response
+      req.on('end', function () {
+        res.writeHead(200, {"content-type":"text/html"});   //http response header
+
+          //res.end(JSON.stringify(arr));             //http response body - send json data
+      });
+
+    //Finished writing to stream
+    fstream.on('finish', function () { 
+      console.log('Finished writing!'); 
+
+        //Get file stats (including size) for file saved to server
+        fs.stat(__dirname + '/uploadFolder/img/' + filename, function(err, stats) {
+            if(err) 
+              throw err;      
+            //if a file
+            if (stats.isFile()) {
+                //console.log("It\'s a file & stats.size= " + JSON.stringify(stats)); 
+                console.log("File size saved to server: " + stats.size);  
+                console.log("-----------------------");
+            };
+          });
+    });
+
+
+        // error
+        fstream.on('error', function (err) {
+          console.log(err);
+        });
+
+    
+    });  // @END/ .req.busboy
+  });  //  @END/ POST
+  
+
+
+  //PUT
+app.put('/upload',function (req, res, next) {
+
+      var fstream;
+      req.pipe(req.busboy);
+      req.busboy.on('file', function (fieldname, file, filename) {
+          console.log("Uploading: " + filename);
+
+          //Path where image will be uploaded
+          fstream = fs.createWriteStream(__dirname + '/img/' + filename);
+          file.pipe(fstream);
+
+          fstream.on('close', function () {
+              console.log("Upload Finished of " + filename);
+              res.redirect('back');       //where to go next
+          });
+      });
+  });
+
+
+ 
+
+
 /*
  |--------------------------------------------------------------------------
  | Login Required Middleware
  |--------------------------------------------------------------------------
  */
 function ensureAuthenticated(req, res, next) {
+ 
   if (!req.headers.authorization) {
     return res.status(401).send({ message: 'Please make sure your request has an Authorization header' });
   }
@@ -147,6 +258,7 @@ function ensureAuthenticated(req, res, next) {
   if (payload.exp <= moment().unix()) {
     return res.status(401).send({ message: 'Token has expired' });
   }
+  
   req.user = payload.sub;
   next();
 }
@@ -158,7 +270,7 @@ function ensureAuthenticated(req, res, next) {
  */
 function createToken(user) {
   var payload = {
-    sub: user._id,
+    sub: user.id,
     iat: moment().unix(),
     exp: moment().add(14, 'days').unix()
   };
@@ -171,7 +283,9 @@ function createToken(user) {
  |--------------------------------------------------------------------------
  */
 app.get('/api/me', ensureAuthenticated, function(req, res) {
-  User.findById(req.user, function(err, user) {
+   
+  User.find({ where: {id: req.user} }).then(function(user) {
+    
     res.send(user);
   });
 });
@@ -182,7 +296,7 @@ app.get('/api/me', ensureAuthenticated, function(req, res) {
  |--------------------------------------------------------------------------
  */
 app.put('/api/me', ensureAuthenticated, function(req, res) {
-  User.findById(req.user, function(err, user) {
+  User.find({ where: {id: req.user} }).then(function(user) {
     if (!user) {
       return res.status(400).send({ message: 'User not found' });
     }
@@ -201,7 +315,7 @@ app.put('/api/me', ensureAuthenticated, function(req, res) {
  |--------------------------------------------------------------------------
  */
 app.post('/auth/login', function(req, res) {
-  console.log("LOGIN WITH CREDENTIAL")
+  
   User.find({ where: {email: req.body.email} }).then(function(user) {
   // project will be the first entry of the Projects table with the title 'aProject' || null
     if (!user) {
@@ -287,6 +401,10 @@ app.post('/auth/google', function(req, res) {
           if (existingUser) {
             return res.send({ token: createToken(existingUser) });
           }
+
+           
+
+
           var user = new User();
           user.google = profile.sub;
           user.displayName = profile.name;
@@ -458,7 +576,6 @@ app.post('/auth/live', function(req, res) {
     function(accessToken, done) {
       var profileUrl = 'https://apis.live.net/v5.0/me?access_token=' + accessToken.access_token;
       request.get({ url: profileUrl, json: true }, function(err, response, profile) {
-        console.log(profile);
         done(err, profile);
       });
     },
@@ -651,6 +768,7 @@ app.get('/auth/twitter', function(req, res) {
     // Step 1. Obtain request token for the authorization popup.
     request.post({ url: requestTokenUrl, oauth: requestTokenOauth }, function(err, response, body) {
       var oauthToken = qs.parse(body);
+      console.log(body)
       var params = qs.stringify({ oauth_token: oauthToken.oauth_token });
 
       // Step 2. Redirect to the authorization screen.
@@ -666,41 +784,53 @@ app.get('/auth/twitter', function(req, res) {
 
     // Step 3. Exchange oauth token and oauth verifier for access token.
     request.post({ url: accessTokenUrl, oauth: accessTokenOauth }, function(err, response, profile) {
+      console.log("----------------")
+      console.log(profile)
+      console.log("----------------")
       profile = qs.parse(profile);
-
+ 
       // Step 4a. Link user accounts.
       if (req.headers.authorization) {
-        User.findOne({ twitter: profile.user_id }, function(err, existingUser) {
+
+        User.find({ where: {twitter: profile.user_id} }).then(function(existingUser) {
           if (existingUser) {
             return res.status(409).send({ message: 'There is already a Twitter account that belongs to you' });
           }
           var token = req.headers.authorization.split(' ')[1];
           var payload = jwt.decode(token, config.TOKEN_SECRET);
-          User.findById(payload.sub, function(err, user) {
+          console.log(profile)          
+
+          User.find({ where: {id: payload.sub} }).then(function(user){
             if (!user) {
-              return res.status(400).send({ message: 'User not found' });
+              return res.status(400).send({ message: 'Something went wrong in the linkage process' });
             }
             user.twitter = profile.user_id;
+            // keep one of the two usernames 
             user.displayName = user.displayName || profile.screen_name;
-            user.save(function(err) {
+            user.save().success(function() { 
               res.send({ token: createToken(user) });
-            });
+            }).error(function(error) {
+              // update fail ... :O
+            })
           });
         });
       } else {
+            console.log("step 4b")
         // Step 4b. Create a new user account or return an existing one.
-        User.findOne({ twitter: profile.user_id }, function(err, existingUser) {
+        // 
+        User.find({ where: {twitter: profile.user_id} }).then(function(existingUser) {
           if (existingUser) {
             var token = createToken(existingUser);
             return res.send({ token: token });
           }
-          var user = new User();
-          user.twitter = profile.user_id;
-          user.displayName = profile.screen_name;
-          user.save(function() {
-            var token = createToken(user);
-            res.send({ token: token });
-          });
+          console.log(profile)
+          User.create({
+            twitter: profile.user_id,
+            displayName: profile.screen_name
+          }).success(function(user) {
+            res.send({ token: createToken(user) });
+          })  
+ 
         });
       }
     });
@@ -783,7 +913,8 @@ app.post('/auth/foursquare', function(req, res) {
 
 app.get('/auth/unlink/:provider', ensureAuthenticated, function(req, res) {
   var provider = req.params.provider;
-  User.findById(req.user, function(err, user) {
+
+  User.find({ where: {id: req.user} }).then(function(user) {
     if (!user) {
       return res.status(400).send({ message: 'User not found' });
     }

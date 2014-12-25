@@ -2,6 +2,10 @@
   "name": "tracklistme",
   "version": "0.0.0",
   "dependencies": {
+    "connect-busboy": "0.0.2",
+    "connect-multiparty": "^1.2.5",
+    "formidable": "^1.0.16",
+    "fs-extra": "^0.13.0",
     "querystring": "^0.2.0",
     "request": "^2.51.0"
   },

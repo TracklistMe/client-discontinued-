@@ -18,7 +18,8 @@ angular
     'ngSanitize',
     'ngTouch',
     'satellizer',
-    'mgcrea.ngStrap'
+    'mgcrea.ngStrap',
+    'angularFileUpload'
   ])
   .config(function($stateProvider, $urlRouterProvider, $authProvider) {
  
@@ -45,7 +46,7 @@ angular
       })
       .state('profile', {
         url: '/profile',
-        templateUrl: 'partials/profile.html',
+        templateUrl: 'views/profile.html',
         controller: 'ProfileCtrl',
         resolve: {
           authenticated: function($location, $auth) {
@@ -59,7 +60,7 @@ angular
 
     
     $authProvider.loginUrl = 'http://localhost:3000/auth/login';
-
+ 
     $authProvider.signupUrl = 'http://localhost:3000/auth/signup';
 
 
