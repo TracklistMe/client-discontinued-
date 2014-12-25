@@ -8,38 +8,54 @@
  * Controller of the tracklistmeApp
  */
 angular.module('tracklistmeApp')
- .controller('ProfileCtrl', function($scope,$http, $timeout, $auth, $alert,$upload, Account) {
-    $scope.onFileSelect = function($files) {
-    //$files: an array of files selected, each file has name, size, and type.
-    for (var i = 0; i < $files.length; i++) {
-      var file = $files[i];
-      $scope.upload = $upload.upload({
-        url: 'http://localhost:3000/upload/', //upload.php script, node.js route, or servlet url
-        // method: POST or PUT,
-        // headers: {'header-key': 'header-value'},
-        // withCredentials: true,
-        data: {myObj: $scope.myModelObj},
-        file: file, // or list of files: $files for html5 only
-        /* set the file formData name ('Content-Desposition'). Default is 'file' */
-        //fileFormDataName: myFile, //or a list of names for multiple files (html5).
-        /* customize how data is added to formData. See #40#issuecomment-28612000 for sample code */
-        //formDataAppender: function(formData, key, val){}
-      }).progress(function(evt) {
-        console.log('percent: ' + parseInt(100.0 * evt.loaded / evt.total));
-      }).success(function(data, status, headers, config) {
-        // file is uploaded successfully
-        console.log(data);
-      });
-      //.error(...)
-      //.then(success, error, progress); 
-      //.xhr(function(xhr){xhr.upload.addEventListener(...)})// access and attach any event listener to XMLHttpRequest.
-    }
-    /* alternative way of uploading, send the file binary with the file's content-type.
-       Could be used to upload files to CouchDB, imgur, etc... html5 FileReader is needed. 
-       It could also be used to monitor the progress of a normal http post/put request with large data*/
-    // $scope.upload = $upload.http({...})  see 88#issuecomment-31366487 for sample code.
-  };
+ .controller('ProfileCtrl', function($scope,$http, $timeout, $auth, $alert, Account, FileUploader) {
 
+        var uploader = $scope.uploader = new FileUploader({
+            url: 'http://localhost:3000/upload/',
+            headers: {'Authorization': 'Bearer '+$auth.getToken()},
+            data: {user: $scope.user},
+
+        });
+
+
+        uploader.onWhenAddingFileFailed = function(item /*{File|FileLikeObject}*/, filter, options) {
+            console.info('onWhenAddingFileFailed', item, filter, options);
+        };
+        uploader.onAfterAddingFile = function(fileItem) {
+            console.info('onAfterAddingFile', fileItem);
+            uploader.queue[0].upload();
+            uploader.queue.pop();
+        };
+        uploader.onAfterAddingAll = function(addedFileItems) {
+            console.info('onAfterAddingAll', addedFileItems);
+        };
+        uploader.onBeforeUploadItem = function(item) {
+            console.info('onBeforeUploadItem', item);
+        };
+        uploader.onProgressItem = function(fileItem, progress) {
+            console.info('onProgressItem', fileItem, progress);
+        };
+        uploader.onProgressAll = function(progress) {
+            console.info('onProgressAll', progress);
+        };
+        uploader.onSuccessItem = function(fileItem, response, status, headers) {
+            console.info('onSuccessItem', fileItem, response, status, headers);
+        };
+        uploader.onErrorItem = function(fileItem, response, status, headers) {
+            console.info('onErrorItem', fileItem, response, status, headers);
+        };
+        uploader.onCancelItem = function(fileItem, response, status, headers) {
+            console.info('onCancelItem', fileItem, response, status, headers);
+        };
+        uploader.onCompleteItem = function(fileItem, response, status, headers) {
+            console.info('onCompleteItem', fileItem, response, status, headers);
+        };
+        uploader.onCompleteAll = function() {
+            console.info('onCompleteAll');
+            $scope.getProfile();
+        };
+
+ 
     /**
      * Get user's profile information.
      */
@@ -48,6 +64,7 @@ angular.module('tracklistmeApp')
       Account.getProfile()
         .success(function(data) {
           $scope.user = data;
+          console.log(data)
         })
         .error(function(error) {
           $alert({
