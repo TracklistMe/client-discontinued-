@@ -72,7 +72,7 @@
 						<span ng-show="searchUserResults.length > 1 && !isSearching"> 
 							<i class="fa fa-times">There are {{searchUserResults.length}} users with this name</i>
 						</span>
-						 
+					=== {{searchUserResults[0].id}} ====
 						<table ng-show="searchUserResults.length > 1 && !isSearching" class="table">
 						    <thead>
 						    	<th> User Id </th>
@@ -92,7 +92,7 @@
 
 						 
 					</p> 
-					<button ng-click="addCompany()" ng-disabled="nameAvailable == false || nameTooShort == true" id="singlebutton" name="singlebutton" class="btn btn-primary">Add Owner</button>
+					<button ng-click="addUserCompanyAssociation()" ng-disabled="searchUserResults.length != 1 " id="singlebutton" name="singlebutton" class="btn btn-primary">Add Owner</button>
 					  
 				</div>
 				<div class="col-md-4">

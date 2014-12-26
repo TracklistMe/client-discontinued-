@@ -59,11 +59,28 @@ angular.module('tracklistmeApp')
 	          		$scope.searchUserResults = data
    					console.log($scope.searchUserResults)
 	        	})
+
 	    }
    	}
    	$scope.selectFromMultipleUsers = function(user){
+   		// create as an array to align to api return tyep 
    		$scope.searchUserResults = [user];
    		console.log($scope.searchUserResults)
+
+   	}
+
+   	$scope.addUserCompanyAssociation = function(){
+   		var userId = $scope.searchUserResults[0].id;
+   		var companyId = $scope.currentCompany.id;
+   		console.log(userId);
+   		$http.post('http://localhost:3000/companies/'+companyId+"/owners/", {newOwner:userId}).
+		  success(function(data, status, headers, config) {
+		  	$scope.editCompany(companyId)
+		  }).
+		  error(function(data, status, headers, config) {
+		    // called asynchronously if an error occurs
+		    // or server returns response with an error status.
+		  });
    	}
 
     $scope.editCompany = function(idCompany){
