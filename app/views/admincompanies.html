@@ -2,19 +2,134 @@
   <div class="panel panel-default">
     <div class="panel-body">
       <div class="row">
-        <div class="col-sm-12">
-         	<h2>Admin Panel</h2>
+        <div class="col-sm-12 bs-callout bs-callout-warning">
+         	<h2>Admin Companies</h2>
           	<hr />
           	<h4> Create Company </h4>
 	        <div class="form-group">
 				
 				<div class="col-md-4">
-					<input name="input" ng-model="userType" ng-change="changed()" placeholder="Company Name" class="form-control input-md">
+					<input name="input" ng-model="searchCompanyField" ng-change="searchCompaniesAvailability()" placeholder="Company Name" class="form-control input-md">
 					 
-					<p> Status: </p> 
-					<button id="singlebutton" name="singlebutton" class="btn btn-primary">Button</button>
+					<p> Status: 
+						<span ng-show="isSearching">
+							<i class="fa fa-circle-o-notch fa-spin"></i>
+						</span>
+						<span ng-show="nameAvailable && !isSearching && !nameTooShort"> 
+							<i class="fa fa-check"> Name Available</i>
+						</span>
+						<span ng-show="!nameAvailable && !isSearching && !nameTooShort"> 
+							<i class="fa fa-times"> Name Not Available</i>
+						</span>
+						<span ng-show="nameTooShort && !isSearching">
+							<i class="fa fa-times"> Name is Too Short</i>
+						</span>
+					</p> 
+					 
+					<button ng-click="addCompany()" ng-disabled="nameAvailable == false || nameTooShort == true" id="singlebutton" name="singlebutton" class="btn btn-primary">Add Company</button>
 				</div>
 			</div>
+		</div>
+		 
+		 <div ng-show="currentCompany" class="col-sm-12 bs-callout bs-callout-info">
+          	<h4> Edit Company:  {{currentCompany.displayName}} </h4>
+	        <div class="form-group">
+				
+				<div class="col-md-4">
+					<input name="input" ng-model="currentCompany.displayName" value="{{currentCompany.displayName}}" placeholder="{{currentCompany.displayName}}" class="form-control input-md">
+					 
+					<p> Status: 
+						<span ng-show="isSearching">
+							<i class="fa fa-circle-o-notch fa-spin"></i>
+						</span>
+						<span ng-show="nameAvailable && !isSearching && !nameTooShort"> 
+							<i class="fa fa-check"> Name Available</i>
+						</span>
+						<span ng-show="!nameAvailable && !isSearching && !nameTooShort"> 
+							<i class="fa fa-times"> Name Not Available</i>
+						</span>
+						<span ng-show="nameTooShort && !isSearching">
+							<i class="fa fa-times"> Name is Too Short</i>
+						</span>
+					</p> 
+					 
+					<button ng-click="addCompany()" ng-disabled="nameAvailable == false || nameTooShort == true" id="singlebutton" name="singlebutton" class="btn btn-primary">Change Name</button>
+				</div>
+				<div class="col-md-4">
+					<input name="input" ng-model="searchUserField" ng-change="searchUser()" placeholder="User Display Name" class="form-control input-md">
+					 
+					<p> Status: 
+						<span ng-show="isSearching">
+							<i class="fa fa-circle-o-notch fa-spin"></i>
+						</span>
+						{{searchUserResults.length}}						 
+						<span ng-show="searchUserResults.length == 1  && !isSearching"> 
+							<i class="fa fa-check"> This is a Valid User</i>
+						</span>
+						<span ng-show="searchUserResults.length == 0 && !isSearching"> 
+							<i class="fa fa-times"> No user available with this name</i>
+						</span>
+						<span ng-show="searchUserResults.length > 1 && !isSearching"> 
+							<i class="fa fa-times">There are {{searchUserResults.length}} users with this name</i>
+						</span>
+						 
+						<table ng-show="searchUserResults.length > 1 && !isSearching" class="table">
+						    <thead>
+						    	<th> User Id </th>
+						    	<th> Name </th>
+						    	<th> Action </th>
+						   	</thead> 
+						   	<tbody ng-repeat="user in searchUserResults" > 
+						  		<tr >
+									<td>{{user.id}}</td>
+									<td>{{user.displayName}}</td>
+									<td>
+										<button ng-click="selectFromMultipleUsers(user)" class="btn btn-primary btn-xs">Select this User</button>
+									</td>
+						  		</tr>
+							</tbody>
+						</table>
+
+						 
+					</p> 
+					<button ng-click="addCompany()" ng-disabled="nameAvailable == false || nameTooShort == true" id="singlebutton" name="singlebutton" class="btn btn-primary">Add Owner</button>
+					  
+				</div>
+				<div class="col-md-4">
+					 
+					 
+					<table class="table">
+				    <thead>
+				    	<th> Owner </th>
+				    	<th> Status </th>
+				   	</thead> 
+				   	<tbody ng-repeat="owner in currentCompany.owners" > 
+				  		<tr >
+							<td>{{owner.displayName}}</td>
+							<td> </td>
+				  		</tr>
+					</tbody>
+				  </table>
+
+				</div>
+			</div>
+		</div>
+		<div class="col-sm-12 bs-callout bs-callout-success">
+		 
+          	<h4> Company List </h4>
+	        
+			  <table class="table">
+			    <thead>
+			    	<th> Company Name </th>
+			    	<th> Status </th>
+			   	</thead> 
+			   	<tbody ng-repeat="company in companyList" > 
+			  		<tr ng-class="{false:'danger'}[company.isActive]" >
+						<td>{{company.displayName}}</td>
+						<td><a href="" ng-click="editCompany(company.id)">Edit Company</a></td>
+			  		</tr>
+				</tbody>
+			  </table>
         </div>
       </div>
     </div>
