@@ -144,12 +144,35 @@
   <div ng-if="user.isAdmin" class="panel panel-default">
     <div class="panel-heading">Admin Panel</div>
     <div class="panel-body">
-      <legend><i class="ion-link"></i><a href="/#/adminCompanies"> Manage Company</a></legend>
+    <div class="col-md-4">
+      <legend><i class="ion-link"></i><a href="/#/adminCompanies"> Manage Companies</a></legend>
+    </div>
+    <div class="col-md-4">
+      <legend><i class="ion-link"></i><a href="/#/adminLabels"> Manage Labels</a></legend>
+    </div>
+    </div>
+  </div>
+
+  <div ng-if="user.isAdmin || companies.length > 0" class="panel panel-default">
+    <div class="panel-heading">Your Companies</div>
+    <div class="panel-body">
+      <div class="col-md-4" ng-repeat="company in companies">
+            <i class="ion-link"></i><a href="/#/adminCompany/{{company.id}}"> {{company.displayName}}</a>
+      </div>
  
     </div>
   </div>
    
 
+  <div ng-if="user.isAdmin || companies.length > 0" class="panel panel-default">
+    <div class="panel-heading">Your Labels</div>
+    <div class="panel-body">
+      <div class="col-md-4" ng-repeat="label in labels">
+            <i class="ion-link"></i><a href="/#/adminLabels"> {{label.displayName}}</a>
+      </div>
+ 
+    </div>
+  </div>
 
 
   <div class="panel panel-default">

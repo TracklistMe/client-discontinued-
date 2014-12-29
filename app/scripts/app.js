@@ -80,9 +80,81 @@ angular
                   return $location.path('/noPermission');                 
               })
                
-            }
-          }
-        }
+            } // if then else
+          } // end of auth
+        } // end of resolve
+      }).state('adminCompany', {
+        url: '/adminCompany/{id:int}',
+        templateUrl: 'views/admincompany.html',
+        controller: 'AdmincompanyCtrl',
+        resolve: {
+          authenticated: function($location, $auth,Account) {
+            console.log("TRY AUTENTICATION FOR ADMINCOMPANIES")
+            if (!$auth.isAuthenticated()) {
+              //not logged in 
+              console.log("YOU are not authenticated");
+              return $location.path('/login');
+            } else {
+              // with an autentication 
+              console.log("YOU ARE AUTENTICATED")
+              return Account.getProfile()
+              .success(function(data) {
+                console.log("FETCH DATA FROM ACCOUNT")
+                if(!data.isAdmin)  // Non sono autorizzato
+                  return $location.path('/noPermission');                 
+              })
+               
+            } // if then else
+          } // end of auth
+        } // end of resolve
+      }).state('adminLabel', {
+        url: '/adminLabel/{id:int}',
+        templateUrl: 'views/adminLabel.html',
+        controller: 'AdminlabelCtrl',
+        resolve: {
+          authenticated: function($location, $auth,Account) {
+            console.log("TRY AUTENTICATION FOR ADMINCOMPANIES")
+            if (!$auth.isAuthenticated()) {
+              //not logged in 
+              console.log("YOU are not authenticated");
+              return $location.path('/login');
+            } else {
+              // with an autentication 
+              console.log("YOU ARE AUTENTICATED")
+              return Account.getProfile()
+              .success(function(data) {
+                console.log("FETCH DATA FROM ACCOUNT")
+                if(!data.isAdmin)  // Non sono autorizzato
+                  return $location.path('/noPermission');                 
+              })
+               
+            } // if then else
+          } // end of auth
+        } // end of resolve
+      }).state('adminLabels', {
+        url: '/adminLabels',
+        templateUrl: 'views/adminLabels.html',
+        controller: 'AdminlabelsCtrl',
+        resolve: {
+          authenticated: function($location, $auth,Account) {
+            console.log("TRY AUTENTICATION FOR ADMINCOMPANIES")
+            if (!$auth.isAuthenticated()) {
+              //not logged in 
+              console.log("YOU are not authenticated");
+              return $location.path('/login');
+            } else {
+              // with an autentication 
+              console.log("YOU ARE AUTENTICATED")
+              return Account.getProfile()
+              .success(function(data) {
+                console.log("FETCH DATA FROM ACCOUNT")
+                if(!data.isAdmin)  // Non sono autorizzato
+                  return $location.path('/noPermission');                 
+              })
+               
+            } // if then else
+          } // end of auth
+        } // end of resolve
       });
     $urlRouterProvider.otherwise('/');
 

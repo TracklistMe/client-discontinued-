@@ -45,7 +45,7 @@
                               
   <ul ng-if="isAuthenticated()"  class="nav navbar-nav navbar-right ">
  
-                         <img  ng-click="$parent.showAccountDropDown = !$parent.showAccountDropDown" src="http://neatlock.com/wp-content/uploads/2014/07/person-placeholder.jpg" class="img-circle special-img">
+                         <img  ng-click="$parent.showAccountDropDown = !$parent.showAccountDropDown" ng-src="http://localhost:3000/images/{{user.avatar}}" class="img-circle special-img">
   </ul>
 
    
@@ -104,6 +104,9 @@
         <script src="scripts/controllers/logout.js"></script>
         <script src="scripts/controllers/profile.js"></script>
         <script src="scripts/services/account.js"></script>
+        <script src="scripts/controllers/adminlabels.js"></script>
+        <script src="scripts/controllers/adminlabel.js"></script>
+        <script src="scripts/controllers/admincompany.js"></script>
         <!-- endbuild -->
 </body>
 </html>

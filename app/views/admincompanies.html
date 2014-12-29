@@ -72,7 +72,7 @@
 						<span ng-show="searchUserResults.length > 1 && !isSearching"> 
 							<i class="fa fa-times">There are {{searchUserResults.length}} users with this name</i>
 						</span>
-					=== {{searchUserResults[0].id}} ====
+					 
 						<table ng-show="searchUserResults.length > 1 && !isSearching" class="table">
 						    <thead>
 						    	<th> User Id </th>
@@ -101,17 +101,25 @@
 					<table class="table">
 				    <thead>
 				    	<th> Owner </th>
-				    	<th> Status </th>
+				    	<th> Edit </th>
 				   	</thead> 
 				   	<tbody ng-repeat="owner in currentCompany.owners" > 
 				  		<tr >
-							<td>{{owner.displayName}}</td>
-							<td> </td>
+							<td>{{owner.CompaniesUsers.UserId}}-{{owner.displayName}}</td>
+							<td><a href="" ng-click="removeOwner(owner.CompaniesUsers.UserId)"><i class="fa fa-times"/></a></td>
 				  		</tr>
 					</tbody>
 				  </table>
 
 				</div>
+			</div>
+
+			<div class="col-md-12">
+
+					<br /> 
+					<button ng-click="currentCompany = null" class="col-md-12 btn btn-primary btn-xs">
+						DONE
+					</button>
 			</div>
 		</div>
 		<div class="col-sm-12 bs-callout bs-callout-success">
@@ -126,7 +134,17 @@
 			   	<tbody ng-repeat="company in companyList" > 
 			  		<tr ng-class="{false:'danger'}[company.isActive]" >
 						<td>{{company.displayName}}</td>
-						<td><a href="" ng-click="editCompany(company.id)">Edit Company</a></td>
+						<td>
+							<button class="btn btn-primary btn-xs" ng-click="editCompany(company.id)">Edit Company</button>
+							
+							<button ng-click="activateCompany(company.id)" ng-show="!company.isActive" ng-click="currentCompany = null" class="btn btn-primary btn-xs">
+								Activate
+							</button>
+							<button ng-click="deactivateCompany(company.id)"  ng-show="company.isActive" ng-click="currentCompany = null" class="btn btn-primary btn-xs">
+								Dectivate
+							</button>
+
+						</td>
 			  		</tr>
 				</tbody>
 			  </table>

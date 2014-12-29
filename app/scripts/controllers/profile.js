@@ -9,7 +9,9 @@
  */
 angular.module('tracklistmeApp')
  .controller('ProfileCtrl', function($scope,$http, $timeout, $auth, $alert, Account, FileUploader) {
-
+        $scope.labels = {}
+        $scope.companies = {}
+    
         var uploader = $scope.uploader = new FileUploader({
             url: 'http://localhost:3000/upload/',
             headers: {'Authorization': 'Bearer '+$auth.getToken()},
@@ -147,7 +149,22 @@ angular.module('tracklistmeApp')
     };
 
  
+ 	$scope.getCompanies = function(){
+ 		$http.get('http://localhost:3000/me/companies/')
+      		.success(function(data) {
+          		$scope.companies = data
+        	})
+ 	}
+  $scope.getLabels = function(){
+    $http.get('http://localhost:3000/me/labels/')
+          .success(function(data) {
+              $scope.labels = data
+          })
+  }
 
-    $scope.getProfile();
+  $scope.getProfile();
+  $scope.getLabels();
+ 	$scope.getCompanies();
+
 
   });

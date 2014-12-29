@@ -11,10 +11,10 @@ angular.module('tracklistmeApp')
   .factory('Account', function($http, $auth) {
     return {
       getProfile: function() {
-        return $http.get('http://localhost:3000/api/me');
+        return $http.get('http://localhost:3000/me');
       },
       updateProfile: function(profileData) {
-        return $http.put('http://localhost:3000/api/me', profileData);
+        return $http.put('http://localhost:3000/me', profileData);
       }
     };
   });

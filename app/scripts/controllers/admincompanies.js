@@ -59,7 +59,6 @@ angular.module('tracklistmeApp')
 	          		$scope.searchUserResults = data
    					console.log($scope.searchUserResults)
 	        	})
-
 	    }
    	}
    	$scope.selectFromMultipleUsers = function(user){
@@ -76,6 +75,42 @@ angular.module('tracklistmeApp')
    		$http.post('http://localhost:3000/companies/'+companyId+"/owners/", {newOwner:userId}).
 		  success(function(data, status, headers, config) {
 		  	$scope.editCompany(companyId)
+		  }).
+		  error(function(data, status, headers, config) {
+		    // called asynchronously if an error occurs
+		    // or server returns response with an error status.
+		  });
+   	}
+   	$scope.removeOwner = function(userId){
+   		var companyId = $scope.currentCompany.id;
+   		$http.delete('http://localhost:3000/companies/'+companyId+"/owners/"+userId).
+		  success(function(data, status, headers, config) {
+		  	$scope.editCompany(companyId)
+		  }).
+		  error(function(data, status, headers, config) {
+		    // called asynchronously if an error occurs
+		    // or server returns response with an error status.
+		  });
+   	}
+
+   	// ACTIVATE COMPANY FORM 
+   	$scope.activateCompany = function(companyId){
+   		console.log("ACTIVATE")
+   		 
+   		$http.put('http://localhost:3000/companies/'+companyId, {isActive:true}).
+		  success(function(data, status, headers, config) {
+		  		$scope.updateCompanyList();
+		  }).
+		  error(function(data, status, headers, config) {
+		    // called asynchronously if an error occurs
+		    // or server returns response with an error status.
+		  });
+   	}
+   	$scope.deactivateCompany = function(companyId){
+   		 
+   		$http.put('http://localhost:3000/companies/'+companyId, {isActive:false}).
+		  success(function(data, status, headers, config) {
+		  		$scope.updateCompanyList();
 		  }).
 		  error(function(data, status, headers, config) {
 		    // called asynchronously if an error occurs
