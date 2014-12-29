@@ -13,12 +13,15 @@ angular.module('tracklistmeApp')
         $scope.companies = {}
     
         var uploader = $scope.uploader = new FileUploader({
-            url: 'http://localhost:3000/upload/',
+            url: 'http://localhost:3000/upload/profilePicture/500/500',
+            method: 'POST',
             headers: {'Authorization': 'Bearer '+$auth.getToken()},
-            data: {user: $scope.user},
-
+            formData:[]
         });
-
+        uploader.onBeforeUploadItem = function(item) {
+        item.formData.push({resize:{width:500,height:500}});
+        }
+        
 
         uploader.onWhenAddingFileFailed = function(item /*{File|FileLikeObject}*/, filter, options) {
             console.info('onWhenAddingFileFailed', item, filter, options);
@@ -31,9 +34,8 @@ angular.module('tracklistmeApp')
         uploader.onAfterAddingAll = function(addedFileItems) {
             console.info('onAfterAddingAll', addedFileItems);
         };
-        uploader.onBeforeUploadItem = function(item) {
-            console.info('onBeforeUploadItem', item);
-        };
+         
+
         uploader.onProgressItem = function(fileItem, progress) {
             console.info('onProgressItem', fileItem, progress);
         };

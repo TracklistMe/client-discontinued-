@@ -10,6 +10,7 @@
 angular.module('tracklistmeApp')
   .controller('AdmincompanyCtrl', function ($scope,$state, $auth, $stateParams,$http,Account, FileUploader) {
   	var companyId = $stateParams.id
+
   	var CHARACTER_BEFORE_SEARCH = 4;
   	var CHARACTER_BEFORE_SEARCH_USER = 3;
   	$scope.isSearching = false
@@ -30,7 +31,7 @@ angular.module('tracklistmeApp')
   	$scope.addLabel = function(){
    		console.log("ADD Label")
    		// TODO STRING SANITIZING
-   		$http.post('http://localhost:3000/labels/', {companyId:$scope.companyId, labelName: $scope.seachLabelField}).
+   		$http.post('http://localhost:3000/labels/', {companyId:companyId, labelName: $scope.seachLabelField}).
 		  success(function(data, status, headers, config) {
 		  	$scope.updateLabelList();
 		  }).
