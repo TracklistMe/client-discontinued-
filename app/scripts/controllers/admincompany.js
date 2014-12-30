@@ -10,7 +10,6 @@
 angular.module('tracklistmeApp')
   .controller('AdmincompanyCtrl', function ($scope,$state, $auth, $stateParams,$http,Account, FileUploader) {
   	var companyId = $stateParams.id
-
   	var CHARACTER_BEFORE_SEARCH = 4;
   	var CHARACTER_BEFORE_SEARCH_USER = 3;
   	$scope.isSearching = false
@@ -22,11 +21,19 @@ angular.module('tracklistmeApp')
   	
 
   	var uploader = $scope.uploader = new FileUploader({
-        url: 'http://localhost:3000/upload/',
+        url: 'http://localhost:3000/companies/'+companyId+'/profilePicture/500/500/',
         headers: {'Authorization': 'Bearer '+$auth.getToken()},
         data: {user: $scope.user},
     });
-
+    uploader.onAfterAddingFile = function(fileItem) {
+            console.info('onAfterAddingFile', fileItem);
+            uploader.queue[0].upload();
+            uploader.queue.pop();
+        };
+  	uploader.onCompleteAll = function() {
+            console.info('onCompleteAll');
+            $scope.getCompany();
+        };
 
   	$scope.addLabel = function(){
    		console.log("ADD Label")
@@ -68,7 +75,7 @@ angular.module('tracklistmeApp')
    		var labelId = $scope.currentLabel.id;
    	 
    	 
-   		$http.post('http://localhost:3000/labels/'+companyId+"/labelManagers/", {newLabelManager:newLabelManager}).
+   		$http.post('http://localhost:3000/labels/'+labelId+"/labelManagers/", {newLabelManager:newLabelManager}).
 		  success(function(data, status, headers, config) {
 		  	$scope.editLabel(labelId)
 		  }).

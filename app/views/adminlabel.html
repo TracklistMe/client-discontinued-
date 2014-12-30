@@ -1,1 +1,51 @@
-<p>This is the {{test}}view.</p>
+<div class="container">
+
+ 
+	<div class="panel panel-default">
+	    <div class="panel-heading">Label Profile</div>
+		    <div class="panel-body">
+		        <div class="row">
+		          <div class="col-md-3">
+		            <div ng-show="uploader.isHTML5">
+		              	<div nv-file-drop="" uploader="uploader"  >
+			                <div nv-file-over="" uploader="uploader" style="background-image: url('http://localhost:3000/images/{{label.logo}}')" over-class="my-drop-zone-over-class" class="well my-drop-zone">
+								<div class="dragAndDropProfilePictureButton"> Drag and drop <br />or<br /> 
+			                        <label class="myLabel">
+			                            <input type="file" nv-file-select="" uploader="uploader"/>
+			                            <span>Upload</span>
+			                        </label>
+								</div> 
+			                </div>
+		            	</div>
+		            </div>
+				</div>
+		        <div class="col-md-4"  >
+		            	<h3> {{label.displayName}} </h3>
+		        </div>
+		    </div>
+		</div>
+	</div> 
+
+
+	<div class="panel panel-default">
+	    <div class="panel-heading">Catalog</div>
+		<div class="panel-body">
+		         
+		        <div class="col-md-4"  >
+		            	 
+		        </div>
+	    </div>
+	</div>
+
+
+
+	<div class="panel panel-default">
+	    <div class="panel-heading">Add Releases</div>
+		<div class="panel-body">
+		         
+	        <div class="col-md-4"  >
+	        	<input type="file" nv-file-select="" uploader="catalogUploader" multiple  /><br/>
+	        </div>
+		</div>
+	</div>
+</div> 
