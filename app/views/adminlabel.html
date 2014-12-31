@@ -42,9 +42,18 @@
 	    <div class="panel-heading">Release to Process</div>
 		<div class="panel-body">
 		        <button type="button" class="col-md-12 btn btn-success btn-s">
-		          We have detected  releases to process. Click to proceed
+		          We have detected {{releasesToProcess.success.length}} releases to process. Click to proceed
 				</button>
-				{{releasesToProcess}}
+				
+				<button ng-if="releasesToProcess.fail.length > 0" class=" btn btn-warning btn-s col-md-12">
+					<h4>Error:</h4>
+					There  
+					<ng-pluralize count="releasesToProcess.fail.length"
+                	when="{'1': 'is 1 release that is missing file',
+                     'other': 'are {} releases that are missing files'}">
+					</ng-pluralize> 
+				</button>
+ 
 	    </div>
 	</div>
 
