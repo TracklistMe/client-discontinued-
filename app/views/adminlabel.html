@@ -19,7 +19,7 @@
 		            	</div>
 		            </div>
 				</div>
-		        <div class="col-md-4"  >
+		        <div class="col-md-4">
 		            	<h3> {{label.displayName}} </h3>
 		        </div>
 		    </div>
@@ -31,17 +31,17 @@
 	    <div class="panel-heading">Catalog</div>
 		<div class="panel-body">
 		         
-		        <div class="col-md-4"  >
-		            	 
+		        <div ng-repeat="release in catalog" class="col-md-2"  >
+		           <img class="col-md-12" ng-src="http://localhost:3000/cover/{{label.id}}/{{release.catalogNumber}}/{{release.cover}}" />
 		        </div>
 	    </div>
 	</div>
 
 
-	<div class="panel panel-default">
+	<div ng-if="releasesToProcess.success.length != 0"class="panel panel-default">
 	    <div class="panel-heading">Release to Process</div>
 		<div class="panel-body">
-		        <button type="button" class="col-md-12 btn btn-success btn-s">
+		        <button type="button" ng-click="processReleases()" class="col-md-12 btn btn-success btn-s">
 		          We have detected {{releasesToProcess.success.length}} releases to process. Click to proceed
 				</button>
 				

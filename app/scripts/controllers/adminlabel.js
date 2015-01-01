@@ -13,6 +13,7 @@ angular.module('tracklistmeApp')
 	  	$scope.label = null
 	  	$scope.dropZoneFiles = null
 	  	$scope.releasesToProcess  = null
+	  	$scope.catalog = null
 
 	  	var uploader = $scope.uploader = new FileUploader({
 	        url: 'http://localhost:3000/labels/'+labelId+'/profilePicture/500/500/',
@@ -68,10 +69,13 @@ angular.module('tracklistmeApp')
         };
         catalogUploader.onCompleteItem = function(fileItem, response, status, headers) {
             console.info('onCompleteItem', fileItem, response, status, headers);
+            $scope.getDropZoneFiles();
         };
         catalogUploader.onCompleteAll = function() {
             console.info('onCompleteAll');
             catalogUploader.clearQueue()
+            $scope.getToProcessReleases();
+			$scope.getDropZoneFiles();
         };
 
         $scope.getLabel = function(){
@@ -87,14 +91,36 @@ angular.module('tracklistmeApp')
           		$scope.dropZoneFiles = data
 	        	})
 	 	}
+	 	$scope.processReleases = function(){
+	 		$http.post('http://localhost:3000/labels/'+labelId+'/processReleases/', {}).
+			  success(function(data, status, headers, config) {
+			  		$scope.getToProcessReleases();
+				 	$scope.getDropZoneFiles();
+				 	$scope.getCatalog();
+			  }).
+			  error(function(data, status, headers, config) {
+			    // called asynchronously if an error occurs
+			    // or server returns response with an error status.
+			  });
+
+	 	}
+
 	 	$scope.getToProcessReleases = function(){
  		$http.get('http://localhost:3000/labels/'+labelId+'/processReleases/info')
       		.success(function(data) {
           		$scope.releasesToProcess = data
 	        	})
 	 	}
+	 	$scope.getCatalog  = function(){
+ 		$http.get('http://localhost:3000/labels/'+labelId+'/catalog')
+      		.success(function(data) {
+          		$scope.catalog = data
+          		console.log(data)
+	        	})
+	 	}
 	 	$scope.getToProcessReleases();
 	 	$scope.getDropZoneFiles();
+	 	$scope.getCatalog();
 	 	$scope.getLabel();
  
   	});
