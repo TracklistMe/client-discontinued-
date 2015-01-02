@@ -150,9 +150,9 @@ angular
     $urlRouterProvider.otherwise('/');
 
     
-    $authProvider.loginUrl = 'http://localhost:3000/auth/login';
+    $authProvider.loginUrl = location.protocol+'//'+location.hostname+':3000/auth/login';
  
-    $authProvider.signupUrl = 'http://localhost:3000/auth/signup';
+    $authProvider.signupUrl = location.protocol+'//'+location.hostname+':3000/auth/signup';
 
 
     $authProvider.facebook({
