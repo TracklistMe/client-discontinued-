@@ -65,17 +65,13 @@ angular
         controller: 'AdmincompaniesCtrl',
         resolve: {
           authenticated: function($location, $auth,Account) {
-            console.log("TRY AUTENTICATION FOR ADMINCOMPANIES")
             if (!$auth.isAuthenticated()) {
               //not logged in 
-              console.log("YOU are not authenticated");
-              return $location.path('/login');
+              //              return $location.path('/login');
             } else {
               // with an autentication 
-              console.log("YOU ARE AUTENTICATED")
               return Account.getProfile()
               .success(function(data) {
-                console.log("FETCH DATA FROM ACCOUNT")
                 if(!data.isAdmin)  // Non sono autorizzato
                   return $location.path('/noPermission');                 
               })
@@ -89,17 +85,14 @@ angular
         controller: 'AdmincompanyCtrl',
         resolve: {
           authenticated: function($location, $auth,Account) {
-            console.log("TRY AUTENTICATION FOR ADMINCOMPANIES")
+            
             if (!$auth.isAuthenticated()) {
               //not logged in 
-              console.log("YOU are not authenticated");
               return $location.path('/login');
             } else {
               // with an autentication 
-              console.log("YOU ARE AUTENTICATED")
               return Account.getProfile()
               .success(function(data) {
-                console.log("FETCH DATA FROM ACCOUNT")
                 if(!data.isAdmin)  // Non sono autorizzato
                   return $location.path('/noPermission');                 
               })
@@ -113,17 +106,15 @@ angular
         controller: 'AdminlabelCtrl',
         resolve: {
           authenticated: function($location, $auth,Account) {
-            console.log("TRY AUTENTICATION FOR ADMINCOMPANIES")
             if (!$auth.isAuthenticated()) {
               //not logged in 
-              console.log("YOU are not authenticated");
               return $location.path('/login');
             } else {
               // with an autentication 
               console.log("YOU ARE AUTENTICATED")
               return Account.getProfile()
               .success(function(data) {
-                console.log("FETCH DATA FROM ACCOUNT")
+                
                 if(!data.isAdmin)  // Non sono autorizzato
                   return $location.path('/noPermission');                 
               })
@@ -137,17 +128,17 @@ angular
         controller: 'AdminlabelsCtrl',
         resolve: {
           authenticated: function($location, $auth,Account) {
-            console.log("TRY AUTENTICATION FOR ADMINCOMPANIES")
+            
             if (!$auth.isAuthenticated()) {
               //not logged in 
-              console.log("YOU are not authenticated");
+              
               return $location.path('/login');
             } else {
               // with an autentication 
-              console.log("YOU ARE AUTENTICATED")
+              
               return Account.getProfile()
               .success(function(data) {
-                console.log("FETCH DATA FROM ACCOUNT")
+                
                 if(!data.isAdmin)  // Non sono autorizzato
                   return $location.path('/noPermission');                 
               })
