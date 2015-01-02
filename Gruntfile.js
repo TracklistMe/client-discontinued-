@@ -179,8 +179,16 @@ module.exports = function (grunt) {
     // 
     nodemon: {
       dev: {
-        script: 'server/server.js'
+        script: 'server/server.js',
+        options: {
+          env: {
+           HOST: grunt.option( "host" )
+          }
+        }
+
       }
+
+      //grunt.option( "host" )
     },
     // Renames files for browser caching purposes
     filerev: {
