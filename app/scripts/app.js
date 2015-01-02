@@ -61,7 +61,7 @@ angular
         }
       }).state('adminCompanies', {
         url: '/adminCompanies',
-        templateUrl: 'views/adminCompanies.html',
+        templateUrl: 'views/admincompanies.html',
         controller: 'AdmincompaniesCtrl',
         resolve: {
           authenticated: function($location, $auth,Account) {
@@ -102,7 +102,7 @@ angular
         } // end of resolve
       }).state('adminLabel', {
         url: '/adminLabel/{id:int}',
-        templateUrl: 'views/adminLabel.html',
+        templateUrl: 'views/adminlabel.html',
         controller: 'AdminlabelCtrl',
         resolve: {
           authenticated: function($location, $auth,Account) {
@@ -124,7 +124,7 @@ angular
         } // end of resolve
       }).state('adminLabels', {
         url: '/adminLabels',
-        templateUrl: 'views/adminLabels.html',
+        templateUrl: 'views/adminlabels.html',
         controller: 'AdminlabelsCtrl',
         resolve: {
           authenticated: function($location, $auth,Account) {
