@@ -94,6 +94,7 @@ angular.module('tracklistmeApp')
 	 	$scope.processReleases = function(){
 	 		$http.post('http://localhost:3000/labels/'+labelId+'/processReleases/', {}).
 			  success(function(data, status, headers, config) {
+			  		console.log("DONE")
 			  		$scope.getToProcessReleases();
 				 	$scope.getDropZoneFiles();
 				 	$scope.getCatalog();
