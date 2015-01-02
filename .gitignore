@@ -5,4 +5,4 @@ node_modules
 bower_components
 server/config.js
 server/uploadFolder/
-!server/node_module/libs/beatport/*
+!server/node_module/libs/beatport/beatportProxy.js
