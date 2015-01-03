@@ -175,21 +175,6 @@ module.exports = function (grunt) {
       }
     },
 
-    // nodemon plugin for starting the server 
-    // 
-    nodemon: {
-      dev: {
-        script: 'server/server.js',
-        options: {
-          env: {
-           HOST: grunt.option( "host" )
-          }
-        }
-
-      }
-
-      //grunt.option( "host" )
-    },
     // Renames files for browser caching purposes
     filerev: {
       dist: {
@@ -391,7 +376,7 @@ module.exports = function (grunt) {
         },
         github: {
           options: {
-            remote: 'git@github.com:nicolabortignon/tracklistme.git',
+            remote: 'git@github.com:TracklistMe/client.git',
             branch: 'master'
           }
         },

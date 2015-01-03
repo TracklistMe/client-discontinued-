@@ -3,6 +3,3 @@ node_modules
 .tmp
 .sass-cache
 bower_components
-server/config.js
-server/uploadFolder/
-!server/node_module/libs/beatport/beatportProxy.js
