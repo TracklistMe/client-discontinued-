@@ -16,7 +16,7 @@ angular.module('tracklistmeApp')
 	  	$scope.catalog = null
 
 	  	var uploader = $scope.uploader = new FileUploader({
-	        url: 'http://localhost:3000/labels/'+labelId+'/profilePicture/500/500/',
+	        url: $rootScope.server.url + '/labels/'+labelId+'/profilePicture/500/500/',
 	        headers: {'Authorization': 'Bearer '+$auth.getToken()},
 	        data: {user: $scope.user},
 	    });
@@ -36,7 +36,7 @@ angular.module('tracklistmeApp')
 
 
         var catalogUploader = $scope.catalogUploader = new FileUploader({
-	        url: 'http://localhost:3000/labels/'+labelId+'/dropzone/',
+	        url: $rootScope.server.url + '/labels/'+labelId+'/dropzone/',
 	        headers: {'Authorization': 'Bearer '+$auth.getToken()},
 	    });	  	
 
@@ -79,20 +79,20 @@ angular.module('tracklistmeApp')
         };
 
         $scope.getLabel = function(){
- 		$http.get('http://localhost:3000/labels/'+labelId)
+ 		$http.get($rootScope.server.url + '/labels/'+labelId)
       		.success(function(data) {
           		$scope.label = data
 	        	})
 	 	}
 
 	 	$scope.getDropZoneFiles = function(){
- 		$http.get('http://localhost:3000/labels/'+labelId+'/dropZoneFiles')
+ 		$http.get($rootScope.server.url + '/labels/'+labelId+'/dropZoneFiles')
       		.success(function(data) {
           		$scope.dropZoneFiles = data
 	        	})
 	 	}
 	 	$scope.processReleases = function(){
-	 		$http.post('http://localhost:3000/labels/'+labelId+'/processReleases/', {}).
+	 		$http.post($rootScope.server.url + '/labels/'+labelId+'/processReleases/', {}).
 			  success(function(data, status, headers, config) {
 			  		console.log("DONE")
 			  		$scope.getToProcessReleases();
@@ -107,7 +107,7 @@ angular.module('tracklistmeApp')
 	 	}
 
 	 	$scope.getToProcessReleases = function(){
- 		$http.get('http://localhost:3000/labels/'+labelId+'/processReleases/info')
+ 		$http.get($rootScope.server.url + '/labels/'+labelId+'/processReleases/info')
       		.success(function(data) {
           		$scope.releasesToProcess = data
 	        	})
@@ -118,7 +118,7 @@ angular.module('tracklistmeApp')
 	 		$location.path('adminRelease/'+id);
 	 	}
 	 	$scope.getCatalog  = function(){
- 		$http.get('http://localhost:3000/labels/'+labelId+'/catalog')
+ 		$http.get($rootScope.server.url + '/labels/'+labelId+'/catalog')
       		.success(function(data) {
           		$scope.catalog = data
           		console.log(data)

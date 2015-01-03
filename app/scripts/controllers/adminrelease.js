@@ -22,7 +22,7 @@ angular.module('tracklistmeApp')
 
 
     $scope.addArtist = function(){
-    	$http.post('http://localhost:3000/artists/', {displayName:$scope.searchArtistField}).
+    	$http.post($rootScope.server.url + '/artists/', {displayName:$scope.searchArtistField}).
 		  success(function(data, status, headers, config) {
 		  	$scope.searchArtist();
 		  }).
@@ -69,7 +69,7 @@ angular.module('tracklistmeApp')
       	if($scope.searchArtistField.length > CHARACTER_BEFORE_SEARCH){
       		$scope.isSearching = true;
       		$scope.nameTooShort = false;
-      		$http.get('http://localhost:3000/artists/search/'+$scope.searchArtistField)
+      		$http.get($rootScope.server.url + '/artists/search/'+$scope.searchArtistField)
       		.success(function(data) {
       			          		
           		$scope.isSearching = false
@@ -99,7 +99,7 @@ angular.module('tracklistmeApp')
 
 
     $scope.getRelease = function(){
- 		$http.get('http://localhost:3000/releases/'+$scope.releaseId)
+ 		$http.get($rootScope.server.url + '/releases/'+$scope.releaseId)
       		.success(function(data) {
       			console.log(data)
           		$scope.release = data

@@ -8,13 +8,13 @@
  * Service in the tracklistmeApp.
  */
 angular.module('tracklistmeApp')
-  .factory('Account', function($http, $auth) {
+  .factory('Account', function($http, $auth, $rootScope) {
     return {
       getProfile: function() {
-        return $http.get('http://localhost:3000/me');
+        return $http.get($rootScope.server.url + '/me');
       },
       updateProfile: function(profileData) {
-        return $http.put('http://localhost:3000/me', profileData);
+        return $http.put($rootScope.server.url + '/me', profileData);
       }
     };
   });

@@ -13,7 +13,7 @@ angular.module('tracklistmeApp')
         $scope.companies = {}
     
         var uploader = $scope.uploader = new FileUploader({
-            url: 'http://localhost:3000/upload/profilePicture/500/500',
+            url: $rootScope.server.url + '/upload/profilePicture/500/500',
             method: 'POST',
             headers: {'Authorization': 'Bearer '+$auth.getToken()},
             formData:[]
@@ -152,13 +152,13 @@ angular.module('tracklistmeApp')
 
  
  	$scope.getCompanies = function(){
- 		$http.get('http://localhost:3000/me/companies/')
+ 		$http.get($rootScope.server.url + '/me/companies/')
       		.success(function(data) {
           		$scope.companies = data
         	})
  	}
   $scope.getLabels = function(){
-    $http.get('http://localhost:3000/me/labels/')
+    $http.get($rootScope.server.url + '/me/labels/')
           .success(function(data) {
               $scope.labels = data
           })

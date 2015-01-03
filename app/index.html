@@ -44,8 +44,7 @@
                  
                               
   <ul ng-if="isAuthenticated()"  class="nav navbar-nav navbar-right ">
- 
-                         <img  ng-click="$parent.showAccountDropDown = !$parent.showAccountDropDown" ng-src="http://localhost:3000/images/{{user.avatar}}" class="img-circle special-img">
+    <img  ng-click="$parent.showAccountDropDown = !$parent.showAccountDropDown" ng-src="{{server.url}}/images/{{user.avatar}}" class="img-circle special-img">
   </ul>
 
    

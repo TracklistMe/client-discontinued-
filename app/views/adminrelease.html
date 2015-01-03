@@ -6,7 +6,7 @@
       <div class="panel-body">
        	<div class="row">  
 			<div class="col-md-3"  >
-				<img class="col-md-12" ng-src="http://localhost:3000/cover/{{release.Labels[0].id}}/{{release.catalogNumber}}/{{release.cover}}" />
+				<img class="col-md-12" ng-src="{{server.url}}:3000/cover/{{release.Labels[0].id}}/{{release.catalogNumber}}/{{release.cover}}" />
 			</div>
 			<div class="col-md-9"  >
           		<h3>{{release.title}}</h3>
