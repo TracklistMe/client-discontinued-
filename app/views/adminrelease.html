@@ -75,13 +75,14 @@
 
 					<input name="input" ng-model="searchArtistField" ng-change="searchArtist()" placeholder="Search For Artist" class="form-control input-md">
 
-					<p>  
+					<p> 
+						<br /> 
 						<span ng-show="isSearching">
 							Status:  <i class="fa fa-circle-o-notch fa-spin"></i>
 						</span>
 						<span ng-show="!isSearching && searchArtistResults.length == 0"> 
 							<i class="fa fa-times"> Name Not Available</i>
-							<button ng-click="createUser(user)" class="btn btn-primary btn-xs">Create New User</button>
+							<button ng-click="addArtist()" class="btn btn-primary btn-xs">Create New Artist</button>
 						</span>
 						 
 						
@@ -97,8 +98,8 @@
 									<td>{{artist.id}}</td>
 									<td>{{artist.displayName}}</td>
 									<td>
-										<button ng-click="selectFromMultipleUsers(user)" class="btn btn-primary btn-xs">Add as Producer</button>
-										<button ng-click="selectFromMultipleUsers(user)" class="btn btn-primary btn-xs">Add as Remixer</button>
+										<button ng-click="addAsProducer(artist)" class="btn btn-primary btn-xs">Add as Producer</button>
+										<button ng-click="addAsRemixer(artist)" class="btn btn-primary btn-xs">Add as Remixer</button>
 									</td>
 						  		</tr>
 							</tbody>
@@ -113,12 +114,12 @@
 						    	<th> Producer </th>
 						    	<th> Edit </th>
 						   	</thead> 
-						   	<tbody ng-repeat="producer in editedTrack.Producer" > 
-						  		<tr >
+						   	<tbody   > 
+						  		<tr ng-repeat="producer in editedTrack.Producer" >
 									<td>{{producer.id}}</td>
 									<td>{{producer.displayName}}</td>
 									<td>
-										<button ng-click="selectFromMultipleUsers(user)" class="btn btn-primary btn-xs">Delete Producer </button>
+										<button ng-click="deleteProducer(producer)" class="btn btn-primary btn-xs">Delete Producer </button>
 									</td>
 						  		</tr>
 							</tbody>
@@ -133,12 +134,12 @@
 						    	<th> Remixer </th>
 						    	<th> Edit </th>
 						   	</thead> 
-						   	<tbody ng-repeat="remixer in editedTrack.Remixer" > 
-						  		<tr >
+						   	<tbody > 
+						  		<tr  ng-repeat="remixer in editedTrack.Remixer" >
 									<td>{{remixer.id}}</td>
 									<td>{{remixer.displayName}}</td>
 									<td>
-										<button ng-click="selectFromMultipleUsers(user)" class="btn btn-primary btn-xs">Delete Remixer</button>
+										<button ng-click="deleteRemixer(remixer)" class="btn btn-primary btn-xs">Delete Remixer</button>
 									</td>
 						  		</tr>
 							</tbody>
