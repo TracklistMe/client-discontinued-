@@ -8,7 +8,7 @@
  * Controller of the tracklistmeApp
  */
 angular.module('tracklistmeApp')
-  .controller('AdminlabelCtrl', function ($scope,$state, $auth, $stateParams,$http,Account, FileUploader) {
+  .controller('AdminlabelCtrl', function ($location,$scope,$state, $auth, $stateParams,$http,Account, FileUploader) {
  		var labelId = $stateParams.id
 	  	$scope.label = null
 	  	$scope.dropZoneFiles = null
@@ -111,6 +111,11 @@ angular.module('tracklistmeApp')
       		.success(function(data) {
           		$scope.releasesToProcess = data
 	        	})
+	 	}
+
+	 	$scope.adminRelease = function(id){
+	 		console.log("adminRelease")
+	 		$location.path('adminRelease/'+id);
 	 	}
 	 	$scope.getCatalog  = function(){
  		$http.get('http://localhost:3000/labels/'+labelId+'/catalog')

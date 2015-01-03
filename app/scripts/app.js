@@ -146,6 +146,32 @@ angular
             } // if then else
           } // end of auth
         } // end of resolve
+      }).state('adminRelease', {
+        url: '/adminRelease/{id:int}',
+        templateUrl: 'views/adminrelease.html',
+        controller: 'AdminreleaseCtrl',
+        resolve: {
+          
+          authenticated: function($location, $auth,Account) {
+            
+            if (!$auth.isAuthenticated()) {
+              //not logged in 
+              
+              return $location.path('/login');
+            } else {
+              // with an autentication 
+              
+              return Account.getProfile()
+              .success(function(data) {
+                
+                if(!data.isAdmin)  // Non sono autorizzato
+                  return $location.path('/noPermission');                 
+              })
+               
+            } // if then else
+          } // end of auth
+        
+        } // end of resolve
       });
     $urlRouterProvider.otherwise('/');
 
@@ -173,7 +199,7 @@ angular
     });
 
     $authProvider.twitter({
-      url: 'http://localhost:3000/auth/twitter',
+      url: location.protocol+'//'+location.hostname+'/auth/twitter',
       type: '1.0',
       popupOptions: { width: 495, height: 645 }
     });
