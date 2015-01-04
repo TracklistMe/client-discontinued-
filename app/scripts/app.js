@@ -19,10 +19,19 @@ var app = angular.module('tracklistmeApp', [
     'satellizer',
     'mgcrea.ngStrap',
     'angularFileUpload'
-  ])
-  
-app.config(function($stateProvider, $urlRouterProvider, $authProvider) {
+  ]).constant("CONFIG", {
+        "protocol": "http://",
+        "hostname": "localhost",
+        "port": "3000",
+        "url": "http://localhost:3000"
+    })
+
  
+
+
+  
+app.config(function($stateProvider, $urlRouterProvider, $authProvider, CONFIG) {
+    
     $stateProvider
       .state('main', {
         url: '/',
@@ -175,7 +184,7 @@ app.config(function($stateProvider, $urlRouterProvider, $authProvider) {
     $urlRouterProvider.otherwise('/');
     
     // Temporarily hard-coded since $rootScope isn't available yet
-    var authServerURL = 'http://staging.tracklist.me:3000'
+    var authServerURL = CONFIG.url;
     
     $authProvider.loginUrl = authServerURL + '/auth/login';
     $authProvider.signupUrl = authServerURL + '/auth/signup';
@@ -216,18 +225,6 @@ app.config(function($stateProvider, $urlRouterProvider, $authProvider) {
       redirectUri: window.location.origin || window.location.protocol + '//' + window.location.host,
       authorizationEndpoint: 'https://foursquare.com/oauth2/authenticate'
     });
-});
-
-app.run(function($rootScope) {
-    // I'll just put this here... http://25.media.tumblr.com/tumblr_lymy7o9lKC1qcyb0lo1_500.gif
-    $rootScope.server = {
-    	// Please don't change these at runtime, or you will make Baby Jesus cry. :(
-    	protocol: 'http://',
-    	hostname: 'staging.tracklist.me',
-    	port:     '3000'
-    };
-    // Note: This doesn't update if you change the above values; Stupid JavaScript for not including easy to use getters...
-    $rootScope.server.url = $rootScope.server.protocol + $rootScope.server.hostname + ':' + $rootScope.server.port;
 });
 
 
