@@ -44,21 +44,18 @@ angular.module('tracklistmeApp')
     $scope.deleteProducer = function(artist){
     	var index = -1;
     	for (var i = $scope.editedTrack.Producer.length - 1; i >= 0; i--) {
-    		if($scope.editedTrack.Producer[i].id = artist.id){
+    		if($scope.editedTrack.Producer[i].id == artist.id){
     			index = i;
     		}	
     	};
     	$scope.editedTrack.Producer.splice(index, 1);
     }
     $scope.deleteRemixer = function(remixer){
-    	console.log("I'm going to delete")
-    	console.log($scope.editedTrack)
+
     	var index = -1;
     	for (var i = $scope.editedTrack.Remixer.length - 1; i >= 0; i--) {
-    		if($scope.editedTrack.Remixer[i].id = remixer.id){
-    			console.log("Found")
-    			console.log($scope.editedTrack.Remixer[i])
-    			index = i;
+    		if($scope.editedTrack.Remixer[i].id == remixer.id){
+    		  index = i;
     		}	
     	};
     	$scope.editedTrack.Remixer.splice(index, 1);
