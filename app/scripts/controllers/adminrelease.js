@@ -8,8 +8,9 @@
  * Controller of the tracklistmeApp
  */
 angular.module('tracklistmeApp')
-  .controller('AdminreleaseCtrl', function ($scope,$state, $auth, $stateParams,$http,Account, FileUploader) {
+  .controller('AdminreleaseCtrl', function ($scope,$state, $auth, $stateParams,$http,Account, FileUploader, CONFIG) {
   	$scope.release = null;
+    $scope.serverURL = CONFIG.url
   	$scope.releaseId = $stateParams.id;
   	$scope.editedTrack = null
   	$scope.temporaryTrack = null
@@ -22,7 +23,7 @@ angular.module('tracklistmeApp')
 
 
     $scope.addArtist = function(){
-    	$http.post($rootScope.server.url + '/artists/', {displayName:$scope.searchArtistField}).
+    	$http.post(CONFIG.url + '/artists/', {displayName:$scope.searchArtistField}).
 		  success(function(data, status, headers, config) {
 		  	$scope.searchArtist();
 		  }).
@@ -69,7 +70,7 @@ angular.module('tracklistmeApp')
       	if($scope.searchArtistField.length > CHARACTER_BEFORE_SEARCH){
       		$scope.isSearching = true;
       		$scope.nameTooShort = false;
-      		$http.get($rootScope.server.url + '/artists/search/'+$scope.searchArtistField)
+      		$http.get(CONFIG.url + '/artists/search/'+$scope.searchArtistField)
       		.success(function(data) {
       			          		
           		$scope.isSearching = false
@@ -99,7 +100,7 @@ angular.module('tracklistmeApp')
 
 
     $scope.getRelease = function(){
- 		$http.get($rootScope.server.url + '/releases/'+$scope.releaseId)
+ 		$http.get(CONFIG.url + '/releases/'+$scope.releaseId)
       		.success(function(data) {
       			console.log(data)
           		$scope.release = data

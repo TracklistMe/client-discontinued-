@@ -8,15 +8,16 @@
  * Controller of the tracklistmeApp
  */
 angular.module('tracklistmeApp')
-  .controller('AdminlabelCtrl', function ($location,$scope,$state, $auth, $stateParams,$http,Account, FileUploader) {
+  .controller('AdminlabelCtrl', function ($location,$scope,$state, $auth, $stateParams,$http,Account, FileUploader, CONFIG) {
  		var labelId = $stateParams.id
+      $scope.serverURL = CONFIG.url
 	  	$scope.label = null
 	  	$scope.dropZoneFiles = null
 	  	$scope.releasesToProcess  = null
 	  	$scope.catalog = null
 
 	  	var uploader = $scope.uploader = new FileUploader({
-	        url: $rootScope.server.url + '/labels/'+labelId+'/profilePicture/500/500/',
+	        url: CONFIG.url + '/labels/'+labelId+'/profilePicture/500/500/',
 	        headers: {'Authorization': 'Bearer '+$auth.getToken()},
 	        data: {user: $scope.user},
 	    });
@@ -36,7 +37,7 @@ angular.module('tracklistmeApp')
 
 
         var catalogUploader = $scope.catalogUploader = new FileUploader({
-	        url: $rootScope.server.url + '/labels/'+labelId+'/dropzone/',
+	        url: CONFIG.url + '/labels/'+labelId+'/dropzone/',
 	        headers: {'Authorization': 'Bearer '+$auth.getToken()},
 	    });	  	
 
@@ -79,20 +80,20 @@ angular.module('tracklistmeApp')
         };
 
         $scope.getLabel = function(){
- 		$http.get($rootScope.server.url + '/labels/'+labelId)
+ 		$http.get(CONFIG.url + '/labels/'+labelId)
       		.success(function(data) {
           		$scope.label = data
 	        	})
 	 	}
 
 	 	$scope.getDropZoneFiles = function(){
- 		$http.get($rootScope.server.url + '/labels/'+labelId+'/dropZoneFiles')
+ 		$http.get(CONFIG.url  + '/labels/'+labelId+'/dropZoneFiles')
       		.success(function(data) {
           		$scope.dropZoneFiles = data
 	        	})
 	 	}
 	 	$scope.processReleases = function(){
-	 		$http.post($rootScope.server.url + '/labels/'+labelId+'/processReleases/', {}).
+	 		$http.post(CONFIG.url + '/labels/'+labelId+'/processReleases/', {}).
 			  success(function(data, status, headers, config) {
 			  		console.log("DONE")
 			  		$scope.getToProcessReleases();
@@ -107,7 +108,7 @@ angular.module('tracklistmeApp')
 	 	}
 
 	 	$scope.getToProcessReleases = function(){
- 		$http.get($rootScope.server.url + '/labels/'+labelId+'/processReleases/info')
+ 		$http.get(CONFIG.url + '/labels/'+labelId+'/processReleases/info')
       		.success(function(data) {
           		$scope.releasesToProcess = data
 	        	})
@@ -118,7 +119,7 @@ angular.module('tracklistmeApp')
 	 		$location.path('adminRelease/'+id);
 	 	}
 	 	$scope.getCatalog  = function(){
- 		$http.get($rootScope.server.url + '/labels/'+labelId+'/catalog')
+ 		$http.get(CONFIG.url + '/labels/'+labelId+'/catalog')
       		.success(function(data) {
           		$scope.catalog = data
           		console.log(data)

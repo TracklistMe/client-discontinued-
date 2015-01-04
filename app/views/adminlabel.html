@@ -8,7 +8,7 @@
 		          <div class="col-md-3">
 		            <div ng-show="uploader.isHTML5">
 		              	<div nv-file-drop="" uploader="uploader"  >
-			                <div nv-file-over="" uploader="uploader" style="background-image: url('{{server.url}}/images/{{label.logo}}')" over-class="my-drop-zone-over-class" class="well my-drop-zone">
+			                <div nv-file-over="" uploader="uploader" style="background-image: url('{{serverURL}}/images/{{label.logo}}')" over-class="my-drop-zone-over-class" class="well my-drop-zone">
 								<div class="dragAndDropProfilePictureButton"> Drag and drop <br />or<br /> 
 			                        <label class="myLabel">
 			                            <input type="file" nv-file-select="" uploader="uploader"/>
@@ -33,7 +33,7 @@
 		         
 		        <div ng-repeat="release in catalog" class="col-md-2"  >
 		        	<a ng-click="adminRelease(release.id)">
-			           <img class="col-md-12" ng-src="{{server.url}}/cover/{{label.id}}/{{release.catalogNumber}}/{{release.cover}}" />
+			           <img class="col-md-12" ng-src="{{serverURL}}/cover/{{label.id}}/{{release.catalogNumber}}/{{release.cover}}" />
 			        </a>
 		        </div>
 	    </div>

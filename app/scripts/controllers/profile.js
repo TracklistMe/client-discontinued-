@@ -8,12 +8,12 @@
  * Controller of the tracklistmeApp
  */
 angular.module('tracklistmeApp')
- .controller('ProfileCtrl', function($scope,$http, $timeout, $auth, $alert, Account, FileUploader) {
+ .controller('ProfileCtrl', function($scope,$http, $timeout, $auth, $alert, Account, FileUploader,CONFIG) {
         $scope.labels = {}
         $scope.companies = {}
     
         var uploader = $scope.uploader = new FileUploader({
-            url: $rootScope.server.url + '/upload/profilePicture/500/500',
+            url: CONFIG.url + '/upload/profilePicture/500/500',
             method: 'POST',
             headers: {'Authorization': 'Bearer '+$auth.getToken()},
             formData:[]
@@ -152,13 +152,13 @@ angular.module('tracklistmeApp')
 
  
  	$scope.getCompanies = function(){
- 		$http.get($rootScope.server.url + '/me/companies/')
+ 		$http.get(CONFIG.url + '/me/companies/')
       		.success(function(data) {
           		$scope.companies = data
         	})
  	}
   $scope.getLabels = function(){
-    $http.get($rootScope.server.url + '/me/labels/')
+    $http.get(CONFIG.url + '/me/labels/')
           .success(function(data) {
               $scope.labels = data
           })
