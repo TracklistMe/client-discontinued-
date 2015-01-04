@@ -8,7 +8,7 @@
  * Controller of the tracklistmeApp
  */
 angular.module('tracklistmeApp')
-  .controller('AdmincompaniesCtrl', function ($scope, $http, $rootScope) {
+  .controller('AdmincompaniesCtrl', function ($scope, $http, CONFIG) {
     // add new company form
     var CHARACTER_BEFORE_SEARCH = 2;
     $scope.currentCompany = null;
@@ -23,7 +23,7 @@ angular.module('tracklistmeApp')
       	if($scope.searchCompanyField.length > CHARACTER_BEFORE_SEARCH){
       		$scope.isSearching = true;
       		$scope.nameTooShort = false;
-      		$http.get($rootScope.server.url + '/companies/search/'+$scope.searchCompanyField)
+      		$http.get(CONFIG.url + '/companies/search/'+$scope.searchCompanyField)
       		.success(function(data) {
           		
           		$scope.isSearching = false
@@ -42,7 +42,7 @@ angular.module('tracklistmeApp')
    	$scope.addCompany = function(){
    		console.log("ADD COMPANY")
    		// TODO STRING SANITIZING
-   		$http.post($rootScope.server.url + '/companies/', {companyName:$scope.searchCompanyField}).
+   		$http.post(CONFIG.url + '/companies/', {companyName:$scope.searchCompanyField}).
 		  success(function(data, status, headers, config) {
 		  	$scope.updateCompanyList();
 		  }).
@@ -72,7 +72,7 @@ angular.module('tracklistmeApp')
    		var userId = $scope.searchUserResults[0].id;
    		var companyId = $scope.currentCompany.id;
    		console.log(userId);
-   		$http.post($rootScope.server.url + '/companies/'+companyId+"/owners/", {newOwner:userId}).
+   		$http.post(CONFIG.url + '/companies/'+companyId+"/owners/", {newOwner:userId}).
 		  success(function(data, status, headers, config) {
 		  	$scope.editCompany(companyId)
 		  }).
@@ -83,7 +83,7 @@ angular.module('tracklistmeApp')
    	}
    	$scope.removeOwner = function(userId){
    		var companyId = $scope.currentCompany.id;
-   		$http.delete($rootScope.server.url + '/companies/'+companyId+"/owners/"+userId).
+   		$http.delete(CONFIG.url + '/companies/'+companyId+"/owners/"+userId).
 		  success(function(data, status, headers, config) {
 		  	$scope.editCompany(companyId)
 		  }).
@@ -97,7 +97,7 @@ angular.module('tracklistmeApp')
    	$scope.activateCompany = function(companyId){
    		console.log("ACTIVATE")
    		 
-   		$http.put($rootScope.server.url + '/companies/'+companyId, {isActive:true}).
+   		$http.put(CONFIG.url + '/companies/'+companyId, {isActive:true}).
 		  success(function(data, status, headers, config) {
 		  		$scope.updateCompanyList();
 		  }).
@@ -108,7 +108,7 @@ angular.module('tracklistmeApp')
    	}
    	$scope.deactivateCompany = function(companyId){
    		 
-   		$http.put($rootScope.server.url + '/companies/'+companyId, {isActive:false}).
+   		$http.put(CONFIG.url + '/companies/'+companyId, {isActive:false}).
 		  success(function(data, status, headers, config) {
 		  		$scope.updateCompanyList();
 		  }).
@@ -119,14 +119,14 @@ angular.module('tracklistmeApp')
    	}
 
     $scope.editCompany = function(idCompany){
-   		$http.get($rootScope.server.url + '/companies/'+idCompany)
+   		$http.get(CONFIG.url + '/companies/'+idCompany)
       		.success(function(data) {
       				console.log(data)
           			$scope.currentCompany = data
           	})
    	}
    	$scope.updateCompanyList = function(){
-   		$http.get($rootScope.server.url + '/companies/')
+   		$http.get(CONFIG.url + '/companies/')
       		.success(function(data) {
       				console.log(data)
           			$scope.companyList = data
