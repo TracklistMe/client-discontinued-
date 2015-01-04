@@ -28,7 +28,7 @@
 
 <div ng-controller="NavbarCtrl" class="navbar navbar-default  navbar-fixed-top">
   <div class="navbar-header">
-    <a class="navbar-brand" href="/#/"><i class="ion-ios7-pulse-strong"></i><img src="images/logo.png" /></a>
+    <a class="navbar-brand" href="/#/"><i class="ion-ios7-pulse-strong"></i><!-- <img src="images/logo.png" /> --></a>
   </div>
    
   <ul ng-if="!isAuthenticated()" class="nav navbar-nav pull-right">
@@ -110,6 +110,8 @@
         <script src="scripts/filters/bytes.js"></script>
         <script src="scripts/controllers/adminrelease.js"></script>
         
+        <script src="scripts/controllers/adminartist.js"></script>
+        <script src="scripts/controllers/adminartists.js"></script>
         <!-- endbuild -->
 </body>
 </html>

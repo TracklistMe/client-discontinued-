@@ -8,10 +8,11 @@
  * Controller of the tracklistmeApp
  */
 angular.module('tracklistmeApp')
-  .controller('AdmincompanyCtrl', function ($scope,$state, $auth, $stateParams,$http,Account, FileUploader) {
+  .controller('AdmincompanyCtrl', function ($scope,$state, $auth, $stateParams,$http,Account, FileUploader, CONFIG) {
   	var companyId = $stateParams.id
   	var CHARACTER_BEFORE_SEARCH = 4;
   	var CHARACTER_BEFORE_SEARCH_USER = 3;
+    $scope.serverURL = CONFIG.url
   	$scope.isSearching = false
     $scope.nameAvailable = false
     $scope.nameTooShort = true
@@ -21,7 +22,7 @@ angular.module('tracklistmeApp')
   	
 
   	var uploader = $scope.uploader = new FileUploader({
-        url: $rootScope.server.url + '/companies/'+companyId+'/profilePicture/500/500/',
+        url: CONFIG.url + '/companies/'+companyId+'/profilePicture/500/500/',
         headers: {'Authorization': 'Bearer '+$auth.getToken()},
         data: {user: $scope.user},
     });
@@ -38,7 +39,7 @@ angular.module('tracklistmeApp')
   	$scope.addLabel = function(){
    		console.log("ADD Label")
    		// TODO STRING SANITIZING
-   		$http.post($rootScope.server.url + '/labels/', {companyId:companyId, labelName: $scope.seachLabelField}).
+   		$http.post( CONFIG.url + '/labels/', {companyId:companyId, labelName: $scope.seachLabelField}).
 		  success(function(data, status, headers, config) {
 		  	$scope.updateLabelList();
 		  }).
@@ -53,7 +54,7 @@ angular.module('tracklistmeApp')
       	if($scope.seachLabelField.length > CHARACTER_BEFORE_SEARCH){
       		$scope.isSearching = true;
       		$scope.nameTooShort = false;
-      		$http.get($rootScope.server.url + '/labels/search/'+$scope.seachLabelField)
+      		$http.get( CONFIG.url + '/labels/search/'+$scope.seachLabelField)
       		.success(function(data) {
           		
           		$scope.isSearching = false
@@ -75,7 +76,7 @@ angular.module('tracklistmeApp')
    		var labelId = $scope.currentLabel.id;
    	 
    	 
-   		$http.post($rootScope.server.url + '/labels/'+labelId+"/labelManagers/", {newLabelManager:newLabelManager}).
+   		$http.post( CONFIG.url + '/labels/'+labelId+"/labelManagers/", {newLabelManager:newLabelManager}).
 		  success(function(data, status, headers, config) {
 		  	$scope.editLabel(labelId)
 		  }).
@@ -87,7 +88,7 @@ angular.module('tracklistmeApp')
 
    	$scope.removeLabelManager = function(userId){
    		var labelId = $scope.currentLabel.id;
-   		$http.delete($rootScope.server.url + '/labels/'+labelId+"/labelManagers/"+userId).
+   		$http.delete( CONFIG.url + '/labels/'+labelId+"/labelManagers/"+userId).
 		  success(function(data, status, headers, config) {
 		  	$scope.editLabel(labelId)
 		  }).
@@ -118,7 +119,7 @@ angular.module('tracklistmeApp')
 
 
    	$scope.updateLabelList = function(){
-   		$http.get($rootScope.server.url + '/companies/'+companyId+"/labels")  // ATTENTION ONLY THE LABEL THAT ARE PART OF THIS COMPANY 
+   		$http.get( CONFIG.url + '/companies/'+companyId+"/labels")  // ATTENTION ONLY THE LABEL THAT ARE PART OF THIS COMPANY 
       		.success(function(data) {
       				console.log(data)
           			$scope.labelList = data
@@ -127,7 +128,7 @@ angular.module('tracklistmeApp')
    	}
 
 	$scope.editLabel = function(idLabel){
-   		$http.get($rootScope.server.url + '/labels/'+idLabel)
+   		$http.get( CONFIG.url + '/labels/'+idLabel)
       		.success(function(data) {
       				console.log(data)
           			$scope.currentLabel = data
@@ -138,7 +139,7 @@ angular.module('tracklistmeApp')
 
 
     $scope.getCompany = function(){
- 		$http.get($rootScope.server.url + '/companies/'+companyId)
+ 		$http.get( CONFIG.url + '/companies/'+companyId)
       		.success(function(data) {
           		$scope.company = data
         	})

@@ -11,7 +11,7 @@
             <div ng-show="uploader.isHTML5">
              
               <div nv-file-drop="" uploader="uploader"  >
-                  <div nv-file-over="" uploader="uploader" style="background-image: url('{{server.url}}/images/{{user.avatar}}')" over-class="my-drop-zone-over-class" class="well my-drop-zone">
+                  <div nv-file-over="" uploader="uploader" style="background-image: url('{{serverURL}}/images/{{user.avatar}}')" over-class="my-drop-zone-over-class" class="well my-drop-zone">
 
 
                         <div class="dragAndDropProfilePictureButton"> Drag and drop <br />or<br /> 
@@ -144,12 +144,15 @@
   <div ng-if="user.isAdmin" class="panel panel-default">
     <div class="panel-heading">Admin Panel</div>
     <div class="panel-body">
-    <div class="col-md-4">
-      <legend><i class="ion-link"></i><a href="/#/adminCompanies"> Manage Companies</a></legend>
-    </div>
-    <div class="col-md-4">
-      <legend><i class="ion-link"></i><a href="/#/adminLabels"> Manage Labels</a></legend>
-    </div>
+      <div class="col-md-4">
+        <legend><i class="ion-link"></i><a href="/#/adminCompanies"> Manage Companies</a></legend>
+      </div>
+      <div class="col-md-4">
+        <legend><i class="ion-link"></i><a href="/#/adminLabels"> Manage Labels</a></legend>
+      </div>
+       <div class="col-md-4">
+        <legend><i class="ion-link"></i><a href="/#/adminArtists"> Admin Artists</a></legend>
+      </div>
     </div>
   </div>
 
@@ -200,7 +203,8 @@
         <button class="btn btn-sm btn-primary" ng-if="!user.linkedin" ng-click="link('linkedin')">
           <i class="ion-social-linkedin"></i> Link LinkedIn Account
         </button>
-
+      </div>
+       <div class="btn-group-vertical">
         <button class="btn btn-sm btn-danger" ng-if="user.twitter" ng-click="unlink('twitter')">
           <i class="ion-social-twitter"></i> Unlink Twitter Account
         </button>

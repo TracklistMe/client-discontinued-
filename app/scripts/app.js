@@ -108,6 +108,47 @@ app.config(function($stateProvider, $urlRouterProvider, $authProvider, CONFIG) {
             } // if then else
           } // end of auth
         } // end of resolve
+      }).state('adminArtists', {
+        url: '/adminArtists',
+        templateUrl: 'views/adminartists.html',
+        controller: 'AdminartistsCtrl',
+        resolve: {
+          authenticated: function($location, $auth,Account) {
+            if (!$auth.isAuthenticated()) {
+              //not logged in 
+              //              return $location.path('/login');
+            } else {
+              // with an autentication 
+              return Account.getProfile()
+              .success(function(data) {
+                if(!data.isAdmin)  // Non sono autorizzato
+                  return $location.path('/noPermission');                 
+              })
+               
+            } // if then else
+          } // end of auth
+        } // end of resolve
+      }).state('adminArtist', {
+        url: '/adminArtist/{id:int}',
+        templateUrl: 'views/adminartist.html',
+        controller: 'AdminartistCtrl',
+        resolve: {
+          authenticated: function($location, $auth,Account) {
+            
+            if (!$auth.isAuthenticated()) {
+              //not logged in 
+              return $location.path('/login');
+            } else {
+              // with an autentication 
+              return Account.getProfile()
+              .success(function(data) {
+                if(!data.isAdmin)  // Non sono autorizzato
+                  return $location.path('/noPermission');                 
+              })
+               
+            } // if then else
+          } // end of auth
+        } // end of resolve
       }).state('adminLabel', {
         url: '/adminLabel/{id:int}',
         templateUrl: 'views/adminlabel.html',

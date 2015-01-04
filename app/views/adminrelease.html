@@ -10,6 +10,12 @@
 			</div>
 			<div class="col-md-9"  >
           		<h3>{{release.title}}</h3>
+          		<span ng-show="release.isActive">
+          			Active
+          		</span>
+          		<span ng-show="!release.isActive">
+          			Not Active 
+          		</span>
 			</div>
         </div>
         <div class="row">
@@ -56,7 +62,7 @@
 				<div class="form-group col-md-6  ">
 				  <label class="col-md-3 control-label" for="trackTitle">Track Title</label>  
 				  <div class="col-md-9">
-				  	<input id="trackTitle" name="trackTitle" type="text" value="{{editedTrack.title}}" placeholder="{{editedTrack.title}}" class="form-control input-md">    
+				  	<input id="trackTitle" name="trackTitle" type="text" ng-model="editedTrack.title"  value="{{editedTrack.title}}" placeholder="{{editedTrack.title}}" class="form-control input-md">    
 				  </div>
 				</div>
 
@@ -64,7 +70,7 @@
 				<div class="form-group col-md-6">
 				  <label class="col-md-3 control-label" for="versionName">Version Name</label>  
 				  <div class="col-md-9">
-				 	 <input id="versionName" name="versionName" type="text"   value="{{editedTrack.version}}" placeholder="{{editedTrack.version}}" class="form-control input-md"> 
+				 	 <input id="versionName" name="versionName" type="text" ng-model="editedTrack.version" value="{{editedTrack.version}}" placeholder="{{editedTrack.version}}" class="form-control input-md"> 
 				  </div>
 				</div>
 			</div>
@@ -149,14 +155,15 @@
 			<div class="col-md-12">
 				<hr />
 			</div>
-			<div class="col-md-12">
-				<button type="button" ng-click="" class="col-md-6 btn btn-success btn-s">
-					Save
-				</button>
-				<button type="button" ng-click="" class="col-md-6 btn btn-danger btn-s">
-					Cancel
-				</button>
-			</div>
+			
+		</div>
+		<div ng-show="editedTrack" class="col-md-12">
+			<button type="button" ng-click="saveRelease()" class="col-md-6 btn btn-success btn-s">
+				Save
+			</button>
+			<button type="button" ng-click="getRelease()" class="col-md-6 btn btn-danger btn-s">
+				Cancel
+			</button>
 		</div>
 
          

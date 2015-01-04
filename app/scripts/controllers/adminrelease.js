@@ -85,6 +85,21 @@ angular.module('tracklistmeApp')
       	}
    	};
 
+    $scope.saveRelease = function(){
+      console.log($scope.release)
+        $http.put(CONFIG.url + '/releases/'+$scope.releaseId, {release:$scope.release}).
+        success(function(data, status, headers, config) {
+          $scope.getRelease();
+          $scope.editedTrack = null
+
+        }).
+        error(function(data, status, headers, config) {
+          // called asynchronously if an error occurs
+          // or server returns response with an error status.
+        });
+
+    }
+
 
   	$scope.editTrack = function(trackId){
   		for (var i = $scope.release.Tracks.length - 1; i >= 0; i--) {

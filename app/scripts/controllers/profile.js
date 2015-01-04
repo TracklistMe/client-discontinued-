@@ -11,7 +11,8 @@ angular.module('tracklistmeApp')
  .controller('ProfileCtrl', function($scope,$http, $timeout, $auth, $alert, Account, FileUploader,CONFIG) {
         $scope.labels = {}
         $scope.companies = {}
-    
+        $scope.serverURL = CONFIG.url;
+        
         var uploader = $scope.uploader = new FileUploader({
             url: CONFIG.url + '/upload/profilePicture/500/500',
             method: 'POST',
