@@ -7,7 +7,7 @@
     <meta name="viewport" content="width=device-width">
     <!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
     <!-- build:css(.) styles/vendor.css -->
-    <!-- bower:css -->
+    <!-- bower:css   -->
     <link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.css" />
     <link rel="stylesheet" href="bower_components/angular-motion/dist/angular-motion.css" />
     <link rel="stylesheet" href="bower_components/fontawesome/css/font-awesome.css" />
@@ -15,6 +15,7 @@
     <!-- endbower -->
     <!-- endbuild -->
     <!-- build:css(.tmp) styles/main.css -->
+    <link rel="stylesheet" href="styles/menuStyle.css">
     <link rel="stylesheet" href="styles/main.css">
     <link rel="stylesheet" href="styles/styles.css">
     <link rel="stylesheet" href="styles/dropImageProfile.css">
@@ -25,8 +26,11 @@
     <!--[if lt IE 7]>
       <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
     <![endif]-->
-
-<div ng-controller="NavbarCtrl" class="navbar navbar-default  navbar-fixed-top">
+     
+   
+<div class="topMenu"> test </div>
+<div ng-controller="NavbarCtrl" class="mainMenu navbar-default ">
+   
   <div class="navbar-header">
     <a class="navbar-brand" href="/#/"><i class="ion-ios7-pulse-strong"></i><!-- <img src="images/logo.png" /> --></a>
   </div>
@@ -44,7 +48,7 @@
                  
                               
   <ul ng-if="isAuthenticated()"  class="nav navbar-nav navbar-right ">
-    <img  ng-click="$parent.showAccountDropDown = !$parent.showAccountDropDown" ng-src="{{server.url}}/images/{{user.avatar}}" class="img-circle special-img">
+    <img  ng-click="$parent.showAccountDropDown = !$parent.showAccountDropDown" src="data:image/png;base64,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" ng-src="{{server.url}}/images/{{user.avatar}}" class="img-circle special-img">
   </ul>
 
    
@@ -111,7 +115,7 @@
         <script src="scripts/controllers/adminrelease.js"></script>
         
         <script src="scripts/controllers/adminartist.js"></script>
-        <script src="scripts/controllers/adminartists.js"></script>
+        <script src="scripts/controllers/adminartists.js"></script> 
         <!-- endbuild -->
 </body>
 </html>

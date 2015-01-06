@@ -116,7 +116,7 @@ angular.module('tracklistmeApp')
 
 	 	$scope.adminRelease = function(id){
 	 		console.log("adminRelease")
-	 		$location.path('adminRelease/'+id);
+	 		  $location.path('adminRelease/'+labelId+'/'+id);
 	 	}
 	 	$scope.getCatalog  = function(){
  		$http.get(CONFIG.url + '/labels/'+labelId+'/catalog')
@@ -125,6 +125,8 @@ angular.module('tracklistmeApp')
           		console.log(data)
 	        	})
 	 	}
+
+ 
 	 	$scope.getToProcessReleases();
 	 	$scope.getDropZoneFiles();
 	 	$scope.getCatalog();

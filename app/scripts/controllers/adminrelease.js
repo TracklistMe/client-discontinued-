@@ -11,6 +11,7 @@ angular.module('tracklistmeApp')
   .controller('AdminreleaseCtrl', function ($scope,$state, $auth, $stateParams,$http,Account, FileUploader, CONFIG) {
   	$scope.release = null;
     $scope.serverURL = CONFIG.url
+    $scope.labelId = $stateParams.labelId;
   	$scope.releaseId = $stateParams.id;
   	$scope.editedTrack = null
   	$scope.temporaryTrack = null

@@ -10,6 +10,7 @@
 angular.module('tracklistmeApp')
  .controller('ProfileCtrl', function($scope,$http, $timeout, $auth, $alert, Account, FileUploader,CONFIG) {
         $scope.labels = {}
+        $scope.artists = {}
         $scope.companies = {}
         $scope.serverURL = CONFIG.url;
         
@@ -164,7 +165,14 @@ angular.module('tracklistmeApp')
               $scope.labels = data
           })
   }
+  $scope.getArtists = function(){
+    $http.get(CONFIG.url + '/me/artists/')
+          .success(function(data) {
+              $scope.artists = data
+          })
+  }
 
+  $scope.getArtists();
   $scope.getProfile();
   $scope.getLabels();
  	$scope.getCompanies();

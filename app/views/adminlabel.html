@@ -67,10 +67,16 @@
 		<div class="panel-body">
 		         
 	        <div class="col-md-12"  >
+	      		<a ng-click="createRelease()">
+	      			<label class="myLabel">
+			        	<span>Create new Release</span>
+			   		</label>
+			   	</a> 
 	        	<label class="myLabel">
 			        <input type="file" nv-file-select="" uploader="catalogUploader" multiple  />
 			        <span>Upload New BeatportBaseware format Release</span>
 			   	</label> 
+			   	 
 	        </div>
 	         <div ng-if="catalogUploader.queue.length>0" class="col-md-12" style="margin-bottom: 40px">
 					

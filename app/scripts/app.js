@@ -196,7 +196,7 @@ app.config(function($stateProvider, $urlRouterProvider, $authProvider, CONFIG) {
           } // end of auth
         } // end of resolve
       }).state('adminRelease', {
-        url: '/adminRelease/{id:int}',
+        url: '/adminRelease/{idLabel:int}/{id:int}',
         templateUrl: 'views/adminrelease.html',
         controller: 'AdminreleaseCtrl',
         resolve: {

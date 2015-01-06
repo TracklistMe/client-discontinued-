@@ -177,6 +177,16 @@
     </div>
   </div>
 
+  <div ng-if="user.isAdmin || artists.length > 0" class="panel panel-default">
+    <div class="panel-heading">Your Managed Artists</div>
+    <div class="panel-body">
+      <div class="col-md-4" ng-repeat="artist in artists">
+            <i class="ion-link"></i><a href="/#/adminArtist/{{artist.id}}"> {{artist.displayName}}</a>
+      </div>
+ 
+    </div>
+  </div>
+
 
   <div class="panel panel-default">
     <div class="panel-heading">Accounts</div>
