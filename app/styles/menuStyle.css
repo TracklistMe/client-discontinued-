@@ -1,0 +1,111 @@
+.topMenu{
+	margin:0px;
+	position: relative;
+	height: 70px;
+	line-height: 70px;
+	width: 100%;
+	border-bottom: solid 2px #f3f0ea;
+	background-color: #fff;
+	color: #111;
+}
+
+.midMenu{
+	width: 100%;
+	background-color: #fff;
+	height: 45px;
+	border-bottom: solid 2px #f3f0ea;
+	line-height: 45px;
+	color: #45413e;
+}
+
+.logo{
+  position: absolute;
+  left: 50%; 
+  top: 0px;
+  margin-left: -156px;
+  text-align: center;
+}
+
+.mainMenu{
+	background: #ff5953; /* Old browsers */
+	background: -moz-linear-gradient(left,  #ffaf40 0%, #ff0066 100%); /* FF3.6+ */
+	background: -webkit-gradient(linear, left top, right top, color-stop(0%,#ffaf40), color-stop(100%,#ff0066)); /* Chrome,Safari4+ */
+	background: -webkit-linear-gradient(left,  #ffaf40 0%,#ff0066 100%); /* Chrome10+,Safari5.1+ */
+	background: -o-linear-gradient(left,  #ffaf40 0%,#ff0066 100%); /* Opera 11.10+ */
+	background: -ms-linear-gradient(left,  #ffaf40 0%,#ff0066 100%); /* IE10+ */
+	background: linear-gradient(to right,  #ffaf40 0%,#ff0066 100%); /* W3C */
+	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ffaf40', endColorstr='#ff0066',GradientType=1 ); /* IE6-9 */
+	border: 0;
+	box-shadow: 0 2px 5px 0 rgba(0, 0, 0, .10);
+	height: 52px;
+	line-height: 52px;
+}
+
+
+.avatarBox {
+    padding: 0px;
+    position: relative;
+    top: 2px;
+    float: left;
+    right: 2px;
+     box-shadow: 0 2px 2px 0 rgba(0, 0, 0, .15);
+    border: 1px solid  rgba(0, 0, 0, .15);
+    width: 48px;
+    height: 48px;
+    -webkit-border-radius: 50%; /* Can also be 55px */
+    -moz-border-radius: 50%;
+    border-radius: 50%;
+    line-height: 0px
+ }
+
+.avatarBox img {
+  width: 46px;
+  height: 46px;
+ 
+  -webkit-border-radius: 50%; /* Can also be 50px */
+  -moz-border-radius: 50%;
+  border-radius: 50%;
+ }
+
+.special-img 
+{
+    width: 42px;
+    height: 42px;
+    position: relative;
+    top: 4px;
+    float: left;
+    right: 4px;
+    -webkit-backface-visibility: hidden; 
+    
+    cursor: pointer; 
+    cursor: hand;
+      overflow: hidden;
+  background-repeat: no-repeat; 
+    box-shadow: 0 2px 2px 0 rgba(0, 0, 0, .15);
+
+   -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+}
+
+.dropDownNavProfile{
+  right: 0px;
+  top: 80px;
+  position: absolute;
+  background-color: #fff;
+  box-shadow: 0 2px 5px 0 rgba(0, 0, 0, .10);
+}
+.dropDownNavProfile:after {
+    content: "";
+    position: absolute;
+    top: -4px;
+    right: 22px;
+    border-style: solid;
+    border-width: 0 4px 4px;
+    border-color: #fff transparent;
+    display: block;
+    width: 0;
+    z-index: 1;
+}
+
