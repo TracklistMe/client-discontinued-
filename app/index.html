@@ -12,6 +12,8 @@
     <link rel="stylesheet" href="bower_components/angular-motion/dist/angular-motion.css" />
     <link rel="stylesheet" href="bower_components/fontawesome/css/font-awesome.css" />
     <link rel="stylesheet" href="bower_components/components-font-awesome/css/font-awesome.css" />
+    <link href='http://fonts.googleapis.com/css?family=Fredoka+One' rel='stylesheet' type='text/css'>
+    <link href='http://fonts.googleapis.com/css?family=Quicksand:300,400,700' rel='stylesheet' type='text/css'>
     <!-- endbower -->
     <!-- endbuild -->
     <!-- build:css(.tmp) styles/main.css -->
@@ -28,11 +30,22 @@
     <![endif]-->
      
    
-<div class="topMenu"> test </div>
+<div class="topMenu">
+    <div class="logo"><img src="images/HypsterWavesLogo.png" /></div> 
+    <div class="row">
+      <div class="col-sm-6 col-md-6">50%</div>
+      <div class="col-sm-6 col-md-6 text-right">50%</div>
+    </div>
+</div>
+
+<div class="midMenu text-center fredokaFont">
+ MENU 1 MENU 2 MENU 3 
+</div>
+<!-- 
 <div ng-controller="NavbarCtrl" class="mainMenu navbar-default ">
    
   <div class="navbar-header">
-    <a class="navbar-brand" href="/#/"><i class="ion-ios7-pulse-strong"></i><!-- <img src="images/logo.png" /> --></a>
+    <a class="navbar-brand" href="/#/"><i class="ion-ios7-pulse-strong"></i>  </a>
   </div>
    
   <ul ng-if="!isAuthenticated()" class="nav navbar-nav pull-right">
@@ -53,6 +66,11 @@
 
    
 </div>
+
+
+-->
+
+
     <!-- Add your site or application content here -->
 <div ui-view class="fadeZoom"></div>
 

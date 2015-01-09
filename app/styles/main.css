@@ -1,9 +1,65 @@
 /* Space out content a bit */
 body {
+  padding: 0px;
+  margin: 0px;
+  background-color: #f1edea;
+}
+ 
+.fredokaFont{
+  font-family: 'Fredoka One', cursive;
+} 
+.quicksandFont{
+  font-family: 'Quicksand', sans-serif;
+} 
+.quicksandFont700{
+  font-weight: 700;
+  font-family: 'Quicksand', sans-serif;
+} 
 
-
+.mainContainer{ 
+  position: relative;
+  margin-top: 20px;
+  width: 92%;
+  margin-left: 4%;
+  margin-right: 4%;
 }
 
+.tileHomeOneSize{ 
+  padding: 1%;
+}
+.releaseTile{
+  background-color: #fff;
+  height: 100%;  
+  -webkit-border-radius: 5px;
+  -moz-border-radius: 5px;
+  border-radius: 5px;
+}
+.coverRelease{
+  overflow: hidden;
+  -webkit-border-top-left-radius: 5px;
+  -webkit-border-top-right-radius: 5px;
+  -moz-border-radius-topleft: 5px;
+  -moz-border-radius-topright: 5px;
+  border-top-left-radius: 5px;
+  border-top-right-radius: 5px;
+  background-color: #ff755b;
+}
+.coverImage{
+  width: 100%;
+}
+.descriptionRelease{
+  color: #2c3e50;
+  background-color: #fff;
+  padding: 2%;
+  font-size: 12px;
+  -webkit-border-bottom-right-radius: 5px;
+  -webkit-border-bottom-left-radius: 5px;
+  -moz-border-radius-bottomright: 5px;
+  -moz-border-radius-bottomleft: 5px;
+  border-bottom-right-radius: 5px;
+  border-bottom-left-radius: 5px;
+  height: 60px;
+}
 /* Everything but the jumbotron gets side spacing for mobile first views */
 .header,
 .marketing,
