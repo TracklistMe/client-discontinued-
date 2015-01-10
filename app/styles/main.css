@@ -60,6 +60,13 @@ body {
   border-bottom-left-radius: 5px;
   height: 60px;
 }
+
+.buttonStyle{
+  -webkit-border-radius: 50px;
+  -moz-border-radius: 50px;
+  border-radius: 50px;
+  border: 2px #816fca solid;
+}
 /* Everything but the jumbotron gets side spacing for mobile first views */
 .header,
 .marketing,
