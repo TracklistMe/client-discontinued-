@@ -20,6 +20,10 @@
     <link rel="stylesheet" href="styles/styles.css">
     <link rel="stylesheet" href="styles/dropImageProfile.css">
 
+    <!-- fonts -->
+
+    <link href='http://fonts.googleapis.com/css?family=Sniglet:400,800' rel='stylesheet' type='text/css'>
+
     <!-- endbuild -->
   </head>
   <body ng-app="tracklistmeApp">
@@ -28,14 +32,18 @@
     <![endif]-->
      
    
-<div class="topMenu">
-    <div class="logo"><img src="images/HypsterWavesLogo.png" /></div> 
+<div class="container-fluid topMenu">
+    
     <div class="row">
-      <div class="col-sm-6 col-md-6">50%</div>
-      <div class="col-sm-6 col-md-6 text-right">
-          <div class="buttonStyle"> text 
-          </div>
+      <div class="col-xs-12 col-sm-6 col-md-3 col-lg-3   logo"><h1 class="sniglet800">TestTitle123</h1></div>
+       
+      <div class="col-xs-12 col-sm-6 col-md-3 col-md-push-6 col-lg-3 text-right ">
+        <div ng-if="!isAuthenticated()">
+          <a href="/#/signup"><span class=" quicksandFont text-center buttonStyle">Sign up</span></a>
+          <a href="/#/login"><span class="buttonStyle quicksandFont text-center">Login</span></a>
+        </div>
       </div>
+      <div class="col-xs-12 col-sm-12 col-md-6 col-md-pull-3 col-lg-6 text-center">Player Area</div>
     </div>
 </div>
 
