@@ -21,9 +21,9 @@ var app = angular.module('tracklistmeApp', [
     'angularFileUpload'
   ]).constant("CONFIG", {
         "protocol": "http://",
-        "hostname": "localhost",
+        "hostname": "146.148.125.46",
         "port": "3000",
-        "url": "http://localhost:3000"
+        "url": "http://146.148.125.46:3000"
     })
 
  
