@@ -17,6 +17,14 @@ body {
   flex: 1;
 }
 
+/* always center in vertical way */
+.Aligner {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+
 
 input[type=text],input[type=password]  {
   -webkit-border-radius: 50px;
