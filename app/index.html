@@ -22,11 +22,7 @@
     <link rel="stylesheet" href="styles/styles.css">
     <link rel="stylesheet" href="styles/dropImageProfile.css">
 
-    <!-- fonts -->
-
-    <link href='http://fonts.googleapis.com/css?family=Sniglet:400,800' rel='stylesheet' type='text/css'>
-    <link href='http://fonts.googleapis.com/css?family=Montserrat:400,700' rel='stylesheet' type='text/css'>
-
+    <!-- fonts --> 
 
     <!-- endbuild -->
   </head>
@@ -66,8 +62,22 @@
 </div>
 <!-- end main corp -->
 
-<footer class="footer text-center">Produly maked in London, the new Berlin</footer>
+<footer class="footer text-center">Proudly made in London, the new Berlin</footer>
+  
 
+  <script type="text/javascript">
+  WebFontConfig = {
+    google: { families: [ 'Montserrat:400,700:latin','Sniglet:400,800:latin','Quicksand:300,400,700:latin' ] }
+  };
+  (function() {
+    var wf = document.createElement('script');
+    wf.src = ('https:' == document.location.protocol ? 'https' : 'http') +
+      '://ajax.googleapis.com/ajax/libs/webfont/1/webfont.js';
+    wf.type = 'text/javascript';
+    wf.async = 'true';
+    var s = document.getElementsByTagName('script')[0];
+    s.parentNode.insertBefore(wf, s);
+  })(); </script>
 
     <!-- Google Analytics: change UA-XXXXX-X to be your site's ID -->
      <script>
@@ -126,7 +136,6 @@
         <script src="scripts/controllers/admincompany.js"></script>
         <script src="scripts/filters/bytes.js"></script>
         <script src="scripts/controllers/adminrelease.js"></script>
-        
         <script src="scripts/controllers/adminartist.js"></script>
         <script src="scripts/controllers/adminartists.js"></script> 
         <!-- endbuild -->
