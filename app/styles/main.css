@@ -2,8 +2,60 @@
 body {
   padding: 0px;
   margin: 0px;
-  background-color: #f1edea;
+  background: #f2f1ef;
   text-decoration: none !important;
+  font-family: 'Montserrat', sans-serif;
+}
+/* STICKY Footer  */
+.Site {
+  display: flex;
+  min-height: 100vh;
+  flex-direction: column;
+}
+
+.Site-content {
+  flex: 1;
+}
+
+
+input[type=text],input[type=password]  {
+  -webkit-border-radius: 50px;
+  -moz-border-radius: 50px;
+  border-radius: 50px;
+  -webkit-transition: all 0.30s ease-in-out;
+  -moz-transition: all 0.30s ease-in-out;
+  -ms-transition: all 0.30s ease-in-out;
+  -o-transition: all 0.30s ease-in-out;
+ 
+  padding: 3px 0px 3px 3px;
+  margin: 5px 1px 3px 0px;
+  border: 1px solid #DDDDDD;
+}
+ 
+input[type=text]:focus,input[type=password]:focus {
+    -webkit-border-radius: 50px;
+  -moz-border-radius: 50px;
+  border-radius: 50px;
+  box-shadow: none !important;
+  padding: 3px 0px 3px 3px;
+  margin: 5px 1px 3px 0px;
+  border: 1px solid #816fca;
+}
+input:focus::-webkit-input-placeholder { color:transparent; }
+input:focus:-moz-placeholder { color:transparent; } /* FF 4-18 */
+input:focus::-moz-placeholder { color:transparent; } /* FF 19+ */
+input:focus:-ms-input-placeholder { color:transparent; } /* IE 10+ */
+
+.row-centered {
+    text-align:center;
+}
+.col-centered {
+    display:inline-block;
+    float:none;
+    /* reset the text-align */
+    text-align:left;
+    /* inline-block space fix */
+    margin-right:-4px;
 }
 *:hover{
   text-decoration: none !important;
@@ -24,6 +76,14 @@ body {
 .sniglet800{
   font-family: 'Sniglet', cursive;
   font-weight: 800;
+}
+
+.montserrat{
+  font-family: 'Montserrat', sans-serif;
+}
+.montserrat700{
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 700;
 }
 
 .mainContainer{ 
@@ -70,33 +130,69 @@ body {
   border-bottom-left-radius: 5px;
   height: 60px;
 }
-
+.roundedButtonStyle{
+  -webkit-border-radius: 50px;
+  -moz-border-radius: 50px;
+  border-radius: 50px;
+  min-height: 50px;
+  min-width: 50px;
+  margin: 2px;
+  font-size: 18px;
+  border: 1px solid; 
+}
 .buttonStyle{
- 
+  background-color: transparent !important;
   margin-right: 5px;
   margin-left: 5px;
   -webkit-border-radius: 50px;
   -moz-border-radius: 50px;
   border-radius: 50px;
-  border: 1px #45413e solid;
-  line-height: 50px;
+  border: 1px #45413e solid; 
   color: #45413e;
-  height: 40px;
-  width: 100px;
+  height: 40px !important;
+  min-width: 100px;
   font-size: 14px;
   padding: 12px 20px 12px 20px;
 }
 .buttonStyle:hover{
- 
-  border: 1px #816fca solid;
+   border: 1px #816fca solid; 
+  background-color: #816fca !important;
+  color: #fff;
+}
+.btn-facebook{
+  color: #3a5b96;
+  background-color: #fff;
+  border: 2px solid #3a5b96;
+}
+.btn-facebook:hover{
+  color: #fff;
+  background-color: #3a5b96;
+  border:  2px #3a5b96 solid !important;
+}
+.btn-twitter{
+  color: #669cfe;
+  background-color: #fff;
+  border: 2px solid #669cfe;
+}
+.btn-twitter:hover{
+  color: #fff;
+  background-color: #669cfe;
+  border:  2px #669cfe solid !important;
+}
+.btn-google-plus{
+  color: #d34836;
+  background-color: #fff;
+  border: 2px solid #d34836;
+}
+.btn-google-plus:hover{
+  color: #fff;
+  background-color: #d34836;
+  border:  2px #d34836 solid !important;
 }
 /* Everything but the jumbotron gets side spacing for mobile first views */
 .header,
 .marketing,
-.footer {
-  padding-left: 15px;
-  padding-right: 15px;
-}
+ 
 
 /* Custom page header */
 .header {
@@ -111,12 +207,7 @@ body {
 }
 
 /* Custom page footer */
-.footer {
-  padding-top: 19px;
-  color: #777;
-  border-top: 1px solid #e5e5e5;
-}
-
+ 
  
 .container-narrow > hr {
   margin: 30px 0;
@@ -207,6 +298,12 @@ body {
 
 body::before {
   content: "xs";
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 9999999;
+  background-color: #000;
+  color: #fff;
 }
 @media (min-width : 768px) { 
   body::before { 
@@ -223,3 +320,4 @@ body::before {
     content: "lg"; 
   }
 }
+    
