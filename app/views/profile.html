@@ -1,6 +1,111 @@
+
+
+<div class="container ">
+
+
+<div class="row">
+    <h2 class="text-center">Your Profile</h2>
+
+    <!-- FIRST COLUMN -->
+    <div class="displayFlex">
+      <div  class="equalHWrap eqWrap tileHomeOneSize col-xs-12 col-sm-6 col-md-3 col-lg-3">
+         <div class="flexColumn profilePictureHolder"> 
+            <div ng-show="uploader.isHTML5">
+               
+                <div nv-file-drop="" uploader="uploader"  >
+                    <div nv-file-over="" uploader="uploader" style="background-image: url('{{serverURL}}/images/{{user.avatar}}')" over-class="my-drop-zone-over-class" class="well my-drop-zone">
+
+
+                          <div class="dragAndDropProfilePictureButton"> Drag and drop <br />or<br /> 
+                          <label class="myLabel">
+                              <input type="file" nv-file-select="" uploader="uploader"/>
+                              <span>Upload</span>
+                          </label>
+                  
+                                       
+                          </div> 
+                    
+                    </div>
+                </div>
+              </div>
+            <h4 class="text-center">{{user.displayName}}</h4>
+         </div>
+      </div>
+      <!-- PROFILE DETAILS -->
+      <div  class="tileHomeOneSize col-xs-12 col-sm-6 col-md-6 col-lg-6">
+        <div class="roundedCorner5 white padding15 ">
+          profile details
+        </div>
+      </div>
+      <!-- SOCIAL DETAIL -->
+      <div  class="tileHomeOneSize col-xs-6 col-sm-4 col-md-3 col-lg-3">
+        <div class="roundedCorner5 white padding15 ">
+          <div class="text-center"> Connect Social </div>
+        </div>
+      </div>
+    </div>
+</div>
+
+<!--- Company List -->
+<div ng-if="user.isAdmin">
+  <h3> Your Companies </h3>
+   
+  <div class="row">
+  <div ng-repeat="company in companies" class="tileHomeOneSize col-xs-6 col-sm-4 col-md-3 col-lg-3">
+        <a href="/#/adminCompany/{{company.id}}"> 
+  <div class="releaseTile">
+  <div class="coverRelease">
+
+          <img class="coverImage"    />
+        </div>
+        <div class="quicksandFont700 descriptionRelease text-center"> 
+          {{company.displayName}} 
+        </div>
+      </div>
+    </a>
+    </div>
+  </div>
+</div>
+
+<div ng-if="user.isAdmin || companies.length > 0">
+  <h3> Your Labels </h3>
+  <div class="row">
+    <div ng-repeat="label in labels" class="tileHomeOneSize col-xs-6 col-sm-4 col-md-3 col-lg-3">
+          <a href="/#/adminCompany/{{label.id}}"> 
+      <div class="releaseTile">
+        <div class="coverRelease">
+
+          <img class="coverImage"    />
+        </div>
+        <div class="quicksandFont700 descriptionRelease text-center"> 
+          {{label.displayName}} 
+        </div>
+      </div>
+    </a>
+    </div>
+  </div>
+</div>
+
  
 
-<div class="container">
+<div ng-if="user.isAdmin || artists.length > 0" >
+  <h3> Your Managed Artists </h3>
+  <div class="row">
+    <div ng-repeat="artist in artists" class="tileHomeOneSize col-xs-6 col-sm-4 col-md-3 col-lg-3">
+          <a href="/#/adminArtist/{{artist.id}}"> 
+      <div class="releaseTile">
+        <div class="coverRelease">
+          <img class="coverImage"/>
+        </div>
+        <div class="quicksandFont700 descriptionRelease text-center"> 
+          {{artist.displayName}}
+        </div>
+      </div>
+    </a>
+    </div>
+  </div>
+</div>
+
 
  
   <div class="panel panel-default">
@@ -8,24 +113,7 @@
       <div class="panel-body">
         <div class="row">
           <div class="col-md-3">
-            <div ng-show="uploader.isHTML5">
              
-              <div nv-file-drop="" uploader="uploader"  >
-                  <div nv-file-over="" uploader="uploader" style="background-image: url('{{serverURL}}/images/{{user.avatar}}')" over-class="my-drop-zone-over-class" class="well my-drop-zone">
-
-
-                        <div class="dragAndDropProfilePictureButton"> Drag and drop <br />or<br /> 
-                        <label class="myLabel">
-                            <input type="file" nv-file-select="" uploader="uploader"/>
-                            <span>Upload</span>
-                        </label>
-
-                                     
-                        </div> 
-                  
-                  </div>
-              </div>
-            </div>
           </div>
           <div class="col-md-4"  >
             <form method="post" ng-submit="updateProfile()">
@@ -141,6 +229,8 @@
     </div>
   </div>
  
+
+ <!--
   <div ng-if="user.isAdmin" class="panel panel-default">
     <div class="panel-heading">Admin Panel</div>
     <div class="panel-body">
@@ -186,7 +276,7 @@
  
     </div>
   </div>
-
+-->
 
   <div class="panel panel-default">
     <div class="panel-heading">Accounts</div>

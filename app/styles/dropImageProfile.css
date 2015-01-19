@@ -157,7 +157,7 @@ form button {
 .my-drop-zone { 
 	width: 200px;
 	height: 200px; 
-	border: solid 2px #ccc;
+	border: solid 2px #fff;
 	-webkit-border-radius: 100%;
 	-moz-border-radius: 100%;
 	border-radius: 100%;

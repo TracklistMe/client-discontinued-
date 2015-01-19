@@ -53,12 +53,10 @@
 
 .special-img 
 {
-    width: 42px;
-    height: 42px;
+    width: 52px;
+    height: 52px;
     position: relative;
-    top: 4px;
-    float: left;
-    right: 4px;
+ 
     -webkit-backface-visibility: hidden; 
     
     cursor: pointer; 
@@ -75,7 +73,8 @@
 
 .dropDownNavProfile{
   right: 0px;
-  top: 80px;
+  top: 120px;
+  z-index: 2;
   position: absolute;
   background-color: #fff;
   box-shadow: 0 2px 5px 0 rgba(0, 0, 0, .10);

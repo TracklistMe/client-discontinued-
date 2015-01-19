@@ -35,17 +35,27 @@
    
   
 
-<header>
+<header  ng-controller="NavbarCtrl" >
   <div class="container-fluid topMenu ">
       
       <div class="row">
-        <div class="col-xs-12 col-sm-6 col-md-3 col-lg-3 logo"><h1 class="sniglet800">TestTitle123</h1></div>
+        <a href="#/"><div class="col-xs-12 col-sm-6 col-md-3 col-lg-3 logo"><h1 class="sniglet800">User:{{user.displayName}}</h1></div></a>
          
         <div class="col-xs-12 col-sm-6 col-md-3 col-md-push-6 col-lg-3 text-right ">
           <div ng-if="!isAuthenticated()">
             <a href="/#/signup"><span class=" montserrat text-center buttonStyle">Sign up</span></a>
             <a href="/#/login"><span class="buttonStyle montserrat text-center">Login</span></a>
           </div>
+           <div ng-if="isAuthenticated()"  class="nav navbar-nav navbar-right ">
+            <a href="/#/profile"><img  ng-click="$parent.showAccountDropDown = !$parent.showAccountDropDown" style="background-image: url('{{serverURL}}/images/{{user.avatar}}')" class="img-circle special-img"></a>
+          </div>
+
+          <!--  <span ng-click="$parent.showAccountDropDown = !$parent.showAccountDropDown" 
+                class=" dropDownNavProfile" 
+                ng-if="isAuthenticated() && showAccountDropDown">
+              <a href="/#/logout"><button class="btn">Logout</button></a>  
+              <a href="/#/profile"><button class="btn">Profile</button></a>
+          </span>-->
         </div>
         <div class="col-xs-12 col-sm-12 col-md-6 col-md-pull-3 col-lg-6 text-center">Player Area</div>
       </div>
@@ -57,7 +67,7 @@
 </header>
 <!-- end hEader -->
 <!-- begin main corp -->
-<div  ui-view class="Site-content fadeZoom Aligner">
+<div  ui-view class="  Site-content fadeZoom Aligner">
   
 
 </div>

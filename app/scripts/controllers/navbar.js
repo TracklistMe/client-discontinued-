@@ -8,7 +8,8 @@
  * Controller of the tracklistmeApp
  */
 angular.module('tracklistmeApp')
-  .controller('NavbarCtrl', function ($scope, $auth,Account) {
+  .controller('NavbarCtrl', function ($scope, $auth,Account,CONFIG) {
+    $scope.serverURL = CONFIG.url
   	$scope.showAccountDropDown = false
   	
   
