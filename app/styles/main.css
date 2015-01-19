@@ -27,10 +27,10 @@ body {
 .displayFlex{
   display:flex;
 }
-.flexColumn{
-  align-items: stretch;
-}
+.expandWidthto100Percentage{ 
+  min-width: 100%;
 
+}
 
 
 input[type=text],input[type=password]  {
@@ -159,7 +159,7 @@ input:focus:-ms-input-placeholder { color:transparent; } /* IE 10+ */
 
 .descriptionRelease{
   color: #2c3e50;
-  background: #f2f1ef;
+  background: #fff;
   padding: 2%;
   font-size: 14px;
   -webkit-border-bottom-right-radius: 5px;
