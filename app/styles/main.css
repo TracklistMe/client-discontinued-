@@ -189,9 +189,10 @@ input:focus:-ms-input-placeholder { color:transparent; } /* IE 10+ */
   border-radius: 50px;
   border: 1px #45413e solid; 
   color: #45413e;
-  height: 40px !important;
+  height: 46px !important;
   min-width: 100px;
   font-size: 14px;
+  margin-bottom: 5px;
   padding: 12px 20px 12px 20px;
 }
 .buttonStyle:hover{
@@ -200,13 +201,15 @@ input:focus:-ms-input-placeholder { color:transparent; } /* IE 10+ */
   color: #fff;
 }
 .btn-facebook{
+
+  height: 46px !important;
   color: #3a5b96;
   background-color: #fff;
   border: 2px solid #3a5b96;
 }
-.btn-facebook:hover{
+.btn-facebook:hover, .btn-facebook-active{
   color: #fff;
-  background-color: #3a5b96;
+  background-color: #3a5b96 !important;
   border:  2px #3a5b96 solid !important;
 }
 .btn-twitter{
@@ -214,19 +217,20 @@ input:focus:-ms-input-placeholder { color:transparent; } /* IE 10+ */
   background-color: #fff;
   border: 2px solid #669cfe;
 }
-.btn-twitter:hover{
+.btn-twitter:hover, .btn-twitter-active, .btn-twitter-active:hover{
   color: #fff;
-  background-color: #669cfe;
+  background-color: #669cfe !important;
   border:  2px #669cfe solid !important;
 }
+ 
 .btn-google-plus{
   color: #d34836;
   background-color: #fff;
   border: 2px solid #d34836;
 }
-.btn-google-plus:hover{
+.btn-google-plus:hover, .btn-google-plus-active{
   color: #fff;
-  background-color: #d34836;
+  background-color: #d34836 !important;
   border:  2px #d34836 solid !important;
 }
 /* Everything but the jumbotron gets side spacing for mobile first views */
