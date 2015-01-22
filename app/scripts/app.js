@@ -23,7 +23,7 @@ var app = angular.module('tracklistmeApp', [
         "protocol": "http://",
         "hostname": "http://api.tracklist.me",
         "port": "3000",
-        "url": "http://api.tracklist.me"
+        "url": "http://localhost:3000"
     })
 
  
