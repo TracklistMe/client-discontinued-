@@ -70,7 +70,8 @@ angular.module('tracklistmeApp')
       Account.getProfile()
         .success(function(data) {
           $scope.user = data;
-          console.log(data)
+          $scope.user.avatar = CONFIG.url+"/images/"+data.avatar;
+          console.log($scope.user)
         })
         .error(function(error) {
           $alert({

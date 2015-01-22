@@ -22,6 +22,7 @@ angular.module('tracklistmeApp')
         .success(function(data) {
           console.log(data)
           $scope.user = data;
+          $scope.user.avatar = $scope.serverURL+"/images/"+$scope.user.avatar;
         })
     
 

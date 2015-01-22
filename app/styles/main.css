@@ -33,7 +33,7 @@ body {
 }
 
 
-input[type=text],input[type=password]  {
+input[type=text],input[type=password] ,input[type=email]  {
   -webkit-border-radius: 50px;
   -moz-border-radius: 50px;
   border-radius: 50px;
@@ -42,12 +42,12 @@ input[type=text],input[type=password]  {
   -ms-transition: all 0.30s ease-in-out;
   -o-transition: all 0.30s ease-in-out;
  
-  padding: 3px 0px 3px 3px;
+  padding: 3px 6px 3px 6px;
   margin: 5px 1px 3px 0px;
   border: 1px solid #DDDDDD;
 }
  
-input[type=text]:focus,input[type=password]:focus {
+input[type=text]:focus,input[type=password]:focus ,input[type=email]:focus{
     -webkit-border-radius: 50px;
   -moz-border-radius: 50px;
   border-radius: 50px;

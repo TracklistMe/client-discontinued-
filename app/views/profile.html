@@ -4,7 +4,8 @@
 
 
 <div class="row">
-    <h2 class="text-center">Your Profile</h2>
+    <h2 class="text-center">Your Profile {{user.avatar}}</h2>
+ 
 
     <!-- FIRST COLUMN -->
     <div class="displayFlex">
@@ -13,7 +14,7 @@
             <div ng-show="uploader.isHTML5">
                
                 <div nv-file-drop="" uploader="uploader"  >
-                    <div nv-file-over="" uploader="uploader" style="background-image: url('{{serverURL}}/images/{{user.avatar}}')" over-class="my-drop-zone-over-class" class="well my-drop-zone">
+                  <div nv-file-over="" uploader="uploader" background-image="{{user.avatar}}" over-class="my-drop-zone-over-class" class="well my-drop-zone">
 
 
                           <div class="dragAndDropProfilePictureButton"> Drag and drop <br />or<br /> 
@@ -37,11 +38,11 @@
           <h4 class="text-center">Profile Details</h4>
           <form method="post" ng-submit="updateProfile()">
               <div class="form-group">
-                <label class="control-label"><i class="ion-person"></i> Display Name</label>
+                <label class="control-label">  Display Name</label>
                 <input type="text" class="form-control" ng-model="user.displayName" />
               </div>
               <div class="form-group">
-                <label class="control-label"><i class="ion-at"></i> Email Address</label>
+                <label class="control-label">  Email Address</label>
                 <input type="email" class="form-control" ng-model="user.email" />
               </div>
             </form>
@@ -75,7 +76,7 @@
   <div class="releaseTile">
   <div class="coverRelease">
 
-          <img class="coverImage" src="{{serverURL}}/images/{{company.logo}}"/>
+          <img class="coverImage" ng-src="{{serverURL}}/images/{{company.logo}}"/>
         </div>
         <div class="quicksandFont700 descriptionRelease text-center"> 
           {{company.displayName}} 
@@ -94,7 +95,7 @@
       <div class="releaseTile">
         <div class="coverRelease">
  
-          <img class="coverImage" src="{{serverURL}}/images/{{label.logo}}"/>
+          <img class="coverImage" ng-src="{{serverURL}}/images/{{label.logo}}"/>
         </div>
         <div class="quicksandFont700 descriptionRelease text-center"> 
           {{label.displayName}} 
@@ -114,7 +115,8 @@
           <a href="/#/adminArtist/{{artist.id}}"> 
       <div class="releaseTile">
         <div class="coverRelease">
-          <img class="coverImage"/>
+
+          <img class="coverImage" ng-src="{{serverURL}}/images/{{artist.avatar}}"/>
         </div>
         <div class="quicksandFont700 descriptionRelease text-center"> 
           {{artist.displayName}}
@@ -128,54 +130,6 @@
 
   
  
-
- <!--
-  <div ng-if="user.isAdmin" class="panel panel-default">
-    <div class="panel-heading">Admin Panel</div>
-    <div class="panel-body">
-      <div class="col-md-4">
-        <legend><i class="ion-link"></i><a href="/#/adminCompanies"> Manage Companies</a></legend>
-      </div>
-      <div class="col-md-4">
-        <legend><i class="ion-link"></i><a href="/#/adminLabels"> Manage Labels</a></legend>
-      </div>
-       <div class="col-md-4">
-        <legend><i class="ion-link"></i><a href="/#/adminArtists"> Admin Artists</a></legend>
-      </div>
-    </div>
-  </div>
-
-  <div ng-if="user.isAdmin || companies.length > 0" class="panel panel-default">
-    <div class="panel-heading">Your Companies</div>
-    <div class="panel-body">
-      <div class="col-md-4" ng-repeat="company in companies">
-            <i class="ion-link"></i><a href="/#/adminCompany/{{company.id}}"> {{company.displayName}}</a>
-      </div>
- 
-    </div>
-  </div>
-   
-
-  <div ng-if="user.isAdmin || companies.length > 0" class="panel panel-default">
-    <div class="panel-heading">Your Labels</div>
-    <div class="panel-body">
-      <div class="col-md-4" ng-repeat="label in labels">
-            <i class="ion-link"></i><a href="/#/adminLabel/{{label.id}}"> {{label.displayName}}</a>
-      </div>
- 
-    </div>
-  </div>
-
-  <div ng-if="user.isAdmin || artists.length > 0" class="panel panel-default">
-    <div class="panel-heading">Your Managed Artists</div>
-    <div class="panel-body">
-      <div class="col-md-4" ng-repeat="artist in artists">
-            <i class="ion-link"></i><a href="/#/adminArtist/{{artist.id}}"> {{artist.displayName}}</a>
-      </div>
- 
-    </div>
-  </div>
--->
 
   <div class="panel panel-default">
     <div class="panel-heading">Accounts</div>

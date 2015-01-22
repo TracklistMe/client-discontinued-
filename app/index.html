@@ -1,4 +1,4 @@
-<!doctype html>
+<!DOCTYPE html>
 <html class="no-js">
   <head>
     <meta charset="utf-8">
@@ -47,7 +47,9 @@
             <a href="/#/login"><span class="buttonStyle montserrat text-center">Login</span></a>
           </div>
            <div ng-if="isAuthenticated()"  class="nav navbar-nav navbar-right ">
-            <a href="/#/profile"><img  ng-click="$parent.showAccountDropDown = !$parent.showAccountDropDown" style="background-image: url('{{serverURL}}/images/{{user.avatar}}')" class="img-circle special-img"></a>
+
+           <!-- background-Image="{{user.avatar}}" --> 
+            <a href="/#/profile"><img  ng-click="$parent.showAccountDropDown = !$parent.showAccountDropDown"   class="img-circle special-img"></a>
           </div>
 
           <!--  <span ng-click="$parent.showAccountDropDown = !$parent.showAccountDropDown" 
@@ -149,6 +151,7 @@
         <script src="scripts/controllers/adminrelease.js"></script>
         <script src="scripts/controllers/adminartist.js"></script>
         <script src="scripts/controllers/adminartists.js"></script> 
+        <script src="scripts/directives/backgroundimage.js"></script>
         <!-- endbuild -->
 </body>
 </html>
