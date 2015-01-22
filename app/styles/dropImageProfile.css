@@ -181,7 +181,7 @@ form button {
 .my-drop-zone-over-class { border: solid 4px #ff5953; }
 
  .dragAndDropProfilePictureButton{
-
+	
 	-webkit-transition: 0.4s ease;
 	-moz-transition: 0.4s ease;
 	-ms-transition: 0.4s ease;

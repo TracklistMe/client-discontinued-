@@ -4,7 +4,7 @@
 
 
 <div class="row">
-    <h2 class="text-center">Your Profile {{user.avatar}}</h2>
+    <h2 class="text-center">Your Profile</h2>
  
 
     <!-- FIRST COLUMN -->
@@ -14,9 +14,9 @@
             <div ng-show="uploader.isHTML5">
                
                 <div nv-file-drop="" uploader="uploader"  >
-                  <div nv-file-over="" uploader="uploader" background-image="{{user.avatar}}" over-class="my-drop-zone-over-class" class="well my-drop-zone">
+                  <div nv-file-over="" uploader="uploader" style="background-image: url('{{user.avatar}}')"  over-class="my-drop-zone-over-class" class="well my-drop-zone">
 
-
+                          
                           <div class="dragAndDropProfilePictureButton"> Drag and drop <br />or<br /> 
                           <label class="myLabel">
                               <input type="file" nv-file-select="" uploader="uploader"/>
