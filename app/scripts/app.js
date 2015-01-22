@@ -20,7 +20,7 @@ var app = angular.module('tracklistmeApp', [
     'mgcrea.ngStrap',
     'angularFileUpload'
   ]).constant("CONFIG", {
-        "url": "http://localhost:3000",
+        "url": "http://api.tracklist.me",
         "imagePath": "images"
     })
 
