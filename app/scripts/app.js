@@ -232,8 +232,7 @@ app.config(function($stateProvider, $urlRouterProvider, $authProvider, CONFIG) {
         } // end of resolve
       });
     $urlRouterProvider.otherwise('/');
-    
-    // Temporarily hard-coded since $rootScope isn't available yet
+     
     var authServerURL = CONFIG.url;
     
     $authProvider.loginUrl = authServerURL + '/auth/login';
