@@ -1,193 +1,215 @@
-
-
 <div class="container ">
 
+    <div class="row">
+        <h2 class="text-center">Your Profile</h2>
 
-<div class="row">
-    <h2 class="text-center">Your Profile</h2>
- 
+        <!-- FIRST COLUMN -->
+        <div class="">
+            <div class="equalHWrap eqWrap tileHomeOneSize col-xs-12 col-sm-12 col-md-3 col-lg-3  ">
+                <div class="flexColumn profilePictureHolder">
+                    <div ng-show="uploader.isHTML5">
 
-    <!-- FIRST COLUMN -->
-    <div class="">
-      <div  class="equalHWrap eqWrap tileHomeOneSize col-xs-12 col-sm-12 col-md-3 col-lg-3  ">
-         <div class="flexColumn profilePictureHolder"> 
-            <div ng-show="uploader.isHTML5">
-               
-                <div nv-file-drop="" uploader="uploader"  >
-                  <div nv-file-over="" uploader="uploader" style="background-image: url('{{user.avatar}}')"  over-class="my-drop-zone-over-class" class="well my-drop-zone">
+                        <div nv-file-drop="" uploader="uploader">
+                            <div nv-file-over="" uploader="uploader" style="background-image: url('{{user.avatar}}')" over-class="my-drop-zone-over-class" class="well my-drop-zone">
 
-                          
-                          <div class="dragAndDropProfilePictureButton"> Drag and drop <br />or<br /> 
-                          <label class="myLabel">
-                              <input type="file" nv-file-select="" uploader="uploader"/>
-                              <span>Upload</span>
-                          </label>
-                  
-                                       
-                          </div> 
-                    
+                                <div class="dragAndDropProfilePictureButton"> Drag and drop
+                                    <br />or
+                                    <br />
+                                    <label class="myLabel">
+                                        <input type="file" nv-file-select="" uploader="uploader" />
+                                        <span>Upload</span>
+                                    </label>
+
+                                </div>
+
+                            </div>
+                        </div>
                     </div>
+                    <h4 class="text-center">{{user.displayName}}</h4>
                 </div>
-              </div>
-            <h4 class="text-center">{{user.displayName}}</h4>
-         </div>
-      </div>
-      <!-- PROFILE DETAILS -->
-      <div  class="tileHomeOneSize col-xs-12 col-sm-12 col-md-6 col-lg-6">
-        <div class="roundedCorner5 white padding15 expandWidthto100Percentage profileBoxHeight ">
-          <h4 class="text-center">Profile Details</h4>
-          <form method="post" ng-submit="updateProfile()">
-              <div class="form-group">
-                <label class="control-label">  Display Name</label>
-                <input type="text" class="form-control" ng-model="user.displayName" />
-              </div>
-              <div class="form-group">
-                <label class="control-label">  Email Address</label>
-                <input type="email" class="form-control" ng-model="user.email" />
-              </div>
-            </form>
+            </div>
+            <!-- PROFILE DETAILS -->
+            <div class="tileHomeOneSize col-xs-12 col-sm-12 col-md-6 col-lg-6">
+                <div class="roundedCorner5 white padding15 expandWidthto100Percentage profileBoxHeight ">
+                    <h4 class="text-center">Profile Details</h4>
+                    <form method="post" ng-submit="updateProfile()">
+                        <div class="form-group">
+                            <label class="control-label"> Display Name</label>
+                            <input type="text" class="form-control" ng-model="user.displayName" />
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label"> Email Address</label>
+                            <input type="email" class="form-control" ng-model="user.email" />
+                        </div>
+                    </form>
 
+                </div>
+            </div>
+            <!-- SOCIAL DETAIL -->
+            <div class="tileHomeOneSize col-xs-12 col-sm-12 col-md-3 col-lg-3 ">
+                <div class="roundedCorner5 white padding15 expandWidthto100Percentage profileBoxHeight">
+                    <h4 class="text-center"> Social </h4>
+                    <button type="submit" ng-if="!user.facebook" ng-click="link('facebook')" class="col-xs-12 montserrat text-center buttonStyle btn-facebook">Connect Facebook</button>
+                    <button type="submit" ng-if="user.facebook" ng-click="unlink('facebook')" class="col-xs-12 montserrat text-center buttonStyle btn-facebook-active">Facebook Connected</button>
+                    <button type="submit" ng-if="user.twitter" class="col-xs-12 montserrat text-center buttonStyle btn-twitter-active" ng-click="unlink('twitter')">Twitter Conneced</button>
+                    <button type="submit" ng-if="!user.twitter" class="col-xs-12 montserrat text-center buttonStyle btn-twitter" ng-click="link('twitter')">Connect Twitter</button>
+
+                    <button type="submit" ng-disabled="loginForm.$invalid" class="col-xs-12 montserrat text-center buttonStyle btn-google-plus">Connect Google Plus</button>
+                </div>
+            </div>
+            <div id="clear" style="clear:both;"></div>
         </div>
-      </div>
-      <!-- SOCIAL DETAIL -->
-      <div  class="tileHomeOneSize col-xs-12 col-sm-12 col-md-3 col-lg-3 ">
-        <div class="roundedCorner5 white padding15 expandWidthto100Percentage profileBoxHeight">
-          <h4 class="text-center"> Social </h4>
-           <button type="submit" ng-if="!user.facebook" ng-click="link('facebook')"   class="col-xs-12 montserrat text-center buttonStyle btn-facebook">Connect Facebook</button>
-           <button type="submit" ng-if="user.facebook" ng-click="unlink('facebook')"   class="col-xs-12 montserrat text-center buttonStyle btn-facebook-active">Facebook Connected</button>
-
-
-
-           <button type="submit" ng-if="user.twitter" class="col-xs-12 montserrat text-center buttonStyle btn-twitter-active" ng-click="unlink('twitter')">Twitter Conneced</button>
-           <button type="submit" ng-if="!user.twitter" class="col-xs-12 montserrat text-center buttonStyle btn-twitter"  ng-click="link('twitter')">Connect Twitter</button>
-
-           <button type="submit" ng-disabled="loginForm.$invalid" class="col-xs-12 montserrat text-center buttonStyle btn-google-plus">Connect Google Plus</button> 
-        </div>
-      </div>
-      <div id="clear" style="clear:both;"></div>
     </div>
-</div>
 
-<!--- Company List -->
-<div ng-if="user.isAdmin">
-  <h3> Your Companies </h3>
-   
-  <div class="row">
-  <div ng-repeat="company in companies" class="tileHomeOneSize col-xs-6 col-sm-4 col-md-3 col-lg-3">
-        <a href="/#/adminCompany/{{company.id}}"> 
-  <div class="releaseTile">
-  <div class="coverRelease">
+    <!-- Admin Specs -->
 
-          <img class="coverImage" ng-src="{{serverURL}}/images/{{company.logo}}"/>
+    <div ng-if="user.isAdmin">
+        <h3>Admin functions</h3>
+
+        <div class="row">
+            <div class="tileHomeOneSize col-xs-6 col-sm-4 col-md-3 col-lg-3">
+                <a href="/#/adminCompanies">
+                    <div class="releaseTile">
+                        <div class="coverRelease">
+
+                            <img class="coverImage" ng-src="{{serverURL}}/images/{{company.logo}}" />
+                        </div>
+                        <div class="quicksandFont700 descriptionRelease text-center">
+                            Manage Companies
+                        </div>
+                    </div>
+                </a>
+            </div>
+            <div class="tileHomeOneSize col-xs-6 col-sm-4 col-md-3 col-lg-3">
+                <a href="/#/adminArtists">
+                    <div class="releaseTile">
+                        <div class="coverRelease">
+
+                            <img class="coverImage" ng-src="{{serverURL}}/images/{{company.logo}}" />
+                        </div>
+                        <div class="quicksandFont700 descriptionRelease text-center">
+                            Admin Artists
+                        </div>
+                    </div>
+                </a>
+            </div>
         </div>
-        <div class="quicksandFont700 descriptionRelease text-center"> 
-          {{company.displayName}} 
-        </div>
-      </div>
-    </a>
     </div>
-  </div>
-</div>
 
-<div ng-if="user.isAdmin || companies.length > 0">
-  <h3> Your Labels </h3>
-  <div class="row">
-    <div ng-repeat="label in labels" class="tileHomeOneSize col-xs-6 col-sm-4 col-md-3 col-lg-3">
-          <a href="/#/adminLabel/{{label.id}}"> 
-      <div class="releaseTile">
-        <div class="coverRelease">
- 
-          <img class="coverImage" ng-src="{{serverURL}}/images/{{label.logo}}"/>
+    <!--- Company List -->
+    <div ng-if="user.isAdmin">
+        <h3> Your Companies </h3>
+
+        <div class="row">
+            <div ng-repeat="company in companies" class="tileHomeOneSize col-xs-6 col-sm-4 col-md-3 col-lg-3">
+                <a href="/#/adminCompany/{{company.id}}">
+                    <div class="releaseTile">
+                        <div class="coverRelease">
+
+                            <img class="coverImage" ng-src="{{serverURL}}/images/{{company.logo}}" />
+                        </div>
+                        <div class="quicksandFont700 descriptionRelease text-center">
+                            {{company.displayName}}
+                        </div>
+                    </div>
+                </a>
+            </div>
         </div>
-        <div class="quicksandFont700 descriptionRelease text-center"> 
-          {{label.displayName}} 
-        </div>
-      </div>
-    </a>
     </div>
-  </div>
-</div>
 
- 
+    <div ng-if="user.isAdmin || companies.length > 0">
+        <h3> Your Labels </h3>
+        <div class="row">
+            <div ng-repeat="label in labels" class="tileHomeOneSize col-xs-6 col-sm-4 col-md-3 col-lg-3">
+                <a href="/#/adminLabel/{{label.id}}">
+                    <div class="releaseTile">
+                        <div class="coverRelease">
 
-<div ng-if="user.isAdmin || artists.length > 0" >
-  <h3> Your Managed Artists </h3>
-  <div class="row">
-    <div ng-repeat="artist in artists" class="tileHomeOneSize col-xs-6 col-sm-4 col-md-3 col-lg-3">
-          <a href="/#/adminArtist/{{artist.id}}"> 
-      <div class="releaseTile">
-        <div class="coverRelease">
-
-          <img class="coverImage" ng-src="{{serverURL}}/images/{{artist.avatar}}"/>
+                            <img class="coverImage" ng-src="{{serverURL}}/images/{{label.logo}}" />
+                        </div>
+                        <div class="quicksandFont700 descriptionRelease text-center">
+                            {{label.displayName}}
+                        </div>
+                    </div>
+                </a>
+            </div>
         </div>
-        <div class="quicksandFont700 descriptionRelease text-center"> 
-          {{artist.displayName}}
+    </div>
+
+    <div ng-if="user.isAdmin || artists.length > 0">
+        <h3> Your Managed Artists </h3>
+        <div class="row">
+            <div ng-repeat="artist in artists" class="tileHomeOneSize col-xs-6 col-sm-4 col-md-3 col-lg-3">
+                <a href="/#/adminArtist/{{artist.id}}">
+                    <div class="releaseTile">
+                        <div class="coverRelease">
+
+                            <img class="coverImage" ng-src="{{serverURL}}/images/{{artist.avatar}}" />
+                        </div>
+                        <div class="quicksandFont700 descriptionRelease text-center">
+                            {{artist.displayName}}
+                        </div>
+                    </div>
+                </a>
+            </div>
         </div>
-      </div>
-    </a>
     </div>
-  </div>
-</div>
 
+    <div class="panel panel-default">
+        <div class="panel-heading">Accounts</div>
+        <div class="panel-body">
+            <legend><i class="ion-link"></i> Linked Accounts</legend>
+            <div class="btn-group-vertical">
+                <button class="btn btn-sm btn-danger" ng-if="user.facebook" ng-click="unlink('facebook')">
+                    <i class="ion-social-facebook"></i> Unlink Facebook Account
+                </button>
+                <button class="btn btn-sm btn-primary" ng-if="!user.facebook" ng-click="link('facebook')">
+                    <i class="ion-social-facebook"></i> Link Facebook Account
+                </button>
 
-  
- 
+                <button class="btn btn-sm btn-danger" ng-if="user.google" ng-click="unlink('google')">
+                    <i class="ion-social-googleplus"></i> Unlink Google Account
+                </button>
+                <button class="btn btn-sm btn-primary" ng-if="!user.google" ng-click="link('google')">
+                    <i class="ion-social-googleplus"></i> Link Google Account
+                </button>
 
-  <div class="panel panel-default">
-    <div class="panel-heading">Accounts</div>
-    <div class="panel-body">
-      <legend><i class="ion-link"></i> Linked Accounts</legend>
-      <div class="btn-group-vertical">
-        <button class="btn btn-sm btn-danger" ng-if="user.facebook" ng-click="unlink('facebook')">
-          <i class="ion-social-facebook"></i> Unlink Facebook Account
-        </button>
-        <button class="btn btn-sm btn-primary" ng-if="!user.facebook" ng-click="link('facebook')">
-          <i class="ion-social-facebook"></i> Link Facebook Account
-        </button>
+                <button class="btn btn-sm btn-danger" ng-if="user.linkedin" ng-click="unlink('linkedin')">
+                    <i class="ion-social-linkedin"></i> Unlink LinkedIn Account
+                </button>
+                <button class="btn btn-sm btn-primary" ng-if="!user.linkedin" ng-click="link('linkedin')">
+                    <i class="ion-social-linkedin"></i> Link LinkedIn Account
+                </button>
+            </div>
+            <div class="btn-group-vertical">
+                <button class="btn btn-sm btn-danger" ng-if="user.twitter" ng-click="unlink('twitter')">
+                    <i class="ion-social-twitter"></i> Unlink Twitter Account
+                </button>
+                <button class="btn btn-sm btn-primary" ng-if="!user.twitter" ng-click="link('twitter')">
+                    <i class="ion-social-twitter"></i> Link Twitter Account
+                </button>
 
-        <button class="btn btn-sm btn-danger" ng-if="user.google" ng-click="unlink('google')">
-          <i class="ion-social-googleplus"></i> Unlink Google Account
-        </button>
-        <button class="btn btn-sm btn-primary" ng-if="!user.google" ng-click="link('google')">
-          <i class="ion-social-googleplus"></i> Link Google Account
-        </button>
+                <button class="btn btn-sm btn-danger" ng-if="user.github" ng-click="unlink('github')">
+                    <i class="ion-social-github"></i> Unlink GitHub Account
+                </button>
+                <button class="btn btn-sm btn-primary" ng-if="!user.github" ng-click="link('github')">
+                    <i class="ion-social-github"></i> Link GitHub Account
+                </button>
 
-        <button class="btn btn-sm btn-danger" ng-if="user.linkedin" ng-click="unlink('linkedin')">
-          <i class="ion-social-linkedin"></i> Unlink LinkedIn Account
-        </button>
-        <button class="btn btn-sm btn-primary" ng-if="!user.linkedin" ng-click="link('linkedin')">
-          <i class="ion-social-linkedin"></i> Link LinkedIn Account
-        </button>
-      </div>
-       <div class="btn-group-vertical">
-        <button class="btn btn-sm btn-danger" ng-if="user.twitter" ng-click="unlink('twitter')">
-          <i class="ion-social-twitter"></i> Unlink Twitter Account
-        </button>
-        <button class="btn btn-sm btn-primary" ng-if="!user.twitter" ng-click="link('twitter')">
-          <i class="ion-social-twitter"></i> Link Twitter Account
-        </button>
+                <button class="btn btn-sm btn-danger" ng-if="user.foursquare" ng-click="unlink('foursquare')">
+                    <i class="ion-social-foursquare"></i> Unlink Foursquare Account
+                </button>
+                <button class="btn btn-sm btn-primary" ng-if="!user.foursquare" ng-click="link('foursquare')">
+                    <i class="ion-social-foursquare"></i> Link Foursquare Account
+                </button>
 
-        <button class="btn btn-sm btn-danger" ng-if="user.github" ng-click="unlink('github')">
-          <i class="ion-social-github"></i> Unlink GitHub Account
-        </button>
-        <button class="btn btn-sm btn-primary" ng-if="!user.github" ng-click="link('github')">
-          <i class="ion-social-github"></i> Link GitHub Account
-        </button>
-
-        <button class="btn btn-sm btn-danger" ng-if="user.foursquare" ng-click="unlink('foursquare')">
-          <i class="ion-social-foursquare"></i> Unlink Foursquare Account
-        </button>
-        <button class="btn btn-sm btn-primary" ng-if="!user.foursquare" ng-click="link('foursquare')">
-          <i class="ion-social-foursquare"></i> Link Foursquare Account
-        </button>
-
-        <button class="btn btn-sm btn-danger" ng-if="user.yahoo" ng-click="unlink('yahoo')">
-          <i class="ion-social-yahoo"></i> Unlink Yahoo Account
-        </button>
-        <button class="btn btn-sm btn-primary" ng-if="!user.yahoo" ng-click="link('yahoo')">
-          <i class="ion-social-yahoo"></i> Link Yahoo Account
-        </button>
-      </div>
+                <button class="btn btn-sm btn-danger" ng-if="user.yahoo" ng-click="unlink('yahoo')">
+                    <i class="ion-social-yahoo"></i> Unlink Yahoo Account
+                </button>
+                <button class="btn btn-sm btn-primary" ng-if="!user.yahoo" ng-click="link('yahoo')">
+                    <i class="ion-social-yahoo"></i> Link Yahoo Account
+                </button>
+            </div>
+        </div>
     </div>
-  </div>
 </div>
