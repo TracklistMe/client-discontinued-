@@ -34,6 +34,7 @@ angular.module('tracklistmeApp')
  		$http.get( CONFIG.url + '/artists/'+artistId)
       		.success(function(data) {
           		$scope.artist = data
+              $scope.artist.avatar = CONFIG.url+"/images/"+$scope.artist.avatar;
         	})
  	} 
 

@@ -19,7 +19,7 @@
     <link rel="stylesheet" href="styles/login.css">
     <link rel="stylesheet" href="styles/styles.css">
     <link rel="stylesheet" href="styles/dropImageProfile.css">
-
+    <link rel="stylesheet" href="styles/checkout.css">
 
     <!-- fonts --> 
 
@@ -36,6 +36,8 @@
   
 
 <header  ng-controller="NavbarCtrl" >
+
+
   <div class="container-fluid topMenu ">
       
       <div class="row">
@@ -47,19 +49,29 @@
             <a href="/#/login"><span class="buttonStyle montserrat text-center">Login</span></a>
           </div>
            <div ng-if="isAuthenticated()"  class="nav navbar-nav navbar-right ">
+             
 
+            <div class="floatLeft montserrat text-center cartIcon">
+              <div class="cartCounter">2</div>
+              <div class="iconCart"> 
+                <i class="fa fa-shopping-cart"></i>
+              </div> 
+            </div> 
            <!-- background-Image="{{user.avatar}}" --> 
-            <a href="/#/profile"><img ng-src="{{user.avatar}}" ng-click="$parent.showAccountDropDown = !$parent.showAccountDropDown" class="img-circle special-img">
-            </a>
+            <div class="floatLeft">
+              <img ng-src="{{user.avatar}}" ng-click="$parent.showAccountDropDown = !$parent.showAccountDropDown" class="  img-circle special-img">
+            </div>
+ 
+
 
           </div>
  
-          <!--  <span ng-click="$parent.showAccountDropDown = !$parent.showAccountDropDown" 
+          <span ng-click="$parent.showAccountDropDown = !$parent.showAccountDropDown" 
                 class=" dropDownNavProfile" 
                 ng-if="isAuthenticated() && showAccountDropDown">
-              <a href="/#/logout"><button class="btn">Logout</button></a>  
-              <a href="/#/profile"><button class="btn">Profile</button></a>
-          </span>-->
+              <a href="/#/logout"><button class="btn btn-danger">Logout</button></a>  
+              <a href="/#/profile"><button class="btn btn-warning">Profile</button></a>
+          </span> 
         </div>
         <div class="col-xs-12 col-sm-12 col-md-6 col-md-pull-3 col-lg-6 text-center">Player Area</div>
       </div>
@@ -71,7 +83,7 @@
 </header>
 <!-- end hEader -->
 <!-- begin main corp -->
-<div  ui-view class="  Site-content fadeZoom Aligner">
+<div  ui-view class="Site-content fadeZoom Aligner">
   
 
 </div>
@@ -133,7 +145,7 @@
     <!-- endbuild -->
 
         <!-- build:js({.tmp,app}) scripts/scripts.js -->
-        
+        <script src="scripts/classie.js"></script>
         <script src="scripts/app.js"></script>
         <script src="scripts/controllers/main.js"></script>
         <script src="scripts/controllers/about.js"></script>
@@ -154,6 +166,7 @@
         <script src="scripts/controllers/adminartist.js"></script>
         <script src="scripts/controllers/adminartists.js"></script> 
         <script src="scripts/directives/backgroundimage.js"></script>
+        <script src="scripts/controllers/checkout.js"></script>
         <!-- endbuild -->
 </body>
 </html>

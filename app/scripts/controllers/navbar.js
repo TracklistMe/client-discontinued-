@@ -12,6 +12,7 @@ angular.module('tracklistmeApp')
     $scope.serverURL = CONFIG.url
   	$scope.showAccountDropDown = false
   	
+    $scope.epxandCheckout = false;
   
   	
   	$scope.isAuthenticated = function() {

@@ -8,8 +8,8 @@
  
 
     <!-- FIRST COLUMN -->
-    <div class=" ">
-      <div  class="equalHWrap eqWrap tileHomeOneSize col-xs-12 col-sm-12 col-md-3 col-lg-3">
+    <div class="">
+      <div  class="equalHWrap eqWrap tileHomeOneSize col-xs-12 col-sm-12 col-md-3 col-lg-3  ">
          <div class="flexColumn profilePictureHolder"> 
             <div ng-show="uploader.isHTML5">
                
@@ -33,8 +33,8 @@
          </div>
       </div>
       <!-- PROFILE DETAILS -->
-      <div  class="tileHomeOneSize col-xs-12 col-sm-12 col-md-6 col-lg-6 displayFlex">
-        <div class="roundedCorner5 white padding15 expandWidthto100Percentage ">
+      <div  class="tileHomeOneSize col-xs-12 col-sm-12 col-md-6 col-lg-6">
+        <div class="roundedCorner5 white padding15 expandWidthto100Percentage profileBoxHeight ">
           <h4 class="text-center">Profile Details</h4>
           <form method="post" ng-submit="updateProfile()">
               <div class="form-group">
@@ -50,8 +50,8 @@
         </div>
       </div>
       <!-- SOCIAL DETAIL -->
-      <div  class="tileHomeOneSize col-xs-12 col-sm-12 col-md-3 col-lg-3 displayFlex ">
-        <div class="roundedCorner5 white padding15 expandWidthto100Percentage ">
+      <div  class="tileHomeOneSize col-xs-12 col-sm-12 col-md-3 col-lg-3 ">
+        <div class="roundedCorner5 white padding15 expandWidthto100Percentage profileBoxHeight">
           <h4 class="text-center"> Social </h4>
            <button type="submit" ng-disabled="loginForm.$invalid" class="col-xs-12 montserrat text-center buttonStyle btn-facebook">Connect Facebook</button>
 
@@ -63,6 +63,7 @@
            <button type="submit" ng-disabled="loginForm.$invalid" class="col-xs-12 montserrat text-center buttonStyle btn-google-plus">Connect Google Plus</button> 
         </div>
       </div>
+      <div id="clear" style="clear:both;"></div>
     </div>
 </div>
 

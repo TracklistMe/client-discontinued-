@@ -1,14 +1,15 @@
 .topMenu{
 	margin:0px;
 	position: relative;
- 
 	line-height: 70px;
 	width: 100%;
 	border-bottom: solid 2px #f3f0ea;
 	background-color: #fff;
 	color: #111;
 }
-
+.floatLeft{
+	float:left;
+}
 .midMenu{
 	width: 100%;
 	background-color: #fff;
@@ -24,6 +25,53 @@
  	color: #816fca;
 }
  
+.cartIcon{
+	position: relative;
+	color: #816fca;
+	margin: 5px 0px 0px 0px;
+	-webkit-border-radius: 50px;
+	-moz-border-radius: 50px;
+	border-radius: 50px;
+	height: 50px;
+	margin-bottom: -20px;
+	line-height: 50px;
+	min-width: 50px;
+	padding: 0px;
+	margin: 11px 12px 5px 10px;
+	font-size: 18px;
+	border: 1px solid #816fca;  
+}
+.cartIcon:hover{
+	background-color: #816fca;
+	color: #f2f1ef;
+}
+.cartIcon:hover .cartCounter{
+ 	color: #816fca ;
+	background-color: #f2f1ef;  
+ 	border: 1px solid #816fca;
+}
+.iconCart{
+	position: absolute;
+	top: 0px;
+	padding-left: 14px;
+}
+.cartCounter{
+	position: relative;
+	margin-bottom: 25px;
+	z-index: 2;
+	left: -2px;
+	top: -2px;
+	background-color: #816fca;  
+	color: #f2f1ef;
+	-webkit-border-radius: 12px;
+	-moz-border-radius: 12px;
+	border-radius: 12px;
+	font-weight: 500;
+	height: 18px;
+	width: 18px;
+	line-height: 18px;
+	font-size: 10px;
+}
  
 
 
@@ -70,23 +118,29 @@
     -o-background-size: cover;
     background-size: cover;
 }
-
+.avatarNavbar{
+	float: right ;
+}
 .dropDownNavProfile{
-  right: 0px;
-  top: 120px;
-  z-index: 2;
-  position: absolute;
-  background-color: #fff;
-  box-shadow: 0 2px 5px 0 rgba(0, 0, 0, .10);
+	background-color: #81d48c;
+	padding: 0px 20px 0px 20px;
+	right: 15px;
+	top: 70px;
+	width: 200px;
+	z-index: 2;
+	position: absolute; 
+	box-shadow: 0 2px 5px 0 rgba(0, 0, 0, .10);
 }
 .dropDownNavProfile:after {
     content: "";
     position: absolute;
-    top: -4px;
+    top: -5px;
     right: 22px;
     border-style: solid;
-    border-width: 0 4px 4px;
-    border-color: #fff transparent;
+    border-width: 0 5px 5px; 
+
+
+    border-color: #81d48c transparent;
     display: block;
     width: 0;
     z-index: 1;
