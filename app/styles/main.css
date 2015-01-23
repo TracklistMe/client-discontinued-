@@ -68,6 +68,9 @@ input:focus:-ms-input-placeholder { color:transparent; } /* IE 10+ */
 .row-centered {
     text-align:center;
 }
+.handCursor{
+  cursor:pointer;
+}
 .col-centered {
     display:inline-block;
     float:none;
@@ -130,12 +133,9 @@ input:focus:-ms-input-placeholder { color:transparent; } /* IE 10+ */
   background-color: #f00;
 }
 .roundedCorner5{
-  -webkit-border-radius: 5px;
-  -webkit-border-radius: 5px;
+  -webkit-border-radius: 5px;  
   -moz-border-radius: 5px;
-  -moz-border-radius: 5px;
-  border-radius: 5px;
-  border-radius: 5px;
+  border-radius: 5px; 
 }
 .padding15{
   padding: 15px;
@@ -194,7 +194,7 @@ input:focus:-ms-input-placeholder { color:transparent; } /* IE 10+ */
   -webkit-border-radius: 50px;
   -moz-border-radius: 50px;
   border-radius: 50px;
-  border: 1px #45413e solid; 
+  border: 1px #816fca solid; 
   color: #45413e;
   height: 46px !important;
   min-width: 100px;

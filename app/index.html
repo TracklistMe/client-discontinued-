@@ -50,13 +50,14 @@
           </div>
            <div ng-if="isAuthenticated()"  class="nav navbar-nav navbar-right ">
              
-
-            <div class="floatLeft montserrat text-center cartIcon">
-              <div class="cartCounter">2</div>
-              <div class="iconCart"> 
-                <i class="fa fa-shopping-cart"></i>
+            <a href="/#/checkout">
+              <div class="floatLeft montserrat text-center cartIcon handCursor">
+                <div class="cartCounter">2</div>
+                <div class="iconCart"> 
+                  <i class="fa fa-shopping-cart"></i>
+                </div> 
               </div> 
-            </div> 
+            </a>
            <!-- background-Image="{{user.avatar}}" --> 
             <div class="floatLeft">
               <img ng-src="{{user.avatar}}" ng-click="$parent.showAccountDropDown = !$parent.showAccountDropDown" class="  img-circle special-img">

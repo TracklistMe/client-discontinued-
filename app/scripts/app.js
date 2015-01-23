@@ -54,6 +54,17 @@ app.config(function($stateProvider, $urlRouterProvider, $authProvider, CONFIG) {
         url: '/noPermission',
         templateUrl: 'views/nopermission.html',
         controller: null
+      }).state('checkout', {
+        url: '/checkout',
+        templateUrl: 'views/checkout.html',
+        controller: 'CheckoutCtrl',
+        resolve: {
+          authenticated: function($location, $auth) {
+            if (!$auth.isAuthenticated()) {
+              return $location.path('/login');
+            }
+          }
+        }
       }).state('profile', {
         url: '/profile',
         templateUrl: 'views/profile.html',
