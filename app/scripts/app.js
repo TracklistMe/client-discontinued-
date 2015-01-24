@@ -18,9 +18,10 @@ var app = angular.module('tracklistmeApp', [
     'ngTouch',
     'satellizer',
     'mgcrea.ngStrap',
-    'angularFileUpload'
+    'angularFileUpload',
+
 ]).constant("CONFIG", {
-    "url": "http://api.tracklist.me",
+    "url": "http://localhost:3000",
     "imagePath": "image"
 })
 
