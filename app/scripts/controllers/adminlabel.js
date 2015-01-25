@@ -50,7 +50,7 @@ angular.module('tracklistmeApp')
 
 
             var file = catalogUploader.queue[0];
-            console.log(file._file.name)
+            console.log(file)
             var fname = file._file.name;
             var filename = fname.substr(0, (Math.min(fname.lastIndexOf("."), fname.length)));
             var extension = fname.substr((Math.max(0, fname.lastIndexOf(".")) || Infinity) + 1);
@@ -61,7 +61,11 @@ angular.module('tracklistmeApp')
                 extension: extension
             }).success(function(data, status, headers, config) {
                 console.log("DONE")
-                console.log(data);
+                console.log(data.signedUrl);
+                file.url = data.signedUrl;
+                console.log(file);
+                file.upload();
+
             }).error(function(data, status, headers, config) {
                 // called asynchronously if an error occurs
                 // or server returns response with an error status.
@@ -77,7 +81,7 @@ angular.module('tracklistmeApp')
             // Create the file on the CDN
             // 
             //  
-
+            /*
             $http.post(CONFIG.url + '/labels/' + labelId + '/dropZone/createFile/', {}).
             success(function(data, status, headers, config) {
                 console.log("DONE")
@@ -87,7 +91,7 @@ angular.module('tracklistmeApp')
                 // called asynchronously if an error occurs
                 // or server returns response with an error status.
             });
-
+          */
 
             console.info('onAfterAddingFile', fileItem);
         };
