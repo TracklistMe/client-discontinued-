@@ -8,28 +8,32 @@
  * Controller of the tracklistmeApp
  */
 angular.module('tracklistmeApp')
-  .controller('AdminlabelCtrl', function ($location,$scope,$state, $auth, $stateParams,$http,Account, FileUploader, CONFIG) {
- 		var labelId = $stateParams.id
-      $scope.serverURL = CONFIG.url
-	  	$scope.label = null
-	  	$scope.dropZoneFiles = null
-	  	$scope.releasesToProcess  = null
-	  	$scope.catalog = null
+    .controller('AdminlabelCtrl', function($location, $scope, $state, $auth, $stateParams, $http, Account, FileUploader, CONFIG) {
+        var labelId = $stateParams.id
+        $scope.serverURL = CONFIG.url
+        $scope.label = null
+        $scope.dropZoneFiles = null
+        $scope.releasesToProcess = null
+        $scope.catalog = null
 
-	  	var uploader = $scope.uploader = new FileUploader({
-	        url: CONFIG.url + '/labels/'+labelId+'/profilePicture/500/500/',
-	        headers: {'Authorization': 'Bearer '+$auth.getToken()},
-	        data: {user: $scope.user},
-	    });
+        var uploader = $scope.uploader = new FileUploader({
+            url: CONFIG.url + '/labels/' + labelId + '/profilePicture/500/500/',
+            headers: {
+                'Authorization': 'Bearer ' + $auth.getToken()
+            },
+            data: {
+                user: $scope.user
+            },
+        });
 
-		
-	  	 
- 		uploader.onAfterAddingFile = function(fileItem) {
+
+
+        uploader.onAfterAddingFile = function(fileItem) {
             console.info('onAfterAddingFile', fileItem);
             uploader.queue[0].upload();
             uploader.queue.pop();
         };
-  		uploader.onCompleteAll = function() {
+        uploader.onCompleteAll = function() {
             console.info('onCompleteAll');
             $scope.getLabel();
         };
@@ -37,14 +41,54 @@ angular.module('tracklistmeApp')
 
 
         var catalogUploader = $scope.catalogUploader = new FileUploader({
-	        url: CONFIG.url + '/labels/'+labelId+'/dropzone/',
-	        headers: {'Authorization': 'Bearer '+$auth.getToken()},
-	    });	  	
+            url: CONFIG.url + '/labels/' + labelId + '/dropzone/',
+            headers: {
+                'Authorization': 'Bearer ' + $auth.getToken()
+            },
+        });
+        $scope.processCDNNegotiation = function() {
 
-        catalogUploader.onWhenAddingFileFailed = function(item /*{File|FileLikeObject}*/, filter, options) {
+
+            var file = catalogUploader.queue[0];
+            console.log(file._file.name)
+            var fname = file._file.name;
+            var filename = fname.substr(0, (Math.min(fname.lastIndexOf("."), fname.length)));
+            var extension = fname.substr((Math.max(0, fname.lastIndexOf(".")) || Infinity) + 1);
+            console.log(filename);
+            console.log(extension);
+            $http.post(CONFIG.url + '/labels/' + labelId + '/dropZone/createFile/', {
+                filename: filename,
+                extension: extension
+            }).success(function(data, status, headers, config) {
+                console.log("DONE")
+                console.log(data);
+            }).error(function(data, status, headers, config) {
+                // called asynchronously if an error occurs
+                // or server returns response with an error status.
+            });
+
+
+
+        }
+        catalogUploader.onWhenAddingFileFailed = function(item /*{File|FileLikeObject}*/ , filter, options) {
             console.info('onWhenAddingFileFailed', item, filter, options);
         };
         catalogUploader.onAfterAddingFile = function(fileItem) {
+            // Create the file on the CDN
+            // 
+            //  
+
+            $http.post(CONFIG.url + '/labels/' + labelId + '/dropZone/createFile/', {}).
+            success(function(data, status, headers, config) {
+                console.log("DONE")
+                console.log(data);
+            }).
+            error(function(data, status, headers, config) {
+                // called asynchronously if an error occurs
+                // or server returns response with an error status.
+            });
+
+
             console.info('onAfterAddingFile', fileItem);
         };
         catalogUploader.onAfterAddingAll = function(addedFileItems) {
@@ -76,62 +120,60 @@ angular.module('tracklistmeApp')
             console.info('onCompleteAll');
             catalogUploader.clearQueue()
             $scope.getToProcessReleases();
-			$scope.getDropZoneFiles();
+            $scope.getDropZoneFiles();
         };
 
-        $scope.getLabel = function(){
- 		$http.get(CONFIG.url + '/labels/'+labelId)
-      		.success(function(data) {
-          		$scope.label = data
-	        	})
-	 	}
+        $scope.getLabel = function() {
+            $http.get(CONFIG.url + '/labels/' + labelId)
+                .success(function(data) {
+                    $scope.label = data
+                })
+        }
 
-	 	$scope.getDropZoneFiles = function(){
- 		$http.get(CONFIG.url  + '/labels/'+labelId+'/dropZoneFiles')
-      		.success(function(data) {
-          		$scope.dropZoneFiles = data
-	        	})
-	 	}
-	 	$scope.processReleases = function(){
-	 		$http.post(CONFIG.url + '/labels/'+labelId+'/processReleases/', {}).
-			  success(function(data, status, headers, config) {
-			  		console.log("DONE")
-			  		$scope.getToProcessReleases();
-				 	$scope.getDropZoneFiles();
-				 	$scope.getCatalog();
-			  }).
-			  error(function(data, status, headers, config) {
-			    // called asynchronously if an error occurs
-			    // or server returns response with an error status.
-			  });
+        $scope.getDropZoneFiles = function() {
+            $http.get(CONFIG.url + '/labels/' + labelId + '/dropZoneFiles')
+                .success(function(data) {
+                    $scope.dropZoneFiles = data
+                })
+        }
+        $scope.processReleases = function() {
+            $http.post(CONFIG.url + '/labels/' + labelId + '/processReleases/', {}).
+            success(function(data, status, headers, config) {
+                console.log("DONE")
+                $scope.getToProcessReleases();
+                $scope.getDropZoneFiles();
+                $scope.getCatalog();
+            }).
+            error(function(data, status, headers, config) {
+                // called asynchronously if an error occurs
+                // or server returns response with an error status.
+            });
 
-	 	}
+        }
 
-	 	$scope.getToProcessReleases = function(){
- 		$http.get(CONFIG.url + '/labels/'+labelId+'/processReleases/info')
-      		.success(function(data) {
-          		$scope.releasesToProcess = data
-	        	})
-	 	}
+        $scope.getToProcessReleases = function() {
+            $http.get(CONFIG.url + '/labels/' + labelId + '/processReleases/info')
+                .success(function(data) {
+                    $scope.releasesToProcess = data
+                })
+        }
 
-	 	$scope.adminRelease = function(id){
-	 		console.log("adminRelease")
-	 		  $location.path('adminRelease/'+labelId+'/'+id);
-	 	}
-	 	$scope.getCatalog  = function(){
- 		$http.get(CONFIG.url + '/labels/'+labelId+'/catalog')
-      		.success(function(data) {
-          		$scope.catalog = data
-          		console.log(data)
-	        	})
-	 	}
+        $scope.adminRelease = function(id) {
+            console.log("adminRelease")
+            $location.path('adminRelease/' + labelId + '/' + id);
+        }
+        $scope.getCatalog = function() {
+            $http.get(CONFIG.url + '/labels/' + labelId + '/catalog')
+                .success(function(data) {
+                    $scope.catalog = data
+                    console.log(data)
+                })
+        }
 
- 
-	 	$scope.getToProcessReleases();
-	 	$scope.getDropZoneFiles();
-	 	$scope.getCatalog();
-	 	$scope.getLabel();
- 
-  	});
 
- 
+        $scope.getToProcessReleases();
+        $scope.getDropZoneFiles();
+        $scope.getCatalog();
+        $scope.getLabel();
+
+    });

@@ -1,174 +1,169 @@
 <div class="container">
 
- 
-	<div class="panel panel-default">
-	    <div class="panel-heading">Label Profile</div>
-		    <div class="panel-body">
-		        <div class="row">
-		          <div class="col-md-3">
-		            <div ng-show="uploader.isHTML5">
-		              	<div nv-file-drop="" uploader="uploader"  >
-			                <div nv-file-over="" uploader="uploader" style="background-image: url('{{serverURL}}/images/{{label.logo}}')" over-class="my-drop-zone-over-class" class="well my-drop-zone">
-								<div class="dragAndDropProfilePictureButton"> Drag and drop <br />or<br /> 
-			                        <label class="myLabel">
-			                            <input type="file" nv-file-select="" uploader="uploader"/>
-			                            <span>Upload</span>
-			                        </label>
-								</div> 
-			                </div>
-		            	</div>
-		            </div>
-				</div>
-		        <div class="col-md-4">
-		            	<h3> {{label.displayName}} </h3>
-		        </div>
-		    </div>
-		</div>
-	</div> 
-
-
-	<div class="panel panel-default">
-	    <div class="panel-heading">Catalog</div>
-		<div class="panel-body">
-		         
-		        <div ng-repeat="release in catalog" class="col-md-2"  >
-		        	<a ng-click="adminRelease(release.id)">
-			           <img class="col-md-12" ng-src="{{serverURL}}/cover/{{label.id}}/{{release.catalogNumber}}/{{release.cover}}" />
-			        </a>
-		        </div>
-	    </div>
-	</div>
-
-
-	<div ng-if="releasesToProcess.success.length != 0"class="panel panel-default">
-	    <div class="panel-heading">Release to Process</div>
-		<div class="panel-body">
-		        <button type="button" ng-click="processReleases()" class="col-md-12 btn btn-success btn-s">
-		          We have detected {{releasesToProcess.success.length}} releases to process. Click to proceed
-				</button>
-				
-				<button ng-if="releasesToProcess.fail.length > 0" class=" btn btn-warning btn-s col-md-12">
-					<h4>Error:</h4>
-					There  
-					<ng-pluralize count="releasesToProcess.fail.length"
-                	when="{'1': 'is 1 release that is missing file',
-                     'other': 'are {} releases that are missing files'}">
-					</ng-pluralize> 
-				</button>
- 
-	    </div>
-	</div>
-
-	
-
-
-	<div class="panel panel-default">
-	    <div class="panel-heading">Add Releases</div>
-		<div class="panel-body">
-		         
-	        <div class="col-md-12"  >
-	      		<a ng-click="createRelease()">
-	      			<label class="myLabel">
-			        	<span>Create new Release</span>
-			   		</label>
-			   	</a> 
-	        	<label class="myLabel">
-			        <input type="file" nv-file-select="" uploader="catalogUploader" multiple  />
-			        <span>Upload New BeatportBaseware format Release</span>
-			   	</label> 
-			   	 
-	        </div>
-	         <div ng-if="catalogUploader.queue.length>0" class="col-md-12" style="margin-bottom: 40px">
-					
-
-
-                    <h3>Upload queue</h3>
-                     <button type="button" class="btn btn-success btn-s" ng-click="catalogUploader.uploadAll()" ng-disabled="!catalogUploader.getNotUploadedItems().length">
-                            <span class="glyphicon glyphicon-upload"></span> Upload all
-                        </button>
-                        <button type="button" class="btn btn-warning btn-s" ng-click="catalogUploader.cancelAll()" ng-disabled="!catalogUploader.isUploading">
-                            <span class="glyphicon glyphicon-ban-circle"></span> Cancel all
-                        </button>
-                        <button type="button" class="btn btn-danger btn-s" ng-click="catalogUploader.clearQueue()" ng-disabled="!catalogUploader.queue.length">
-                            <span class="glyphicon glyphicon-trash"></span> Remove all
-                        </button>
-
-                    <p>Queue length: {{ catalogUploader.queue.length }}</p>
-
-                    <table class="table">
-                        <thead>
-                            <tr>
-                                <th width="50%">Name</th>
-                                <th ng-show="catalogUploader.isHTML5">Size</th>
-                                <th ng-show="catalogUploader.isHTML5">Progress</th>
-                                <th>Status</th>
-                                <th>Actions</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr ng-repeat="item in catalogUploader.queue">
-                                <td><strong>{{ item.file.name }}</strong></td>
-                                <td ng-show="catalogUploader.isHTML5" nowrap>{{ item.file.size/1024/1024|number:2 }} MB</td>
-                                <td ng-show="catalogUploader.isHTML5">
-                                    <div class="progress" style="margin-bottom: 0;">
-                                        <div class="progress-bar" role="progressbar" ng-style="{ 'width': item.progress + '%' }"></div>
-                                    </div>
-                                </td>
-                                <td class="text-center">
-                                    <span ng-show="item.isSuccess"><i class="glyphicon glyphicon-ok"></i></span>
-                                    <span ng-show="item.isCancel"><i class="glyphicon glyphicon-ban-circle"></i></span>
-                                    <span ng-show="item.isError"><i class="glyphicon glyphicon-remove"></i></span>
-                                </td>
-                                <td nowrap>
-                                    <button type="button" class="btn btn-success btn-xs" ng-click="item.upload()" ng-disabled="item.isReady || item.isUploading || item.isSuccess">
-                                        <span class="glyphicon glyphicon-upload"></span> Upload
-                                    </button>
-                                    <button type="button" class="btn btn-warning btn-xs" ng-click="item.cancel()" ng-disabled="!item.isUploading">
-                                        <span class="glyphicon glyphicon-ban-circle"></span> Cancel
-                                    </button>
-                                    <button type="button" class="btn btn-danger btn-xs" ng-click="item.remove()">
-                                        <span class="glyphicon glyphicon-trash"></span> Remove
-                                    </button>
-                                </td>
-                            </tr>
-                        </tbody>
-                    </table>
-
-                    <div>
-                        <div>
-                            Queue progress:
-                            <div class="progress" style="">
-                                <div class="progress-bar" role="progressbar" ng-style="{ 'width': catalogUploader.progress + '%' }"></div>
+    <div class="panel panel-default">
+        <div class="panel-heading">Label Profile</div>
+        <div class="panel-body">
+            <div class="row">
+                <div class="col-md-3">
+                    <div ng-show="uploader.isHTML5">
+                        <div nv-file-drop="" uploader="uploader">
+                            <div nv-file-over="" uploader="uploader" style="background-image: url('{{serverURL}}/images/{{label.logo}}')" over-class="my-drop-zone-over-class" class="well my-drop-zone">
+                                <div class="dragAndDropProfilePictureButton"> Drag and drop
+                                    <br />or
+                                    <br />
+                                    <label class="myLabel">
+                                        <input type="file" nv-file-select="" uploader="uploader" />
+                                        <span>Upload</span>
+                                    </label>
+                                </div>
                             </div>
                         </div>
-                        
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <h3> {{label.displayName}} </h3>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="panel panel-default">
+        <div class="panel-heading">Catalog</div>
+        <div class="panel-body">
+
+            <div ng-repeat="release in catalog" class="col-md-2">
+                <a ng-click="adminRelease(release.id)">
+                    <img class="col-md-12" ng-src="{{serverURL}}/cover/{{label.id}}/{{release.catalogNumber}}/{{release.cover}}" />
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <div ng-if="releasesToProcess.success.length != 0" class="panel panel-default">
+        <div class="panel-heading">Release to Process</div>
+        <div class="panel-body">
+            <button type="button" ng-click="processReleases()" class="col-md-12 btn btn-success btn-s">
+                We have detected {{releasesToProcess.success.length}} releases to process. Click to proceed
+            </button>
+
+            <button ng-if="releasesToProcess.fail.length > 0" class=" btn btn-warning btn-s col-md-12">
+                <h4>Error:</h4> There
+                <ng-pluralize count="releasesToProcess.fail.length" when="{'1': 'is 1 release that is missing file',
+                     'other': 'are {} releases that are missing files'}">
+                </ng-pluralize>
+            </button>
+
+        </div>
+    </div>
+
+    <div class="panel panel-default">
+        <div class="panel-heading">Add Releases</div>
+        <div class="panel-body">
+
+            <div class="col-md-12">
+                <a ng-click="createRelease()">
+                    <label class="myLabel">
+                        <span>Create new Release</span>
+                    </label>
+                </a>
+                <label class="myLabel">
+                    <input type="file" nv-file-select="" uploader="catalogUploader" multiple />
+                    <span>Upload New BeatportBaseware format Release</span>
+                </label>
+
+            </div>
+            <div ng-if="catalogUploader.queue.length>0" class="col-md-12" style="margin-bottom: 40px">
+
+                <h3>Upload queue</h3>
+                <button type="button" class="btn btn-success btn-s" ng-click="processCDNNegotiation()">
+
+                    <!-- ng-click="catalogUploader.uploadAll()" ng-disabled="!catalogUploader.getNotUploadedItems().length"> -->
+                    <span class="glyphicon glyphicon-upload"></span> Upload all
+                </button>
+                <button type="button" class="btn btn-warning btn-s" ng-click="catalogUploader.cancelAll()" ng-disabled="!catalogUploader.isUploading">
+                    <span class="glyphicon glyphicon-ban-circle"></span> Cancel all
+                </button>
+                <button type="button" class="btn btn-danger btn-s" ng-click="catalogUploader.clearQueue()" ng-disabled="!catalogUploader.queue.length">
+                    <span class="glyphicon glyphicon-trash"></span> Remove all
+                </button>
+
+                <p>Queue length: {{ catalogUploader.queue.length }}</p>
+
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th width="50%">Name</th>
+                            <th ng-show="catalogUploader.isHTML5">Size</th>
+                            <th ng-show="catalogUploader.isHTML5">Progress</th>
+                            <th>Status</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr ng-repeat="item in catalogUploader.queue">
+                            <td><strong>{{ item.file.name }}</strong>
+                            </td>
+                            <td ng-show="catalogUploader.isHTML5" nowrap>{{ item.file.size/1024/1024|number:2 }} MB</td>
+                            <td ng-show="catalogUploader.isHTML5">
+                                <div class="progress" style="margin-bottom: 0;">
+                                    <div class="progress-bar" role="progressbar" ng-style="{ 'width': item.progress + '%' }"></div>
+                                </div>
+                            </td>
+                            <td class="text-center">
+                                <span ng-show="item.isSuccess"><i class="glyphicon glyphicon-ok"></i></span>
+                                <span ng-show="item.isCancel"><i class="glyphicon glyphicon-ban-circle"></i></span>
+                                <span ng-show="item.isError"><i class="glyphicon glyphicon-remove"></i></span>
+                            </td>
+                            <td nowrap>
+                                <button type="button" class="btn btn-success btn-xs" ng-click="item.upload()" ng-disabled="item.isReady || item.isUploading || item.isSuccess">
+                                    <span class="glyphicon glyphicon-upload"></span> Upload
+                                </button>
+                                <button type="button" class="btn btn-warning btn-xs" ng-click="item.cancel()" ng-disabled="!item.isUploading">
+                                    <span class="glyphicon glyphicon-ban-circle"></span> Cancel
+                                </button>
+                                <button type="button" class="btn btn-danger btn-xs" ng-click="item.remove()">
+                                    <span class="glyphicon glyphicon-trash"></span> Remove
+                                </button>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+
+                <div>
+                    <div>
+                        Queue progress:
+                        <div class="progress" style="">
+                            <div class="progress-bar" role="progressbar" ng-style="{ 'width': catalogUploader.progress + '%' }"></div>
+                        </div>
                     </div>
 
                 </div>
-		</div>
-	</div>
-	<div class="panel panel-default">
-	    <div class="panel-heading">DropZone Files</div>
-		<div class="panel-body">
-		         
-		        <div class="col-md-12"  >
-		            <table class="table">
-                        <thead>
-                            <tr>
-                                <th width="50%">Name</th>
-                                <th>Extension</th>
-                                <th>Size</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                        	<tr ng-repeat="file in dropZoneFiles">
-								<td> {{file.fileName}} </td>
-								<td> {{file.extension}} </td>
-								<td> {{file.size|bytes:2}} </td>
-                        	</tr>
-                        </tbody>
-                    </table>	 	
-		        </div>
-	    </div>
-	</div>
-</div> 
+
+            </div>
+        </div>
+    </div>
+    <div class="panel panel-default">
+        <div class="panel-heading">DropZone Files</div>
+        <div class="panel-body">
+
+            <div class="col-md-12">
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th width="50%">Name</th>
+                            <th>Extension</th>
+                            <th>Size</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr ng-repeat="file in dropZoneFiles">
+                            <td> {{file.fileName}} </td>
+                            <td> {{file.extension}} </td>
+                            <td> {{file.size|bytes:2}} </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
