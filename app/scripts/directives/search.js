@@ -19,4 +19,17 @@ angular.module('tracklistmeApp')
                 element[0].focus();
             });
         }
+    }).directive('stopEvent', function() {
+        return {
+            restrict: 'A',
+            link: function(scope, element, attr) {
+                element.bind('keypress', function(e) {
+                    e.stopPropagation();
+                });
+                element.bind('keyup', function(e) {
+                    console.log("keyup")
+                    e.stopPropagation();
+                });
+            }
+        };
     });

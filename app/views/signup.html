@@ -1,45 +1,43 @@
- <div class="container">
-  <div class="row">
-    <div class="loginBubble  col-xs-12 col-sm-10 col-sm-offset-1 col-md-6 col-md-offset-3 col-lg-4 col-lg-offset-4">
-      <h2 class="montserrat text-center">Sign Up</h2>
+<div class="container">
+    <div class="row">
+        <div class="loginBubble  col-xs-12 col-sm-10 col-sm-offset-1 col-md-6 col-md-offset-3 col-lg-4 col-lg-offset-4">
+            <h2 class="montserrat text-center">Sign Up</h2>
 
-      <form method="post" ng-submit="signup()" name="signupForm">
-          <div class="form-group " ng-class="{ 'has-error' : signupForm.fullName.$invalid && signupForm.fullName.$dirty }">
-            <input class="text-center form-control input-lg" type="text" name="displayName" ng-model="displayName" placeholder="Name" required autofocus>
-             
-            <div class="help-block text-danger" ng-if="signupForm.fullName.$dirty" ng-messages="signupForm.fullName.$error">
-              <div ng-message="required">You must enter your name.</div>
-            </div>
-          </div>
+            <form method="post" ng-submit="signup()" name="signupForm">
+                <div class="form-group " ng-class="{ 'has-error' : signupForm.fullName.$invalid && signupForm.fullName.$dirty }">
+                    <input class="text-center form-control input-lg" type="text" name="displayName" ng-model="displayName" placeholder="Name" required autofocus stop-event>
 
-          <div class="form-group" ng-class="{ 'has-error' : signupForm.email.$invalid && signupForm.email.$dirty }">
-            <input class="text-center form-control input-lg" type="email" id="email" name="email" ng-model="email" placeholder="Email" required 
-            ng-pattern="/^[A-z]+[a-z0-9._]+@[a-z]+\.[a-z.]{2,5}$/">
-            <span class="ion-at form-control-feedback"></span>
-            <div class="help-block text-danger" ng-if="signupForm.email.$dirty" ng-messages="signupForm.email.$error">
-              <div ng-message="required">Your email address is required.</div>
-              <div ng-message="pattern">Your email address is invalid.</div>
-            </div>
-          </div>
+                    <div class="help-block text-danger" ng-if="signupForm.fullName.$dirty" ng-messages="signupForm.fullName.$error">
+                        <div ng-message="required">You must enter your name.</div>
+                    </div>
+                </div>
 
-          <div class="form-group " ng-class="{ 'has-error' : signupForm.password.$invalid && signupForm.password.$dirty }">
-            <input password-strength class="text-center form-control input-lg" type="password" name="password" ng-model="password" placeholder="Password" required>
-           
-            <div class="help-block text-danger" ng-if="signupForm.password.$dirty" ng-messages="signupForm.password.$error">
-              <div ng-message="required">Password is required.</div>
-            </div>
-          </div>
+                <div class="form-group" ng-class="{ 'has-error' : signupForm.email.$invalid && signupForm.email.$dirty }">
+                    <input class="text-center form-control input-lg" type="email" id="email" name="email" ng-model="email" placeholder="Email" required ng-pattern="/^[A-z]+[a-z0-9._]+@[a-z]+\.[a-z.]{2,5}$/" stop-event>
+                    <span class="ion-at form-control-feedback"></span>
+                    <div class="help-block text-danger" ng-if="signupForm.email.$dirty" ng-messages="signupForm.email.$error">
+                        <div ng-message="required">Your email address is required.</div>
+                        <div ng-message="pattern">Your email address is invalid.</div>
+                    </div>
+                </div>
 
-          <p class="text-center text-muted"><small>By clicking on Sign up, you agree to <a href="#">terms & conditions</a> and <a href="#">privacy policy</a></small></p>
-           <button type="submit" ng-disabled="signupForm.$invalid" class="col-xs-12 montserrat text-center buttonStyle btn-login">Sign Up</button>
+                <div class="form-group " ng-class="{ 'has-error' : signupForm.password.$invalid && signupForm.password.$dirty }">
+                    <input password-strength class="text-center form-control input-lg" type="password" name="password" ng-model="password" placeholder="Password" required stop-event>
 
-          <br/>
+                    <div class="help-block text-danger" ng-if="signupForm.password.$dirty" ng-messages="signupForm.password.$error">
+                        <div ng-message="required">Password is required.</div>
+                    </div>
+                </div>
 
-          <p class="text-center text-muted">Already have an account? <a href="/#/login">Log in now</a></p>
-        </form> 
+                <p class="text-center text-muted"><small>By clicking on Sign up, you agree to <a href="#">terms & conditions</a> and <a href="#">privacy policy</a></small>
+                </p>
+                <button type="submit" ng-disabled="signupForm.$invalid" class="col-xs-12 montserrat text-center buttonStyle btn-login">Sign Up</button>
+
+                <br/>
+
+                <p class="text-center text-muted">Already have an account? <a href="/#/login">Log in now</a>
+                </p>
+            </form>
+        </div>
     </div>
-  </div>
 </div>
- 
- 
-

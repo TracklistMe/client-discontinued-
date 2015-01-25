@@ -21,7 +21,8 @@ var app = angular.module('tracklistmeApp', [
     'angularFileUpload',
 
 ]).constant("CONFIG", {
-    "url": "http://api.tracklist.me",
+    "url": "http://api.tracklist.me
+",
     "imagePath": "image"
 })
 

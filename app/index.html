@@ -99,14 +99,14 @@
 
         <div id="morphsearch" class="morphsearch" ng-class="{'open':searchOpen}">
             <form class="morphsearch-form">
-                <input class="morphsearch-input-style" ng-class="{'open':searchOpen}" type="search" ng-model="searchString" focusable="{{isSelected}}" ng-focus="focusReport()" ng-blur="blurReport()" placeholder="what would you like to search? Type it" />
+                <input class="morphsearch-input-style" ng-class="{'open':searchOpen}" type="search" ng-model="searchString" focusable="{{isSelected}}" ng-focus="focusReport()" ng-blur="blurReport()" placeholder="" />
                 <button class="morphsearch-submit" type="submit">Search</button>
             </form>
             <div class="morphsearch-content">
                 <div ng-if="foundArtists.length > 0" class="dummy-column">
                     <h2>Artists</h2>
                     <a ng-repeat="artist in foundArtists" class="dummy-media-object" href="http://twitter.com/SaraSoueidan">
-                        <img class="round" src="{{serverURL}}/images/{{artist.avatar}}" alt="Sara Soueidan" />
+                        <img class="round" src="{{serverURL}}/images/{{artist.avatar}}" alt="{{artist.displayName}}" />
                         <h3>{{artist.displayName}}</h3>
                     </a>
                 </div>

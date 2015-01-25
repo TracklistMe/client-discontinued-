@@ -214,7 +214,7 @@ input:focus:-ms-input-placeholder {
     line-height: 50px;
     font-size: 17px;
     margin-bottom: 5px;
-    padding: 0px 20px 0px 20px;
+    padding: 0px 20px 0px 20px !important;
 }
 .buttonStyle:hover {
     border: 1px #816fca solid;
@@ -222,7 +222,7 @@ input:focus:-ms-input-placeholder {
     color: #fff;
 }
 .btn-facebook {
-    height: 46px !important;
+    height: 50px !important;
     color: #3a5b96;
     background-color: #fff;
     border: 2px solid #3a5b96;

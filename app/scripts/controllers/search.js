@@ -13,15 +13,18 @@ angular.module('tracklistmeApp')
         var CHARACTER_BEFORE_SEARCH = 2;
         var countToExitInARow = 0;
         $scope.foundLabels = []
+        $scope.foundArtists = []
         $scope.searchOpen = false
         $scope.searchString = ""
         $scope.isSelected = false
 
         $document.bind("keypress", function(event) {
-
+            console.log(event);
 
             if ($scope.isSelected == false) {
                 $scope.open();
+                $scope.foundLabels = null
+                $scope.foundArtists = null
                 $scope.$apply();
             }
 
@@ -31,6 +34,7 @@ angular.module('tracklistmeApp')
             $scope.evaluateSearch();
             if (event.keyCode == 27) {
                 countToExitInARow++
+
                 if (countToExitInARow == 2) {
                     $scope.close();
                     $scope.$apply();
@@ -44,6 +48,8 @@ angular.module('tracklistmeApp')
 
 
         $scope.evaluateSearch = function() {
+
+
             $scope.getArtists($scope.searchString);
             $scope.getLabels($scope.searchString);
             $scope.getTracks($scope.searchString);
@@ -79,10 +85,10 @@ angular.module('tracklistmeApp')
 
 
         $scope.focusReport = function() {
-            console.log("FOCUS<<")
+
         }
         $scope.blurReport = function() {
-            console.log("BLUR<<")
+
         }
         $scope.open = function() {
             console.log("Open Interface");
@@ -95,7 +101,7 @@ angular.module('tracklistmeApp')
             $scope.isSelected = false;
         }
         $rootScope.$on('searchActivate', function(event, mass) {
-            console.log("GOT IT ");
+
             $scope.open();
         });
 
