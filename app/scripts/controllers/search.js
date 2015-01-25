@@ -8,21 +8,76 @@
  * Controller of the tracklistmeApp
  */
 angular.module('tracklistmeApp')
-    .controller('SearchCtrl', function($scope, $rootScope, $document) {
-
+    .controller('SearchCtrl', function($scope, $rootScope, $document, CONFIG, $http) {
+        $scope.serverURL = CONFIG.url;
+        var CHARACTER_BEFORE_SEARCH = 2;
+        var countToExitInARow = 0;
+        $scope.foundLabels = []
         $scope.searchOpen = false
         $scope.searchString = ""
         $scope.isSelected = false
+
         $document.bind("keypress", function(event) {
+
+
             if ($scope.isSelected == false) {
                 $scope.open();
-                console.log($scope.searchOpen)
-                $scope.isSelected = true;
                 $scope.$apply();
-
             }
 
         });
+        $document.bind("keyup", function(event) {
+            console.log(event.keyCode)
+            $scope.evaluateSearch();
+            if (event.keyCode == 27) {
+                countToExitInARow++
+                if (countToExitInARow == 2) {
+                    $scope.close();
+                    $scope.$apply();
+                    countToExitInARow = 0
+                }
+
+            } else {
+                countToExitInARow = 0;
+            }
+        });
+
+
+        $scope.evaluateSearch = function() {
+            $scope.getArtists($scope.searchString);
+            $scope.getLabels($scope.searchString);
+            $scope.getTracks($scope.searchString);
+
+        }
+
+        $scope.getArtists = function(s) {
+            if (s.length > CHARACTER_BEFORE_SEARCH) {
+                $http.get(CONFIG.url + '/artists/search/' + s)
+                    .success(function(data) {
+
+                        $scope.foundArtists = data;
+                    })
+            }
+
+
+        }
+        $scope.getLabels = function(s) {
+
+            if (s.length > CHARACTER_BEFORE_SEARCH) {
+                $http.get(CONFIG.url + '/labels/search/' + s)
+                    .success(function(data) {
+
+                        $scope.foundLabels = data;
+                    })
+            }
+
+        }
+        $scope.getTracks = function(s) {
+
+
+        }
+
+
         $scope.focusReport = function() {
             console.log("FOCUS<<")
         }
@@ -32,6 +87,12 @@ angular.module('tracklistmeApp')
         $scope.open = function() {
             console.log("Open Interface");
             $scope.searchOpen = true;
+            $scope.isSelected = true;
+        }
+        $scope.close = function() {
+            console.log("Close Interface");
+            $scope.searchOpen = false;
+            $scope.isSelected = false;
         }
         $rootScope.$on('searchActivate', function(event, mass) {
             console.log("GOT IT ");

@@ -29,7 +29,7 @@
     line-height: 50px;
 }
 .morphsearch.open {
-    background: rgba(255, 255, 255, .9);
+    background: rgba(240, 240, 240, .98);
     width: 100%;
     min-height: 100%;
     top: 0px;
@@ -76,7 +76,7 @@
     font-weight: 700;
     border: none;
     background: transparent;
-    font-size: 2.8em;
+    font-size: 4em;
     color: #816fca;
 }
 .morphsearch-input {
@@ -218,7 +218,6 @@ input[type="search"] {
     height: 0;
     overflow: hidden;
     padding: 0 10.5%;
-    background: #f1f1f1;
     position: absolute;
     pointer-events: none;
     opacity: 0;
