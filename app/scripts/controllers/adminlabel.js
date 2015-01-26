@@ -42,6 +42,7 @@ angular.module('tracklistmeApp')
 
         var catalogUploader = $scope.catalogUploader = new FileUploader({
             url: CONFIG.url + '/labels/' + labelId + '/dropzone/',
+            method: 'PUT',
             headers: {
                 'Authorization': 'Bearer ' + $auth.getToken()
             },
@@ -118,7 +119,25 @@ angular.module('tracklistmeApp')
         };
         catalogUploader.onCompleteItem = function(fileItem, response, status, headers) {
             console.info('onCompleteItem', fileItem, response, status, headers);
-            $scope.getDropZoneFiles();
+
+            var fname = fileItem._file.name;
+            var filename = fname.substr(0, (Math.min(fname.lastIndexOf("."), fname.length)));
+            var extension = fname.substr((Math.max(0, fname.lastIndexOf(".")) || Infinity) + 1);
+
+
+            $http.post(CONFIG.url + '/labels/' + labelId + '/dropZone/confirmFile', {
+                filename: filename,
+                extension: extension
+            }).success(function(data, status, headers, config) {
+                console.log(data)
+
+            }).error(function(data, status, headers, config) {
+                // called asynchronously if an error occurs
+                // or server returns response with an error status.
+            });
+
+
+            //$scope.getDropZoneFiles();
         };
         catalogUploader.onCompleteAll = function() {
             console.info('onCompleteAll');
