@@ -41,7 +41,7 @@ angular.module('tracklistmeApp')
 
 
         var catalogUploader = $scope.catalogUploader = new FileUploader({
-            method: 'PUT',
+            method: 'POST',
             url: CONFIG.url + '/labels/' + labelId + '/dropZone/'
         });
 
@@ -61,12 +61,64 @@ angular.module('tracklistmeApp')
                 extension: extension
             }).success(function(data, status, headers, config) {
                 console.log("DONE")
-                console.log(data.signedUrl);
-                file.url = data.signedUrl;
-                console.log(file);
-                file.upload({
-                    method: 'PUT'
+
+
+                /*
+                $http.put(data.signedUrl, file._file).
+                success(function(data, status, headers, config) {
+                    $http.post(CONFIG.url + '/labels/' + labelId + '/dropZone/confirmFile', {
+                        filename: filename,
+                        extension: extension
+                    }).success(function(data, status, headers, config) {
+                        console.log(data)
+
+                    }).error(function(data, status, headers, config) {
+                        // called asynchronously if an error occurs
+                        // or server returns response with an error status.
+                    });
+                }).
+                error(function(data, status, headers, config) {
+                    console.log(data)
                 });
+                */
+
+
+
+                var fd = new FormData()
+                fd.append("GoogleAccessId", data.GoogleAccessId)
+                fd.append("signature", data.signature)
+                fd.append("policy", data.policy)
+                fd.append("key", data.key)
+                    //fd.append("Expires", data.Expires)
+                fd.append("file", file._file)
+
+                var xhr = new XMLHttpRequest()
+                xhr.open("POST", data.action)
+                xhr.send(fd)
+
+                file.url = data.action;
+                file.method = 'POST';
+                /*
+                var formDataArray = [];
+                formDataArray["GoogleAccessId"] = data.GoogleAccessId;
+                formDataArray["signature"] = data.signature;
+                formDataArray["policy"] = data.policy;
+                formDataArray["key"] = data.key;
+                */
+
+                var formDataArray = [{
+                    "GoogleAccessId": data.GoogleAccessId,
+                    "signature": data.signature,
+                    "policy": data.policy,
+                    "key": data.key
+                }]
+                file.formData = formDataArray;
+
+
+                console.log(file);
+
+                file.upload();
+
 
             }).error(function(data, status, headers, config) {
                 // called asynchronously if an error occurs
