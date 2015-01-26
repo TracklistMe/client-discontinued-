@@ -195,7 +195,7 @@ angular.module('tracklistmeApp')
 
 
         $scope.getToProcessReleases();
-        $scope.getDropZoneFiles();
+        //$scope.getDropZoneFiles();
         $scope.getCatalog();
         $scope.getLabel();
 
