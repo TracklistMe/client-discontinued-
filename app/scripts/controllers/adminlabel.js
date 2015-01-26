@@ -47,10 +47,14 @@ angular.module('tracklistmeApp')
 
 
         $scope.processCDNNegotiation = function() {
+            console.log("Process CDN NEGOTIATION")
+            for (var i = 0; i < catalogUploader.queue.length; i++) {
+                catalogUploader.processOne(catalogUploader.queue[i]);
+            }
+        }
 
-
-            var file = catalogUploader.queue[0];
-            console.log(file)
+        catalogUploader.processOne = function(fileItem) {
+            var file = fileItem;
             var fname = file._file.name;
             var filename = fname.substr(0, (Math.min(fname.lastIndexOf("."), fname.length)));
             var extension = fname.substr((Math.max(0, fname.lastIndexOf(".")) || Infinity) + 1);
@@ -62,42 +66,6 @@ angular.module('tracklistmeApp')
             }).success(function(data, status, headers, config) {
                 console.log("DONE")
 
-
-                /*
-                $http.put(data.signedUrl, file._file).
-                success(function(data, status, headers, config) {
-                    $http.post(CONFIG.url + '/labels/' + labelId + '/dropZone/confirmFile', {
-                        filename: filename,
-                        extension: extension
-                    }).success(function(data, status, headers, config) {
-                        console.log(data)
-
-                    }).error(function(data, status, headers, config) {
-                        // called asynchronously if an error occurs
-                        // or server returns response with an error status.
-                    });
-                }).
-                error(function(data, status, headers, config) {
-                    console.log(data)
-                });
-                */
-
-
-
-                var fd = new FormData()
-                fd.append("GoogleAccessId", data.GoogleAccessId)
-                fd.append("signature", data.signature)
-                fd.append("policy", data.policy)
-                fd.append("key", data.key)
-                    //fd.append("Expires", data.Expires)
-                fd.append("file", file._file)
-
-                var xhr = new XMLHttpRequest()
-                xhr.open("POST", data.action)
-                xhr.send(fd)
-
-                file.url = data.action;
-                file.method = 'POST';
                 /*
                 var formDataArray = [];
                 formDataArray["GoogleAccessId"] = data.GoogleAccessId;
@@ -112,11 +80,9 @@ angular.module('tracklistmeApp')
                     "policy": data.policy,
                     "key": data.key
                 }]
+                file.url = data.action;
                 file.formData = formDataArray;
-
-
                 console.log(file);
-
                 file.upload();
 
 
@@ -124,10 +90,37 @@ angular.module('tracklistmeApp')
                 // called asynchronously if an error occurs
                 // or server returns response with an error status.
             });
-
-
-
         }
+
+
+        catalogUploader.onAfterAddingFile = function(fileItem) {
+
+            /*
+            var fname = fileItem._file.name;
+            var filename = fname.substr(0, (Math.min(fname.lastIndexOf("."), fname.length)));
+            var extension = fname.substr((Math.max(0, fname.lastIndexOf(".")) || Infinity) + 1);
+            console.log(filename);
+            console.log(extension);
+            $http.post(CONFIG.url + '/labels/' + labelId + '/dropZone/createFile/', {
+                filename: filename,
+                extension: extension
+            }).success(function(data, status, headers, config) {
+
+
+                var formDataArray = [{
+                    "GoogleAccessId": data.GoogleAccessId,
+                    "signature": data.signature,
+                    "policy": data.policy,
+                    "key": data.key
+                }]
+                file.formData = formDataArray;
+            }).error(function(data, status, headers, config) {
+                // THERE wERE PROBLEM IN ASSIGNING INFORMATIONS 
+            });
+*/
+
+
+        };
         catalogUploader.onWhenAddingFileFailed = function(item /*{File|FileLikeObject}*/ , filter, options) {
             console.info('onWhenAddingFileFailed', item, filter, options);
         };
@@ -247,7 +240,7 @@ angular.module('tracklistmeApp')
         }
 
 
-        $scope.getToProcessReleases();
+        //$scope.getToProcessReleases();
         //$scope.getDropZoneFiles();
         $scope.getCatalog();
         $scope.getLabel();
