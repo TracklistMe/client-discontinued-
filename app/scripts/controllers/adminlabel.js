@@ -42,7 +42,6 @@ angular.module('tracklistmeApp')
 
         var catalogUploader = $scope.catalogUploader = new FileUploader({
             method: 'PUT',
-            withCredentials: true,
             url: CONFIG.url + '/labels/' + labelId + '/dropZone/'
         });
 
