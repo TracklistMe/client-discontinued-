@@ -41,12 +41,15 @@ angular.module('tracklistmeApp')
 
 
         var catalogUploader = $scope.catalogUploader = new FileUploader({
-            method: 'PUT',
-            url: CONFIG.url + '/labels/' + labelId + '/dropzone/',
+            method: 'POST',
+            withCredentials: true,
+            url: CONFIG.url + '/labels/' + labelId + '/dropZone/',
             headers: {
                 'Authorization': 'Bearer ' + $auth.getToken()
             },
         });
+
+
         $scope.processCDNNegotiation = function() {
 
 
@@ -63,9 +66,11 @@ angular.module('tracklistmeApp')
             }).success(function(data, status, headers, config) {
                 console.log("DONE")
                 console.log(data.signedUrl);
-                file.url = data.signedUrl;
+                //file.url = data.signedUrl;
                 console.log(file);
-                file.upload();
+                file.upload({
+                    method: 'POST'
+                });
 
             }).error(function(data, status, headers, config) {
                 // called asynchronously if an error occurs
@@ -141,9 +146,9 @@ angular.module('tracklistmeApp')
         };
         catalogUploader.onCompleteAll = function() {
             console.info('onCompleteAll');
-            catalogUploader.clearQueue()
-            $scope.getToProcessReleases();
-            $scope.getDropZoneFiles();
+            //catalogUploader.clearQueue()
+            //$scope.getToProcessReleases();
+            //$scope.getDropZoneFiles();
         };
 
         $scope.getLabel = function() {
