@@ -42,7 +42,6 @@ angular.module('tracklistmeApp')
 
         var catalogUploader = $scope.catalogUploader = new FileUploader({
             url: CONFIG.url + '/labels/' + labelId + '/dropzone/',
-            method: 'PUT',
             headers: {
                 'Authorization': 'Bearer ' + $auth.getToken()
             },
@@ -65,7 +64,9 @@ angular.module('tracklistmeApp')
                 console.log(data.signedUrl);
                 file.url = data.signedUrl;
                 console.log(file);
-                file.upload();
+                file.upload({
+                    method: 'PUT'
+                });
 
             }).error(function(data, status, headers, config) {
                 // called asynchronously if an error occurs
