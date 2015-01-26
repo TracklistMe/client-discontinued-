@@ -66,10 +66,10 @@ angular.module('tracklistmeApp')
             }).success(function(data, status, headers, config) {
                 console.log("DONE")
                 console.log(data.signedUrl);
-                //file.url = data.signedUrl;
+                file.url = data.signedUrl;
                 console.log(file);
                 file.upload({
-                    method: 'POST'
+                    method: 'PUT'
                 });
 
             }).error(function(data, status, headers, config) {
