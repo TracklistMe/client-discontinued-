@@ -62,7 +62,8 @@ angular.module('tracklistmeApp')
             console.log(extension);
             $http.post(CONFIG.url + '/labels/' + labelId + '/dropZone/createFile/', {
                 filename: filename,
-                extension: extension
+                extension: extension,
+                size: file.file.size
             }).success(function(data, status, headers, config) {
                 console.log("DONE")
 
@@ -183,7 +184,7 @@ angular.module('tracklistmeApp')
             });
 
 
-            //$scope.getDropZoneFiles();
+            $scope.getDropZoneFiles();
         };
         catalogUploader.onCompleteAll = function() {
             console.info('onCompleteAll');
@@ -241,7 +242,7 @@ angular.module('tracklistmeApp')
 
 
         //$scope.getToProcessReleases();
-        //$scope.getDropZoneFiles();
+        $scope.getDropZoneFiles();
         $scope.getCatalog();
         $scope.getLabel();
 
