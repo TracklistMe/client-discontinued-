@@ -210,7 +210,7 @@ angular.module('tracklistmeApp')
             $http.post(CONFIG.url + '/labels/' + labelId + '/processReleases/', {}).
             success(function(data, status, headers, config) {
                 console.log("DONE")
-                $scope.getToProcessReleases();
+                    //$scope.getToProcessReleases();
                 $scope.getDropZoneFiles();
                 $scope.getCatalog();
             }).
