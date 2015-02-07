@@ -1,181 +1,371 @@
 <div class="container">
 
- 
-  <div class="panel panel-default">
-    <div class="panel-heading">Release</div>
-      <div class="panel-body">
-       	<div class="row">  
-			<div class="col-md-3"  >
+    <div class="panel panel-default">
 
-				<img class="col-md-12" ng-src="{{serverURL}}/cover/{{release.Labels[0].id}}/{{release.catalogNumber}}/{{release.cover}}" />
-		 
-			</div>
-			<div class="col-md-9"  >
-          		<h3>{{release.title}}</h3>
-          		<span ng-show="release.isActive">
-          			Active
-          		</span>
-          		<span ng-show="!release.isActive">
-          			Not Active 
-          		</span>
-			</div>
+        <div class="panel-heading"><a href="#/adminLabel/{{labelId}}">Label</a> >> zRelease</div>
+        <div class="panel-body">
+            <div class="row">
+                <div class="col-md-3">
+                    <div ng-show="uploader.isHTML5">
+                        <div nv-file-drop="" uploader="uploader">
+                            <div nv-file-over="" uploader="uploader" style="background-image: url('{{serverURL}}/images/{{release.cover}}')" over-class="my-drop-zone-over-class" class="well my-drop-zone">
+                                <div class="dragAndDropProfilePictureButton"> Drag and drop
+                                    <br />or
+                                    <br />
+                                    <label class="myLabel">
+                                        <input type="file" nv-file-select="" uploader="uploader" />
+                                        <span>Upload</span>
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-9">
+
+                    <input id="releaseTitle" name="releaseTitle" type="text" ng-model="release.title" value="{{release.title}}" placeholder="Release Title" class="form-control input-md-5" stop-event>
+                    <input id="releaseTitle" name="releaseTitle" type="text" ng-model="release.catalogNumber" value="{{release.catalogNumber}}" placeholder="Catalog Number" class="form-control input-md-5" stop-event>
+
+                    <input id="UPCNumber" name="UPCNumber" type="text" ng-model="release.UPC" value="{{release.UPC}}" placeholder="UPC/EIN Number" class="form-control input-md-5" stop-event>
+
+                    <p class="input-group">
+                        <input type="text" placeholder="Release Date" class="form-control input-md-5" ng-click="openTimePicker($event)" datepicker-popup="{{format}}" ng-model="release.releaseDate" is-open="opened" datepicker-options="dateOptions" close-text="Close" stop-event />
+                        <span class="input-group-btn">
+                         <button type="button" class="btn btn-default" ng-click="openTimePicker($event)">
+                                <i class="glyphicon glyphicon-calendar"></i>
+                            </button>
+                        </span>
+                    </p>
+                    Release Status:
+                    <div class="btn-group">
+                        <button type="button" class="btn btn-primary" ng-class=" " ng-model="release.isActive" btn-checkbox btn-checkbox-true="true" btn-checkbox-false="false">Active</button>
+                        <button type="button" class="btn btn-primary" ng-class=" " ng-model="release.isActive" btn-checkbox btn-checkbox-true="false" btn-checkbox-false="true">Deactive</button>
+
+                    </div>
+
+                </div>
+            </div>
+
+            <div class="row">
+
+                <div class="col-md-12">
+                    <h2> 
+                    Tracklist:
+                    </h2>
+                </div>
+                <div class="col-md-12">
+
+                    <button type="button" ng-click="addNewTrack()" class="col-md-12 btn btn-info btn-s">
+                        Add New Track
+                    </button>
+
+                </div>
+
+                <!--/stories-->
+                <div class="row">
+
+                    <ul id='sortable' class="source connected">
+
+                        <div ng-repeat="track in release.Tracks">
+
+                            <li>
+
+                                <table class="tracklistEntry">
+                                    <tr>
+                                        <th class="coverHolder">
+                                            <span class="labelPosition">{{track.ReleaseTracks.position}}</span>
+
+                                        </th>
+                                        <th class="columnSpacerStats">
+                                            <div class="columnRelativizer">
+                                                <div>
+                                                    <span ng-show="track.editingTitle">
+                                                                <input id="" type="text" ng-model="track.title" placeholder="Track Title"class="trackEditInput">
+                                                                    <i ng-click="updateTitle(track.id)" class="insideInput pointer fa fa-check iconApproved"></i>
+
+                                                            </span>
+                                                    <span ng-hide="track.editingTitle">
+                                                                 {{track.title}} 
+                                                                 <i ng-click="editTitle(track.id)" class="pointer fa fa-pencil iconEdit"></i>
+                                                            </span>
+                                                </div>
+                                                <div style="position: relative">
+                                                    <span ng-show="track.editingVersion">
+                                                                <input id=""   type="text"  ng-model="track.version"  placeholder="Version Name" class="trackEditInput">
+                                                                    <i ng-click="updateVersion(track.id)" class="insideInput pointer fa fa-check iconApproved"></i>
+
+                                                                 
+                                                            </span>
+                                                    <span ng-hide="track.editingVersion">
+                                                                 ({{track.version}}) 
+     
+                                                                 <i ng-click="editVersion(track.id)" class="pointer fa fa-pencil"></i>
+                                                            </span>
+                                                </div>
+                                            </div>
+                                        </th>
+                                        <th class="columnSpacerStats">
+                                            <div class="columnRelativizer">
+                                                <div ng-show="track.editingArtist">
+                                                    <input id="" class="trackEditInput" type="text" value="{{track.currentArtistEdited}}" ng-model="track.currentArtistEdited" placeholder="track.currentArtistEdited" class=""> </input>
+                                                    <i ng-click="confirmEditing(track.id)" class="insideInput insideInput2nd  pointer fa fa-check iconApproved"></i>
+                                                    <i ng-click="stopEditing(track.id)" class="insideInput    pointer fa fa-times iconDelete"></i>
+                                                </div>
+
+                                                <div ng-hide="track.editingArtist">
+                                                    <input id="" class="trackEditInput" type="text" placeholder="Artist Name" ng-model="track.newArtist" value="{{track.newArtist}}" class=""> </input>
+                                                    <i ng-click="addArtist(track.id)" class="insideInput   pointer fa fa-plus iconApproved"></i>
+                                                </div>
+                                                <div class="artistListInEntry">
+                                                    <span class="artistInBubble" ng-repeat="artist in track.artists">
+                                                             {{artist.name}}
+                                                                <span class="hiddenFeature"> 
+                                                                     <i ng-click="editArtist(track.id,$index)" class="iconEdit pointer fa fa-pencil"></i>
+                                                                    <i ng-click="deleteArtist(track.id,$index)" class="pointer fa fa-times iconDelete"></i>
+                                                                </span>
+                                                    </span>
+                                                </div>
+                                            </div>
+                                        </th>
+                                        <th class="columnSpacerStats">
+                                            <div class="columnRelativizer">
+
+                                                <div ng-show="track.editingRemixer">
+                                                    <input id="" class="trackEditInput" type="text" value="{{track.currentRemixerEdited}}" ng-model="track.currentRemixerEdited" placeholder="track.currentRemixerEdited" class=""> </input>
+                                                    <i ng-click="confirmEditingRemixer(track.id)" class="insideInput insideInput2nd  pointer fa fa-check iconApproved"></i>
+                                                    <i ng-click="stopEditingRemixer(track.id)" class="insideInput    pointer fa fa-times iconDelete"></i>
+                                                </div>
+
+                                                <div ng-hide="track.editingRemixer">
+                                                    <input id="" class="trackEditInput" type="text" placeholder="Remixer Name" ng-model="track.newRemixer" value="{{track.newRemixer}}" class=""> </input>
+                                                    <i ng-click="addRemixer(track.id)" class="insideInput   pointer fa fa-plus iconApproved"></i>
+                                                </div>
+                                                <div class="artistListInEntry">
+                                                    <span class="artistInBubble" ng-repeat="remixer in track.remixers">
+                                                             {{remixer.name}}
+                                                                <span class="hiddenFeature"> 
+                                                                     <i ng-click="editRemixer(track.id,$index)" class="iconEdit pointer fa fa-pencil"></i>
+                                                                    <i ng-click="deleteRemixer(track.id,$index)" class="pointer fa fa-times iconDelete"></i>
+                                                                </span>
+                                                    </span>
+                                                </div>
+                                            </div>
+
+                                        </th>
+                                        <th class="columnSpacerStats">
+                                            <div class="columnRelativizer">
+                                                <span ng-show="track.editingLabel">
+                                                                <input id="" type="text" ng-model="track.label" placeholder="Label Name"class="trackEditInput">
+                                                                    <i ng-click="updateLabel(track.id)" class="insideInput pointer fa fa-check iconApproved"></i>
+
+                                                            </span>
+                                                <span ng-hide="track.editingLabel">
+                                                                 {{track.label}} 
+                                                                 <i ng-click="editLabel(track.id)" class="pointer fa fa-pencil iconEdit"></i>
+                                                            </span>
+                                            </div>
+                                        </th>
+                                        <th class="columnSpacerStats">
+                                            <div class="columnRelativizer">
+                                                <div ng-show="track.showSuggestionGenre" class="suggestionGenre">
+                                                    <ul ng-repeat="genre in genres">
+                                                        <li ng-click="selectGenre(track.id,$index)">{{genre.Genre.name}}</li>
+                                                    </ul>
+                                                </div>
+
+                                                <span>
+                                                                <input id="" type="text" 
+                                                                ng-click="track.showSuggestionGenre = !track.showSuggestionGenre"
+                                                                ng-model="track.currentSelectedGenre" 
+                                                                value="{{track.currentSelectedGenre}}"
+                                                                placeholder="Add Genre" 
+                                                                class="trackEditInput"  
+                                                                readonly="readonly">
+                                                                    <i ng-click="addGenre(track.id)" class="insideInput pointer fa fa-plus iconApproved"></i>
+                                                                     
+
+                                                            </span>
+                                                <div class="artistListInEntry">
+                                                    <span class="artistInBubble" ng-repeat="genre in track.genres">
+                                                                 {{genre.name}}
+                                                                    <span class="hiddenFeature"> 
+                                                                        <i ng-click="deleteGenre(track.id,$index)" class="pointer fa fa-times iconDelete"></i>
+                                                                    </span>
+                                                    </span>
+                                                </div>
+
+                                            </div>
+
+                                        </th>
+                                        <th class="columnSpacerStats">
+                                            <span class="closeButton">x</span>
+                                            <span ng-click="track.showOverlayBeatport = !track.showOverlayBeatport" ng-class="{beatportTrackAddButtonOver: track.showOverlayBeatport}" class="beatportTrackAddButton"> <i>B</i></span>
+
+                                            <span ng-click="track.showOverlayYoutube = !track.showOverlayYoutube" ng-class="{youtubeAddButtonOver: track.showOverlayYoutube}" class="youtubeAddButton"> <i class="fa fa-youtube"></i></span>
+
+                                            <span ng-click="track.showOverlaySettings = !track.showOverlaySettings" ng-class="{settingAddButtonOver: track.showOverlaySettings}" class="settingAddButton"> <i class="fa fa-cog"></i></span>
+
+                                        </th>
+                                    </tr>
+                                </table>
+
+                            </li>
+
+                    </ul>
+
+                    <script type="text/javascript">
+                    var sortable = document.getElementById("sortable");
+                    nativesortable(sortable, {
+                        change: function() {}
+                    });
+                    </script>
+
+                    <div class="col-md-12">
+                        <table class="col-md-12 table table-striped table-bordered">
+
+                            <thead>
+                                <tr>
+                                    <th>Position</th>
+                                    <th>Title</th>
+                                    <th>Version</th>
+                                    <th>Artist</th>
+                                    <th>Remixer</th>
+                                    <th>Edit</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr ng-repeat="track in release.Tracks">
+                                    <td>{{track.ReleaseTracks.position}}</td>
+                                    <td>{{track.title}}</td>
+                                    <td>{{track.version}}</td>
+                                    <td><span ng-repeat="producer in track.Producer">{{producer.displayName}}, </span> </td>
+                                    <td><span ng-repeat="remixer in track.Remixer"> {{remixer.displayName}}, </span> </td>
+                                    <td> <a ng-click="editTrack(track.id)">Edit</a>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    </div>
+
+                    <div ng-show="editedTrack != null" class="row">
+                        <div class="col-md-12">
+                            <h2>Edit Track  </h2>
+                        </div>
+
+                        <div class="col-md-12 bs-callout-warning">
+                            <hr />
+                            <!-- Text input-->
+                            <div class="form-group col-md-6  ">
+                                <label class="col-md-3 control-label" for="trackTitle">Track Title</label>
+                                <div class="col-md-9">
+                                    <input id="trackTitle" name="trackTitle" type="text" ng-model="editedTrack.title" value="{{editedTrack.title}}" placeholder="{{editedTrack.title}}" class="form-control input-md" stop-event>
+                                </div>
+                            </div>
+
+                            <!-- Text input-->
+                            <div class="form-group col-md-6">
+                                <label class="col-md-3 control-label" for="versionName">Version Name</label>
+                                <div class="col-md-9">
+                                    <input id="versionName" name="versionName" type="text" ng-model="editedTrack.version" value="{{editedTrack.version}}" placeholder="{{editedTrack.version}}" class="form-control input-md" stop-event>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-12 bs-callout-info">
+                            <hr />
+
+                            <div class="col-md-12 ">
+
+                                <input name="input" ng-model="searchArtistField" ng-change="searchArtist()" placeholder="Search For Artist" class="form-control input-md" stop-event>
+
+                                <p>
+                                    <br />
+                                    <span ng-show="isSearching">
+                            Status:  <i class="fa fa-circle-o-notch fa-spin"></i>
+                        </span>
+                                    <span ng-show="!isSearching && searchArtistResults.length == 0"> 
+                            <i class="fa fa-times"> Name Not Available</i>
+                            <button ng-click="addArtist()" class="btn btn-primary btn-xs">Create New Artist</button>
+                        </span>
+
+                                </p>
+                                <table ng-show="searchArtistResults.length > 0 && !isSearching" class="table">
+                                    <thead>
+                                        <th> Artist Id </th>
+                                        <th> Name </th>
+                                        <th> Action </th>
+                                    </thead>
+                                    <tbody ng-repeat="artist in searchArtistResults">
+                                        <tr>
+                                            <td>{{artist.id}}</td>
+                                            <td>{{artist.displayName}}</td>
+                                            <td>
+                                                <button ng-click="addAsProducer(artist)" class="btn btn-primary btn-xs">Add as Producer</button>
+                                                <button ng-click="addAsRemixer(artist)" class="btn btn-primary btn-xs">Add as Remixer</button>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+
+                            </div>
+                            <div class="form-group col-md-6">
+
+                                <table class="table">
+                                    <thead>
+                                        <th> Producer Id </th>
+                                        <th> Producer </th>
+                                        <th> Edit </th>
+                                    </thead>
+                                    <tbody>
+                                        <tr ng-repeat="producer in editedTrack.Producer">
+                                            <td>{{producer.id}}</td>
+                                            <td>{{producer.displayName}}</td>
+                                            <td>
+                                                <button ng-click="deleteProducer(producer)" class="btn btn-primary btn-xs">Delete Producer </button>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+
+                            </div>
+                            <div class="form-group col-md-6">
+
+                                <table class="table">
+                                    <thead>
+                                        <th> Remixer Id </th>
+                                        <th> Remixer </th>
+                                        <th> Edit </th>
+                                    </thead>
+                                    <tbody>
+                                        <tr ng-repeat="remixer in editedTrack.Remixer">
+                                            <td>{{remixer.id}}</td>
+                                            <td>{{remixer.displayName}}</td>
+                                            <td>
+                                                <button ng-click="deleteRemixer(remixer)" class="btn btn-primary btn-xs">Delete Remixer</button>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                        <div class="col-md-12">
+                            <hr />
+                        </div>
+
+                    </div>
+                    <div class="col-md-12">
+                        <button ng-show="addMode" type="button" ng-click="createRelease()" class="col-md-6 btn btn-info btn-s">
+                            Create
+                        </button>
+                        <button ng-show="!addMode" type="button" ng-click="saveRelease()" class="col-md-6 btn btn-success btn-s">
+                            Save
+                        </button>
+                        <button type="button" ng-click="getRelease()" class="col-md-6 btn btn-danger btn-s">
+                            Cancel
+                        </button>
+                    </div>
+
+                </div>
+            </div>
+
         </div>
-        <div class="row">
-           
-          <div class="col-md-12"  >
-			<h2>
-			{{release.ReleaseTracks}}
-			Tracklist:
-			</h2>
-				<table class="col-md-12 table table-striped table-bordered" >
-
-					<thead>
-				        <tr>
-				        	<th>Position</th>
-				            <th>Title</th>
-				            <th>Version</th>
-				            <th>Artist</th>
-				            <th>Remixer</th>
-				            <th>Edit</th>
-				        </tr>
-				    </thead>
-					<tbody>
-						<tr ng-repeat="track in release.Tracks">
-					 		<td>{{track.ReleaseTracks.position}}</td>
-							<td>{{track.title}}</td>
-							<td>{{track.version}}</td>
-							<td><span ng-repeat="producer in track.Producer">{{producer.displayName}}, </span> </td>
-							<td><span ng-repeat="remixer in track.Remixer">	{{remixer.displayName}}, </span> </td>
-							<td> <a ng-click="editTrack(track.id)">Edit</a></td>
-						</tr>
-					</tbody>
-				</table>
-			</div>
-        </div>
-         
-		<div ng-show="editedTrack != null" class="row">
-			<div class="col-md-12">
-				<h2>Edit Track  </h2>
-			</div>
-
-			<div class="col-md-12 bs-callout-warning">
-				<hr />
-				<!-- Text input-->
-				<div class="form-group col-md-6  ">
-				  <label class="col-md-3 control-label" for="trackTitle">Track Title</label>  
-				  <div class="col-md-9">
-				  	<input id="trackTitle" name="trackTitle" type="text" ng-model="editedTrack.title"  value="{{editedTrack.title}}" placeholder="{{editedTrack.title}}" class="form-control input-md">    
-				  </div>
-				</div>
-
-				<!-- Text input-->
-				<div class="form-group col-md-6">
-				  <label class="col-md-3 control-label" for="versionName">Version Name</label>  
-				  <div class="col-md-9">
-				 	 <input id="versionName" name="versionName" type="text" ng-model="editedTrack.version" value="{{editedTrack.version}}" placeholder="{{editedTrack.version}}" class="form-control input-md"> 
-				  </div>
-				</div>
-			</div>
-			<div class="col-md-12 bs-callout-info">
-				<hr />
-			 
-				<div class="col-md-12 ">
-
-					<input name="input" ng-model="searchArtistField" ng-change="searchArtist()" placeholder="Search For Artist" class="form-control input-md">
-
-					<p> 
-						<br /> 
-						<span ng-show="isSearching">
-							Status:  <i class="fa fa-circle-o-notch fa-spin"></i>
-						</span>
-						<span ng-show="!isSearching && searchArtistResults.length == 0"> 
-							<i class="fa fa-times"> Name Not Available</i>
-							<button ng-click="addArtist()" class="btn btn-primary btn-xs">Create New Artist</button>
-						</span>
-						 
-						
-					</p>
-					<table ng-show="searchArtistResults.length > 0 && !isSearching" class="table">
-						    <thead>
-						    	<th> Artist Id </th>
-						    	<th> Name </th>
-						    	<th> Action </th>
-						   	</thead> 
-						   	<tbody ng-repeat="artist in searchArtistResults" > 
-						  		<tr >
-									<td>{{artist.id}}</td>
-									<td>{{artist.displayName}}</td>
-									<td>
-										<button ng-click="addAsProducer(artist)" class="btn btn-primary btn-xs">Add as Producer</button>
-										<button ng-click="addAsRemixer(artist)" class="btn btn-primary btn-xs">Add as Remixer</button>
-									</td>
-						  		</tr>
-							</tbody>
-						</table> 
-					 
-				</div>
-				<div class="form-group col-md-6">
-			 
-					<table   class="table">
-						    <thead>
-						    	<th> Producer Id </th>
-						    	<th> Producer </th>
-						    	<th> Edit </th>
-						   	</thead> 
-						   	<tbody   > 
-						  		<tr ng-repeat="producer in editedTrack.Producer" >
-									<td>{{producer.id}}</td>
-									<td>{{producer.displayName}}</td>
-									<td>
-										<button ng-click="deleteProducer(producer)" class="btn btn-primary btn-xs">Delete Producer </button>
-									</td>
-						  		</tr>
-							</tbody>
-					</table>
-
-				</div>
-				<div class="form-group col-md-6">
-			 
-					<table  class="table">
-						    <thead>
-						    	<th> Remixer Id </th>
-						    	<th> Remixer </th>
-						    	<th> Edit </th>
-						   	</thead> 
-						   	<tbody > 
-						  		<tr  ng-repeat="remixer in editedTrack.Remixer" >
-									<td>{{remixer.id}}</td>
-									<td>{{remixer.displayName}}</td>
-									<td>
-										<button ng-click="deleteRemixer(remixer)" class="btn btn-primary btn-xs">Delete Remixer</button>
-									</td>
-						  		</tr>
-							</tbody>
-					</table>
-				</div>
-			</div>
-			<div class="col-md-12">
-				<hr />
-			</div>
-			
-		</div>
-		<div ng-show="editedTrack" class="col-md-12">
-			<button type="button" ng-click="saveRelease()" class="col-md-6 btn btn-success btn-s">
-				Save
-			</button>
-			<button type="button" ng-click="getRelease()" class="col-md-6 btn btn-danger btn-s">
-				Cancel
-			</button>
-		</div>
-
-         
-    
-
-
-    </div>
-  </div>
-  
-
-
-   
-</div>

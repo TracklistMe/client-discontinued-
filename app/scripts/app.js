@@ -11,6 +11,8 @@
 var app = angular.module('tracklistmeApp', [
     'ngAnimate',
     'ui.router',
+    'ui.bootstrap'
+,
     'ngCookies',
     'ngResource',
     'ngRoute',
@@ -21,7 +23,7 @@ var app = angular.module('tracklistmeApp', [
     'angularFileUpload',
 
 ]).constant("CONFIG", {
-    "url": "http://api.tracklist.me",
+    "url": "http://localhost:3000",
     "imagePath": "image"
 })
 
@@ -205,31 +207,43 @@ app.config(function($stateProvider, $urlRouterProvider, $authProvider, CONFIG) {
                         } // if then else
                     } // end of auth
             } // end of resolve
+        }).state('createRelease', {
+            url: '/createRelease/{idLabel:int}',
+            templateUrl: 'views/adminrelease.html',
+            controller: 'AdminreleaseCtrl',
+            resolve: {
+                authenticated: function($location, $auth, Account) {
+                        if (!$auth.isAuthenticated()) {
+                            //not logged in 
+                            return $location.path('/login');
+                        } else {
+                            // with an autentication 
+                            return Account.getProfile()
+                                .success(function(data) {
+                                    if (!data.isAdmin) // Non sono autorizzato
+                                        return $location.path('/noPermission');
+                                })
+                        } // if then else
+                    } // end of auth
+            } // end of resolve
         }).state('adminRelease', {
             url: '/adminRelease/{idLabel:int}/{id:int}',
             templateUrl: 'views/adminrelease.html',
             controller: 'AdminreleaseCtrl',
             resolve: {
-
                 authenticated: function($location, $auth, Account) {
-
                         if (!$auth.isAuthenticated()) {
                             //not logged in 
-
                             return $location.path('/login');
                         } else {
                             // with an autentication 
-
                             return Account.getProfile()
                                 .success(function(data) {
-
                                     if (!data.isAdmin) // Non sono autorizzato
                                         return $location.path('/noPermission');
                                 })
-
                         } // if then else
                     } // end of auth
-
             } // end of resolve
         });
     $urlRouterProvider.otherwise('/');

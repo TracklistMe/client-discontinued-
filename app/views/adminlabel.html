@@ -31,9 +31,14 @@
         <div class="panel-heading">Catalog</div>
         <div class="panel-body">
 
-            <div ng-repeat="release in catalog" class="col-md-2">
+            <div ng-repeat="release in catalog" class="col-md-3">
+                <div class="activeBadge">
+                    <span ng-if="release.isActive"><i class="fa fa-check-square fa-2x"></i></span>
+                    <span ng-if="!release.isActive"><i class="fa fa-times fa-2x"></i></span>
+                </div>
+
                 <a ng-click="adminRelease(release.id)">
-                    <img class="col-md-12" ng-src="{{serverURL}}/cover/{{label.id}}/{{release.catalogNumber}}/{{release.cover}}" />
+                    <img class="col-md-12" ng-src="{{serverURL}}/images/{{release.cover}}" /> {{release.catalogNumber}}
                 </a>
             </div>
         </div>
@@ -46,13 +51,19 @@
                 We have detected {{releasesToProcess.success.length}} releases to process. Click to proceed
             </button>
 
-            <button ng-if="releasesToProcess.fail.length > 0" class=" btn btn-warning btn-s col-md-12">
-                <h4>Error:</h4> There
-                <ng-pluralize count="releasesToProcess.fail.length" when="{'1': 'is 1 release that is missing file',
+        </div>
+    </div>
+    <div ng-if="releasesToProcess.success.length != 0" class="panel panel-default">
+        <div class="panel-heading">Incomplete Releaes </div>
+        <div class="panel-body">
+
+            <div ng-if="releasesToProcess.fail.length > 0">
+                There
+                <ng-pluralize count="releasesToProcess.fail.length" when="{'1': 'is 1 release that is missing files',
                      'other': 'are {} releases that are missing files'}">
                 </ng-pluralize>
-            </button>
 
+            </div>
         </div>
     </div>
 

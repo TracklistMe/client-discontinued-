@@ -10,11 +10,14 @@
 angular.module('tracklistmeApp')
     .controller('AdminlabelCtrl', function($location, $scope, $state, $auth, $stateParams, $http, Account, FileUploader, CONFIG) {
         var labelId = $stateParams.id
-        $scope.serverURL = CONFIG.url
+        $scope.
+        serverURL = CONFIG.url
         $scope.label = null
         $scope.dropZoneFiles = null
         $scope.releasesToProcess = null
         $scope.catalog = null
+
+
 
         var uploader = $scope.uploader = new FileUploader({
             url: CONFIG.url + '/labels/' + labelId + '/profilePicture/500/500/',
@@ -25,6 +28,7 @@ angular.module('tracklistmeApp')
                 user: $scope.user
             },
         });
+
 
 
 
@@ -189,7 +193,7 @@ angular.module('tracklistmeApp')
         catalogUploader.onCompleteAll = function() {
             console.info('onCompleteAll');
             //catalogUploader.clearQueue()
-            //$scope.getToProcessReleases();
+            $scope.getToProcessReleases();
             //$scope.getDropZoneFiles();
         };
 
@@ -210,7 +214,7 @@ angular.module('tracklistmeApp')
             $http.post(CONFIG.url + '/labels/' + labelId + '/processReleases/', {}).
             success(function(data, status, headers, config) {
                 console.log("DONE")
-                    //$scope.getToProcessReleases();
+                $scope.getToProcessReleases();
                 $scope.getDropZoneFiles();
                 $scope.getCatalog();
             }).
@@ -228,6 +232,10 @@ angular.module('tracklistmeApp')
                 })
         }
 
+        $scope.createRelease = function(id) {
+            console.log("Create Release")
+            $location.path('createRelease/' + labelId);
+        }
         $scope.adminRelease = function(id) {
             console.log("adminRelease")
             $location.path('adminRelease/' + labelId + '/' + id);
@@ -241,7 +249,7 @@ angular.module('tracklistmeApp')
         }
 
 
-        //$scope.getToProcessReleases();
+        $scope.getToProcessReleases();
         $scope.getDropZoneFiles();
         $scope.getCatalog();
         $scope.getLabel();
