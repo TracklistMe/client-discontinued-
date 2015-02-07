@@ -11,8 +11,8 @@
 var app = angular.module('tracklistmeApp', [
     'ngAnimate',
     'ui.router',
-    'ui.bootstrap'
-,
+    'ui.bootstrap',
+    'ui.sortable',
     'ngCookies',
     'ngResource',
     'ngRoute',

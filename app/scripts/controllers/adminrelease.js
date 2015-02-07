@@ -208,6 +208,9 @@ angular.module('tracklistmeApp')
 
             // ADMIN RELEASE 
             console.log($scope.release)
+            for (var i = $scope.release.Tracks.length - 1; i >= 0; i--) {
+                $scope.release.Tracks[i].ReleaseTracks.position = i + 1;
+            };
             $http.put(CONFIG.url + '/releases/' + $scope.releaseId, {
                 release: $scope.release
             }).
@@ -290,6 +293,29 @@ angular.module('tracklistmeApp')
         /* end of datapicker */
 
 
+        /* sortable list 
+        Object (event) - structure         
+         source:
+              index: original index before move.
+              itemScope: original item scope before move.
+              sortableScope: original sortable list scope.
+         dest: index
+              index: index after move.
+              sortableScope: destination sortable scope. 
+
+        */
+        $scope.dragControlListeners = {
+            accept: function(sourceItemHandleScope, destSortableScope) {
+                return true
+            },
+            itemMoved: function(event) {
+                console.log(event)
+            },
+            orderChanged: function(event) {
+
+            },
+            containment: '#board' //optional param.
+        };
 
 
         $scope.initialize();
