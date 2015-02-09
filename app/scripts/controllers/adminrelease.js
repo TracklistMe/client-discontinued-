@@ -10,7 +10,7 @@
 angular.module('tracklistmeApp')
     .controller('AdminreleaseCtrl', function($location, $scope, $state, $auth, $stateParams, $http, Account, FileUploader, CONFIG) {
 
-
+        $scope.selectFileFromDropZone = "TEST"
         $scope.addMode = false;
         $scope.release = {};
         $scope.serverURL = CONFIG.url
@@ -226,6 +226,47 @@ angular.module('tracklistmeApp')
 
         }
 
+        $scope.deatach = function(index) {
+            // REMEMBER TO DEATACH A TRACK and put back in the dropzone.
+            $scope.release.Tracks[index].path = "";
+        }
+        $scope.uplaodSingleTrack = function(index) {
+            $scope.open();
+
+        }
+        $scope.selectFromDropzone = function(track) {
+            console.log(track);
+            $scope.selectFromDropzone = track;
+            $scope.getDropZoneFiles();
+
+        }
+        $scope.getDropZoneFiles = function() {
+            $http.get(CONFIG.url + '/labels/' + labelId + '/dropZoneFiles')
+                .success(function(data) {
+                    $scope.dropZoneFiles = data
+                })
+        }
+        $scope.items = ['item1', 'item2', 'item3'];
+
+        $scope.open = function(size) {
+
+            var modalInstance = $modal.open({
+                templateUrl: 'myModalContent.html',
+                controller: 'ModalInstanceCtrl',
+                size: size,
+                resolve: {
+                    items: function() {
+                        return $scope.items;
+                    }
+                }
+            });
+
+            modalInstance.result.then(function(selectedItem) {
+                $scope.selected = selectedItem;
+            }, function() {
+                $log.info('Modal dismissed at: ' + new Date());
+            });
+        };
 
         $scope.editTrack = function(trackId) {
             for (var i = $scope.release.Tracks.length - 1; i >= 0; i--) {

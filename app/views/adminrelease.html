@@ -1,8 +1,35 @@
 <div class="container">
 
+    <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span>
+                    </button>
+                    <h4 class="modal-title" id="myModalLabel">Select From Dropzone</h4>
+                </div>
+                <div class="modal-body">
+                    <input id="" name="" type="text" ng-model="searchFile" placeholder="Search File Name" class="form-control input-md-5" stop-event>
+                    <hr /> {{selectFileFromDropZone}}
+                    <ul ng-init="selectItem = null" class="list-group">
+
+                        <li ng-click="$parent.selectFileFromDropZone = file" ng-class="{'active': $parent.selectFileFromDropZone == file}" ng-repeat="file in dropZoneFiles | filter:searchFile" class="list-group-item">
+                            {{file.fileName}}.{{file.extension}}
+                        </li>
+
+                    </ul>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Exit without updating</button>
+                    <button type="button" class="btn btn-primary">Ok,you still need to save later</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <div class="panel panel-default">
 
-        <div class="panel-heading"><a href="#/adminLabel/{{labelId}}">Label</a> >> zRelease</div>
+        <div class="panel-heading"><a href="#/adminLabel/{{labelId}}">Label</a> >> Release</div>
         <div class="panel-body">
             <div class="row">
                 <div class="col-md-3">
@@ -60,27 +87,47 @@
                     </button>
 
                 </div>
-                <div class="col-md-12">
-                    <!--/stories-->
-                    <table class="col-md-12 table table-striped table-bordered">
 
-                        <thead>
-                            <tr>
-                                <th>Position</th>
-                                <th>Title</th>
-                                <th>Version</th>
-                                <th>Artist</th>
-                                <th>Remixer</th>
-                                <th>Edit</th>
-                            </tr>
-                        </thead>
-                    </table>
-                </div>
                 <div class="col-md-12">
                     <ul data-as-sortable="dragControlListeners" data-ng-model="release.Tracks">
                         <li data-ng-repeat="track in release.Tracks" data-as-sortable-item>
                             <div data-as-sortable-item-handle>
+                                <span class="labelPosition ng-binding">{{$index+1}}</span>
+                                <div class="trackPosition">
+                                    <span ng-if="track.path != ''">
+                                    This track has a file associated.
+                                    <a ng-click="deatach($index)">Deatach</a>
+                                    </span>
+                                    <span ng-if="!track.path">
+                                    This track doesn't have a file
+                                    <a ng-click="uplaodSingleTrack($index)">Upload</a> or
+                                    <!-- Button trigger modal -->
+<button type="button" class="btn btn-primary btn-sm" ng-click="selectFromDropzone({{track}})" data-toggle="modal" data-target="#myModal">
+ Select from<br /> Dropzone
+</button>
+                                </span>
+                                </div>
 
+                                <div class="col-md-3 col-md-offset-1">
+                                    Title:
+                                    <input id="trackTitle" name="trackTitle" type="text" ng-model="track.title" value="{{track.title}}" placeholder="Track Title" class="form-control  " stop-event> Version:
+                                    <input id="trackTitle" name="trackVersion" type="text" ng-model="track.version" value="{{track.version}}" placeholder="Track Version" class="form-control  " stop-event>
+                                </div>
+                                <div class="col-md-4 ">
+                                    Artists:
+                                    <span ng-repeat="producer in track.Producer">{{producer.displayName}}, </span>
+                                    <br /> Remixers:
+                                    <span ng-repeat="remixer in track.Remixer"> {{remixer.displayName}}, </span>
+                                </div>
+                                <div class="col-md-4 ">
+                                    Genre:
+                                    <br /> ISRC:
+                                    <input id="trackTitle" name="trackTitle" type="text" ng-model="track.ISRC" value="{{track.ISRC}}" placeholder="Track ISRC" class="form-control  " stop-event>
+                                    <a ng-click="editTrack(track.id)">Edit</a>
+
+                                </div>
+
+                                <!--
                                 <table class="col-md-12 table table-striped table-bordered">
 
                                     <tr>
@@ -93,7 +140,7 @@
                                         </td>
                                     </tr>
                                 </table>
-
+                                -->
                             </div>
                         </li>
                     </ul>
