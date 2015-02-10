@@ -13,7 +13,7 @@
                     <hr /> {{selectFileFromDropZone}}
                     <ul ng-init="selectItem = null" class="list-group">
 
-                        <li ng-click="$parent.selectFileFromDropZone = file" ng-class="{'active': $parent.selectFileFromDropZone == file}" ng-repeat="file in dropZoneFiles | filter:searchFile" class="list-group-item">
+                        <li ng-click="$parent.selectFileFromDropZone = file" ng-class="{'active': $parent.selectFileFromDropZone == file}" ng-repeat="file in dropZoneFiles | orderBy : file.fileName  | filter:searchFile  " class="list-group-item">
                             {{file.fileName}}.{{file.extension}}
                         </li>
 
@@ -21,7 +21,7 @@
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-default" data-dismiss="modal">Exit without updating</button>
-                    <button type="button" class="btn btn-primary">Ok,you still need to save later</button>
+                    <button ng-if="selectFileFromDropZone" ng-click="assignDropZoneFileToTrack(selectTrackToChangeFile)" type="button" data-dismiss="modal" class="btn btn-primary">Ok,you still need to save later</button>
                 </div>
             </div>
         </div>
@@ -78,7 +78,9 @@
                 <div class="col-md-12">
                     <h2> 
                     Tracklist:
-                    </h2>
+                    </h2> deatachedList {{deatachedList}}
+                    <hr /> assignedList : {{assignedList}}
+                    <hr /> dropZoneFiles: {{dropZoneFiles}}
                 </div>
                 <div class="col-md-12">
 
@@ -94,49 +96,51 @@
                             <div data-as-sortable-item-handle>
                                 <span class="labelPosition ng-binding">{{$index+1}}</span>
                                 <div class="trackPosition">
-                                    <span ng-if="track.path != ''">
+                                    <span ng-if="track.path != null">
                                     This track has a file associated.
                                     <a ng-click="deatach($index)">Deatach</a>
                                     </span>
-                                    <span ng-if="!track.path">
+                                    <span ng-if="track.path == null">
+                                    {{track.path}}
                                     This track doesn't have a file
-                                    <a ng-click="uplaodSingleTrack($index)">Upload</a> or
+                                    <a ng-click="uplaodSingleTrack($index) ">Upload</a> or
                                     <!-- Button trigger modal -->
-<button type="button" class="btn btn-primary btn-sm" ng-click="selectFromDropzone({{track}})" data-toggle="modal" data-target="#myModal">
+<div  class="btn btn-primary " ng-click="selectFromDropZone(track) " data-toggle="modal" data-target="#myModal"
+>
  Select from<br /> Dropzone
-</button>
+</div>
                                 </span>
                                 </div>
 
-                                <div class="col-md-3 col-md-offset-1">
+                                <div class="col-md-3 col-md-offset-1 ">
                                     Title:
-                                    <input id="trackTitle" name="trackTitle" type="text" ng-model="track.title" value="{{track.title}}" placeholder="Track Title" class="form-control  " stop-event> Version:
-                                    <input id="trackTitle" name="trackVersion" type="text" ng-model="track.version" value="{{track.version}}" placeholder="Track Version" class="form-control  " stop-event>
+                                    <input id="trackTitle " name="trackTitle " type="text " ng-model="track.title " value="{{track.title}} " placeholder="Track Title " class="form-control " stop-event> Version:
+                                    <input id="trackTitle " name="trackVersion " type="text " ng-model="track.version " value="{{track.version}} " placeholder="Track Version " class="form-control " stop-event>
                                 </div>
                                 <div class="col-md-4 ">
                                     Artists:
-                                    <span ng-repeat="producer in track.Producer">{{producer.displayName}}, </span>
+                                    <span ng-repeat="producer in track.Producer ">{{producer.displayName}}, </span>
                                     <br /> Remixers:
-                                    <span ng-repeat="remixer in track.Remixer"> {{remixer.displayName}}, </span>
+                                    <span ng-repeat="remixer in track.Remixer "> {{remixer.displayName}}, </span>
                                 </div>
                                 <div class="col-md-4 ">
                                     Genre:
                                     <br /> ISRC:
-                                    <input id="trackTitle" name="trackTitle" type="text" ng-model="track.ISRC" value="{{track.ISRC}}" placeholder="Track ISRC" class="form-control  " stop-event>
-                                    <a ng-click="editTrack(track.id)">Edit</a>
+                                    <input id="trackTitle " name="trackTitle " type="text " ng-model="track.ISRC " value="{{track.ISRC}} " placeholder="Track ISRC " class="form-control " stop-event>
+                                    <a ng-click="editTrack(track.id) ">Edit</a>
 
                                 </div>
 
                                 <!--
-                                <table class="col-md-12 table table-striped table-bordered">
+                                <table class="col-md-12 table table-striped table-bordered ">
 
                                     <tr>
                                         <td>{{$index+1}}</td>
                                         <td>{{track.title}}</td>
                                         <td>{{track.version}}</td>
-                                        <td><span ng-repeat="producer in track.Producer">{{producer.displayName}}, </span> </td>
-                                        <td><span ng-repeat="remixer in track.Remixer"> {{remixer.displayName}}, </span> </td>
-                                        <td> <a ng-click="editTrack(track.id)">Edit</a>
+                                        <td><span ng-repeat="producer in track.Producer ">{{producer.displayName}}, </span> </td>
+                                        <td><span ng-repeat="remixer in track.Remixer "> {{remixer.displayName}}, </span> </td>
+                                        <td> <a ng-click="editTrack(track.id) ">Edit</a>
                                         </td>
                                     </tr>
                                 </table>
@@ -148,48 +152,48 @@
 
             </div>
 
-            <div ng-show="editedTrack != null" class="row">
-                <div class="col-md-12">
+            <div ng-show="editedTrack !=null " class="row ">
+                <div class="col-md-12 ">
                     <h2>Edit Track  </h2>
                 </div>
 
-                <div class="col-md-12 bs-callout-warning">
+                <div class="col-md-12 bs-callout-warning ">
                     <hr />
                     <!-- Text input-->
-                    <div class="form-group col-md-6  ">
-                        <label class="col-md-3 control-label" for="trackTitle">Track Title</label>
-                        <div class="col-md-9">
-                            <input id="trackTitle" name="trackTitle" type="text" ng-model="editedTrack.title" value="{{editedTrack.title}}" placeholder="{{editedTrack.title}}" class="form-control input-md" stop-event>
+                    <div class="form-group col-md-6 ">
+                        <label class="col-md-3 control-label " for="trackTitle ">Track Title</label>
+                        <div class="col-md-9 ">
+                            <input id="trackTitle " name="trackTitle " type="text " ng-model="editedTrack.title " value="{{editedTrack.title}} " placeholder="{{editedTrack.title}} " class="form-control input-md " stop-event>
                         </div>
                     </div>
 
                     <!-- Text input-->
-                    <div class="form-group col-md-6">
-                        <label class="col-md-3 control-label" for="versionName">Version Name</label>
-                        <div class="col-md-9">
-                            <input id="versionName" name="versionName" type="text" ng-model="editedTrack.version" value="{{editedTrack.version}}" placeholder="{{editedTrack.version}}" class="form-control input-md" stop-event>
+                    <div class="form-group col-md-6 ">
+                        <label class="col-md-3 control-label " for="versionName ">Version Name</label>
+                        <div class="col-md-9 ">
+                            <input id="versionName " name="versionName " type="text " ng-model="editedTrack.version " value="{{editedTrack.version}} " placeholder="{{editedTrack.version}} " class="form-control input-md " stop-event>
                         </div>
                     </div>
                 </div>
-                <div class="col-md-12 bs-callout-info">
+                <div class="col-md-12 bs-callout-info ">
                     <hr />
 
                     <div class="col-md-12 ">
 
-                        <input name="input" ng-model="searchArtistField" ng-change="searchArtist()" placeholder="Search For Artist" class="form-control input-md" stop-event>
+                        <input name="input " ng-model="searchArtistField " ng-change="searchArtist() " placeholder="Search For Artist " class="form-control input-md " stop-event>
 
                         <p>
                             <br />
-                            <span ng-show="isSearching">
-                            Status:  <i class="fa fa-circle-o-notch fa-spin"></i>
+                            <span ng-show="isSearching ">
+                            Status:  <i class="fa fa-circle-o-notch fa-spin "></i>
                         </span>
-                            <span ng-show="!isSearching && searchArtistResults.length == 0"> 
-                            <i class="fa fa-times"> Name Not Available</i>
-                            <button ng-click="addArtist()" class="btn btn-primary btn-xs">Create New Artist</button>
+                            <span ng-show="!isSearching && searchArtistResults.length==0 "> 
+                            <i class="fa fa-times "> Name Not Available</i>
+                            <button ng-click="addArtist() " class="btn btn-primary btn-xs ">Create New Artist</button>
                         </span>
 
                         </p>
-                        <table ng-show="searchArtistResults.length > 0 && !isSearching" class="table">
+                        <table ng-show="searchArtistResults.length> 0 && !isSearching" class="table">
                             <thead>
                                 <th> Artist Id </th>
                                 <th> Name </th>

@@ -23,7 +23,14 @@ angular.module('tracklistmeApp')
         $scope.nameAvailable = false
         $scope.nameTooShort = true
         $scope.searchArtistResults = null
+        $scope.selectTrackToChangeFile = null;
 
+        // when deataching a file from his track, remember to add in the list
+        // of potential file to added back. Those files will not fetched back from the call dropzone/
+        // so must be handled manually 
+        $scope.deatachedList = []
+        $scope.assignedList = []
+        $scope.dropZoneFiles = []
         var uploader = $scope.uploader = new FileUploader({
             url: CONFIG.url + '/labels/' + $scope.labelId + '/dropZone/'
 
@@ -40,8 +47,6 @@ angular.module('tracklistmeApp')
             } else {
                 // upload directely into the release folder
                 uploader.processOne(uploader.queue[0]);
-
-
             }
         };
 
@@ -128,6 +133,7 @@ angular.module('tracklistmeApp')
                 $scope.release.Tracks = []
             }
             $scope.release.Tracks.push({
+                path: null,
                 ReleaseTracks: {
                     position: $scope.release.Tracks.length + 1
                 }
@@ -228,22 +234,112 @@ angular.module('tracklistmeApp')
 
         $scope.deatach = function(index) {
             // REMEMBER TO DEATACH A TRACK and put back in the dropzone.
-            $scope.release.Tracks[index].path = "";
+
+            var path = $scope.release.Tracks[index].path;
+            var filename = path.replace(/^.*(\\|\/|\:)/, '');
+            console.log(filename)
+            var extension = filename.split(".")[1];
+            filename = filename.split(".")[0];
+            $scope.release.Tracks[index].path = null;
+
+            // find if the track already exist in the deatacched tracks
+
+            var foundInDeatached = false;
+            for (var i = $scope.deatachedList.length - 1; i >= 0; i--) {
+                if ($scope.deatachedList[i].path == path) {
+                    foundInDeatached = true
+                }
+            };
+
+            // need to check if the track would come out from the list of tracks in the dropzone already
+            // in that case i should not show it again.
+            var foundInDropZone = false;
+            for (var i = $scope.dropZoneFiles.length - 1; i >= 0; i--) {
+                if ($scope.dropZoneFiles[i].path == path) {
+                    foundInDropZone = true
+                }
+            };
+
+            if (foundInDeatached == false && foundInDropZone == false) {
+                $scope.deatachedList.push({
+                    fileName: filename,
+                    extension: extension,
+                    path: path
+                })
+            }
+
+            for (var i = 0; i < $scope.assignedList.length; i++) {
+                console.log("THIS" + $scope.assignedList[i].path)
+                console.log("AND" + path)
+                if ($scope.assignedList[i].path == path) $scope.assignedList.splice(i, 1);
+            }
+            // HERE I SHOULD REMOVE THE TRACK FROM LIST OF ASSIGNED TRACK 
         }
         $scope.uplaodSingleTrack = function(index) {
             $scope.open();
 
         }
-        $scope.selectFromDropzone = function(track) {
-            console.log(track);
-            $scope.selectFromDropzone = track;
-            $scope.getDropZoneFiles();
+        $scope.selectFromDropZone = function(track) {
+
+                $scope.selectTrackToChangeFile = track;
+                $scope.selectFileFromDropZone = null
+                $scope.getDropZoneFiles();
+            }
+            /* ASSIGN TO A TRACK A NEW PATH FROM THE DROPZONE */
+        $scope.assignDropZoneFileToTrack = function(track) {
+
+            track.path = $scope.selectFileFromDropZone.path
+            console.log($scope.release)
+
+            // add the path to a blacklist for the dropzone, this because we are
+            // maintaining consistent a status that is not saved in the server yet.
+
+            $scope.assignedList.push({
+                path: $scope.selectFileFromDropZone.path
+            })
 
         }
         $scope.getDropZoneFiles = function() {
             $http.get(CONFIG.url + '/labels/' + labelId + '/dropZoneFiles')
                 .success(function(data) {
-                    $scope.dropZoneFiles = data
+                    // concat the array with the file from the dropbox with the array of file that have been deatached.
+                    // Remove duplicates
+                    $scope.dropZoneFiles = []
+                    for (var k = 0; k < data.length; k++) {
+                        $scope.dropZoneFiles.push(data[k])
+                    }
+
+
+                    for (var i = 0; i < $scope.deatachedList.length; i++) {
+                        found = false;
+                        for (var j = 0; j < data.length; j++) {
+                            if (data[j].path == $scope.deatachedList[i].path) {
+                                found = true;
+                            }
+                        }
+                        if (found == false) {
+                            $scope.dropZoneFiles.push($scope.deatachedList[i])
+                        }
+
+                    }
+
+
+
+                    // REMOVE ALL THE FILE THAT HAS BEEN USED BUT ARE INCONSISTENT WITH THE STATUS OF THE 
+                    // DROPZONE IN DB
+                    var array = []
+                    for (var i = 0; i < $scope.dropZoneFiles.length; i++) {
+                        var found = false;
+                        for (var j = 0; j < $scope.assignedList.length; j++) {
+                            if ($scope.dropZoneFiles[i].path == $scope.assignedList[j].path) {
+                                found = true
+                            }
+                        }
+                        if (found == false) {
+                            array.push($scope.dropZoneFiles[i]);
+                        }
+                    }
+                    $scope.dropZoneFiles = array;
                 })
         }
         $scope.items = ['item1', 'item2', 'item3'];
