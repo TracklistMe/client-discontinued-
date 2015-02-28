@@ -39,6 +39,9 @@ body {
     position: relative;
     width: 100%;
 }
+.smallFont {
+    font-size: 7px !important;
+}
 ul, li {
     list-style-type: none;
 }

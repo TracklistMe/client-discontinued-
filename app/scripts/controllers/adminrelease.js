@@ -31,6 +31,101 @@ angular.module('tracklistmeApp')
         $scope.deatachedList = []
         $scope.assignedList = []
         $scope.dropZoneFiles = []
+
+        var trackUploader = $scope.trackUploader = new FileUploader({
+            method: 'POST',
+            url: CONFIG.url + '/labels/' + labelId + '/dropZone/'
+        });
+
+        trackUploader.onAfterAddingFile = function(fileItem) {
+            console.log("fileItem -------------")
+            console.log(fileItem)
+            console.log("trackUploader -------------")
+            console.log(trackUploader);
+            $scope.processCDNNegotiation();
+        }
+        $scope.processCDNNegotiation = function() {
+            console.log("Process CDN NEGOTIATION")
+            for (var i = 0; i < trackUploader.queue.length; i++) {
+                trackUploader.processOne(trackUploader.queue[i]);
+            }
+        }
+
+        trackUploader.processOne = function(fileItem) {
+            var file = fileItem;
+            var fname = file._file.name;
+            var filename = fname.substr(0, (Math.min(fname.lastIndexOf("."), fname.length)));
+            var extension = fname.substr((Math.max(0, fname.lastIndexOf(".")) || Infinity) + 1);
+            console.log(filename);
+            console.log(extension);
+            $http.post(CONFIG.url + '/labels/' + labelId + '/dropZone/createFile/', {
+                filename: filename,
+                extension: extension,
+                size: file.file.size
+            }).success(function(data, status, headers, config) {
+                console.log("DONE")
+
+                /*
+                var formDataArray = [];
+                formDataArray["GoogleAccessId"] = data.GoogleAccessId;
+                formDataArray["signature"] = data.signature;
+                formDataArray["policy"] = data.policy;
+                formDataArray["key"] = data.key;
+                */
+
+                var formDataArray = [{
+                    "GoogleAccessId": data.GoogleAccessId,
+                    "signature": data.signature,
+                    "policy": data.policy,
+                    "key": data.key
+                }]
+                file.url = data.action;
+                file.formData = formDataArray;
+                console.log(file);
+                file.upload();
+
+
+            }).error(function(data, status, headers, config) {
+                // called asynchronously if an error occurs
+                // or server returns response with an error status.
+            });
+        }
+        trackUploader.onProgressItem = function(fileItem, progress) {
+            console.info('onProgressItem', fileItem, progress);
+        };
+        trackUploader.onProgressAll = function(progress) {
+            console.info('onProgressAll', progress);
+        };
+
+        trackUploader.onCompleteItem = function(fileItem, response, status, headers) {
+            console.info('onCompleteItem', fileItem, response, status, headers);
+
+            var fname = fileItem._file.name;
+            var filename = fname.substr(0, (Math.min(fname.lastIndexOf("."), fname.length)));
+            var extension = fname.substr((Math.max(0, fname.lastIndexOf(".")) || Infinity) + 1);
+
+
+            $http.post(CONFIG.url + '/labels/' + labelId + '/dropZone/confirmFile', {
+                filename: filename,
+                extension: extension
+            }).success(function(data, status, headers, config) {
+                console.log(data)
+
+                $scope.selectFileFromDropZone = {
+                    filaName: filename,
+                    extension: extension,
+                    path: 'dropZone/' + labelId + '/' + fname
+                };
+
+            }).error(function(data, status, headers, config) {
+                // called asynchronously if an error occurs
+                // or server returns response with an error status.
+            });
+
+
+            $scope.getDropZoneFiles();
+        };
+
         var uploader = $scope.uploader = new FileUploader({
             url: CONFIG.url + '/labels/' + $scope.labelId + '/dropZone/'
 
@@ -72,7 +167,7 @@ angular.module('tracklistmeApp')
             var file = fileItem;
             var fname = file._file.name;
 
-            var filename = fname.substr(0, (Math.min(fname.lastIndexOf("."), fname.length))) + "_" + Math.floor(Date.now() / 1000);
+            var filename = fname.substr(0, (Math.min(fname.lastIndexOf("."), fname.length)));
             file.newFileName = filename;
             var extension = fname.substr((Math.max(0, fname.lastIndexOf(".")) || Infinity) + 1);
             console.log(filename);
@@ -217,6 +312,8 @@ angular.module('tracklistmeApp')
             for (var i = $scope.release.Tracks.length - 1; i >= 0; i--) {
                 $scope.release.Tracks[i].ReleaseTracks.position = i + 1;
             };
+            console.log("---RELEASE---")
+            console.log($scope.release)
             $http.put(CONFIG.url + '/releases/' + $scope.releaseId, {
                 release: $scope.release
             }).
@@ -277,6 +374,12 @@ angular.module('tracklistmeApp')
         }
         $scope.uplaodSingleTrack = function(index) {
             $scope.open();
+
+        }
+        $scope.uploadToDropZone = function(track) {
+            $scope.selectTrackToChangeFile = track
+
+
 
         }
         $scope.selectFromDropZone = function(track) {
@@ -368,6 +471,17 @@ angular.module('tracklistmeApp')
             for (var i = $scope.release.Tracks.length - 1; i >= 0; i--) {
                 if ($scope.release.Tracks[i].id == trackId) {
                     $scope.editedTrack = $scope.release.Tracks[i];
+                }
+            };
+
+        }
+
+
+        $scope.removeTrack = function(trackId) {
+            for (var i = $scope.release.Tracks.length - 1; i >= 0; i--) {
+                console.log("compare" + $scope.release.Tracks[i].id + " - " + trackId)
+                if ($scope.release.Tracks[i].id == trackId) {
+                    $scope.release.Tracks.splice(i, 1)
                 }
             };
 

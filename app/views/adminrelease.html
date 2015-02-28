@@ -1,6 +1,7 @@
 <div class="container">
+    <!-- MODAL FOR ASSOCIATE A FILE TO A TRACK -->
 
-    <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal fade" id="associateTrackModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
@@ -21,6 +22,30 @@
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-default" data-dismiss="modal">Exit without updating</button>
+                    <button ng-if="selectFileFromDropZone" ng-click="assignDropZoneFileToTrack(selectTrackToChangeFile)" type="button" data-dismiss="modal" class="btn btn-primary">Ok,you still need to save later</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Upload Track(s) to Drop Zone -->
+
+    <div class="modal fade" id="uploadTrackModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span>
+                    </button>
+                    <h4 class="modal-title" id="myModalLabel">Upload to Dropzone</h4>
+                </div>
+                <div class="modal-body">
+                    <label class="myLabel">
+                        <input type="file" nv-file-select="" uploader="trackUploader" />
+                        <span>Upload</span>
+                    </label>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close without changing</button>
                     <button ng-if="selectFileFromDropZone" ng-click="assignDropZoneFileToTrack(selectTrackToChangeFile)" type="button" data-dismiss="modal" class="btn btn-primary">Ok,you still need to save later</button>
                 </div>
             </div>
@@ -78,19 +103,19 @@
                 <div class="col-md-12">
                     <h2> 
                     Tracklist:
-                    </h2> deatachedList {{deatachedList}}
-                    <hr /> assignedList : {{assignedList}}
-                    <hr /> dropZoneFiles: {{dropZoneFiles}}
+                    </h2> Deatached: {{deatachedList}}
+                    <br />assigned: {{assignedList}}
+                    <br /> dropZoneFiles: {{dropZoneFiles}}
                 </div>
-                <div class="col-md-12">
+                <div class="col-md-12 smallFont">
 
                     <button type="button" ng-click="addNewTrack()" class="col-md-12 btn btn-info btn-s">
                         Add New Track
                     </button>
 
-                </div>
+                </div class="smallFont">
 
-                <div class="col-md-12">
+                <div class="col-md-12 smallFont">
                     <ul data-as-sortable="dragControlListeners" data-ng-model="release.Tracks">
                         <li data-ng-repeat="track in release.Tracks" data-as-sortable-item>
                             <div data-as-sortable-item-handle>
@@ -103,13 +128,19 @@
                                     <span ng-if="track.path == null">
                                     {{track.path}}
                                     This track doesn't have a file
-                                    <a ng-click="uplaodSingleTrack($index) ">Upload</a> or
+                                  
+
+                                    <div class="btn btn-primary smallFont" ng-click="uploadToDropZone(track) " data-toggle="modal" data-target="#uploadTrackModal">
+                                        Upload
+                                    </div>
+
+                                    or
                                     <!-- Button trigger modal -->
-<div  class="btn btn-primary " ng-click="selectFromDropZone(track) " data-toggle="modal" data-target="#myModal"
->
- Select from<br /> Dropzone
-</div>
-                                </span>
+                                    <div class="btn btn-primary smallFont" ng-click="selectFromDropZone(track) " data-toggle="modal" data-target="#associateTrackModal">
+                                        Select from
+                                        <br /> Dropzone
+                                    </div>
+                                    </span>
                                 </div>
 
                                 <div class="col-md-3 col-md-offset-1 ">
@@ -127,7 +158,8 @@
                                     Genre:
                                     <br /> ISRC:
                                     <input id="trackTitle " name="trackTitle " type="text " ng-model="track.ISRC " value="{{track.ISRC}} " placeholder="Track ISRC " class="form-control " stop-event>
-                                    <a ng-click="editTrack(track.id) ">Edit</a>
+                                    <button ng-click="editTrack(track.id) ">Edit</button>
+                                    <button ng-click="removeTrack(track.id) ">Remove</button>
 
                                 </div>
 
