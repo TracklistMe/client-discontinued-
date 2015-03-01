@@ -36,7 +36,7 @@ app.config(function($stateProvider, $urlRouterProvider, $authProvider, CONFIG) {
     $stateProvider
         .state('main', {
             url: '/',
-            templateUrl: 'views/preopen.html'
+            templateUrl: 'views/main.html'
         })
         .state('beta', {
             url: '/index',
