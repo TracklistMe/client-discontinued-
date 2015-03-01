@@ -23,7 +23,7 @@ var app = angular.module('tracklistmeApp', [
     'angularFileUpload',
 
 ]).constant("CONFIG", {
-    "url": "http://api.tracklist.me",
+    "url": "http://localhost:3000",
     "imagePath": "image"
 })
 
@@ -34,11 +34,11 @@ var app = angular.module('tracklistmeApp', [
 app.config(function($stateProvider, $urlRouterProvider, $authProvider, CONFIG) {
 
     $stateProvider
-        .state('main', {
+        .state('pre', {
             url: '/',
             templateUrl: 'views/preopen.html'
         })
-        .state('beta', {
+        .state('main', {
             url: '/index',
             templateUrl: 'views/main.html'
         })
