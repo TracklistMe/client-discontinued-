@@ -22,6 +22,9 @@ angular.module('tracklistmeApp')
             },
             formData: []
         });
+
+
+        
         uploader.onBeforeUploadItem = function(item) {
             item.formData.push({
                 resize: {
