@@ -25,6 +25,7 @@
     <link rel="stylesheet" href="styles/productGrid.css">
     <link rel="stylesheet" href="styles/search.css">
     <link rel="stylesheet" href="styles/sortableList.css">
+        <link rel="stylesheet" href="styles/storeTest.css">
     <!-- fonts -->
 
     <!-- endbuild -->
@@ -181,7 +182,7 @@
     ga('create', 'UA-XXXXX-X');
     ga('send', 'pageview');
     </script>
-
+    <script type="text/javascript" src="https://js.stripe.com/v2/"></script>
     <!-- build:js(.) scripts/oldieshim.js -->
     <!--[if lt IE 9]>
     <script src="bower_components/es5-shim/es5-shim.js"></script>
@@ -207,6 +208,8 @@
     <script src="bower_components/ng-file-upload/angular-file-upload.js"></script>
     <script src="bower_components/angular-file-upload/angular-file-upload.js"></script>
     <script src="bower_components/angular-bootstrap/ui-bootstrap-tpls.js"></script>
+    <script src="bower_components/stripe-angular/stripe-angular.js"></script>
+    <script src="bower_components/angular-stripe-checkout/angular-stripe-checkout.js"></script>
     <!-- endbower -->
     <!-- endbuild -->
 
@@ -243,7 +246,9 @@
     <script src="bower_components/nativesortable/nativesortable.js"></script>
     <script type="text/javascript" src="bower_components/ng-sortable/dist/ng-sortable.min.js"></script>
     <link rel="stylesheet" type="text/css" href="bower_components/ng-sortable/dist/ng-sortable.min.css">
+     
 
+    <script src="scripts/controllers/samplepacks.js"></script>
     <!-- endbuild -->
 </body>
 

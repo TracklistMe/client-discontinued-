@@ -20,9 +20,9 @@ var app = angular.module('tracklistmeApp', [
     'satellizer',
     'mgcrea.ngStrap',
     'angularFileUpload',
-
+    'stripe.checkout'
 ]).constant("CONFIG", {
-    "url": "http://ap.tracklist.me:3000",
+    "url": "http://api.tracklist.me:3000",
     "imagePath": "image"
 })
 
@@ -30,7 +30,11 @@ var app = angular.module('tracklistmeApp', [
 
 
 
-app.config(function($stateProvider, $urlRouterProvider, $authProvider, CONFIG) {
+app.config(function($stateProvider, $urlRouterProvider, $authProvider,StripeCheckoutProvider, CONFIG) {
+
+     StripeCheckoutProvider.defaults({
+            key: "pk_test_klNEMWHl4SxLWPfi1JAt9tlu"
+          });
 
     $stateProvider
         .state('main', {
@@ -38,13 +42,22 @@ app.config(function($stateProvider, $urlRouterProvider, $authProvider, CONFIG) {
             templateUrl: 'views/main.html'
         })
         .state('beta', {
-            url: '/index',
-            templateUrl: 'views/main.html'
+            url: '/beta',
+            templateUrl: 'views/mainBeta.html'
         })
         .state('login', {
             url: '/login',
             templateUrl: 'views/login.html',
             controller: 'LoginCtrl'
+        })
+        .state('purchaseExperiment', {
+            url: '/samplePacks',
+            templateUrl: 'views/samplepack.html',
+            controller: 'SamplepacksCtrl',
+            resolve: {
+                // checkout.js isn't fetched until this is resolved.
+                stripe: StripeCheckoutProvider.load
+              }
         })
         .state('signup', {
             url: '/signup',
