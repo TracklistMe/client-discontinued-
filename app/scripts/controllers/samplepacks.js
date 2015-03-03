@@ -8,7 +8,7 @@
  * Controller of the tracklistmeApp
  */
 angular.module('tracklistmeApp')
-  .controller('SamplepacksCtrl', function ($scope, $http, CONFIG) {
+  .controller('SamplepacksCtrl', function ($scope, $http, CONFIG, $location,$window) {
   			$scope.value = null;
   			$scope.currency = "";
   			$scope.idproduct = ""
@@ -45,9 +45,10 @@ angular.module('tracklistmeApp')
 	            }).success(function(data, status, headers, config) {
 	                
 
-	                console.log("DONE")
-	                console.log(data)
-
+	               //$location.path(data);
+	         
+					$window.open(data, '_self', '');
+					
 	                /*
 	                var formDataArray = [];
 	                formDataArray["GoogleAccessId"] = data.GoogleAccessId;
