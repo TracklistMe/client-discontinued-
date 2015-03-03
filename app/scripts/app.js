@@ -33,7 +33,7 @@ var app = angular.module('tracklistmeApp', [
 app.config(function($stateProvider, $urlRouterProvider, $authProvider,StripeCheckoutProvider, CONFIG) {
 
      StripeCheckoutProvider.defaults({
-            key: "pk_test_klNEMWHl4SxLWPfi1JAt9tlu"
+            key: "pk_live_2qm5jxlroBXmDBlsRUsfDpob"
           });
 
     $stateProvider
