@@ -29,6 +29,7 @@ angular.module('tracklistmeApp')
 		    }
 
 		   $scope.doCheckoutSimple = function(token) {
+		   	console.log(token)
 	  		var email = token.email;
 		   	var token = token.id;
 		   	var value = $scope.value;
