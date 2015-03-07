@@ -12,6 +12,7 @@ var app = angular.module('tracklistmeApp', [
     'ngAnimate',
     'ui.router',
     'ui.bootstrap',
+    'ui.sortable',
     'ngCookies',
     'ngResource',
     'ngRoute',
@@ -22,7 +23,7 @@ var app = angular.module('tracklistmeApp', [
     'angularFileUpload',
     'stripe.checkout'
 ]).constant("CONFIG", {
-    "url": "https://tracklist.me/api",
+    "url": "http://localhost:3000",
     "imagePath": "image"
 })
 
