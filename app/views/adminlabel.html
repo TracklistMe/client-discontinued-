@@ -38,8 +38,15 @@
                 </div>
 
                 <a ng-click="adminRelease(release.id)">
-                    <img class="col-md-12" ng-src="{{serverURL}}/images/{{release.cover}}" /> {{release.catalogNumber}}
+                    <img class="col-md-12" ng-src="{{serverURL}}/images/{{release.cover}}" />
+                     <div class="releaseStatus">
+                        status: {{release.status}}
+                    </div>
+                 {{release.catalogNumber}}
                 </a>
+
+                 
+
             </div>
         </div>
     </div>

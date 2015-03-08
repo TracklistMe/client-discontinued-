@@ -370,6 +370,25 @@ input:focus:-ms-input-placeholder {
     background-color: #f0fdf7;
     border-color: #c4f88c;
 }
+
+.activeBadge{
+    position: absolute;
+    z-index: 2;
+    color: #fff;
+    margin-left: 17px;
+}
+.releaseStatus{
+   padding: 2px;
+    position: absolute;
+    z-index: 2;
+    margin-left: 17px;
+    bottom: 23px;
+    height: 20px;
+    background-color: #fc0;
+    -webkit-border-radius: 5px;
+    -moz-border-radius: 5px;
+    border-radius: 5px;
+}
 /* DEBUG  */
 
 body::before {
