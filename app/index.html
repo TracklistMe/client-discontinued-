@@ -1,252 +1,93 @@
 <!DOCTYPE html>
-<html class="no-js">
+<html lang="en" data-ng-app="app">
 
 <head>
-    <meta charset="utf-8">
-    <title></title>
-    <meta name="description" content="">
-    <meta name="viewport" content="width=device-width">
-    <!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
-    <!-- build:css(.) styles/vendor.css -->
-    <!-- bower:css   -->
-    <link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.css" />
-    <link rel="stylesheet" href="bower_components/angular-motion/dist/angular-motion.css" />
-    <link rel="stylesheet" href="bower_components/ng-sortable/dist/ng-sortable.css" />
-    <!-- endbower -->
-    <!-- endbuild -->
-    <!-- build:css(.tmp) styles/main.css -->
-    <link rel="stylesheet" href="styles/menuStyle.css">
-    <link rel="stylesheet" href="styles/footer.css">
-    <link rel="stylesheet" href="styles/main.css">
-    <link rel="stylesheet" href="styles/login.css">
-    <link rel="stylesheet" href="styles/styles.css">
-    <link rel="stylesheet" href="styles/dropImageProfile.css">
-    <link rel="stylesheet" href="styles/checkout.css">
-    <link rel="stylesheet" href="styles/productGrid.css">
-    <link rel="stylesheet" href="styles/search.css">
-    <link rel="stylesheet" href="styles/sortableList.css">  
-    <!-- fonts -->
-
-    <!-- endbuild -->
-    <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
+    <meta charset="utf-8" />
+    <title>Tracklist.me</title>
+    <meta name="description" content="Tracklist.me - Your next music store " />
+    <meta name="keywords" content="Music, Dj, Producers, Electronic Music" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+    <link rel="stylesheet" href="../bower_components/bootstrap/dist/css/bootstrap.css" type="text/css" />
+    <link rel="stylesheet" href="../bower_components/animate.css/animate.css" type="text/css" />
+    <link rel="stylesheet" href="../bower_components/font-awesome/css/font-awesome.min.css" type="text/css" />
+    <link rel="stylesheet" href="../bower_components/simple-line-icons/css/simple-line-icons.css" type="text/css" />
+    <link rel="stylesheet" href="css/font.css" type="text/css" />
+    <link rel="stylesheet" href="css/app.css" type="text/css" />
+    <link rel="apple-touch-icon" sizes="57x57" href="favicon/apple-icon-57x57.png">
+    <link rel="apple-touch-icon" sizes="60x60" href="favicon/apple-icon-60x60.png">
+    <link rel="apple-touch-icon" sizes="72x72" href="favicon/apple-icon-72x72.png">
+    <link rel="apple-touch-icon" sizes="76x76" href="favicon/apple-icon-76x76.png">
+    <link rel="apple-touch-icon" sizes="114x114" href="favicon/apple-icon-114x114.png">
+    <link rel="apple-touch-icon" sizes="120x120" href="favicon/apple-icon-120x120.png">
+    <link rel="apple-touch-icon" sizes="144x144" href="favicon/apple-icon-144x144.png">
+    <link rel="apple-touch-icon" sizes="152x152" href="favicon/apple-icon-152x152.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="favicon/apple-icon-180x180.png">
+    <link rel="icon" type="image/png" sizes="192x192" href="favicon/android-icon-192x192.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="favicon/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="96x96" href="favicon/favicon-96x96.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="favicon/favicon-16x16.png">
+    <link rel="manifest" href="favicon/manifest.json">
+    <meta name="msapplication-TileColor" content="#ffffff">
+    <meta name="msapplication-TileImage" content="favicon/ms-icon-144x144.png">
+    <meta name="theme-color" content="#ffffff">
 
 </head>
 
-<body class="Site" ng-app="tracklistmeApp">
-    <!--[if lt IE 7]>
-      <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
-    <![endif]-->
- 
-    <header ng-controller="NavbarCtrl">
-
-        <div class="container-fluid topMenu ">
-
-            <div class="row">
-                <a href="#/">
-                    <div class="col-xs-12 col-sm-6 col-md-3 col-lg-3 logo">
-                        <h1 class="sniglet800">Tracklist.me</h1>
-                    </div>
-                </a>
-
-                <div class="col-xs-12 col-sm-6 col-md-3 col-md-push-6 col-lg-3 text-right  ">
-                    <div class="nav navbar-nav navbar-right ">
-
-                        <div ng-if="!isAuthenticated()">
-                            <a href="/#/signup">
-                                <div class="montserrat text-center buttonStyle">Sign up</div>
-                            </a>
-                            <a href="/#/login">
-                                <div class="buttonStyle montserrat text-center">Login</div>
-                            </a>
-                        </div>
-                        <div ng-if="isAuthenticated()">
-                            <div ng-click="clickSearchButton()" class="floatLeft montserrat text-center cartIcon handCursor">
-                                <div class="iconCart">
-                                    <i class="fa fa-search"></i>
-                                </div>
-                            </div>
-                            <a href="/#/checkout">
-                                <div class="floatLeft montserrat text-center cartIcon handCursor">
-                                    <div class="cartCounter">2</div>
-                                    <div class="iconCart">
-                                        <i class="fa fa-shopping-cart"></i>
-                                    </div>
-                                </div>
-                            </a> 
-                            <div class="floatLeft">
-                                <img ng-src="{{user.avatar}}" ng-click="$parent.showAccountDropDown = !$parent.showAccountDropDown" class="  img-circle special-img">
-                            </div>
-
-                        </div>
-
-                        <span ng-click="$parent.showAccountDropDown = !$parent.showAccountDropDown" class=" dropDownNavProfile" ng-if="isAuthenticated() && showAccountDropDown">
-                            <a href="/#/logout"><button class="btn btn-danger">Logout</button></a>  
-                            <a href="/#/profile"><button class="btn btn-warning">Profile</button></a>
-                        </span>
-                    </div>
-                </div>
-                <div class="col-xs-12 col-sm-12 col-md-6 col-md-pull-3 col-lg-6 text-center"> </div>
-            </div>
-        </div>
-<!--
-        <div class="midMenu text-center montserrat">
-            MENU 1 MENU 2 MENU 3
-        </div>
-    -->
-    </header>
- 
-    <!-- end hEader -->
-
-    <!-- search Area -->
-    <div ng-controller="SearchCtrl" class="container">
-
-        <div id="morphsearch" class="morphsearch" ng-class="{'open':searchOpen}">
-            <form class="morphsearch-form">
-                <input class="morphsearch-input-style" ng-class="{'open':searchOpen}" type="search" ng-model="searchString" focusable="{{isSelected}}" ng-focus="focusReport()" ng-blur="blurReport()" placeholder="" />
-                <button class="morphsearch-submit" type="submit">Search</button>
-            </form>
-            <div class="morphsearch-content">
-                <div ng-if="foundArtists.length > 0" class="dummy-column">
-                    <h2>Artists</h2>
-                    <a ng-repeat="artist in foundArtists" class="dummy-media-object" href="http://twitter.com/SaraSoueidan">
-                        <img class="round" src="{{serverURL}}/images/{{artist.avatar}}" alt="{{artist.displayName}}" />
-                        <h3>{{artist.displayName}}</h3>
-                    </a>
-                </div>
-                <!--
-                <div class="dummy-column">
-                    <h2>Releases</h2>
-                    <a class="dummy-media-object" href="http://tympanus.net/codrops/2014/08/05/page-preloading-effect/">
-                        <img src="img/thumbs/PagePreloadingEffect.png" alt="PagePreloadingEffect" />
-                        <h3>Page Preloading Effect</h3>
-                    </a>
-                </div>
-                -->
-                <div ng-if="foundLabels.length > 0" class="dummy-column">
-                    <h2>Labels</h2>
-                    <a ng-repeat="label in foundLabels" class="dummy-media-object" href="">
-                        <img class="round" src="{{serverURL}}/images/{{label.logo}}" alt="TooltipStylesInspiration" />
-                        <h3>{{label.displayName}}</h3>
-                    </a>
-
-                </div>
-            </div>
-            <!-- /morphsearch-content -->
-            <span ng-click="closeSearch()" class="morphsearch-close"></span>
-        </div>
-        <!-- /morphsearch -->
-
-        <div class="overlay"></div>
-    </div>
-    <!-- /container -->
-    <!-- end search area -->
-
-    <!-- begin main corp -->
-    <div ui-view class="Site-content fadeZoom Aligner">
-
-    </div>
-    <!-- end main corp -->
-
-    <footer class="footer text-center">Proudly made in London, the new Berlin.</footer>
-
-    <script type="text/javascript">
-    WebFontConfig = {
-        google: {
-            families: ['Montserrat:400,700:latin', 'Sniglet:400,800:latin', 'Quicksand:300,400,700:latin']
-        }
-    };
-    (function() {
-        var wf = document.createElement('script');
-        wf.src = ('https:' == document.location.protocol ? 'https' : 'http') +
-            '://ajax.googleapis.com/ajax/libs/webfont/1/webfont.js';
-        wf.type = 'text/javascript';
-        wf.async = 'true';
-        var s = document.getElementsByTagName('script')[0];
-        s.parentNode.insertBefore(wf, s);
-    })();
-    </script>
-
-    <!-- Google Analytics: change UA-XXXXX-X to be your site's ID -->
-    
-    <script type="text/javascript" src="https://js.stripe.com/v2/"></script>
-    <!-- build:js(.) scripts/oldieshim.js -->
-    <!--[if lt IE 9]>
-    <script src="bower_components/es5-shim/es5-shim.js"></script>
-    <script src="bower_components/json3/lib/json3.js"></script>
-    <![endif]-->
-    <!-- endbuild -->
-
-    <!-- build:js(.) scripts/vendor.js -->
-    <!-- bower:js -->
-    <script src="bower_components/jquery/dist/jquery.js"></script>
-    <script src="bower_components/angular/angular.js"></script>
-    <script src="bower_components/bootstrap/dist/js/bootstrap.js"></script>
-    <script src="bower_components/angular-bootstrap/ui-bootstrap-tpls.js"></script>
-    <script src="bower_components/angular-animate/angular-animate.js"></script>
-    <script src="bower_components/angular-cookies/angular-cookies.js"></script>
-    <script src="bower_components/angular-resource/angular-resource.js"></script>
-    <script src="bower_components/angular-route/angular-route.js"></script>
-    <script src="bower_components/angular-sanitize/angular-sanitize.js"></script>
-    <script src="bower_components/angular-touch/angular-touch.js"></script>
-    <script src="bower_components/satellizer/satellizer.js"></script>
-    <script src="bower_components/angular-ui-router/release/angular-ui-router.js"></script>
-    <script src="bower_components/angular-strap/dist/angular-strap.js"></script>
-    <script src="bower_components/angular-strap/dist/angular-strap.tpl.js"></script>
-    <script src="bower_components/ng-file-upload/angular-file-upload.js"></script>
-    <script src="bower_components/angular-file-upload/angular-file-upload.js"></script>
-    <script src="bower_components/ng-sortable/dist/ng-sortable.js"></script>
-    <script src="bower_components/stripe-angular/stripe-angular.js"></script>
-    <script src="bower_components/angular-stripe-checkout/angular-stripe-checkout.js"></script>
-    <!-- endbower -->
-    <!-- endbuild -->
-
-    <!-- build:js({.tmp,app}) scripts/scripts.js -->
-    <script src="scripts/classie.js"></script>
-    <script src="scripts/app.js"></script>
-    <script src="scripts/controllers/main.js"></script>
-    <script src="scripts/controllers/about.js"></script>
-    <script src="scripts/controllers/admin.js"></script>
-    <script src="scripts/controllers/admincompanies.js"></script>
-    <script src="scripts/directives/passwordstrength.js"></script>
-    <script src="scripts/controllers/navbar.js"></script>
-    <script src="scripts/controllers/signup.js"></script>
-    <script src="scripts/controllers/login.js"></script>
-    <script src="scripts/controllers/logout.js"></script>
-    <script src="scripts/controllers/profile.js"></script>
-    <script src="scripts/services/account.js"></script>
-    <script src="scripts/controllers/adminlabels.js"></script>
-    <script src="scripts/controllers/adminlabel.js"></script>
-    <script src="scripts/controllers/admincompany.js"></script>
-    <script src="scripts/filters/bytes.js"></script>
-    <script src="scripts/controllers/adminrelease.js"></script>
-    <script src="scripts/controllers/adminartist.js"></script>
-    <script src="scripts/controllers/adminartists.js"></script>
-    <script src="scripts/directives/backgroundimage.js"></script>
-    <script src="scripts/controllers/checkout.js"></script>
-    <script src="scripts/controllers/search.js"></script>
-    <script src="scripts/directives/search.js"></script>
-    <script src="scripts/controllers/label.js"></script>
-
-  
-    <script type="text/javascript" src="bower_components/ng-sortable/dist/ng-sortable.min.js"></script>
-    <link rel="stylesheet" type="text/css" href="bower_components/ng-sortable/dist/ng-sortable.min.css">
-     
-
-    <script src="scripts/controllers/samplepacks.js"></script>
-    <!-- endbuild -->
-
-    <script>
-  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
-
-  ga('create', 'UA-60336760-1', 'auto');
-  ga('send', 'pageview');
-
-</script>
+<body ng-controller="AppCtrl">
+    <div class="app" id="app" ng-class="{'app-header-fixed':app.settings.headerFixed, 'app-aside-fixed':app.settings.asideFixed, 'app-aside-folded':app.settings.asideFolded, 'app-aside-dock':app.settings.asideDock, 'container':app.settings.container}" ui-view></div>
 
 
+    <!-- jQuery -->
+    <script src="../bower_components/jquery/dist/jquery.min.js"></script>
+
+    <!-- Angular -->
+    <script src="../bower_components/angular/angular.js"></script>
+
+    <script src="../bower_components/angular-animate/angular-animate.js"></script>
+    <script src="../bower_components/angular-cookies/angular-cookies.js"></script>
+    <script src="../bower_components/angular-resource/angular-resource.js"></script>
+    <script src="../bower_components/angular-sanitize/angular-sanitize.js"></script>
+    <script src="../bower_components/angular-touch/angular-touch.js"></script>
+
+    <script src="../bower_components/angular-ui-router/release/angular-ui-router.js"></script>
+    <script src="../bower_components/ngstorage/ngStorage.js"></script>
+    <script src="../bower_components/angular-ui-utils/ui-utils.js"></script>
+
+    <script src="../bower_components/satellizer/satellizer.js"></script>
+
+     <script src="../bower_components/angular-smart-table/dist/smart-table.min.js"> </script>
+    <!-- bootstrap -->
+    <script src="../bower_components/angular-bootstrap/ui-bootstrap-tpls.js"></script>
+    <!-- lazyload -->
+    <script src="../bower_components/oclazyload/dist/ocLazyLoad.js"></script>
+    <!-- translate -->
+    <script src="../bower_components/angular-translate/angular-translate.js"></script>
+    <script src="../bower_components/angular-translate-loader-static-files/angular-translate-loader-static-files.js"></script>
+    <script src="../bower_components/angular-translate-storage-cookie/angular-translate-storage-cookie.js"></script>
+    <script src="../bower_components/angular-translate-storage-local/angular-translate-storage-local.js"></script>
+
+    <!-- App -->
+    <script src="js/app.js"></script>
+    <script src="js/config.js"></script>
+    <script src="js/config.lazyload.js"></script>
+    <script src="js/config.auth.js"></script>
+    <script src="js/config.router.js"></script>
+    <script src="js/main.js"></script>
+    <script src="js/services/ui-load.js"></script>
+    <script src="js/services/account.js"></script>
+    <script src="js/filters/fromNow.js"></script>
+    <script src="js/directives/setnganimate.js"></script>
+    <script src="js/directives/ui-butterbar.js"></script>
+    <script src="js/directives/ui-focus.js"></script>
+    <script src="js/directives/ui-fullscreen.js"></script>
+    <script src="js/directives/ui-jq.js"></script>
+    <script src="js/directives/ui-module.js"></script>
+    <script src="js/directives/ui-nav.js"></script>
+    <script src="js/directives/ui-scroll.js"></script>
+    <script src="js/directives/ui-shift.js"></script>
+    <script src="js/directives/ui-toggleclass.js"></script>
+    <script src="js/controllers/bootstrap.js"></script>
+    <!-- Lazy loading -->
 </body>
 
 </html>
