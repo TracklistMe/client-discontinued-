@@ -13,7 +13,7 @@
         <label class="col-lg-2 control-label">To:</label>
         <div class="col-lg-8">
           <select ui-jq="chosen" data-placeholder="Choose email" class="form-control" multiple ng-model="mail.to">
-            <option ng-repeat="list in tolist" value="{{list.email}}">{{list.name}} <{{list.email}}></option>
+            <option ng-repeat="list in tolist" value="{{list.email}}">{{list.name}} {{list.email}}</option>
           </select>
         </div>
       </div>
