@@ -44,6 +44,11 @@ label {
   font-weight: normal;
 }
 
+label.uploadLabel input[type="file"] {
+    position: fixed;
+    top: -1000px;
+}
+
 small,
 .small {
   font-size: 13px;
@@ -1882,6 +1887,22 @@ fieldset[disabled] .btn-success:active,
 fieldset[disabled] .btn-success.active {
   background-color: #27c24c;
   border-color: #27c24c;
+}
+
+.twitter {
+  color: #ffffff !important;
+  background-color: #00aced;
+  border-color: #00aced;
+}
+.facebook {
+  color: #ffffff !important;
+  background-color: #3b5998;
+  border-color: #3b5998;
+}
+.googleplus {
+  color: #ffffff !important;
+  background-color: #dd4b39;
+  border-color: #dd4b39;
 }
 
 .btn-info {
