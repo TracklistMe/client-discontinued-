@@ -64,7 +64,6 @@
     <div class="app" id="app" ng-class="{'app-header-fixed':app.settings.headerFixed, 'app-aside-fixed':app.settings.asideFixed, 'app-aside-folded':app.settings.asideFolded, 'app-aside-dock':app.settings.asideDock, 'container':app.settings.container}" ui-view></div>
 
     <!-- build:js(.) js/vendor.js -->
-    <!-- bower:js -->
     <script src="bower_components/es5-shim/es5-shim.js"></script>
     <script src="bower_components/jquery/dist/jquery.js"></script>
     <script src="bower_components/angular/angular.js"></script>
@@ -98,10 +97,10 @@
     <script src="bower_components/oclazyload/dist/ocLazyLoad.min.js"></script>
     <script src="bower_components/textAngular/dist/textAngular.min.js"></script>
     <script src="bower_components/venturocket-angular-slider/build/angular-slider.js"></script>
-    <script src="bower_components/videogular/videogular.js"></script>
-    <script src="bower_components/videogular-controls/controls.js"></script>
-    <script src="bower_components/videogular-buffering/buffering.js"></script>
-    <script src="bower_components/videogular-overlay-play/overlay-play.js"></script>
+    <script src="bower_components/videogular/videogular.min.js "></script>
+    <script src="bower_components/videogular-controls/controls.min.js"></script>
+    <script src="bower_components/videogular-buffering/buffering.min.js"></script>
+    <script src="bower_components/videogular-overlay-play/overlay-play.min.js"></script>
     <script src="bower_components/videogular-poster/poster.js"></script>
     <script src="bower_components/videogular-ima-ads/ima-ads.js"></script>
     <script src="bower_components/bootstrap-filestyle/src/bootstrap-filestyle.js"></script>
@@ -121,11 +120,10 @@
     <script src="bower_components/bootstrap-daterangepicker/daterangepicker.js"></script>
     <script src="bower_components/bootstrap-tagsinput/dist/bootstrap-tagsinput.js"></script>
     <script src="bower_components/satellizer/satellizer.js"></script>
-    <!-- endbower -->
     <!-- endbuild -->
 
     <!-- build:js({.tmp,app}) js/scripts.js -->
-    <!-- App -->
+  
     <script src="js/app.js"></script>
     <script src="js/config.js"></script>
     <script src="js/config.lazyload.js"></script>
@@ -146,7 +144,8 @@
     <script src="js/directives/ui-shift.js"></script>
     <script src="js/directives/ui-toggleclass.js"></script>
     <script src="js/controllers/bootstrap.js"></script>
-        <!-- endbuild -->
+    <script src="js/controllers/headerMusic.js"></script>
+    <!-- endbuild -->
     <!-- Lazy loading -->
 </body>
 
