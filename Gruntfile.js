@@ -23,6 +23,8 @@ module.exports = function(grunt) {
         app: require('./bower.json').appPath || 'app',
         dist: 'dist'
     };
+    grunt.loadNpmTasks('grunt-bower-install');
+
     grunt.loadNpmTasks('grunt-nodemon');
     grunt.loadNpmTasks('grunt-exec');
     // Define the configuration for all the tasks
@@ -175,6 +177,29 @@ module.exports = function(grunt) {
             }
         },
 
+        bowerInstall: {
+
+            target: {
+
+                // Point to the files that should be updated when 
+                // you run `grunt bower-install` 
+                src: [
+                    'app/{,*/}*.*', // .html support... 
+
+                ],
+
+                // Optional: 
+                // --------- 
+                cwd: '',
+                dependencies: true,
+                devDependencies: true,
+                exclude: [],
+                fileTypes: {},
+                ignorePath: '',
+                overrides: {}
+            }
+        },
+
         // Renames files for browser caching purposes
         filerev: {
             dist: {
@@ -315,7 +340,8 @@ module.exports = function(grunt) {
                         '*.html',
                         'tpl/{,*/}*.html',
                         'img/{,*/}*.{webp}',
-                        'fonts/{,*/}*.*'
+                        'fonts/{,*/}*.*',
+                        'l10n/*'
                     ]
                 }, {
                     expand: true,
