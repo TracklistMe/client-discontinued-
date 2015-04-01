@@ -20,7 +20,7 @@ module.exports = {
             'bower_components/oclazyload/dist/ocLazyLoad.js',
 
             'bower_components/angular-smart-table/dist/smart-table.min.js',
-            'bower_components/satellizer/satellizer.min.js',
+            'bower_components/satellizer/satellizer.js',
 
             'bower_components/angular-translate/angular-translate.js',
             'bower_components/angular-translate-loader-static-files/angular-translate-loader-static-files.js',
@@ -33,7 +33,7 @@ module.exports = {
             'src/js/filters/*.js',
             'src/js/controllers/bootstrap.js'
         ],
-        dest: 'angular/js/app.src.js'
+        dest: 'angular/js/app.min.js'
     },
     html: {
         src: [
