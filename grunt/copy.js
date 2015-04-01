@@ -52,7 +52,7 @@ module.exports = {
         }, {
             expand: true,
             src: "**",
-            cwd: 'bower_components/Simple-Line-Icons/fonts',
+            cwd: 'bower_components/simple-line-icons/fonts',
             dest: "angular/fonts"
         }, {
             expand: true,
