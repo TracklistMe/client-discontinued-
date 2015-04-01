@@ -101,6 +101,7 @@
     "flot.tooltip": "~0.8.4",
     "flot.orderbars": "*",
     "bootstrap-daterangepicker": "~1.3.17",
-    "bootstrap-tagsinput": "~0.4.2"
+    "bootstrap-tagsinput": "~0.4.2",
+    "satellizer": "~0.9.4"
   }
 }
