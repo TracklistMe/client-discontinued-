@@ -63,7 +63,7 @@ module.exports = function(grunt) {
                 files: [
                     '<%= yeoman.app %>/{,*/}*.html',
                     '.tmp/styles/{,*/}*.css',
-                    '<%= yeoman.app %>/img/{,*/}*.{png,jpg,jpeg,gif,webp,svg}'
+                    '<%= yeoman.app %>/images/{,*/}*.{png,jpg,jpeg,gif,webp,svg}'
                 ]
             }
         },
@@ -126,7 +126,7 @@ module.exports = function(grunt) {
             all: {
                 src: [
                     'Gruntfile.js',
-                    '<%= yeoman.app %>/js/{,*/}*.js'
+                    '<%= yeoman.app %>/scripts/{,*/}*.js'
                 ]
             },
             test: {
@@ -179,9 +179,9 @@ module.exports = function(grunt) {
         filerev: {
             dist: {
                 src: [
-                    '<%= yeoman.dist %>/js/{,*/}*.js',
+                    '<%= yeoman.dist %>/scripts/{,*/}*.js',
                     '<%= yeoman.dist %>/styles/{,*/}*.css',
-                    '<%= yeoman.dist %>/img/{,*/}*.{png,jpg,jpeg,gif,webp,svg}',
+                    '<%= yeoman.dist %>/images/{,*/}*.{png,jpg,jpeg,gif,webp,svg}',
                     '<%= yeoman.dist %>/styles/fonts/*'
                 ]
             }
@@ -191,9 +191,9 @@ module.exports = function(grunt) {
         // concat, minify and revision files. Creates configurations in memory so
         // additional tasks can operate on them
         useminPrepare: {
-            html: 'app/index.html',
+            html: '<%= yeoman.app %>/index.html',
             options: {
-                dest: 'dist/',
+                dest: '<%= yeoman.dist %>',
                 flow: {
                     html: {
                         steps: {
@@ -211,7 +211,7 @@ module.exports = function(grunt) {
             html: ['<%= yeoman.dist %>/{,*/}*.html'],
             css: ['<%= yeoman.dist %>/styles/{,*/}*.css'],
             options: {
-                assetsDirs: ['<%= yeoman.dist %>', '<%= yeoman.dist %>/img']
+                assetsDirs: ['<%= yeoman.dist %>', '<%= yeoman.dist %>/images']
             }
         },
 
@@ -219,35 +219,35 @@ module.exports = function(grunt) {
         // By default, your `index.html`'s <!-- Usemin block --> will take care of
         // minification. These next options are pre-configured if you do not wish
         // to use the Usemin blocks.
-        cssmin: {
-            dist: {
-                files: {
-                    '<%= yeoman.dist %>/styles/main.css': [
-                        '.tmp/styles/{,*/}*.css'
-                    ]
-                }
-            }
-        },
-        uglify: {
-            dist: {
-                files: {
-                    '<%= yeoman.dist %>/js/scripts.js': [
-                        '.tmp/concat/js/scripts.js'
-                    ]
-                }
-            }
-        },
-        concat: {
-            dist: {}
-        },
+        // cssmin: {
+        //   dist: {
+        //     files: {
+        //       '<%= yeoman.dist %>/styles/main.css': [
+        //         '.tmp/styles/{,*/}*.css'
+        //       ]
+        //     }
+        //   }
+        // },
+        // uglify: {
+        //   dist: {
+        //     files: {
+        //       '<%= yeoman.dist %>/scripts/scripts.js': [
+        //         '<%= yeoman.dist %>/scripts/scripts.js'
+        //       ]
+        //     }
+        //   }
+        // },
+        // concat: {
+        //   dist: {}
+        // },
 
         imagemin: {
             dist: {
                 files: [{
                     expand: true,
-                    cwd: '<%= yeoman.app %>/img',
+                    cwd: '<%= yeoman.app %>/images',
                     src: '{,*/}*.{png,jpg,jpeg,gif}',
-                    dest: '<%= yeoman.dist %>/img'
+                    dest: '<%= yeoman.dist %>/images'
                 }]
             }
         },
@@ -256,9 +256,9 @@ module.exports = function(grunt) {
             dist: {
                 files: [{
                     expand: true,
-                    cwd: '<%= yeoman.app %>/img',
+                    cwd: '<%= yeoman.app %>/images',
                     src: '{,*/}*.svg',
-                    dest: '<%= yeoman.dist %>/img'
+                    dest: '<%= yeoman.dist %>/images'
                 }]
             }
         },
@@ -275,7 +275,7 @@ module.exports = function(grunt) {
                 files: [{
                     expand: true,
                     cwd: '<%= yeoman.dist %>',
-                    src: ['*.html', 'tpl/{,*/}*.html'],
+                    src: ['*.html', 'views/{,*/}*.html'],
                     dest: '<%= yeoman.dist %>'
                 }]
             }
@@ -287,9 +287,9 @@ module.exports = function(grunt) {
             dist: {
                 files: [{
                     expand: true,
-                    cwd: '.tmp/concat/js',
+                    cwd: '.tmp/concat/scripts',
                     src: ['*.js', '!oldieshim.js'],
-                    dest: '.tmp/concat/js'
+                    dest: '.tmp/concat/scripts'
                 }]
             }
         },
@@ -313,14 +313,14 @@ module.exports = function(grunt) {
                         '*.{ico,png,txt}',
                         '.htaccess',
                         '*.html',
-                        'tpl/{,*/}*.html',
-                        'img/{,*/}*.{webp}',
+                        'views/{,*/}*.html',
+                        'images/{,*/}*.{webp}',
                         'fonts/{,*/}*.*'
                     ]
                 }, {
                     expand: true,
-                    cwd: '.tmp/img',
-                    dest: '<%= yeoman.dist %>/img',
+                    cwd: '.tmp/images',
+                    dest: '<%= yeoman.dist %>/images',
                     src: ['generated/*']
                 }, {
                     expand: true,
@@ -425,8 +425,6 @@ module.exports = function(grunt) {
         'clean:dist',
         'wiredep',
         'useminPrepare',
-
-
         'concurrent:dist',
         'autoprefixer',
         'concat',
@@ -438,7 +436,6 @@ module.exports = function(grunt) {
         'filerev',
         'usemin',
         'htmlmin'
-
     ]);
 
     grunt.registerTask('commit', [
