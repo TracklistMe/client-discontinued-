@@ -4,7 +4,7 @@
 },removeAttr:function(a,b){var c,d,e=0,f=b&&b.match(E);if(f&&1===a.nodeType)while(c=f[e++])d=n.propFix[c]||c,n.expr.match.bool.test(c)&&(a[d]=!1),a.removeAttribute(c)},attrHooks:{type:{set:function(a,b){if(!k.radioValue&&"radio"===b&&n.nodeName(a,"input")){var c=a.value;return a.setAttribute("type",b),c&&(a.value=c),b}}}}}),Zb={set:function(a,b,c){return b===!1?n.removeAttr(a,c):a.setAttribute(c,c),c}},n.each(n.expr.match.bool.source.match(/\w+/g),function(a,b){var c=$b[b]||n.find.attr;$b[b]=function(a,b,d){var e,f;return d||(f=$b[b],$b[b]=e,e=null!=c(a,b,d)?b.toLowerCase():null,$b[b]=f),e}});var _b=/^(?:input|select|textarea|button)$/i;n.fn.extend({prop:function(a,b){return J(this,n.prop,a,b,arguments.length>1)},removeProp:function(a){return this.each(function(){delete this[n.propFix[a]||a]})}}),n.extend({propFix:{"for":"htmlFor","class":"className"},prop:function(a,b,c){var d,e,f,g=a.nodeType;if(a&&3!==g&&8!==g&&2!==g)return f=1!==g||!n.isXMLDoc(a),f&&(b=n.propFix[b]||b,e=n.propHooks[b]),void 0!==c?e&&"set"in e&&void 0!==(d=e.set(a,c,b))?d:a[b]=c:e&&"get"in e&&null!==(d=e.get(a,b))?d:a[b]},propHooks:{tabIndex:{get:function(a){return a.hasAttribute("tabindex")||_b.test(a.nodeName)||a.href?a.tabIndex:-1}}}}),k.optSelected||(n.propHooks.selected={get:function(a){var b=a.parentNode;return b&&b.parentNode&&b.parentNode.selectedIndex,null}}),n.each(["tabIndex","readOnly","maxLength","cellSpacing","cellPadding","rowSpan","colSpan","useMap","frameBorder","contentEditable"],function(){n.propFix[this.toLowerCase()]=this});var ac=/[\t\r\n\f]/g;n.fn.extend({addClass:function(a){var b,c,d,e,f,g,h="string"==typeof a&&a,i=0,j=this.length;if(n.isFunction(a))return this.each(function(b){n(this).addClass(a.call(this,b,this.className))});if(h)for(b=(a||"").match(E)||[];j>i;i++)if(c=this[i],d=1===c.nodeType&&(c.className?(" "+c.className+" ").replace(ac," "):" ")){f=0;while(e=b[f++])d.indexOf(" "+e+" ")<0&&(d+=e+" ");g=n.trim(d),c.className!==g&&(c.className=g)}return this},removeClass:function(a){var b,c,d,e,f,g,h=0===arguments.length||"string"==typeof a&&a,i=0,j=this.length;if(n.isFunction(a))return this.each(function(b){n(this).removeClass(a.call(this,b,this.className))});if(h)for(b=(a||"").match(E)||[];j>i;i++)if(c=this[i],d=1===c.nodeType&&(c.className?(" "+c.className+" ").replace(ac," "):"")){f=0;while(e=b[f++])while(d.indexOf(" "+e+" ")>=0)d=d.replace(" "+e+" "," ");g=a?n.trim(d):"",c.className!==g&&(c.className=g)}return this},toggleClass:function(a,b){var c=typeof a;return"boolean"==typeof b&&"string"===c?b?this.addClass(a):this.removeClass(a):this.each(n.isFunction(a)?function(c){n(this).toggleClass(a.call(this,c,this.className,b),b)}:function(){if("string"===c){var b,d=0,e=n(this),f=a.match(E)||[];while(b=f[d++])e.hasClass(b)?e.removeClass(b):e.addClass(b)}else(c===U||"boolean"===c)&&(this.className&&L.set(this,"__className__",this.className),this.className=this.className||a===!1?"":L.get(this,"__className__")||"")})},hasClass:function(a){for(var b=" "+a+" ",c=0,d=this.length;d>c;c++)if(1===this[c].nodeType&&(" "+this[c].className+" ").replace(ac," ").indexOf(b)>=0)return!0;return!1}});var bc=/\r/g;n.fn.extend({val:function(a){var b,c,d,e=this[0];{if(arguments.length)return d=n.isFunction(a),this.each(function(c){var e;1===this.nodeType&&(e=d?a.call(this,c,n(this).val()):a,null==e?e="":"number"==typeof e?e+="":n.isArray(e)&&(e=n.map(e,function(a){return null==a?"":a+""})),b=n.valHooks[this.type]||n.valHooks[this.nodeName.toLowerCase()],b&&"set"in b&&void 0!==b.set(this,e,"value")||(this.value=e))});if(e)return b=n.valHooks[e.type]||n.valHooks[e.nodeName.toLowerCase()],b&&"get"in b&&void 0!==(c=b.get(e,"value"))?c:(c=e.value,"string"==typeof c?c.replace(bc,""):null==c?"":c)}}}),n.extend({valHooks:{option:{get:function(a){var b=n.find.attr(a,"value");return null!=b?b:n.trim(n.text(a))}},select:{get:function(a){for(var b,c,d=a.options,e=a.selectedIndex,f="select-one"===a.type||0>e,g=f?null:[],h=f?e+1:d.length,i=0>e?h:f?e:0;h>i;i++)if(c=d[i],!(!c.selected&&i!==e||(k.optDisabled?c.disabled:null!==c.getAttribute("disabled"))||c.parentNode.disabled&&n.nodeName(c.parentNode,"optgroup"))){if(b=n(c).val(),f)return b;g.push(b)}return g},set:function(a,b){var c,d,e=a.options,f=n.makeArray(b),g=e.length;while(g--)d=e[g],(d.selected=n.inArray(d.value,f)>=0)&&(c=!0);return c||(a.selectedIndex=-1),f}}}}),n.each(["radio","checkbox"],function(){n.valHooks[this]={set:function(a,b){return n.isArray(b)?a.checked=n.inArray(n(a).val(),b)>=0:void 0}},k.checkOn||(n.valHooks[this].get=function(a){return null===a.getAttribute("value")?"on":a.value})}),n.each("blur focus focusin focusout load resize scroll unload click dblclick mousedown mouseup mousemove mouseover mouseout mouseenter mouseleave change select submit keydown keypress keyup error contextmenu".split(" "),function(a,b){n.fn[b]=function(a,c){return arguments.length>0?this.on(b,null,a,c):this.trigger(b)}}),n.fn.extend({hover:function(a,b){return this.mouseenter(a).mouseleave(b||a)},bind:function(a,b,c){return this.on(a,null,b,c)},unbind:function(a,b){return this.off(a,null,b)},delegate:function(a,b,c,d){return this.on(b,a,c,d)},undelegate:function(a,b,c){return 1===arguments.length?this.off(a,"**"):this.off(b,a||"**",c)}});var cc=n.now(),dc=/\?/;n.parseJSON=function(a){return JSON.parse(a+"")},n.parseXML=function(a){var b,c;if(!a||"string"!=typeof a)return null;try{c=new DOMParser,b=c.parseFromString(a,"text/xml")}catch(d){b=void 0}return(!b||b.getElementsByTagName("parsererror").length)&&n.error("Invalid XML: "+a),b};var ec=/#.*$/,fc=/([?&])_=[^&]*/,gc=/^(.*?):[ \t]*([^\r\n]*)$/gm,hc=/^(?:about|app|app-storage|.+-extension|file|res|widget):$/,ic=/^(?:GET|HEAD)$/,jc=/^\/\//,kc=/^([\w.+-]+:)(?:\/\/(?:[^\/?#]*@|)([^\/?#:]*)(?::(\d+)|)|)/,lc={},mc={},nc="*/".concat("*"),oc=a.location.href,pc=kc.exec(oc.toLowerCase())||[];function qc(a){return function(b,c){"string"!=typeof b&&(c=b,b="*");var d,e=0,f=b.toLowerCase().match(E)||[];if(n.isFunction(c))while(d=f[e++])"+"===d[0]?(d=d.slice(1)||"*",(a[d]=a[d]||[]).unshift(c)):(a[d]=a[d]||[]).push(c)}}function rc(a,b,c,d){var e={},f=a===mc;function g(h){var i;return e[h]=!0,n.each(a[h]||[],function(a,h){var j=h(b,c,d);return"string"!=typeof j||f||e[j]?f?!(i=j):void 0:(b.dataTypes.unshift(j),g(j),!1)}),i}return g(b.dataTypes[0])||!e["*"]&&g("*")}function sc(a,b){var c,d,e=n.ajaxSettings.flatOptions||{};for(c in b)void 0!==b[c]&&((e[c]?a:d||(d={}))[c]=b[c]);return d&&n.extend(!0,a,d),a}function tc(a,b,c){var d,e,f,g,h=a.contents,i=a.dataTypes;while("*"===i[0])i.shift(),void 0===d&&(d=a.mimeType||b.getResponseHeader("Content-Type"));if(d)for(e in h)if(h[e]&&h[e].test(d)){i.unshift(e);break}if(i[0]in c)f=i[0];else{for(e in c){if(!i[0]||a.converters[e+" "+i[0]]){f=e;break}g||(g=e)}f=f||g}return f?(f!==i[0]&&i.unshift(f),c[f]):void 0}function uc(a,b,c,d){var e,f,g,h,i,j={},k=a.dataTypes.slice();if(k[1])for(g in a.converters)j[g.toLowerCase()]=a.converters[g];f=k.shift();while(f)if(a.responseFields[f]&&(c[a.responseFields[f]]=b),!i&&d&&a.dataFilter&&(b=a.dataFilter(b,a.dataType)),i=f,f=k.shift())if("*"===f)f=i;else if("*"!==i&&i!==f){if(g=j[i+" "+f]||j["* "+f],!g)for(e in j)if(h=e.split(" "),h[1]===f&&(g=j[i+" "+h[0]]||j["* "+h[0]])){g===!0?g=j[e]:j[e]!==!0&&(f=h[0],k.unshift(h[1]));break}if(g!==!0)if(g&&a["throws"])b=g(b);else try{b=g(b)}catch(l){return{state:"parsererror",error:g?l:"No conversion from "+i+" to "+f}}}return{state:"success",data:b}}n.extend({active:0,lastModified:{},etag:{},ajaxSettings:{url:oc,type:"GET",isLocal:hc.test(pc[1]),global:!0,processData:!0,async:!0,contentType:"application/x-www-form-urlencoded; charset=UTF-8",accepts:{"*":nc,text:"text/plain",html:"text/html",xml:"application/xml, text/xml",json:"application/json, text/javascript"},contents:{xml:/xml/,html:/html/,json:/json/},responseFields:{xml:"responseXML",text:"responseText",json:"responseJSON"},converters:{"* text":String,"text html":!0,"text json":n.parseJSON,"text xml":n.parseXML},flatOptions:{url:!0,context:!0}},ajaxSetup:function(a,b){return b?sc(sc(a,n.ajaxSettings),b):sc(n.ajaxSettings,a)},ajaxPrefilter:qc(lc),ajaxTransport:qc(mc),ajax:function(a,b){"object"==typeof a&&(b=a,a=void 0),b=b||{};var c,d,e,f,g,h,i,j,k=n.ajaxSetup({},b),l=k.context||k,m=k.context&&(l.nodeType||l.jquery)?n(l):n.event,o=n.Deferred(),p=n.Callbacks("once memory"),q=k.statusCode||{},r={},s={},t=0,u="canceled",v={readyState:0,getResponseHeader:function(a){var b;if(2===t){if(!f){f={};while(b=gc.exec(e))f[b[1].toLowerCase()]=b[2]}b=f[a.toLowerCase()]}return null==b?null:b},getAllResponseHeaders:function(){return 2===t?e:null},setRequestHeader:function(a,b){var c=a.toLowerCase();return t||(a=s[c]=s[c]||a,r[a]=b),this},overrideMimeType:function(a){return t||(k.mimeType=a),this},statusCode:function(a){var b;if(a)if(2>t)for(b in a)q[b]=[q[b],a[b]];else v.always(a[v.status]);return this},abort:function(a){var b=a||u;return c&&c.abort(b),x(0,b),this}};if(o.promise(v).complete=p.add,v.success=v.done,v.error=v.fail,k.url=((a||k.url||oc)+"").replace(ec,"").replace(jc,pc[1]+"//"),k.type=b.method||b.type||k.method||k.type,k.dataTypes=n.trim(k.dataType||"*").toLowerCase().match(E)||[""],null==k.crossDomain&&(h=kc.exec(k.url.toLowerCase()),k.crossDomain=!(!h||h[1]===pc[1]&&h[2]===pc[2]&&(h[3]||("http:"===h[1]?"80":"443"))===(pc[3]||("http:"===pc[1]?"80":"443")))),k.data&&k.processData&&"string"!=typeof k.data&&(k.data=n.param(k.data,k.traditional)),rc(lc,k,b,v),2===t)return v;i=n.event&&k.global,i&&0===n.active++&&n.event.trigger("ajaxStart"),k.type=k.type.toUpperCase(),k.hasContent=!ic.test(k.type),d=k.url,k.hasContent||(k.data&&(d=k.url+=(dc.test(d)?"&":"?")+k.data,delete k.data),k.cache===!1&&(k.url=fc.test(d)?d.replace(fc,"$1_="+cc++):d+(dc.test(d)?"&":"?")+"_="+cc++)),k.ifModified&&(n.lastModified[d]&&v.setRequestHeader("If-Modified-Since",n.lastModified[d]),n.etag[d]&&v.setRequestHeader("If-None-Match",n.etag[d])),(k.data&&k.hasContent&&k.contentType!==!1||b.contentType)&&v.setRequestHeader("Content-Type",k.contentType),v.setRequestHeader("Accept",k.dataTypes[0]&&k.accepts[k.dataTypes[0]]?k.accepts[k.dataTypes[0]]+("*"!==k.dataTypes[0]?", "+nc+"; q=0.01":""):k.accepts["*"]);for(j in k.headers)v.setRequestHeader(j,k.headers[j]);if(k.beforeSend&&(k.beforeSend.call(l,v,k)===!1||2===t))return v.abort();u="abort";for(j in{success:1,error:1,complete:1})v[j](k[j]);if(c=rc(mc,k,b,v)){v.readyState=1,i&&m.trigger("ajaxSend",[v,k]),k.async&&k.timeout>0&&(g=setTimeout(function(){v.abort("timeout")},k.timeout));try{t=1,c.send(r,x)}catch(w){if(!(2>t))throw w;x(-1,w)}}else x(-1,"No Transport");function x(a,b,f,h){var j,r,s,u,w,x=b;2!==t&&(t=2,g&&clearTimeout(g),c=void 0,e=h||"",v.readyState=a>0?4:0,j=a>=200&&300>a||304===a,f&&(u=tc(k,v,f)),u=uc(k,u,v,j),j?(k.ifModified&&(w=v.getResponseHeader("Last-Modified"),w&&(n.lastModified[d]=w),w=v.getResponseHeader("etag"),w&&(n.etag[d]=w)),204===a||"HEAD"===k.type?x="nocontent":304===a?x="notmodified":(x=u.state,r=u.data,s=u.error,j=!s)):(s=x,(a||!x)&&(x="error",0>a&&(a=0))),v.status=a,v.statusText=(b||x)+"",j?o.resolveWith(l,[r,x,v]):o.rejectWith(l,[v,x,s]),v.statusCode(q),q=void 0,i&&m.trigger(j?"ajaxSuccess":"ajaxError",[v,k,j?r:s]),p.fireWith(l,[v,x]),i&&(m.trigger("ajaxComplete",[v,k]),--n.active||n.event.trigger("ajaxStop")))}return v},getJSON:function(a,b,c){return n.get(a,b,c,"json")},getScript:function(a,b){return n.get(a,void 0,b,"script")}}),n.each(["get","post"],function(a,b){n[b]=function(a,c,d,e){return n.isFunction(c)&&(e=e||d,d=c,c=void 0),n.ajax({url:a,type:b,dataType:e,data:c,success:d})}}),n._evalUrl=function(a){return n.ajax({url:a,type:"GET",dataType:"script",async:!1,global:!1,"throws":!0})},n.fn.extend({wrapAll:function(a){var b;return n.isFunction(a)?this.each(function(b){n(this).wrapAll(a.call(this,b))}):(this[0]&&(b=n(a,this[0].ownerDocument).eq(0).clone(!0),this[0].parentNode&&b.insertBefore(this[0]),b.map(function(){var a=this;while(a.firstElementChild)a=a.firstElementChild;return a}).append(this)),this)},wrapInner:function(a){return this.each(n.isFunction(a)?function(b){n(this).wrapInner(a.call(this,b))}:function(){var b=n(this),c=b.contents();c.length?c.wrapAll(a):b.append(a)})},wrap:function(a){var b=n.isFunction(a);return this.each(function(c){n(this).wrapAll(b?a.call(this,c):a)})},unwrap:function(){return this.parent().each(function(){n.nodeName(this,"body")||n(this).replaceWith(this.childNodes)}).end()}}),n.expr.filters.hidden=function(a){return a.offsetWidth<=0&&a.offsetHeight<=0},n.expr.filters.visible=function(a){return!n.expr.filters.hidden(a)};var vc=/%20/g,wc=/\[\]$/,xc=/\r?\n/g,yc=/^(?:submit|button|image|reset|file)$/i,zc=/^(?:input|select|textarea|keygen)/i;function Ac(a,b,c,d){var e;if(n.isArray(b))n.each(b,function(b,e){c||wc.test(a)?d(a,e):Ac(a+"["+("object"==typeof e?b:"")+"]",e,c,d)});else if(c||"object"!==n.type(b))d(a,b);else for(e in b)Ac(a+"["+e+"]",b[e],c,d)}n.param=function(a,b){var c,d=[],e=function(a,b){b=n.isFunction(b)?b():null==b?"":b,d[d.length]=encodeURIComponent(a)+"="+encodeURIComponent(b)};if(void 0===b&&(b=n.ajaxSettings&&n.ajaxSettings.traditional),n.isArray(a)||a.jquery&&!n.isPlainObject(a))n.each(a,function(){e(this.name,this.value)});else for(c in a)Ac(c,a[c],b,e);return d.join("&").replace(vc,"+")},n.fn.extend({serialize:function(){return n.param(this.serializeArray())},serializeArray:function(){return this.map(function(){var a=n.prop(this,"elements");return a?n.makeArray(a):this}).filter(function(){var a=this.type;return this.name&&!n(this).is(":disabled")&&zc.test(this.nodeName)&&!yc.test(a)&&(this.checked||!T.test(a))}).map(function(a,b){var c=n(this).val();return null==c?null:n.isArray(c)?n.map(c,function(a){return{name:b.name,value:a.replace(xc,"\r\n")}}):{name:b.name,value:c.replace(xc,"\r\n")}}).get()}}),n.ajaxSettings.xhr=function(){try{return new XMLHttpRequest}catch(a){}};var Bc=0,Cc={},Dc={0:200,1223:204},Ec=n.ajaxSettings.xhr();a.attachEvent&&a.attachEvent("onunload",function(){for(var a in Cc)Cc[a]()}),k.cors=!!Ec&&"withCredentials"in Ec,k.ajax=Ec=!!Ec,n.ajaxTransport(function(a){var b;return k.cors||Ec&&!a.crossDomain?{send:function(c,d){var e,f=a.xhr(),g=++Bc;if(f.open(a.type,a.url,a.async,a.username,a.password),a.xhrFields)for(e in a.xhrFields)f[e]=a.xhrFields[e];a.mimeType&&f.overrideMimeType&&f.overrideMimeType(a.mimeType),a.crossDomain||c["X-Requested-With"]||(c["X-Requested-With"]="XMLHttpRequest");for(e in c)f.setRequestHeader(e,c[e]);b=function(a){return function(){b&&(delete Cc[g],b=f.onload=f.onerror=null,"abort"===a?f.abort():"error"===a?d(f.status,f.statusText):d(Dc[f.status]||f.status,f.statusText,"string"==typeof f.responseText?{text:f.responseText}:void 0,f.getAllResponseHeaders()))}},f.onload=b(),f.onerror=b("error"),b=Cc[g]=b("abort");try{f.send(a.hasContent&&a.data||null)}catch(h){if(b)throw h}},abort:function(){b&&b()}}:void 0}),n.ajaxSetup({accepts:{script:"text/javascript, application/javascript, application/ecmascript, application/x-ecmascript"},contents:{script:/(?:java|ecma)script/},converters:{"text script":function(a){return n.globalEval(a),a}}}),n.ajaxPrefilter("script",function(a){void 0===a.cache&&(a.cache=!1),a.crossDomain&&(a.type="GET")}),n.ajaxTransport("script",function(a){if(a.crossDomain){var b,c;return{send:function(d,e){b=n("<script>").prop({async:!0,charset:a.scriptCharset,src:a.url}).on("load error",c=function(a){b.remove(),c=null,a&&e("error"===a.type?404:200,a.type)}),l.head.appendChild(b[0])},abort:function(){c&&c()}}}});var Fc=[],Gc=/(=)\?(?=&|$)|\?\?/;n.ajaxSetup({jsonp:"callback",jsonpCallback:function(){var a=Fc.pop()||n.expando+"_"+cc++;return this[a]=!0,a}}),n.ajaxPrefilter("json jsonp",function(b,c,d){var e,f,g,h=b.jsonp!==!1&&(Gc.test(b.url)?"url":"string"==typeof b.data&&!(b.contentType||"").indexOf("application/x-www-form-urlencoded")&&Gc.test(b.data)&&"data");return h||"jsonp"===b.dataTypes[0]?(e=b.jsonpCallback=n.isFunction(b.jsonpCallback)?b.jsonpCallback():b.jsonpCallback,h?b[h]=b[h].replace(Gc,"$1"+e):b.jsonp!==!1&&(b.url+=(dc.test(b.url)?"&":"?")+b.jsonp+"="+e),b.converters["script json"]=function(){return g||n.error(e+" was not called"),g[0]},b.dataTypes[0]="json",f=a[e],a[e]=function(){g=arguments},d.always(function(){a[e]=f,b[e]&&(b.jsonpCallback=c.jsonpCallback,Fc.push(e)),g&&n.isFunction(f)&&f(g[0]),g=f=void 0}),"script"):void 0}),n.parseHTML=function(a,b,c){if(!a||"string"!=typeof a)return null;"boolean"==typeof b&&(c=b,b=!1),b=b||l;var d=v.exec(a),e=!c&&[];return d?[b.createElement(d[1])]:(d=n.buildFragment([a],b,e),e&&e.length&&n(e).remove(),n.merge([],d.childNodes))};var Hc=n.fn.load;n.fn.load=function(a,b,c){if("string"!=typeof a&&Hc)return Hc.apply(this,arguments);var d,e,f,g=this,h=a.indexOf(" ");return h>=0&&(d=n.trim(a.slice(h)),a=a.slice(0,h)),n.isFunction(b)?(c=b,b=void 0):b&&"object"==typeof b&&(e="POST"),g.length>0&&n.ajax({url:a,type:e,dataType:"html",data:b}).done(function(a){f=arguments,g.html(d?n("<div>").append(n.parseHTML(a)).find(d):a)}).complete(c&&function(a,b){g.each(c,f||[a.responseText,b,a])}),this},n.each(["ajaxStart","ajaxStop","ajaxComplete","ajaxError","ajaxSuccess","ajaxSend"],function(a,b){n.fn[b]=function(a){return this.on(b,a)}}),n.expr.filters.animated=function(a){return n.grep(n.timers,function(b){return a===b.elem}).length};var Ic=a.document.documentElement;function Jc(a){return n.isWindow(a)?a:9===a.nodeType&&a.defaultView}n.offset={setOffset:function(a,b,c){var d,e,f,g,h,i,j,k=n.css(a,"position"),l=n(a),m={};"static"===k&&(a.style.position="relative"),h=l.offset(),f=n.css(a,"top"),i=n.css(a,"left"),j=("absolute"===k||"fixed"===k)&&(f+i).indexOf("auto")>-1,j?(d=l.position(),g=d.top,e=d.left):(g=parseFloat(f)||0,e=parseFloat(i)||0),n.isFunction(b)&&(b=b.call(a,c,h)),null!=b.top&&(m.top=b.top-h.top+g),null!=b.left&&(m.left=b.left-h.left+e),"using"in b?b.using.call(a,m):l.css(m)}},n.fn.extend({offset:function(a){if(arguments.length)return void 0===a?this:this.each(function(b){n.offset.setOffset(this,a,b)});var b,c,d=this[0],e={top:0,left:0},f=d&&d.ownerDocument;if(f)return b=f.documentElement,n.contains(b,d)?(typeof d.getBoundingClientRect!==U&&(e=d.getBoundingClientRect()),c=Jc(f),{top:e.top+c.pageYOffset-b.clientTop,left:e.left+c.pageXOffset-b.clientLeft}):e},position:function(){if(this[0]){var a,b,c=this[0],d={top:0,left:0};return"fixed"===n.css(c,"position")?b=c.getBoundingClientRect():(a=this.offsetParent(),b=this.offset(),n.nodeName(a[0],"html")||(d=a.offset()),d.top+=n.css(a[0],"borderTopWidth",!0),d.left+=n.css(a[0],"borderLeftWidth",!0)),{top:b.top-d.top-n.css(c,"marginTop",!0),left:b.left-d.left-n.css(c,"marginLeft",!0)}}},offsetParent:function(){return this.map(function(){var a=this.offsetParent||Ic;while(a&&!n.nodeName(a,"html")&&"static"===n.css(a,"position"))a=a.offsetParent;return a||Ic})}}),n.each({scrollLeft:"pageXOffset",scrollTop:"pageYOffset"},function(b,c){var d="pageYOffset"===c;n.fn[b]=function(e){return J(this,function(b,e,f){var g=Jc(b);return void 0===f?g?g[c]:b[e]:void(g?g.scrollTo(d?a.pageXOffset:f,d?f:a.pageYOffset):b[e]=f)},b,e,arguments.length,null)}}),n.each(["top","left"],function(a,b){n.cssHooks[b]=yb(k.pixelPosition,function(a,c){return c?(c=xb(a,b),vb.test(c)?n(a).position()[b]+"px":c):void 0})}),n.each({Height:"height",Width:"width"},function(a,b){n.each({padding:"inner"+a,content:b,"":"outer"+a},function(c,d){n.fn[d]=function(d,e){var f=arguments.length&&(c||"boolean"!=typeof d),g=c||(d===!0||e===!0?"margin":"border");return J(this,function(b,c,d){var e;return n.isWindow(b)?b.document.documentElement["client"+a]:9===b.nodeType?(e=b.documentElement,Math.max(b.body["scroll"+a],e["scroll"+a],b.body["offset"+a],e["offset"+a],e["client"+a])):void 0===d?n.css(b,c,g):n.style(b,c,d,g)},b,f?d:void 0,f,null)}})}),n.fn.size=function(){return this.length},n.fn.andSelf=n.fn.addBack,"function"==typeof define&&define.amd&&define("jquery",[],function(){return n});var Kc=a.jQuery,Lc=a.$;return n.noConflict=function(b){return a.$===n&&(a.$=Lc),b&&a.jQuery===n&&(a.jQuery=Kc),n},typeof b===U&&(a.jQuery=a.$=n),n});
 //# sourceMappingURL=jquery.min.map
 /**
- * @license AngularJS v1.3.15
+ * @license AngularJS v1.3.11
  * (c) 2010-2014 Google, Inc. http://angularjs.org
  * License: MIT
  */
@@ -59,7 +59,7 @@ function minErr(module, ErrorConstructor) {
       return match;
     });
 
-    message = message + '\nhttp://errors.angularjs.org/1.3.15/' +
+    message = message + '\nhttp://errors.angularjs.org/1.3.11/' +
       (module ? module + '/' : '') + code;
     for (i = 2; i < arguments.length; i++) {
       message = message + (i == 2 ? '?' : '&') + 'p' + (i - 2) + '=' +
@@ -386,7 +386,8 @@ function nextUid() {
 function setHashKey(obj, h) {
   if (h) {
     obj.$$hashKey = h;
-  } else {
+  }
+  else {
     delete obj.$$hashKey;
   }
 }
@@ -551,12 +552,6 @@ function isString(value) {return typeof value === 'string';}
  * @description
  * Determines if a reference is a `Number`.
  *
- * This includes the "special" numbers `NaN`, `+Infinity` and `-Infinity`.
- *
- * If you wish to exclude these then you can use the native
- * [`isFinite'](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/isFinite)
- * method.
- *
  * @param {*} value Reference to check.
  * @returns {boolean} True if `value` is a `Number`.
  */
@@ -701,7 +696,7 @@ function isElement(node) {
 function makeMap(str) {
   var obj = {}, items = str.split(","), i;
   for (i = 0; i < items.length; i++)
-    obj[items[i]] = true;
+    obj[ items[i] ] = true;
   return obj;
 }
 
@@ -925,11 +920,10 @@ function equals(o1, o2) {
       } else if (isDate(o1)) {
         if (!isDate(o2)) return false;
         return equals(o1.getTime(), o2.getTime());
-      } else if (isRegExp(o1)) {
-        return isRegExp(o2) ? o1.toString() == o2.toString() : false;
+      } else if (isRegExp(o1) && isRegExp(o2)) {
+        return o1.toString() == o2.toString();
       } else {
-        if (isScope(o1) || isScope(o2) || isWindow(o1) || isWindow(o2) ||
-          isArray(o2) || isDate(o2) || isRegExp(o2)) return false;
+        if (isScope(o1) || isScope(o2) || isWindow(o1) || isWindow(o2) || isArray(o2)) return false;
         keySet = {};
         for (key in o1) {
           if (key.charAt(0) === '$' || isFunction(o1[key])) continue;
@@ -1483,12 +1477,8 @@ function bootstrap(element, modules, config) {
     forEach(extraModules, function(module) {
       modules.push(module);
     });
-    return doBootstrap();
+    doBootstrap();
   };
-
-  if (isFunction(angular.resumeDeferredBootstrap)) {
-    angular.resumeDeferredBootstrap();
-  }
 }
 
 /**
@@ -2133,11 +2123,11 @@ function toDebugString(obj) {
  * - `codeName` – `{string}` – Code name of the release, such as "jiggling-armfat".
  */
 var version = {
-  full: '1.3.15',    // all of these placeholder strings will be replaced by grunt's
+  full: '1.3.11',    // all of these placeholder strings will be replaced by grunt's
   major: 1,    // package task
   minor: 3,
-  dot: 15,
-  codeName: 'locality-filtration'
+  dot: 11,
+  codeName: 'spiffy-manatee'
 };
 
 
@@ -2273,17 +2263,6 @@ function publishExternalAPI(angular) {
     }
   ]);
 }
-
-/* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
- *     Any commits to this file should be reviewed with security in mind.  *
- *   Changes to this file can potentially create security vulnerabilities. *
- *          An approval from 2 Core members with history of modifying      *
- *                         this file is required.                          *
- *                                                                         *
- *  Does the change somehow allow for arbitrary javascript to be executed? *
- *    Or allows for someone to change the prototype of built-in objects?   *
- *     Or gives undesired access to variables likes document or window?    *
- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
 
 /* global JQLitePrototype: true,
   addEventListenerFn: true,
@@ -4183,7 +4162,7 @@ function createInjector(modulesToLoad, strictDi) {
       }
 
       var args = [],
-          $inject = createInjector.$$annotate(fn, strictDi, serviceName),
+          $inject = annotate(fn, strictDi, serviceName),
           length, i,
           key;
 
@@ -4222,7 +4201,7 @@ function createInjector(modulesToLoad, strictDi) {
       invoke: invoke,
       instantiate: instantiate,
       get: getService,
-      annotate: createInjector.$$annotate,
+      annotate: annotate,
       has: function(name) {
         return providerCache.hasOwnProperty(name + providerSuffix) || cache.hasOwnProperty(name);
       }
@@ -4708,7 +4687,6 @@ var $AnimateProvider = ['$provide', function($provide) {
        * @return {Promise} the animation callback promise
        */
       leave: function(element, options) {
-        applyStyles(element, options);
         element.remove();
         return asyncPromise();
       },
@@ -5113,19 +5091,11 @@ function Browser(window, document, $log, $sniffer) {
     fireUrlChange();
   }
 
-  function getCurrentState() {
-    try {
-      return history.state;
-    } catch (e) {
-      // MSIE can reportedly throw when there is no state (UNCONFIRMED).
-    }
-  }
-
   // This variable should be used *only* inside the cacheState function.
   var lastCachedState = null;
   function cacheState() {
     // This should be the only place in $browser where `history.state` is read.
-    cachedState = getCurrentState();
+    cachedState = window.history.state;
     cachedState = isUndefined(cachedState) ? null : cachedState;
 
     // Prevent callbacks fo fire twice if both hashchange & popstate were fired.
@@ -5722,7 +5692,7 @@ function $CacheFactoryProvider() {
  * the document, but it must be a descendent of the {@link ng.$rootElement $rootElement} (IE,
  * element with ng-app attribute), otherwise the template will be ignored.
  *
- * Adding via the `$templateCache` service:
+ * Adding via the $templateCache service:
  *
  * ```js
  * var myApp = angular.module('myApp', []);
@@ -5749,17 +5719,6 @@ function $TemplateCacheProvider() {
     return $cacheFactory('templates');
   }];
 }
-
-/* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
- *     Any commits to this file should be reviewed with security in mind.  *
- *   Changes to this file can potentially create security vulnerabilities. *
- *          An approval from 2 Core members with history of modifying      *
- *                         this file is required.                          *
- *                                                                         *
- *  Does the change somehow allow for arbitrary javascript to be executed? *
- *    Or allows for someone to change the prototype of built-in objects?   *
- *     Or gives undesired access to variables likes document or window?    *
- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
 
 /* ! VARIABLE/FUNCTION NAMING CONVENTIONS THAT APPLY TO THIS FILE!
  *
@@ -5972,8 +5931,7 @@ function $TemplateCacheProvider() {
  * Require another directive and inject its controller as the fourth argument to the linking function. The
  * `require` takes a string name (or array of strings) of the directive(s) to pass in. If an array is used, the
  * injected argument will be an array in corresponding order. If no such directive can be
- * found, or if the directive does not have a controller, then an error is raised (unless no link function
- * is specified, in which case error checking is skipped). The name can be prefixed with:
+ * found, or if the directive does not have a controller, then an error is raised. The name can be prefixed with:
  *
  * * (no prefix) - Locate the required controller on the current element. Throw an error if not found.
  * * `?` - Attempt to locate the required controller or pass `null` to the `link` fn if not found.
@@ -7917,7 +7875,8 @@ function $CompileProvider($provide, $$sanitizeUriProvider) {
           afterTemplateChildLinkFn,
           beforeTemplateCompileNode = $compileNode[0],
           origAsyncDirective = directives.shift(),
-          derivedSyncDirective = inherit(origAsyncDirective, {
+          // The fact that we have to copy and patch the directive seems wrong!
+          derivedSyncDirective = extend({}, origAsyncDirective, {
             templateUrl: null, transclude: null, replace: null, $$originalDirective: origAsyncDirective
           }),
           templateUrl = (isFunction(origAsyncDirective.templateUrl))
@@ -8370,8 +8329,6 @@ function removeComments(jqNodes) {
   return jqNodes;
 }
 
-var $controllerMinErr = minErr('$controller');
-
 /**
  * @ngdoc provider
  * @name $controllerProvider
@@ -8459,12 +8416,7 @@ function $ControllerProvider() {
       }
 
       if (isString(expression)) {
-        match = expression.match(CNTRL_REG);
-        if (!match) {
-          throw $controllerMinErr('ctrlfmt',
-            "Badly formed controller string '{0}'. " +
-            "Must match `__name__ as __id__` or `__name__`.", expression);
-        }
+        match = expression.match(CNTRL_REG),
         constructor = match[1],
         identifier = identifier || match[3];
         expression = controllers.hasOwnProperty(constructor)
@@ -10523,15 +10475,7 @@ function $LocaleProvider() {
         mediumDate: 'MMM d, y',
         shortDate: 'M/d/yy',
         mediumTime: 'h:mm:ss a',
-        shortTime: 'h:mm a',
-        ERANAMES: [
-          "Before Christ",
-          "Anno Domini"
-        ],
-        ERAS: [
-          "BC",
-          "AD"
-        ]
+        shortTime: 'h:mm a'
       },
 
       pluralCat: function(num) {
@@ -11423,7 +11367,7 @@ function $LocationProvider() {
 
 
     // rewrite hashbang url <> html5 url
-    if (trimEmptyHash($location.absUrl()) != trimEmptyHash(initialUrl)) {
+    if ($location.absUrl() != initialUrl) {
       $browser.url($location.absUrl(), true);
     }
 
@@ -11539,7 +11483,6 @@ function $LocationProvider() {
          <button ng-click="$log.warn(message)">warn</button>
          <button ng-click="$log.info(message)">info</button>
          <button ng-click="$log.error(message)">error</button>
-         <button ng-click="$log.debug(message)">debug</button>
        </div>
      </file>
    </example>
@@ -11669,17 +11612,6 @@ function $LogProvider() {
     }
   }];
 }
-
-/* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
- *     Any commits to this file should be reviewed with security in mind.  *
- *   Changes to this file can potentially create security vulnerabilities. *
- *          An approval from 2 Core members with history of modifying      *
- *                         this file is required.                          *
- *                                                                         *
- *  Does the change somehow allow for arbitrary javascript to be executed? *
- *    Or allows for someone to change the prototype of built-in objects?   *
- *     Or gives undesired access to variables likes document or window?    *
- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
 
 var $parseMinErr = minErr('$parse');
 
@@ -12408,11 +12340,6 @@ Parser.prototype = {
       var v = fn.apply
             ? fn.apply(context, args)
             : fn(args[0], args[1], args[2], args[3], args[4]);
-
-      if (args) {
-        // Free-up the memory (arguments of the last function call).
-        args.length = 0;
-      }
 
       return ensureSafeObject(v, expressionText);
       };
@@ -13285,7 +13212,8 @@ function qFactory(nextTick, exceptionHandler) {
           'qcycle',
           "Expected promise to be resolved with value other than itself '{0}'",
           val));
-      } else {
+      }
+      else {
         this.$$resolve(val);
       }
 
@@ -13616,26 +13544,8 @@ function $RootScopeProvider() {
     return TTL;
   };
 
-  function createChildScopeClass(parent) {
-    function ChildScope() {
-      this.$$watchers = this.$$nextSibling =
-          this.$$childHead = this.$$childTail = null;
-      this.$$listeners = {};
-      this.$$listenerCount = {};
-      this.$$watchersCount = 0;
-      this.$id = nextUid();
-      this.$$ChildScope = null;
-    }
-    ChildScope.prototype = parent;
-    return ChildScope;
-  }
-
   this.$get = ['$injector', '$exceptionHandler', '$parse', '$browser',
       function($injector, $exceptionHandler, $parse, $browser) {
-
-    function destroyChildScope($event) {
-        $event.currentScope.$$destroyed = true;
-    }
 
     /**
      * @ngdoc type
@@ -13759,7 +13669,15 @@ function $RootScopeProvider() {
           // Only create a child scope class if somebody asks for one,
           // but cache it to allow the VM to optimize lookups.
           if (!this.$$ChildScope) {
-            this.$$ChildScope = createChildScopeClass(this);
+            this.$$ChildScope = function ChildScope() {
+              this.$$watchers = this.$$nextSibling =
+                  this.$$childHead = this.$$childTail = null;
+              this.$$listeners = {};
+              this.$$listenerCount = {};
+              this.$id = nextUid();
+              this.$$ChildScope = null;
+            };
+            this.$$ChildScope.prototype = this;
           }
           child = new this.$$ChildScope();
         }
@@ -13777,9 +13695,13 @@ function $RootScopeProvider() {
         // prototypically. In all other cases, this property needs to be set
         // when the parent scope is destroyed.
         // The listener needs to be added after the parent is set
-        if (isolate || parent != this) child.$on('$destroy', destroyChildScope);
+        if (isolate || parent != this) child.$on('$destroy', destroyChild);
 
         return child;
+
+        function destroyChild() {
+          child.$$destroyed = true;
+        }
       },
 
       /**
@@ -14939,17 +14861,6 @@ function $$SanitizeUriProvider() {
     };
   };
 }
-
-/* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
- *     Any commits to this file should be reviewed with security in mind.  *
- *   Changes to this file can potentially create security vulnerabilities. *
- *          An approval from 2 Core members with history of modifying      *
- *                         this file is required.                          *
- *                                                                         *
- *  Does the change somehow allow for arbitrary javascript to be executed? *
- *    Or allows for someone to change the prototype of built-in objects?   *
- *     Or gives undesired access to variables likes document or window?    *
- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
 
 var $sceMinErr = minErr('$sce');
 
@@ -16126,7 +16037,7 @@ function $TemplateRequestProvider() {
       };
 
       return $http.get(tpl, httpOptions)
-        ['finally'](function() {
+        .finally(function() {
           handleRequestFn.totalPendingRequests--;
         })
         .then(function(response) {
@@ -16822,8 +16733,8 @@ function createPredicateFn(expression, comparator, matchAgainstAnyProp) {
 }
 
 function deepCompare(actual, expected, comparator, matchAgainstAnyProp, dontMatchWholeObject) {
-  var actualType = (actual !== null) ? typeof actual : 'null';
-  var expectedType = (expected !== null) ? typeof expected : 'null';
+  var actualType = typeof actual;
+  var expectedType = typeof expected;
 
   if ((expectedType === 'string') && (expected.charAt(0) === '!')) {
     return !deepCompare(actual, expected.substring(1), comparator, matchAgainstAnyProp);
@@ -16848,7 +16759,7 @@ function deepCompare(actual, expected, comparator, matchAgainstAnyProp, dontMatc
       } else if (expectedType === 'object') {
         for (key in expected) {
           var expectedVal = expected[key];
-          if (isFunction(expectedVal) || isUndefined(expectedVal)) {
+          if (isFunction(expectedVal)) {
             continue;
           }
 
@@ -17162,14 +17073,6 @@ function ampmGetter(date, formats) {
   return date.getHours() < 12 ? formats.AMPMS[0] : formats.AMPMS[1];
 }
 
-function eraGetter(date, formats) {
-  return date.getFullYear() <= 0 ? formats.ERAS[0] : formats.ERAS[1];
-}
-
-function longEraGetter(date, formats) {
-  return date.getFullYear() <= 0 ? formats.ERANAMES[0] : formats.ERANAMES[1];
-}
-
 var DATE_FORMATS = {
   yyyy: dateGetter('FullYear', 4),
     yy: dateGetter('FullYear', 2, 0, true),
@@ -17196,14 +17099,10 @@ var DATE_FORMATS = {
      a: ampmGetter,
      Z: timeZoneGetter,
     ww: weekGetter(2),
-     w: weekGetter(1),
-     G: eraGetter,
-     GG: eraGetter,
-     GGG: eraGetter,
-     GGGG: longEraGetter
+     w: weekGetter(1)
 };
 
-var DATE_FORMATS_SPLIT = /((?:[^yMdHhmsaZEwG']+)|(?:'(?:[^']|'')*')|(?:E+|y+|M+|d+|H+|h+|m+|s+|a|Z|G+|w+))(.*)/,
+var DATE_FORMATS_SPLIT = /((?:[^yMdHhmsaZEw']+)|(?:'(?:[^']|'')*')|(?:E+|y+|M+|d+|H+|h+|m+|s+|a|Z|w+))(.*)/,
     NUMBER_STRING = /^\-?\d+$/;
 
 /**
@@ -17240,8 +17139,6 @@ var DATE_FORMATS_SPLIT = /((?:[^yMdHhmsaZEwG']+)|(?:'(?:[^']|'')*')|(?:E+|y+|M+|
  *   * `'Z'`: 4 digit (+sign) representation of the timezone offset (-1200-+1200)
  *   * `'ww'`: Week of year, padded (00-53). Week 01 is the week with the first Thursday of the year
  *   * `'w'`: Week of year (0-53). Week 1 is the week with the first Thursday of the year
- *   * `'G'`, `'GG'`, `'GGG'`: The abbreviated form of the era string (e.g. 'AD')
- *   * `'GGGG'`: The long form of the era string (e.g. 'Anno Domini')
  *
  *   `format` string can also be one of the following predefined
  *   {@link guide/i18n localizable formats}:
@@ -17575,43 +17472,6 @@ function limitToFilter() {
  * @param {boolean=} reverse Reverse the order of the array.
  * @returns {Array} Sorted copy of the source array.
  *
- *
- * @example
- * The example below demonstrates a simple ngRepeat, where the data is sorted
- * by age in descending order (predicate is set to `'-age'`).
- * `reverse` is not set, which means it defaults to `false`.
-   <example module="orderByExample">
-     <file name="index.html">
-       <script>
-         angular.module('orderByExample', [])
-           .controller('ExampleController', ['$scope', function($scope) {
-             $scope.friends =
-                 [{name:'John', phone:'555-1212', age:10},
-                  {name:'Mary', phone:'555-9876', age:19},
-                  {name:'Mike', phone:'555-4321', age:21},
-                  {name:'Adam', phone:'555-5678', age:35},
-                  {name:'Julie', phone:'555-8765', age:29}];
-           }]);
-       </script>
-       <div ng-controller="ExampleController">
-         <table class="friend">
-           <tr>
-             <th>Name</th>
-             <th>Phone Number</th>
-             <th>Age</th>
-           </tr>
-           <tr ng-repeat="friend in friends | orderBy:'-age'">
-             <td>{{friend.name}}</td>
-             <td>{{friend.phone}}</td>
-             <td>{{friend.age}}</td>
-           </tr>
-         </table>
-       </div>
-     </file>
-   </example>
- *
- * The predicate and reverse parameters can be controlled dynamically through scope properties,
- * as shown in the next example.
  * @example
    <example module="orderByExample">
      <file name="index.html">
@@ -17986,24 +17846,20 @@ var htmlAnchorDirective = valueFn({
  *
  * @description
  *
- * This directive sets the `disabled` attribute on the element if the
- * {@link guide/expression expression} inside `ngDisabled` evaluates to truthy.
- *
- * A special directive is necessary because we cannot use interpolation inside the `disabled`
- * attribute.  The following example would make the button enabled on Chrome/Firefox
- * but not on older IEs:
- *
+ * We shouldn't do this, because it will make the button enabled on Chrome/Firefox but not on IE8 and older IEs:
  * ```html
- * <!-- See below for an example of ng-disabled being used correctly -->
- * <div ng-init="isDisabled = false">
- *  <button disabled="{{isDisabled}}">Disabled</button>
+ * <div ng-init="scope = { isDisabled: false }">
+ *  <button disabled="{{scope.isDisabled}}">Disabled</button>
  * </div>
  * ```
  *
- * This is because the HTML specification does not require browsers to preserve the values of
- * boolean attributes such as `disabled` (Their presence means true and their absence means false.)
+ * The HTML specification does not require browsers to preserve the values of boolean attributes
+ * such as disabled. (Their presence means true and their absence means false.)
  * If we put an Angular interpolation expression into such an attribute then the
  * binding information would be lost when the browser removes the attribute.
+ * The `ngDisabled` directive solves this problem for the `disabled` attribute.
+ * This complementary directive is not removed by the browser and so provides
+ * a permanent reliable place to store the binding information.
  *
  * @example
     <example>
@@ -18022,7 +17878,7 @@ var htmlAnchorDirective = valueFn({
  *
  * @element INPUT
  * @param {expression} ngDisabled If the {@link guide/expression expression} is truthy,
- *     then the `disabled` attribute will be set on the element
+ *     then special attribute "disabled" will be set on the element
  */
 
 
@@ -18570,7 +18426,7 @@ function FormController(element, attrs, $scope, $animate, $interpolate) {
  *
  * # Alias: {@link ng.directive:ngForm `ngForm`}
  *
- * In Angular, forms can be nested. This means that the outer form is valid when all of the child
+ * In Angular forms can be nested. This means that the outer form is valid when all of the child
  * forms are valid as well. However, browsers do not allow nesting of `<form>` elements, so
  * Angular provides the {@link ng.directive:ngForm `ngForm`} directive which behaves identically to
  * `<form>` but can be nested.  This allows you to have nested forms, which is very useful when
@@ -18708,11 +18564,9 @@ var formDirectiveFactory = function(isNgForm) {
       name: 'form',
       restrict: isNgForm ? 'EAC' : 'E',
       controller: FormController,
-      compile: function ngFormCompile(formElement, attr) {
+      compile: function ngFormCompile(formElement) {
         // Setup initial state of the control
         formElement.addClass(PRISTINE_CLASS).addClass(VALID_CLASS);
-
-        var nameAttr = attr.name ? 'name' : (isNgForm && attr.ngForm ? 'ngForm' : false);
 
         return {
           pre: function ngFormPreLink(scope, formElement, attr, controller) {
@@ -18744,21 +18598,23 @@ var formDirectiveFactory = function(isNgForm) {
               });
             }
 
-            var parentFormCtrl = controller.$$parentForm;
+            var parentFormCtrl = controller.$$parentForm,
+                alias = controller.$name;
 
-            if (nameAttr) {
-              setter(scope, null, controller.$name, controller, controller.$name);
-              attr.$observe(nameAttr, function(newValue) {
-                if (controller.$name === newValue) return;
-                setter(scope, null, controller.$name, undefined, controller.$name);
-                parentFormCtrl.$$renameControl(controller, newValue);
-                setter(scope, null, controller.$name, controller, controller.$name);
+            if (alias) {
+              setter(scope, null, alias, controller, alias);
+              attr.$observe(attr.name ? 'name' : 'ngForm', function(newValue) {
+                if (alias === newValue) return;
+                setter(scope, null, alias, undefined, alias);
+                alias = newValue;
+                setter(scope, null, alias, controller, alias);
+                parentFormCtrl.$$renameControl(controller, alias);
               });
             }
             formElement.on('$destroy', function() {
               parentFormCtrl.$removeControl(controller);
-              if (nameAttr) {
-                setter(scope, null, attr[nameAttr], undefined, controller.$name);
+              if (alias) {
+                setter(scope, null, alias, undefined, alias);
               }
               extend(controller, nullFormCtrl); //stop propagating child destruction handlers upwards
             });
@@ -20024,7 +19880,7 @@ function numberInputType(scope, element, attr, ctrl, $sniffer, $browser) {
     return value;
   });
 
-  if (isDefined(attr.min) || attr.ngMin) {
+  if (attr.min || attr.ngMin) {
     var minVal;
     ctrl.$validators.min = function(value) {
       return ctrl.$isEmpty(value) || isUndefined(minVal) || value >= minVal;
@@ -20040,7 +19896,7 @@ function numberInputType(scope, element, attr, ctrl, $sniffer, $browser) {
     });
   }
 
-  if (isDefined(attr.max) || attr.ngMax) {
+  if (attr.max || attr.ngMax) {
     var maxVal;
     ctrl.$validators.max = function(value) {
       return ctrl.$isEmpty(value) || isUndefined(maxVal) || value <= maxVal;
@@ -22731,8 +22587,8 @@ is set to `true`. The parse error is stored in `ngModel.$error.parse`.
  * data-binding. Notice how different directives (`contenteditable`, `ng-model`, and `required`)
  * collaborate together to achieve the desired result.
  *
- * `contenteditable` is an HTML5 attribute, which tells the browser to let the element
- * contents be edited in place by the user.
+ * Note that `contenteditable` is an HTML5 attribute, which tells the browser to let the element
+ * contents be edited in place by the user.  This will not work on older browsers.
  *
  * We are using the {@link ng.service:$sce $sce} service here and include the {@link ngSanitize $sanitize}
  * module to automatically remove "bad" content like inline event listener (e.g. `<span onclick="...">`).
@@ -22846,7 +22702,6 @@ var NgModelController = ['$scope', '$exceptionHandler', '$attrs', '$element', '$
       ngModelGet = parsedNgModel,
       ngModelSet = parsedNgModelAssign,
       pendingDebounce = null,
-      parserValid,
       ctrl = this;
 
   this.$$setOptions = function(options) {
@@ -23119,12 +22974,16 @@ var NgModelController = ['$scope', '$exceptionHandler', '$attrs', '$element', '$
     // the model although neither viewValue nor the model on the scope changed
     var modelValue = ctrl.$$rawModelValue;
 
+    // Check if the there's a parse error, so we don't unset it accidentially
+    var parserName = ctrl.$$parserName || 'parse';
+    var parserValid = ctrl.$error[parserName] ? false : undefined;
+
     var prevValid = ctrl.$valid;
     var prevModelValue = ctrl.$modelValue;
 
     var allowInvalid = ctrl.$options && ctrl.$options.allowInvalid;
 
-    ctrl.$$runValidators(modelValue, viewValue, function(allValid) {
+    ctrl.$$runValidators(parserValid, modelValue, viewValue, function(allValid) {
       // If there was no change in validity, don't update the model
       // This prevents changing an invalid modelValue to undefined
       if (!allowInvalid && prevValid !== allValid) {
@@ -23142,12 +23001,12 @@ var NgModelController = ['$scope', '$exceptionHandler', '$attrs', '$element', '$
 
   };
 
-  this.$$runValidators = function(modelValue, viewValue, doneCallback) {
+  this.$$runValidators = function(parseValid, modelValue, viewValue, doneCallback) {
     currentValidationRunId++;
     var localValidationRunId = currentValidationRunId;
 
     // check parser error
-    if (!processParseErrors()) {
+    if (!processParseErrors(parseValid)) {
       validationDone(false);
       return;
     }
@@ -23157,22 +23016,21 @@ var NgModelController = ['$scope', '$exceptionHandler', '$attrs', '$element', '$
     }
     processAsyncValidators();
 
-    function processParseErrors() {
+    function processParseErrors(parseValid) {
       var errorKey = ctrl.$$parserName || 'parse';
-      if (parserValid === undefined) {
+      if (parseValid === undefined) {
         setValidity(errorKey, null);
       } else {
-        if (!parserValid) {
+        setValidity(errorKey, parseValid);
+        if (!parseValid) {
           forEach(ctrl.$validators, function(v, name) {
             setValidity(name, null);
           });
           forEach(ctrl.$asyncValidators, function(v, name) {
             setValidity(name, null);
           });
+          return false;
         }
-        // Set the parse error last, to prevent unsetting it, should a $validators key == parserName
-        setValidity(errorKey, parserValid);
-        return parserValid;
       }
       return true;
     }
@@ -23267,7 +23125,7 @@ var NgModelController = ['$scope', '$exceptionHandler', '$attrs', '$element', '$
   this.$$parseAndValidate = function() {
     var viewValue = ctrl.$$lastCommittedViewValue;
     var modelValue = viewValue;
-    parserValid = isUndefined(modelValue) ? undefined : true;
+    var parserValid = isUndefined(modelValue) ? undefined : true;
 
     if (parserValid) {
       for (var i = 0; i < ctrl.$parsers.length; i++) {
@@ -23293,7 +23151,7 @@ var NgModelController = ['$scope', '$exceptionHandler', '$attrs', '$element', '$
 
     // Pass the $$lastCommittedViewValue here, because the cached viewValue might be out of date.
     // This can happen if e.g. $setViewValue is called from inside a parser
-    ctrl.$$runValidators(modelValue, ctrl.$$lastCommittedViewValue, function(allValid) {
+    ctrl.$$runValidators(parserValid, modelValue, ctrl.$$lastCommittedViewValue, function(allValid) {
       if (!allowInvalid) {
         // Note: Don't check ctrl.$valid here, as we could have
         // external validators (e.g. calculated on the server),
@@ -23414,7 +23272,6 @@ var NgModelController = ['$scope', '$exceptionHandler', '$attrs', '$element', '$
     // TODO(perf): why not move this to the action fn?
     if (modelValue !== ctrl.$modelValue) {
       ctrl.$modelValue = ctrl.$$rawModelValue = modelValue;
-      parserValid = undefined;
 
       var formatters = ctrl.$formatters,
           idx = formatters.length;
@@ -23427,7 +23284,7 @@ var NgModelController = ['$scope', '$exceptionHandler', '$attrs', '$element', '$
         ctrl.$viewValue = ctrl.$$lastCommittedViewValue = viewValue;
         ctrl.$render();
 
-        ctrl.$$runValidators(modelValue, viewValue, noop);
+        ctrl.$$runValidators(undefined, modelValue, viewValue, noop);
       }
     }
 
@@ -24243,55 +24100,6 @@ var ngPluralizeDirective = ['$locale', '$interpolate', function($locale, $interp
  * when keys are deleted and reinstated.
  *
  *
- * # Tracking and Duplicates
- *
- * When the contents of the collection change, `ngRepeat` makes the corresponding changes to the DOM:
- *
- * * When an item is added, a new instance of the template is added to the DOM.
- * * When an item is removed, its template instance is removed from the DOM.
- * * When items are reordered, their respective templates are reordered in the DOM.
- *
- * By default, `ngRepeat` does not allow duplicate items in arrays. This is because when
- * there are duplicates, it is not possible to maintain a one-to-one mapping between collection
- * items and DOM elements.
- *
- * If you do need to repeat duplicate items, you can substitute the default tracking behavior
- * with your own using the `track by` expression.
- *
- * For example, you may track items by the index of each item in the collection, using the
- * special scope property `$index`:
- * ```html
- *    <div ng-repeat="n in [42, 42, 43, 43] track by $index">
- *      {{n}}
- *    </div>
- * ```
- *
- * You may use arbitrary expressions in `track by`, including references to custom functions
- * on the scope:
- * ```html
- *    <div ng-repeat="n in [42, 42, 43, 43] track by myTrackingFunction(n)">
- *      {{n}}
- *    </div>
- * ```
- *
- * If you are working with objects that have an identifier property, you can track
- * by the identifier instead of the whole object. Should you reload your data later, `ngRepeat`
- * will not have to rebuild the DOM elements for items it has already rendered, even if the
- * JavaScript objects in the collection have been substituted for new ones:
- * ```html
- *    <div ng-repeat="model in collection track by model.id">
- *      {{model.name}}
- *    </div>
- * ```
- *
- * When no `track by` expression is provided, it is equivalent to tracking by the built-in
- * `$id` function, which tracks items by their identity:
- * ```html
- *    <div ng-repeat="obj in collection track by $id(obj)">
- *      {{obj.prop}}
- *    </div>
- * ```
- *
  * # Special repeat start and end points
  * To repeat a series of elements instead of just one parent element, ngRepeat (as well as other ng directives) supports extending
  * the range of the repeater by defining explicit start and end points by using **ng-repeat-start** and **ng-repeat-end** respectively.
@@ -24359,12 +24167,12 @@ var ngPluralizeDirective = ['$locale', '$interpolate', function($locale, $interp
  *
  *     For example: `(name, age) in {'adam':10, 'amalie':12}`.
  *
- *   * `variable in expression track by tracking_expression` – You can also provide an optional tracking expression
- *     which can be used to associate the objects in the collection with the DOM elements. If no tracking expression
- *     is specified, ng-repeat associates elements by identity. It is an error to have
- *     more than one tracking expression value resolve to the same key. (This would mean that two distinct objects are
- *     mapped to the same DOM element, which is not possible.)  If filters are used in the expression, they should be
- *     applied before the tracking expression.
+ *   * `variable in expression track by tracking_expression` – You can also provide an optional tracking function
+ *     which can be used to associate the objects in the collection with the DOM elements. If no tracking function
+ *     is specified the ng-repeat associates elements by identity in the collection. It is an error to have
+ *     more than one tracking function to resolve to the same key. (This would mean that two distinct objects are
+ *     mapped to the same DOM element, which is not possible.)  Filters should be applied to the expression,
+ *     before specifying a tracking expression.
  *
  *     For example: `item in items` is equivalent to `item in items track by $id(item)`. This implies that the DOM elements
  *     will be associated by item identity in the array.
@@ -24748,11 +24556,10 @@ var NG_HIDE_IN_PROGRESS_CLASS = 'ng-hide-animate';
  *
  * By default, the `.ng-hide` class will style the element with `display: none!important`. If you wish to change
  * the hide behavior with ngShow/ngHide then this can be achieved by restating the styles for the `.ng-hide`
- * class CSS. Note that the selector that needs to be used is actually `.ng-hide:not(.ng-hide-animate)` to cope
- * with extra animation classes that can be added.
+ * class in CSS:
  *
  * ```css
- * .ng-hide:not(.ng-hide-animate) {
+ * .ng-hide {
  *   /&#42; this is just another form of hiding an element &#42;/
  *   display: block!important;
  *   position: absolute;
@@ -26268,7 +26075,7 @@ var maxlengthDirective = function() {
         ctrl.$validate();
       });
       ctrl.$validators.maxlength = function(modelValue, viewValue) {
-        return (maxlength < 0) || ctrl.$isEmpty(viewValue) || (viewValue.length <= maxlength);
+        return (maxlength < 0) || ctrl.$isEmpty(modelValue) || (viewValue.length <= maxlength);
       };
     }
   };
@@ -26313,7 +26120,7 @@ var minlengthDirective = function() {
 
 !window.angular.$$csp() && window.angular.element(document).find('head').prepend('<style type="text/css">@charset "UTF-8";[ng\\:cloak],[ng-cloak],[data-ng-cloak],[x-ng-cloak],.ng-cloak,.x-ng-cloak,.ng-hide:not(.ng-hide-animate){display:none !important;}ng\\:form{display:block;}</style>');
 /**
- * @license AngularJS v1.3.15
+ * @license AngularJS v1.3.11
  * (c) 2010-2014 Google, Inc. http://angularjs.org
  * License: MIT
  */
@@ -27647,7 +27454,8 @@ angular.module('ngAnimate', ['ng'])
           } else if (lastAnimation.event == 'setClass') {
             animationsToCancel.push(lastAnimation);
             cleanup(element, className);
-          } else if (runningAnimations[className]) {
+          }
+          else if (runningAnimations[className]) {
             var current = runningAnimations[className];
             if (current.event == animationEvent) {
               skipAnimation = true;
@@ -28451,7 +28259,7 @@ angular.module('ngAnimate', ['ng'])
 })(window, window.angular);
 
 /**
- * @license AngularJS v1.3.15
+ * @license AngularJS v1.3.11
  * (c) 2010-2014 Google, Inc. http://angularjs.org
  * License: MIT
  */
@@ -28658,7 +28466,7 @@ angular.module('ngCookies', ['ng']).
 })(window, window.angular);
 
 /**
- * @license AngularJS v1.3.15
+ * @license AngularJS v1.3.11
  * (c) 2010-2014 Google, Inc. http://angularjs.org
  * License: MIT
  */
@@ -28871,7 +28679,6 @@ function shallowClearAndCopy(src, dst) {
  *   - HTTP GET "class" actions: `Resource.action([parameters], [success], [error])`
  *   - non-GET "class" actions: `Resource.action([parameters], postData, [success], [error])`
  *   - non-GET instance actions:  `instance.$action([parameters], [success], [error])`
- *
  *
  *   Success callback is called with (value, responseHeaders) arguments. Error callback is called
  *   with (httpResponse) argument.
@@ -29327,22 +29134,11 @@ angular.module('ngResource', ['ng']).
 })(window, window.angular);
 
 /**
- * @license AngularJS v1.3.15
+ * @license AngularJS v1.3.11
  * (c) 2010-2014 Google, Inc. http://angularjs.org
  * License: MIT
  */
 (function(window, angular, undefined) {'use strict';
-
-/* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
- *     Any commits to this file should be reviewed with security in mind.  *
- *   Changes to this file can potentially create security vulnerabilities. *
- *          An approval from 2 Core members with history of modifying      *
- *                         this file is required.                          *
- *                                                                         *
- *  Does the change somehow allow for arbitrary javascript to be executed? *
- *    Or allows for someone to change the prototype of built-in objects?   *
- *     Or gives undesired access to variables likes document or window?    *
- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
 
 var $sanitizeMinErr = angular.$$minErr('$sanitize');
 
@@ -29615,14 +29411,14 @@ function htmlParser(html, handler) {
     }
   }
   var index, chars, match, stack = [], last = html, text;
-  stack.last = function() { return stack[stack.length - 1]; };
+  stack.last = function() { return stack[ stack.length - 1 ]; };
 
   while (html) {
     text = '';
     chars = true;
 
     // Make sure we're not in a script or style element
-    if (!stack.last() || !specialElements[stack.last()]) {
+    if (!stack.last() || !specialElements[ stack.last() ]) {
 
       // Comment
       if (html.indexOf("<!--") === 0) {
@@ -29680,8 +29476,7 @@ function htmlParser(html, handler) {
       }
 
     } else {
-      // IE versions 9 and 10 do not understand the regex '[^]', so using a workaround with [\W\w].
-      html = html.replace(new RegExp("([\\W\\w]*)<\\s*\\/\\s*" + stack.last() + "[^>]*>", 'i'),
+      html = html.replace(new RegExp("(.*)<\\s*\\/\\s*" + stack.last() + "[^>]*>", 'i'),
         function(all, text) {
           text = text.replace(COMMENT_REGEXP, "$1").replace(CDATA_REGEXP, "$1");
 
@@ -29705,17 +29500,17 @@ function htmlParser(html, handler) {
 
   function parseStartTag(tag, tagName, rest, unary) {
     tagName = angular.lowercase(tagName);
-    if (blockElements[tagName]) {
-      while (stack.last() && inlineElements[stack.last()]) {
+    if (blockElements[ tagName ]) {
+      while (stack.last() && inlineElements[ stack.last() ]) {
         parseEndTag("", stack.last());
       }
     }
 
-    if (optionalEndTagElements[tagName] && stack.last() == tagName) {
+    if (optionalEndTagElements[ tagName ] && stack.last() == tagName) {
       parseEndTag("", tagName);
     }
 
-    unary = voidElements[tagName] || !!unary;
+    unary = voidElements[ tagName ] || !!unary;
 
     if (!unary)
       stack.push(tagName);
@@ -29740,13 +29535,13 @@ function htmlParser(html, handler) {
     if (tagName)
       // Find the closest opened tag of the same type
       for (pos = stack.length - 1; pos >= 0; pos--)
-        if (stack[pos] == tagName)
+        if (stack[ pos ] == tagName)
           break;
 
     if (pos >= 0) {
       // Close all the open elements, up the stack
       for (i = stack.length - 1; i >= pos; i--)
-        if (handler.end) handler.end(stack[i]);
+        if (handler.end) handler.end(stack[ i ]);
 
       // Remove the open elements from the stack
       stack.length = pos;
@@ -29755,6 +29550,7 @@ function htmlParser(html, handler) {
 }
 
 var hiddenPre=document.createElement("pre");
+var spaceRe = /^(\s*)([\s\S]*?)(\s*)$/;
 /**
  * decodes all entities into regular string
  * @param value
@@ -29763,10 +29559,22 @@ var hiddenPre=document.createElement("pre");
 function decodeEntities(value) {
   if (!value) { return ''; }
 
-  hiddenPre.innerHTML = value.replace(/</g,"&lt;");
-  // innerText depends on styling as it doesn't display hidden elements.
-  // Therefore, it's better to use textContent not to cause unnecessary reflows.
-  return hiddenPre.textContent;
+  // Note: IE8 does not preserve spaces at the start/end of innerHTML
+  // so we must capture them and reattach them afterward
+  var parts = spaceRe.exec(value);
+  var spaceBefore = parts[1];
+  var spaceAfter = parts[3];
+  var content = parts[2];
+  if (content) {
+    hiddenPre.innerHTML=content.replace(/</g,"&lt;");
+    // innerText depends on styling as it doesn't display hidden elements.
+    // Therefore, it's better to use textContent not to cause unnecessary
+    // reflows. However, IE<9 don't support textContent so the innerText
+    // fallback is necessary.
+    content = 'textContent' in hiddenPre ?
+      hiddenPre.textContent : hiddenPre.innerText;
+  }
+  return spaceBefore + content + spaceAfter;
 }
 
 /**
@@ -30007,7 +29815,7 @@ angular.module('ngSanitize').filter('linky', ['$sanitize', function($sanitize) {
 })(window, window.angular);
 
 /**
- * @license AngularJS v1.3.15
+ * @license AngularJS v1.3.11
  * (c) 2010-2014 Google, Inc. http://angularjs.org
  * License: MIT
  */
@@ -30628,776 +30436,6 @@ makeSwipeDirective('ngSwipeRight', 1, 'swiperight');
 
 
 })(window, window.angular);
-
-/** 
-* @version 2.0.1
-* @license MIT
-*/
-!function(t,e){"use strict";t.module("smart-table",[]).run(["$templateCache",function(t){t.put("template/smart-table/pagination.html",'<nav ng-if="pages.length >= 2"><ul class="pagination"><li ng-repeat="page in pages" ng-class="{active: page==currentPage}"><a ng-click="selectPage(page)">{{page}}</a></li></ul></nav>')}]),t.module("smart-table").constant("stConfig",{pagination:{template:"template/smart-table/pagination.html",itemsByPage:10,displayedPages:5},search:{delay:400},select:{mode:"single",selectedClass:"st-selected"},sort:{ascentClass:"st-sort-ascent",descentClass:"st-sort-descent"}}),t.module("smart-table").controller("stTableController",["$scope","$parse","$filter","$attrs",function(a,s,n,r){function i(t){return t?[].concat(t):[]}function c(){h=i(l(a)),P===!0&&S.pipe()}var l,o,u,p=r.stTable,g=s(p),f=g.assign,d=n("orderBy"),m=n("filter"),h=i(g(a)),b={sort:{},search:{},pagination:{start:0}},P=!0,S=this;r.stSafeSrc&&(l=s(r.stSafeSrc),a.$watch(function(){var t=l(a);return t?t.length:0},function(t){t!==h.length&&c()}),a.$watch(function(){return l(a)},function(t,e){t!==e&&c()})),this.sortBy=function(e,a){return b.sort.predicate=e,b.sort.reverse=a===!0,t.isFunction(e)?b.sort.functionName=e.name:delete b.sort.functionName,b.pagination.start=0,this.pipe()},this.search=function(e,a){var s=b.search.predicateObject||{},n=a?a:"$";return e=t.isString(e)?e.trim():e,s[n]=e,e||delete s[n],b.search.predicateObject=s,b.pagination.start=0,this.pipe()},this.pipe=function(){var t,s=b.pagination;o=b.search.predicateObject?m(h,b.search.predicateObject):h,b.sort.predicate&&(o=d(o,b.sort.predicate,b.sort.reverse)),s.number!==e&&(s.numberOfPages=o.length>0?Math.ceil(o.length/s.number):1,s.start=s.start>=o.length?(s.numberOfPages-1)*s.number:s.start,t=o.slice(s.start,s.start+parseInt(s.number))),f(a,t||o)},this.select=function(t,a){var s=h,n=s.indexOf(t);-1!==n&&("single"===a?(t.isSelected=t.isSelected!==!0,u&&(u.isSelected=!1),u=t.isSelected===!0?t:e):s[n].isSelected=!s[n].isSelected)},this.slice=function(t,e){return b.pagination.start=t,b.pagination.number=e,this.pipe()},this.tableState=function(){return b},this.getFilteredCollection=function(){return o||h},this.setFilterFunction=function(t){m=n(t)},this.setSortFunction=function(t){d=n(t)},this.preventPipeOnWatch=function(){P=!1}}]).directive("stTable",function(){return{restrict:"A",controller:"stTableController",link:function(t,e,a,s){a.stSetFilter&&s.setFilterFunction(a.stSetFilter),a.stSetSort&&s.setSortFunction(a.stSetSort)}}}),t.module("smart-table").directive("stSearch",["stConfig","$timeout",function(t,e){return{require:"^stTable",link:function(a,s,n,r){var i=r,c=null,l=n.stDelay||t.search.delay;n.$observe("stSearch",function(t,e){var a=s[0].value;t!==e&&a&&(r.tableState().search={},i.search(a,t))}),a.$watch(function(){return r.tableState().search},function(t){var e=n.stSearch||"$";t.predicateObject&&t.predicateObject[e]!==s[0].value&&(s[0].value=t.predicateObject[e]||"")},!0),s.bind("input",function(t){t=t.originalEvent||t,null!==c&&e.cancel(c),c=e(function(){i.search(t.target.value,n.stSearch||""),c=null},l)})}}}]),t.module("smart-table").directive("stSelectRow",["stConfig",function(t){return{restrict:"A",require:"^stTable",scope:{row:"=stSelectRow"},link:function(e,a,s,n){var r=s.stSelectMode||t.select.mode;a.bind("click",function(){e.$apply(function(){n.select(e.row,r)})}),e.$watch("row.isSelected",function(e){e===!0?a.addClass(t.select.selectedClass):a.removeClass(t.select.selectedClass)})}}}]),t.module("smart-table").directive("stSort",["stConfig","$parse",function(a,s){return{restrict:"A",require:"^stTable",link:function(n,r,i,c){function l(){g++,u=t.isFunction(p(n))?p(n):i.stSort,g%3===0&&i.stSkipNatural===e?(g=0,c.tableState().sort={},c.tableState().pagination.start=0,c.pipe()):c.sortBy(u,g%2===0)}var o,u=i.stSort,p=s(u),g=0,f=i.stClassAscent||a.sort.ascentClass,d=i.stClassDescent||a.sort.descentClass,m=[f,d];i.stSortDefault&&(o=n.$eval(i.stSortDefault)!==e?n.$eval(i.stSortDefault):i.stSortDefault),r.bind("click",function(){u&&n.$apply(l)}),o&&(g="reverse"===o?1:0,l()),n.$watch(function(){return c.tableState().sort},function(t){t.predicate!==u?(g=0,r.removeClass(f).removeClass(d)):(g=t.reverse===!0?2:1,r.removeClass(m[g%2]).addClass(m[g-1]))},!0)}}}]),t.module("smart-table").directive("stPagination",["stConfig",function(t){return{restrict:"EA",require:"^stTable",scope:{stItemsByPage:"=?",stDisplayedPages:"=?",stPageChange:"&"},templateUrl:function(e,a){return a.stTemplate?a.stTemplate:t.pagination.template},link:function(e,a,s,n){function r(){var t,a,s=n.tableState().pagination,r=1,i=e.currentPage;for(e.currentPage=Math.floor(s.start/s.number)+1,r=Math.max(r,e.currentPage-Math.abs(Math.floor(e.stDisplayedPages/2))),t=r+e.stDisplayedPages,t>s.numberOfPages&&(t=s.numberOfPages+1,r=Math.max(1,t-e.stDisplayedPages)),e.pages=[],e.numPages=s.numberOfPages,a=r;t>a;a++)e.pages.push(a);i!==e.currentPage&&e.stPageChange({newPage:e.currentPage})}e.stItemsByPage=e.stItemsByPage?+e.stItemsByPage:t.pagination.itemsByPage,e.stDisplayedPages=e.stDisplayedPages?+e.stDisplayedPages:t.pagination.displayedPages,e.currentPage=1,e.pages=[],e.$watch(function(){return n.tableState().pagination},r,!0),e.$watch("stItemsByPage",function(t,a){t!==a&&e.selectPage(1)}),e.$watch("stDisplayedPages",r),e.selectPage=function(t){t>0&&t<=e.numPages&&n.slice((t-1)*e.stItemsByPage,e.stItemsByPage)},n.tableState().pagination.number||n.slice(0,e.stItemsByPage)}}}]),t.module("smart-table").directive("stPipe",function(){return{require:"stTable",scope:{stPipe:"="},link:{pre:function(e,a,s,n){t.isFunction(e.stPipe)&&(n.preventPipeOnWatch(),n.pipe=function(){return e.stPipe(n.tableState(),n)})},post:function(t,e,a,s){s.pipe()}}}})}(angular);
-/**
- * Satellizer 0.9.4
- * (c) 2015 Sahat Yalkabov
- * License: MIT
- */
-(function(window, angular, undefined) {
-  'use strict';
-
-  angular.module('satellizer', [])
-    .constant('satellizer.config', {
-      httpInterceptor: true,
-      loginOnSignup: true,
-      loginRedirect: '/',
-      logoutRedirect: '/',
-      signupRedirect: '/login',
-      loginUrl: '/auth/login',
-      signupUrl: '/auth/signup',
-      loginRoute: '/login',
-      signupRoute: '/signup',
-      tokenRoot: false,
-      tokenName: 'token',
-      tokenPrefix: 'satellizer',
-      unlinkUrl: '/auth/unlink/',
-      unlinkMethod: 'get',
-      authHeader: 'Authorization',
-      withCredentials: true,
-      platform: 'browser',
-      providers: {
-        google: {
-          name: 'google',
-          url: '/auth/google',
-          authorizationEndpoint: 'https://accounts.google.com/o/oauth2/auth',
-          redirectUri: window.location.origin || window.location.protocol + '//' + window.location.host,
-          scope: ['profile', 'email'],
-          scopePrefix: 'openid',
-          scopeDelimiter: ' ',
-          requiredUrlParams: ['scope'],
-          optionalUrlParams: ['display'],
-          display: 'popup',
-          type: '2.0',
-          popupOptions: { width: 452, height: 633 }
-        },
-        facebook: {
-          name: 'facebook',
-          url: '/auth/facebook',
-          authorizationEndpoint: 'https://www.facebook.com/dialog/oauth',
-          redirectUri: window.location.origin + '/' || window.location.protocol + '//' + window.location.host + '/',
-          scope: ['email'],
-          scopeDelimiter: ',',
-          requiredUrlParams: ['display', 'scope'],
-          display: 'popup',
-          type: '2.0',
-          popupOptions: { width: 580, height: 400 }
-        },
-        linkedin: {
-          name: 'linkedin',
-          url: '/auth/linkedin',
-          authorizationEndpoint: 'https://www.linkedin.com/uas/oauth2/authorization',
-          redirectUri: window.location.origin || window.location.protocol + '//' + window.location.host,
-          requiredUrlParams: ['state'],
-          scope: ['r_emailaddress'],
-          scopeDelimiter: ' ',
-          state: 'STATE',
-          type: '2.0',
-          popupOptions: { width: 527, height: 582 }
-        },
-        github: {
-          name: 'github',
-          url: '/auth/github',
-          authorizationEndpoint: 'https://github.com/login/oauth/authorize',
-          redirectUri: window.location.origin || window.location.protocol + '//' + window.location.host,
-          optionalUrlParams: ['scope'],
-          scope: ['user:email'],
-          scopeDelimiter: ' ',
-          type: '2.0',
-          popupOptions: { width: 1020, height: 618 }
-        },
-        yahoo: {
-          name: 'yahoo',
-          url: '/auth/yahoo',
-          authorizationEndpoint: 'https://api.login.yahoo.com/oauth2/request_auth',
-          redirectUri: window.location.origin || window.location.protocol + '//' + window.location.host,
-          scope: [],
-          scopeDelimiter: ',',
-          type: '2.0',
-          popupOptions: { width: 559, height: 519 }
-        },
-        twitter: {
-          name: 'twitter',
-          url: '/auth/twitter',
-          type: '1.0',
-          popupOptions: { width: 495, height: 645 }
-        },
-        live: {
-          name: 'live',
-          url: '/auth/live',
-          authorizationEndpoint: 'https://login.live.com/oauth20_authorize.srf',
-          redirectUri: window.location.origin || window.location.protocol + '//' + window.location.host,
-          scope: ['wl.emails'],
-          scopeDelimiter: ' ',
-          requiredUrlParams: ['display', 'scope'],
-          display: 'popup',
-          type: '2.0',
-          popupOptions: { width: 500, height: 560 }
-        }
-      }
-    })
-    .provider('$auth', ['satellizer.config', function(config) {
-      Object.defineProperties(this, {
-        loginOnSignup: {
-          get: function() { return config.loginOnSignup; },
-          set: function(value) { config.loginOnSignup = value; }
-        },
-        httpInterceptor: {
-          get: function() { return config.httpInterceptor; },
-          set: function(value) { config.httpInterceptor = value; }
-        },
-        logoutRedirect: {
-          get: function() { return config.logoutRedirect; },
-          set: function(value) { config.logoutRedirect = value; }
-        },
-        loginRedirect: {
-          set: function(value) { config.loginRedirect = value; },
-          get: function() { return config.loginRedirect; }
-        },
-        signupRedirect: {
-          get: function() { return config.signupRedirect; },
-          set: function(value) { config.signupRedirect = value; }
-        },
-        loginUrl: {
-          get: function() { return config.loginUrl; },
-          set: function(value) { config.loginUrl = value; }
-        },
-        signupUrl: {
-          get: function() { return config.signupUrl; },
-          set: function(value) { config.signupUrl = value; }
-        },
-        loginRoute: {
-          get: function() { return config.loginRoute; },
-          set: function(value) { config.loginRoute = value; }
-        },
-        signupRoute: {
-          get: function() { return config.signupRoute; },
-          set: function(value) { config.signupRoute = value; }
-        },
-        tokenRoot: {
-          get: function() { return config.tokenRoot; },
-          set: function(value) { config.tokenRoot = value; }
-        },
-        tokenName: {
-          get: function() { return config.tokenName; },
-          set: function(value) { config.tokenName = value; }
-        },
-        tokenPrefix: {
-          get: function() { return config.tokenPrefix; },
-          set: function(value) { config.tokenPrefix = value; }
-        },
-        unlinkUrl: {
-          get: function() { return config.unlinkUrl; },
-          set: function(value) { config.unlinkUrl = value; }
-        },
-        authHeader: {
-          get: function() { return config.authHeader; },
-          set: function(value) { config.authHeader = value; }
-        },
-        withCredentials: {
-          get: function() { return config.withCredentials; },
-          set: function(value) { config.withCredentials = value; }
-        },
-        unlinkMethod: {
-          get: function() { return config.unlinkMethod; },
-          set: function(value) { config.unlinkMethod = value; }
-        },
-        platform: {
-          get: function() { return config.platform; },
-          set: function(value) { config.platform = value; }
-        }
-      });
-
-      angular.forEach(Object.keys(config.providers), function(provider) {
-        this[provider] = function(params) {
-          return angular.extend(config.providers[provider], params);
-        };
-      }, this);
-
-      var oauth = function(params) {
-        config.providers[params.name] = config.providers[params.name] || {};
-        angular.extend(config.providers[params.name], params);
-      };
-
-      this.oauth1 = function(params) {
-        oauth(params);
-        config.providers[params.name].type = '1.0';
-      };
-
-      this.oauth2 = function(params) {
-        oauth(params);
-        config.providers[params.name].type = '2.0';
-      };
-
-      this.$get = [
-        '$q',
-        'satellizer.shared',
-        'satellizer.local',
-        'satellizer.oauth',
-        function($q, shared, local, oauth) {
-          var $auth = {};
-
-          $auth.authenticate = function(name, userData) {
-            return oauth.authenticate(name, false, userData);
-          };
-
-          $auth.login = function(user, redirect) {
-            return local.login(user, redirect);
-          };
-
-          $auth.signup = function(user) {
-            return local.signup(user);
-          };
-
-          $auth.logout = function() {
-            return shared.logout();
-          };
-
-          $auth.isAuthenticated = function() {
-            return shared.isAuthenticated();
-          };
-
-          $auth.link = function(name, userData) {
-            return oauth.authenticate(name, true, userData);
-          };
-
-          $auth.unlink = function(provider) {
-            return oauth.unlink(provider);
-          };
-
-          $auth.getToken = function() {
-            return shared.getToken();
-          };
-
-          $auth.setToken = function(token, redirect) {
-            shared.setToken({ access_token: token }, redirect);
-          };
-
-          $auth.removeToken = function() {
-            return shared.removeToken();
-          };
-
-          $auth.getPayload = function() {
-            return shared.getPayload();
-          };
-
-          return $auth;
-        }];
-
-    }])
-    .factory('satellizer.shared', [
-      '$q',
-      '$window',
-      '$location',
-      'satellizer.config',
-      function($q, $window, $location, config) {
-        var shared = {};
-
-        shared.getToken = function() {
-          var tokenName = config.tokenPrefix ? config.tokenPrefix + '_' + config.tokenName : config.tokenName;
-          return $window.localStorage[tokenName];
-        };
-
-        shared.getPayload = function() {
-          var tokenName = config.tokenPrefix ? config.tokenPrefix + '_' + config.tokenName : config.tokenName;
-          var token = $window.localStorage[tokenName];
-
-          if (token && token.split('.').length === 3) {
-            var base64Url = token.split('.')[1];
-            var base64 = base64Url.replace('-', '+').replace('_', '/');
-            return JSON.parse($window.atob(base64));
-          }
-        };
-
-        shared.setToken = function(response, redirect) {
-          var accessToken = response && response.access_token;
-          var token;
-
-          if (accessToken) {
-            if (angular.isObject(accessToken) && angular.isObject(accessToken.data)) {
-              response = accessToken;
-            } else if (angular.isString(accessToken)) {
-              token = accessToken;
-            }
-          }
-
-          if (!token && response) {
-            token = config.tokenRoot && response.data[config.tokenRoot] ?
-              response.data[config.tokenRoot][config.tokenName] : response.data[config.tokenName];
-          }
-
-          var tokenName = config.tokenPrefix ? config.tokenPrefix + '_' + config.tokenName : config.tokenName;
-
-          if (!token) {
-            tokenName = config.tokenRoot ? config.tokenRoot + '.' + config.tokenName : config.tokenName;
-            throw new Error('Expecting a token named "' + tokenName + '" but instead got: ' + JSON.stringify(response.data));
-          }
-
-          $window.localStorage[tokenName] = token;
-
-          if (config.loginRedirect && !redirect) {
-            $location.path(config.loginRedirect);
-          }  else if (redirect && angular.isString(redirect)) {
-              $location.path(encodeURI(redirect));
-          }
-        };
-
-        shared.removeToken = function() {
-          var tokenName = config.tokenPrefix ? config.tokenPrefix + '_' + config.tokenName : config.tokenName;
-          delete $window.localStorage[tokenName];
-        };
-
-        shared.isAuthenticated = function() {
-          var tokenName = config.tokenPrefix ? config.tokenPrefix + '_' + config.tokenName : config.tokenName;
-          var token = $window.localStorage[tokenName];
-
-          if (token) {
-            if (token.split('.').length === 3) {
-              var base64Url = token.split('.')[1];
-              var base64 = base64Url.replace('-', '+').replace('_', '/');
-              var exp = JSON.parse($window.atob(base64)).exp;
-              if (exp) {
-                return Math.round(new Date().getTime() / 1000) <= exp;
-              }
-            }
-            return true;
-          }
-          return false;
-        };
-
-        shared.logout = function() {
-          var tokenName = config.tokenPrefix ? config.tokenPrefix + '_' + config.tokenName : config.tokenName;
-          delete $window.localStorage[tokenName];
-
-          if (config.logoutRedirect) {
-            $location.url(config.logoutRedirect);
-          }
-          return $q.when();
-        };
-
-        return shared;
-      }])
-    .factory('satellizer.oauth', [
-      '$q',
-      '$http',
-      'satellizer.config',
-      'satellizer.shared',
-      'satellizer.Oauth1',
-      'satellizer.Oauth2',
-      function($q, $http, config, shared, Oauth1, Oauth2) {
-        var oauth = {};
-
-        oauth.authenticate = function(name, redirect, userData) {
-          var provider = config.providers[name].type === '1.0' ? new Oauth1() : new Oauth2();
-          var deferred = $q.defer();
-
-          provider.open(config.providers[name], userData || {})
-            .then(function(response) {
-              shared.setToken(response, redirect);
-              deferred.resolve(response);
-            })
-            .catch(function(error) {
-              deferred.reject(error);
-            });
-
-          return deferred.promise;
-        };
-
-        oauth.unlink = function(provider) {
-          if (config.unlinkMethod === 'get') {
-            return $http.get(config.unlinkUrl + provider);
-          } else if (config.unlinkMethod === 'post') {
-            return $http.post(config.unlinkUrl, provider);
-          }
-        };
-
-        return oauth;
-      }])
-    .factory('satellizer.local', [
-      '$q',
-      '$http',
-      '$location',
-      'satellizer.utils',
-      'satellizer.shared',
-      'satellizer.config',
-      function($q, $http, $location, utils, shared, config) {
-        var local = {};
-
-        local.login = function(user, redirect) {
-          return $http.post(config.loginUrl, user)
-            .then(function(response) {
-              shared.setToken(response, redirect);
-              return response;
-            });
-        };
-
-        local.signup = function(user) {
-          return $http.post(config.signupUrl, user)
-            .then(function(response) {
-              if (config.loginOnSignup) {
-                shared.setToken(response);
-              } else if (config.signupRedirect) {
-                $location.path(config.signupRedirect);
-              }
-              return response;
-            });
-        };
-
-        return local;
-      }])
-    .factory('satellizer.Oauth2', [
-      '$q',
-      '$http',
-      '$window',
-      'satellizer.popup',
-      'satellizer.utils',
-      'satellizer.config',
-      function($q, $http, $window, popup, utils, config) {
-        return function() {
-
-          var defaults = {
-            url: null,
-            name: null,
-            state: null,
-            scope: null,
-            scopeDelimiter: null,
-            clientId: null,
-            redirectUri: null,
-            popupOptions: null,
-            authorizationEndpoint: null,
-            responseParams: null,
-            requiredUrlParams: null,
-            optionalUrlParams: null,
-            defaultUrlParams: ['response_type', 'client_id', 'redirect_uri'],
-            responseType: 'code'
-          };
-
-          var oauth2 = {};
-
-          oauth2.open = function(options, userData) {
-            angular.extend(defaults, options);
-
-            var stateName = defaults.name + '_state';
-
-            if (angular.isFunction(defaults.state)) {
-              $window.localStorage[stateName] = defaults.state();
-            } else if (angular.isString(defaults.state)) {
-              $window.localStorage[stateName] = defaults.state;
-            }
-
-            var url = defaults.authorizationEndpoint + '?' + oauth2.buildQueryString();
-
-            return popup.open(url, defaults.popupOptions, defaults.redirectUri)
-              .then(function(oauthData) {
-                if (defaults.responseType === 'token') {
-                  return oauthData;
-                }
-                if (oauthData.state && oauthData.state !== $window.localStorage[stateName]) {
-                  return $q.reject('OAuth 2.0 state parameter mismatch.');
-                }
-                return oauth2.exchangeForToken(oauthData, userData);
-              });
-
-          };
-
-          oauth2.exchangeForToken = function(oauthData, userData) {
-            var data = angular.extend({}, userData, {
-              code: oauthData.code,
-              clientId: defaults.clientId,
-              redirectUri: defaults.redirectUri
-            });
-
-            if (oauthData.state) {
-              data.state = oauthData.state;
-            }
-
-            angular.forEach(defaults.responseParams, function(param) {
-              data[param] = oauthData[param];
-            });
-
-            return $http.post(defaults.url, data, { withCredentials: config.withCredentials });
-          };
-
-          oauth2.buildQueryString = function() {
-            var keyValuePairs = [];
-            var urlParams = ['defaultUrlParams', 'requiredUrlParams', 'optionalUrlParams'];
-
-            angular.forEach(urlParams, function(params) {
-              angular.forEach(defaults[params], function(paramName) {
-                var camelizedName = utils.camelCase(paramName);
-                var paramValue = defaults[camelizedName];
-
-                if (paramName === 'state') {
-                  var stateName = defaults.name + '_state';
-                  paramValue = $window.localStorage[stateName];
-                }
-
-                if (paramName === 'scope' && Array.isArray(paramValue)) {
-                  paramValue = paramValue.join(defaults.scopeDelimiter);
-
-                  if (defaults.scopePrefix) {
-                    paramValue = [defaults.scopePrefix, paramValue].join(defaults.scopeDelimiter);
-                  }
-                }
-
-                keyValuePairs.push([paramName, paramValue]);
-              });
-            });
-
-            return keyValuePairs.map(function(pair) {
-              return pair.join('=');
-            }).join('&');
-          };
-
-          return oauth2;
-        };
-      }])
-    .factory('satellizer.Oauth1', ['$q', '$http', 'satellizer.popup', function($q, $http, popup) {
-      return function() {
-
-        var defaults = {
-          url: null,
-          name: null,
-          popupOptions: null,
-          redirectUri: null
-        };
-
-        var oauth1 = {};
-
-        oauth1.open = function(options, userData) {
-          angular.extend(defaults, options);
-          return popup.open(defaults.url, defaults.popupOptions, defaults.redirectUri)
-            .then(function(response) {
-              return oauth1.exchangeForToken(response, userData);
-            });
-        };
-
-        oauth1.exchangeForToken = function(oauthData, userData) {
-          var data = angular.extend({}, userData, oauthData);
-          var qs = oauth1.buildQueryString(data);
-          return $http.get(defaults.url + '?' + qs);
-        };
-
-        oauth1.buildQueryString = function(obj) {
-          var str = [];
-          angular.forEach(obj, function(value, key) {
-            str.push(encodeURIComponent(key) + '=' + encodeURIComponent(value));
-          });
-          return str.join('&');
-        };
-
-        return oauth1;
-      };
-    }])
-    .factory('satellizer.popup', [
-      '$q',
-      '$interval',
-      '$window',
-      '$location',
-      'satellizer.config',
-      'satellizer.utils',
-      function($q, $interval, $window, $location, config, utils) {
-        var popupWindow = null;
-        var polling = null;
-
-        var popup = {};
-
-        popup.popupWindow = popupWindow;
-
-        popup.open = function(url, options, redirectUri) {
-          var optionsString = popup.stringifyOptions(popup.prepareOptions(options || {}));
-
-          popupWindow = window.open(url, '_blank', optionsString);
-
-          if (popupWindow && popupWindow.focus) {
-            popupWindow.focus();
-          }
-
-          if (config.platform === 'mobile') {
-            return popup.eventListener(redirectUri);
-          }
-
-          return popup.pollPopup();
-        };
-
-        popup.eventListener = function(redirectUri) {
-          var deferred = $q.defer();
-
-          popupWindow.addEventListener('loadstart', function(event) {
-            if (event.url.indexOf(redirectUri) !== 0) {
-              return;
-            }
-
-            var parser = document.createElement('a');
-            parser.href = event.url;
-
-            if (parser.search || parser.hash) {
-              var queryParams = parser.search.substring(1).replace(/\/$/, '');
-              var hashParams = parser.hash.substring(1).replace(/\/$/, '');
-              var hash = utils.parseQueryString(hashParams);
-              var qs = utils.parseQueryString(queryParams);
-
-              angular.extend(qs, hash);
-
-              if (qs.error) {
-                deferred.reject({ error: qs.error });
-              } else {
-                deferred.resolve(qs);
-              }
-
-              popupWindow.close();
-            }
-          });
-
-          popupWindow.addEventListener('exit', function() {
-            deferred.reject({ data: 'Provider Popup was closed' });
-          });
-
-          popupWindow.addEventListener('loaderror', function() {
-            deferred.reject({ data: 'Authorization Failed' });
-          });
-
-          return deferred.promise;
-        };
-
-        popup.pollPopup = function() {
-          var deferred = $q.defer();
-          polling = $interval(function() {
-            try {
-              if (popupWindow.document.domain === document.domain && (popupWindow.location.search || popupWindow.location.hash)) {
-                var queryParams = popupWindow.location.search.substring(1).replace(/\/$/, '');
-                var hashParams = popupWindow.location.hash.substring(1).replace(/\/$/, '');
-                var hash = utils.parseQueryString(hashParams);
-                var qs = utils.parseQueryString(queryParams);
-
-                angular.extend(qs, hash);
-
-                if (qs.error) {
-                  deferred.reject({ error: qs.error });
-                } else {
-                  deferred.resolve(qs);
-                }
-
-                popupWindow.close();
-                $interval.cancel(polling);
-              }
-            } catch (error) {
-            }
-
-            if (!popupWindow) {
-              $interval.cancel(polling);
-              deferred.reject({ data: 'Provider Popup Blocked' });
-            } else if (popupWindow.closed) {
-              $interval.cancel(polling);
-              deferred.reject({ data: 'Authorization Failed' });
-            }
-          }, 35);
-          return deferred.promise;
-        };
-
-        popup.prepareOptions = function(options) {
-          var width = options.width || 500;
-          var height = options.height || 500;
-          return angular.extend({
-            width: width,
-            height: height,
-            left: $window.screenX + (($window.outerWidth - width) / 2),
-            top: $window.screenY + (($window.outerHeight - height) / 2.5)
-          }, options);
-        };
-
-        popup.stringifyOptions = function(options) {
-          var parts = [];
-          angular.forEach(options, function(value, key) {
-            parts.push(key + '=' + value);
-          });
-          return parts.join(',');
-        };
-
-        return popup;
-      }])
-    .service('satellizer.utils', function() {
-      this.camelCase = function(name) {
-        return name.replace(/([\:\-\_]+(.))/g, function(_, separator, letter, offset) {
-          return offset ? letter.toUpperCase() : letter;
-        });
-      };
-
-      this.parseQueryString = function(keyValue) {
-        var obj = {}, key, value;
-        angular.forEach((keyValue || '').split('&'), function(keyValue) {
-          if (keyValue) {
-            value = keyValue.split('=');
-            key = decodeURIComponent(value[0]);
-            obj[key] = angular.isDefined(value[1]) ? decodeURIComponent(value[1]) : true;
-          }
-        });
-        return obj;
-      };
-    })
-    .config(['$httpProvider', 'satellizer.config', function($httpProvider, config) {
-      $httpProvider.interceptors.push(['$q', function($q) {
-        var tokenName = config.tokenPrefix ? config.tokenPrefix + '_' + config.tokenName : config.tokenName;
-        return {
-          request: function(httpConfig) {
-            var token = localStorage.getItem(tokenName);
-            if (token && config.httpInterceptor) {
-              token = config.authHeader === 'Authorization' ? 'Bearer ' + token : token;
-              httpConfig.headers[config.authHeader] = token;
-            }
-            return httpConfig;
-          },
-          responseError: function(response) {
-            return $q.reject(response);
-          }
-        };
-      }]);
-    }]);
-
-})(window, window.angular);
-
-// Base64.js Polyfill (@davidchambers)
-(function() {
-  var object = typeof exports != 'undefined' ? exports : this;
-  var chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/=';
-
-  function InvalidCharacterError(message) {
-    this.message = message;
-  }
-
-  InvalidCharacterError.prototype = new Error;
-  InvalidCharacterError.prototype.name = 'InvalidCharacterError';
-
-  object.btoa || (
-    object.btoa = function(input) {
-      var str = String(input);
-      for (var block, charCode, idx = 0, map = chars, output = ''; str.charAt(idx | 0) || (map = '=', idx % 1); output += map.charAt(63 & block >> 8 - idx % 1 * 8)) {
-        charCode = str.charCodeAt(idx += 3 / 4);
-        if (charCode > 0xFF) {
-          throw new InvalidCharacterError("'btoa' failed: The string to be encoded contains characters outside of the Latin1 range.");
-        }
-        block = block << 8 | charCode;
-      }
-      return output;
-    });
-
-  object.atob || (
-    object.atob = function(input) {
-      var str = String(input).replace(/=+$/, '');
-      if (str.length % 4 == 1) {
-        throw new InvalidCharacterError("'atob' failed: The string to be decoded is not correctly encoded.");
-      }
-      for (var bc = 0, bs, buffer, idx = 0, output = ''; buffer = str.charAt(idx++); ~buffer && (bs = bc % 4 ? bs * 64 + buffer : buffer, bc++ % 4) ? output += String.fromCharCode(255 & bs >> (-2 * bc & 6)) : 0) {
-        buffer = chars.indexOf(buffer);
-      }
-      return output;
-    });
-}());
 
 /**
  * State-based routing for AngularJS
@@ -35737,7 +34775,7 @@ angular.module('ui.router.state')
 
 /**
  * angular-ui-utils - Swiss-Army-Knife of AngularJS tools (with no external dependencies!)
- * @version v0.2.2 - 2015-02-18
+ * @version v0.2.1 - 2015-01-02
  * @link http://angular-ui.github.com
  * @license MIT License, http://www.opensource.org/licenses/MIT
  */
@@ -36027,6 +35065,17 @@ angular.module('ui.jq',[]).
 
       return function uiJqLinkingFunction(scope, elm, attrs) {
 
+        var linkOptions = [];
+
+        // If ui-options are passed, merge (or override) them onto global defaults and pass to the jQuery method
+        if (attrs.uiOptions) {
+          linkOptions = scope.$eval('[' + attrs.uiOptions + ']');
+          if (angular.isObject(options) && angular.isObject(linkOptions[0])) {
+            linkOptions[0] = angular.extend({}, options, linkOptions[0]);
+          }
+        } else if (options) {
+          linkOptions = [options];
+        }
         // If change compatibility is enabled, the form input's "change" event will trigger an "input" event
         if (attrs.ngModel && elm.is('select,input,textarea')) {
           elm.bind('change', function() {
@@ -36034,25 +35083,10 @@ angular.module('ui.jq',[]).
           });
         }
 
-        function createLinkOptions(){
-          var linkOptions = [];
-
-          // If ui-options are passed, merge (or override) them onto global defaults and pass to the jQuery method
-          if (attrs.uiOptions) {
-            linkOptions = scope.$eval('[' + attrs.uiOptions + ']');
-            if (angular.isObject(options) && angular.isObject(linkOptions[0])) {
-              linkOptions[0] = angular.extend({}, options, linkOptions[0]);
-            }
-          } else if (options) {
-            linkOptions = [options];
-          }
-          return linkOptions;
-        }
-
         // Call jQuery method and pass relevant options
         function callPlugin() {
           $timeout(function() {
-            elm[attrs.uiJq].apply(elm, createLinkOptions());
+            elm[attrs.uiJq].apply(elm, linkOptions);
           }, 0, false);
         }
 
@@ -36341,7 +35375,7 @@ angular.module('ui.mask', [])
           }
 
           function initializeElement(){
-            value = oldValueUnmasked = unmaskValue(controller.$viewValue || '');
+            value = oldValueUnmasked = unmaskValue(controller.$modelValue || '');
             valueMasked = oldValue = maskValue(value);
             isValid = validateValue(value);
             var viewValue = isValid && value.length ? valueMasked : '';
@@ -36486,13 +35520,15 @@ angular.module('ui.mask', [])
             if (linkOptions.clearOnBlur) {
               oldCaretPosition = 0;
               oldSelectionLength = 0;
-              if (!isValid || value.length === 0) {
+            }
+            if (!isValid || value.length === 0) {
+              if (linkOptions.clearOnBlur) {
                 valueMasked = '';
                 iElement.val('');
-                scope.$apply(function () {
-                  controller.$setViewValue('');
-                });
               }
+              scope.$apply(function (){
+                controller.$setViewValue('');
+              });
             }
           }
 
@@ -37664,36 +36700,26 @@ angular.module('ui.scrollfix',[]).directive('uiScrollfix', ['$window', function 
   return {
     require: '^?uiScrollfixTarget',
     link: function (scope, elm, attrs, uiScrollfixTarget) {
-      var absolute = true,
-          shift = 0,
-          fixLimit,
+      var top = elm[0].offsetTop,
           $target = uiScrollfixTarget && uiScrollfixTarget.$element || angular.element($window);
 
       if (!attrs.uiScrollfix) {
-          absolute = false;
+        attrs.uiScrollfix = top;
       } else if (typeof(attrs.uiScrollfix) === 'string') {
         // charAt is generally faster than indexOf: http://jsperf.com/indexof-vs-charat
         if (attrs.uiScrollfix.charAt(0) === '-') {
-          absolute = false;
-          shift = - parseFloat(attrs.uiScrollfix.substr(1));
+          attrs.uiScrollfix = top - parseFloat(attrs.uiScrollfix.substr(1));
         } else if (attrs.uiScrollfix.charAt(0) === '+') {
-          absolute = false;
-          shift = parseFloat(attrs.uiScrollfix.substr(1));
+          attrs.uiScrollfix = top + parseFloat(attrs.uiScrollfix.substr(1));
         }
       }
 
-      fixLimit = absolute ? attrs.uiScrollfix : elm[0].offsetTop + shift;
-
       function onScroll() {
-
-        var limit = absolute ? attrs.uiScrollfix : elm[0].offsetTop + shift;
-
         // if pageYOffset is defined use it, otherwise use other crap for IE
         var offset = uiScrollfixTarget ? $target[0].scrollTop : getWindowScrollTop();
-        if (!elm.hasClass('ui-scrollfix') && offset > limit) {
+        if (!elm.hasClass('ui-scrollfix') && offset > attrs.uiScrollfix) {
           elm.addClass('ui-scrollfix');
-          fixLimit = limit;
-        } else if (elm.hasClass('ui-scrollfix') && offset < fixLimit) {
+        } else if (elm.hasClass('ui-scrollfix') && offset < attrs.uiScrollfix) {
           elm.removeClass('ui-scrollfix');
         }
       }
@@ -37923,7 +36949,7 @@ function uiUploader($log) {
         xhr.onload = function() {
             self.activeUploads -= 1;
             startUpload(self.options);
-            self.options.onCompleted(file, xhr.responseText);
+            self.options.onCompleted(file);
         };
 
         // Triggered when upload fails:
@@ -38092,7 +37118,7 @@ angular.module('ui.utils',  [
  * angular-ui-bootstrap
  * http://angular-ui.github.io/bootstrap/
 
- * Version: 0.12.1 - 2015-02-20
+ * Version: 0.12.0 - 2014-11-16
  * License: MIT
  */
 angular.module("ui.bootstrap", ["ui.bootstrap.tpls", "ui.bootstrap.transition","ui.bootstrap.collapse","ui.bootstrap.accordion","ui.bootstrap.alert","ui.bootstrap.bindHtml","ui.bootstrap.buttons","ui.bootstrap.carousel","ui.bootstrap.dateparser","ui.bootstrap.position","ui.bootstrap.datepicker","ui.bootstrap.dropdown","ui.bootstrap.modal","ui.bootstrap.pagination","ui.bootstrap.tooltip","ui.bootstrap.popover","ui.bootstrap.progressbar","ui.bootstrap.rating","ui.bootstrap.tabs","ui.bootstrap.timepicker","ui.bootstrap.typeahead"]);
@@ -40702,7 +39728,14 @@ angular.module( 'ui.bootstrap.tooltip', [ 'ui.bootstrap.position', 'ui.bootstrap
 
               // Set the initial positioning.
               tooltip.css({ top: 0, left: 0, display: 'block' });
-              ttScope.$digest();
+
+              // Now we add it to the DOM because need some info about it. But it's not
+              // visible yet anyway.
+              if ( appendToBody ) {
+                  $document.find( 'body' ).append( tooltip );
+              } else {
+                element.after( tooltip );
+              }
 
               positionTooltip();
 
@@ -40742,13 +39775,7 @@ angular.module( 'ui.bootstrap.tooltip', [ 'ui.bootstrap.position', 'ui.bootstrap
                 removeTooltip();
               }
               tooltipLinkedScope = ttScope.$new();
-              tooltip = tooltipLinker(tooltipLinkedScope, function (tooltip) {
-                if ( appendToBody ) {
-                  $document.find( 'body' ).append( tooltip );
-                } else {
-                  element.after( tooltip );
-                }
-              });
+              tooltip = tooltipLinker(tooltipLinkedScope, angular.noop);
             }
 
             function removeTooltip() {
@@ -43292,6 +42319,17 @@ angular.module("template/typeahead/typeahead-popup.html", []).run(["$templateCac
   }
 })();
 
+/** 
+* @version 2.0.1
+* @license MIT
+*/
+!function(t,e){"use strict";t.module("smart-table",[]).run(["$templateCache",function(t){t.put("template/smart-table/pagination.html",'<nav ng-if="pages.length >= 2"><ul class="pagination"><li ng-repeat="page in pages" ng-class="{active: page==currentPage}"><a ng-click="selectPage(page)">{{page}}</a></li></ul></nav>')}]),t.module("smart-table").constant("stConfig",{pagination:{template:"template/smart-table/pagination.html",itemsByPage:10,displayedPages:5},search:{delay:400},select:{mode:"single",selectedClass:"st-selected"},sort:{ascentClass:"st-sort-ascent",descentClass:"st-sort-descent"}}),t.module("smart-table").controller("stTableController",["$scope","$parse","$filter","$attrs",function(a,s,n,r){function i(t){return t?[].concat(t):[]}function c(){h=i(l(a)),P===!0&&S.pipe()}var l,o,u,p=r.stTable,g=s(p),f=g.assign,d=n("orderBy"),m=n("filter"),h=i(g(a)),b={sort:{},search:{},pagination:{start:0}},P=!0,S=this;r.stSafeSrc&&(l=s(r.stSafeSrc),a.$watch(function(){var t=l(a);return t?t.length:0},function(t){t!==h.length&&c()}),a.$watch(function(){return l(a)},function(t,e){t!==e&&c()})),this.sortBy=function(e,a){return b.sort.predicate=e,b.sort.reverse=a===!0,t.isFunction(e)?b.sort.functionName=e.name:delete b.sort.functionName,b.pagination.start=0,this.pipe()},this.search=function(e,a){var s=b.search.predicateObject||{},n=a?a:"$";return e=t.isString(e)?e.trim():e,s[n]=e,e||delete s[n],b.search.predicateObject=s,b.pagination.start=0,this.pipe()},this.pipe=function(){var t,s=b.pagination;o=b.search.predicateObject?m(h,b.search.predicateObject):h,b.sort.predicate&&(o=d(o,b.sort.predicate,b.sort.reverse)),s.number!==e&&(s.numberOfPages=o.length>0?Math.ceil(o.length/s.number):1,s.start=s.start>=o.length?(s.numberOfPages-1)*s.number:s.start,t=o.slice(s.start,s.start+parseInt(s.number))),f(a,t||o)},this.select=function(t,a){var s=h,n=s.indexOf(t);-1!==n&&("single"===a?(t.isSelected=t.isSelected!==!0,u&&(u.isSelected=!1),u=t.isSelected===!0?t:e):s[n].isSelected=!s[n].isSelected)},this.slice=function(t,e){return b.pagination.start=t,b.pagination.number=e,this.pipe()},this.tableState=function(){return b},this.getFilteredCollection=function(){return o||h},this.setFilterFunction=function(t){m=n(t)},this.setSortFunction=function(t){d=n(t)},this.preventPipeOnWatch=function(){P=!1}}]).directive("stTable",function(){return{restrict:"A",controller:"stTableController",link:function(t,e,a,s){a.stSetFilter&&s.setFilterFunction(a.stSetFilter),a.stSetSort&&s.setSortFunction(a.stSetSort)}}}),t.module("smart-table").directive("stSearch",["stConfig","$timeout",function(t,e){return{require:"^stTable",link:function(a,s,n,r){var i=r,c=null,l=n.stDelay||t.search.delay;n.$observe("stSearch",function(t,e){var a=s[0].value;t!==e&&a&&(r.tableState().search={},i.search(a,t))}),a.$watch(function(){return r.tableState().search},function(t){var e=n.stSearch||"$";t.predicateObject&&t.predicateObject[e]!==s[0].value&&(s[0].value=t.predicateObject[e]||"")},!0),s.bind("input",function(t){t=t.originalEvent||t,null!==c&&e.cancel(c),c=e(function(){i.search(t.target.value,n.stSearch||""),c=null},l)})}}}]),t.module("smart-table").directive("stSelectRow",["stConfig",function(t){return{restrict:"A",require:"^stTable",scope:{row:"=stSelectRow"},link:function(e,a,s,n){var r=s.stSelectMode||t.select.mode;a.bind("click",function(){e.$apply(function(){n.select(e.row,r)})}),e.$watch("row.isSelected",function(e){e===!0?a.addClass(t.select.selectedClass):a.removeClass(t.select.selectedClass)})}}}]),t.module("smart-table").directive("stSort",["stConfig","$parse",function(a,s){return{restrict:"A",require:"^stTable",link:function(n,r,i,c){function l(){g++,u=t.isFunction(p(n))?p(n):i.stSort,g%3===0&&i.stSkipNatural===e?(g=0,c.tableState().sort={},c.tableState().pagination.start=0,c.pipe()):c.sortBy(u,g%2===0)}var o,u=i.stSort,p=s(u),g=0,f=i.stClassAscent||a.sort.ascentClass,d=i.stClassDescent||a.sort.descentClass,m=[f,d];i.stSortDefault&&(o=n.$eval(i.stSortDefault)!==e?n.$eval(i.stSortDefault):i.stSortDefault),r.bind("click",function(){u&&n.$apply(l)}),o&&(g="reverse"===o?1:0,l()),n.$watch(function(){return c.tableState().sort},function(t){t.predicate!==u?(g=0,r.removeClass(f).removeClass(d)):(g=t.reverse===!0?2:1,r.removeClass(m[g%2]).addClass(m[g-1]))},!0)}}}]),t.module("smart-table").directive("stPagination",["stConfig",function(t){return{restrict:"EA",require:"^stTable",scope:{stItemsByPage:"=?",stDisplayedPages:"=?",stPageChange:"&"},templateUrl:function(e,a){return a.stTemplate?a.stTemplate:t.pagination.template},link:function(e,a,s,n){function r(){var t,a,s=n.tableState().pagination,r=1,i=e.currentPage;for(e.currentPage=Math.floor(s.start/s.number)+1,r=Math.max(r,e.currentPage-Math.abs(Math.floor(e.stDisplayedPages/2))),t=r+e.stDisplayedPages,t>s.numberOfPages&&(t=s.numberOfPages+1,r=Math.max(1,t-e.stDisplayedPages)),e.pages=[],e.numPages=s.numberOfPages,a=r;t>a;a++)e.pages.push(a);i!==e.currentPage&&e.stPageChange({newPage:e.currentPage})}e.stItemsByPage=e.stItemsByPage?+e.stItemsByPage:t.pagination.itemsByPage,e.stDisplayedPages=e.stDisplayedPages?+e.stDisplayedPages:t.pagination.displayedPages,e.currentPage=1,e.pages=[],e.$watch(function(){return n.tableState().pagination},r,!0),e.$watch("stItemsByPage",function(t,a){t!==a&&e.selectPage(1)}),e.$watch("stDisplayedPages",r),e.selectPage=function(t){t>0&&t<=e.numPages&&n.slice((t-1)*e.stItemsByPage,e.stItemsByPage)},n.tableState().pagination.number||n.slice(0,e.stItemsByPage)}}}]),t.module("smart-table").directive("stPipe",function(){return{require:"stTable",scope:{stPipe:"="},link:{pre:function(e,a,s,n){t.isFunction(e.stPipe)&&(n.preventPipeOnWatch(),n.pipe=function(){return e.stPipe(n.tableState(),n)})},post:function(t,e,a,s){s.pipe()}}}})}(angular);
+/**
+ * Satellizer 0.9.4
+ * (c) 2015 Sahat Yalkabov
+ * License: MIT
+ */
+!function(e,t){"use strict";t.module("satellizer",[]).constant("satellizer.config",{httpInterceptor:!0,loginOnSignup:!0,loginRedirect:"/",logoutRedirect:"/",signupRedirect:"/login",loginUrl:"/auth/login",signupUrl:"/auth/signup",loginRoute:"/login",signupRoute:"/signup",tokenRoot:!1,tokenName:"token",tokenPrefix:"satellizer",unlinkUrl:"/auth/unlink/",unlinkMethod:"get",authHeader:"Authorization",withCredentials:!0,platform:"browser",providers:{google:{name:"google",url:"/auth/google",authorizationEndpoint:"https://accounts.google.com/o/oauth2/auth",redirectUri:e.location.origin||e.location.protocol+"//"+e.location.host,scope:["profile","email"],scopePrefix:"openid",scopeDelimiter:" ",requiredUrlParams:["scope"],optionalUrlParams:["display"],display:"popup",type:"2.0",popupOptions:{width:452,height:633}},facebook:{name:"facebook",url:"/auth/facebook",authorizationEndpoint:"https://www.facebook.com/dialog/oauth",redirectUri:e.location.origin+"/"||e.location.protocol+"//"+e.location.host+"/",scope:["email"],scopeDelimiter:",",requiredUrlParams:["display","scope"],display:"popup",type:"2.0",popupOptions:{width:580,height:400}},linkedin:{name:"linkedin",url:"/auth/linkedin",authorizationEndpoint:"https://www.linkedin.com/uas/oauth2/authorization",redirectUri:e.location.origin||e.location.protocol+"//"+e.location.host,requiredUrlParams:["state"],scope:["r_emailaddress"],scopeDelimiter:" ",state:"STATE",type:"2.0",popupOptions:{width:527,height:582}},github:{name:"github",url:"/auth/github",authorizationEndpoint:"https://github.com/login/oauth/authorize",redirectUri:e.location.origin||e.location.protocol+"//"+e.location.host,optionalUrlParams:["scope"],scope:["user:email"],scopeDelimiter:" ",type:"2.0",popupOptions:{width:1020,height:618}},yahoo:{name:"yahoo",url:"/auth/yahoo",authorizationEndpoint:"https://api.login.yahoo.com/oauth2/request_auth",redirectUri:e.location.origin||e.location.protocol+"//"+e.location.host,scope:[],scopeDelimiter:",",type:"2.0",popupOptions:{width:559,height:519}},twitter:{name:"twitter",url:"/auth/twitter",type:"1.0",popupOptions:{width:495,height:645}},live:{name:"live",url:"/auth/live",authorizationEndpoint:"https://login.live.com/oauth20_authorize.srf",redirectUri:e.location.origin||e.location.protocol+"//"+e.location.host,scope:["wl.emails"],scopeDelimiter:" ",requiredUrlParams:["display","scope"],display:"popup",type:"2.0",popupOptions:{width:500,height:560}}}}).provider("$auth",["satellizer.config",function(e){Object.defineProperties(this,{loginOnSignup:{get:function(){return e.loginOnSignup},set:function(t){e.loginOnSignup=t}},httpInterceptor:{get:function(){return e.httpInterceptor},set:function(t){e.httpInterceptor=t}},logoutRedirect:{get:function(){return e.logoutRedirect},set:function(t){e.logoutRedirect=t}},loginRedirect:{set:function(t){e.loginRedirect=t},get:function(){return e.loginRedirect}},signupRedirect:{get:function(){return e.signupRedirect},set:function(t){e.signupRedirect=t}},loginUrl:{get:function(){return e.loginUrl},set:function(t){e.loginUrl=t}},signupUrl:{get:function(){return e.signupUrl},set:function(t){e.signupUrl=t}},loginRoute:{get:function(){return e.loginRoute},set:function(t){e.loginRoute=t}},signupRoute:{get:function(){return e.signupRoute},set:function(t){e.signupRoute=t}},tokenRoot:{get:function(){return e.tokenRoot},set:function(t){e.tokenRoot=t}},tokenName:{get:function(){return e.tokenName},set:function(t){e.tokenName=t}},tokenPrefix:{get:function(){return e.tokenPrefix},set:function(t){e.tokenPrefix=t}},unlinkUrl:{get:function(){return e.unlinkUrl},set:function(t){e.unlinkUrl=t}},authHeader:{get:function(){return e.authHeader},set:function(t){e.authHeader=t}},withCredentials:{get:function(){return e.withCredentials},set:function(t){e.withCredentials=t}},unlinkMethod:{get:function(){return e.unlinkMethod},set:function(t){e.unlinkMethod=t}},platform:{get:function(){return e.platform},set:function(t){e.platform=t}}}),t.forEach(Object.keys(e.providers),function(n){this[n]=function(o){return t.extend(e.providers[n],o)}},this);var n=function(n){e.providers[n.name]=e.providers[n.name]||{},t.extend(e.providers[n.name],n)};this.oauth1=function(t){n(t),e.providers[t.name].type="1.0"},this.oauth2=function(t){n(t),e.providers[t.name].type="2.0"},this.$get=["$q","satellizer.shared","satellizer.local","satellizer.oauth",function(e,t,n,o){var r={};return r.authenticate=function(e,t){return o.authenticate(e,!1,t)},r.login=function(e,t){return n.login(e,t)},r.signup=function(e){return n.signup(e)},r.logout=function(){return t.logout()},r.isAuthenticated=function(){return t.isAuthenticated()},r.link=function(e,t){return o.authenticate(e,!0,t)},r.unlink=function(e){return o.unlink(e)},r.getToken=function(){return t.getToken()},r.setToken=function(e,n){t.setToken({access_token:e},n)},r.removeToken=function(){return t.removeToken()},r.getPayload=function(){return t.getPayload()},r}]}]).factory("satellizer.shared",["$q","$window","$location","satellizer.config",function(e,n,o,r){var i={};return i.getToken=function(){var e=r.tokenPrefix?r.tokenPrefix+"_"+r.tokenName:r.tokenName;return n.localStorage[e]},i.getPayload=function(){var e=r.tokenPrefix?r.tokenPrefix+"_"+r.tokenName:r.tokenName,t=n.localStorage[e];if(t&&3===t.split(".").length){var o=t.split(".")[1],i=o.replace("-","+").replace("_","/");return JSON.parse(n.atob(i))}},i.setToken=function(e,i){var a,u=e&&e.access_token;u&&(t.isObject(u)&&t.isObject(u.data)?e=u:t.isString(u)&&(a=u)),!a&&e&&(a=r.tokenRoot&&e.data[r.tokenRoot]?e.data[r.tokenRoot][r.tokenName]:e.data[r.tokenName]);var l=r.tokenPrefix?r.tokenPrefix+"_"+r.tokenName:r.tokenName;if(!a)throw l=r.tokenRoot?r.tokenRoot+"."+r.tokenName:r.tokenName,new Error('Expecting a token named "'+l+'" but instead got: '+JSON.stringify(e.data));n.localStorage[l]=a,r.loginRedirect&&!i?o.path(r.loginRedirect):i&&t.isString(i)&&o.path(encodeURI(i))},i.removeToken=function(){var e=r.tokenPrefix?r.tokenPrefix+"_"+r.tokenName:r.tokenName;delete n.localStorage[e]},i.isAuthenticated=function(){var e=r.tokenPrefix?r.tokenPrefix+"_"+r.tokenName:r.tokenName,t=n.localStorage[e];if(t){if(3===t.split(".").length){var o=t.split(".")[1],i=o.replace("-","+").replace("_","/"),a=JSON.parse(n.atob(i)).exp;if(a)return Math.round((new Date).getTime()/1e3)<=a}return!0}return!1},i.logout=function(){var t=r.tokenPrefix?r.tokenPrefix+"_"+r.tokenName:r.tokenName;return delete n.localStorage[t],r.logoutRedirect&&o.url(r.logoutRedirect),e.when()},i}]).factory("satellizer.oauth",["$q","$http","satellizer.config","satellizer.shared","satellizer.Oauth1","satellizer.Oauth2",function(e,t,n,o,r,i){var a={};return a.authenticate=function(t,a,u){var l="1.0"===n.providers[t].type?new r:new i,c=e.defer();return l.open(n.providers[t],u||{}).then(function(e){o.setToken(e,a),c.resolve(e)}).catch(function(e){c.reject(e)}),c.promise},a.unlink=function(e){return"get"===n.unlinkMethod?t.get(n.unlinkUrl+e):"post"===n.unlinkMethod?t.post(n.unlinkUrl,e):void 0},a}]).factory("satellizer.local",["$q","$http","$location","satellizer.utils","satellizer.shared","satellizer.config",function(e,t,n,o,r,i){var a={};return a.login=function(e,n){return t.post(i.loginUrl,e).then(function(e){return r.setToken(e,n),e})},a.signup=function(e){return t.post(i.signupUrl,e).then(function(e){return i.loginOnSignup?r.setToken(e):i.signupRedirect&&n.path(i.signupRedirect),e})},a}]).factory("satellizer.Oauth2",["$q","$http","$window","satellizer.popup","satellizer.utils","satellizer.config",function(e,n,o,r,i,a){return function(){var u={url:null,name:null,state:null,scope:null,scopeDelimiter:null,clientId:null,redirectUri:null,popupOptions:null,authorizationEndpoint:null,responseParams:null,requiredUrlParams:null,optionalUrlParams:null,defaultUrlParams:["response_type","client_id","redirect_uri"],responseType:"code"},l={};return l.open=function(n,i){t.extend(u,n);var a=u.name+"_state";t.isFunction(u.state)?o.localStorage[a]=u.state():t.isString(u.state)&&(o.localStorage[a]=u.state);var c=u.authorizationEndpoint+"?"+l.buildQueryString();return r.open(c,u.popupOptions,u.redirectUri).then(function(t){return"token"===u.responseType?t:t.state&&t.state!==o.localStorage[a]?e.reject("OAuth 2.0 state parameter mismatch."):l.exchangeForToken(t,i)})},l.exchangeForToken=function(e,o){var r=t.extend({},o,{code:e.code,clientId:u.clientId,redirectUri:u.redirectUri});return e.state&&(r.state=e.state),t.forEach(u.responseParams,function(t){r[t]=e[t]}),n.post(u.url,r,{withCredentials:a.withCredentials})},l.buildQueryString=function(){var e=[],n=["defaultUrlParams","requiredUrlParams","optionalUrlParams"];return t.forEach(n,function(n){t.forEach(u[n],function(t){var n=i.camelCase(t),r=u[n];if("state"===t){var a=u.name+"_state";r=o.localStorage[a]}"scope"===t&&Array.isArray(r)&&(r=r.join(u.scopeDelimiter),u.scopePrefix&&(r=[u.scopePrefix,r].join(u.scopeDelimiter))),e.push([t,r])})}),e.map(function(e){return e.join("=")}).join("&")},l}}]).factory("satellizer.Oauth1",["$q","$http","satellizer.popup",function(e,n,o){return function(){var e={url:null,name:null,popupOptions:null,redirectUri:null},r={};return r.open=function(n,i){return t.extend(e,n),o.open(e.url,e.popupOptions,e.redirectUri).then(function(e){return r.exchangeForToken(e,i)})},r.exchangeForToken=function(o,i){var a=t.extend({},i,o),u=r.buildQueryString(a);return n.get(e.url+"?"+u)},r.buildQueryString=function(e){var n=[];return t.forEach(e,function(e,t){n.push(encodeURIComponent(t)+"="+encodeURIComponent(e))}),n.join("&")},r}}]).factory("satellizer.popup",["$q","$interval","$window","$location","satellizer.config","satellizer.utils",function(n,o,r,i,a,u){var l=null,c=null,s={};return s.popupWindow=l,s.open=function(t,n,o){var r=s.stringifyOptions(s.prepareOptions(n||{}));return l=e.open(t,"_blank",r),l&&l.focus&&l.focus(),"mobile"===a.platform?s.eventListener(o):s.pollPopup()},s.eventListener=function(e){var o=n.defer();return l.addEventListener("loadstart",function(n){if(0===n.url.indexOf(e)){var r=document.createElement("a");if(r.href=n.url,r.search||r.hash){var i=r.search.substring(1).replace(/\/$/,""),a=r.hash.substring(1).replace(/\/$/,""),c=u.parseQueryString(a),s=u.parseQueryString(i);t.extend(s,c),s.error?o.reject({error:s.error}):o.resolve(s),l.close()}}}),l.addEventListener("exit",function(){o.reject({data:"Provider Popup was closed"})}),l.addEventListener("loaderror",function(){o.reject({data:"Authorization Failed"})}),o.promise},s.pollPopup=function(){var e=n.defer();return c=o(function(){try{if(l.document.domain===document.domain&&(l.location.search||l.location.hash)){var n=l.location.search.substring(1).replace(/\/$/,""),r=l.location.hash.substring(1).replace(/\/$/,""),i=u.parseQueryString(r),a=u.parseQueryString(n);t.extend(a,i),a.error?e.reject({error:a.error}):e.resolve(a),l.close(),o.cancel(c)}}catch(s){}l?l.closed&&(o.cancel(c),e.reject({data:"Authorization Failed"})):(o.cancel(c),e.reject({data:"Provider Popup Blocked"}))},35),e.promise},s.prepareOptions=function(e){var n=e.width||500,o=e.height||500;return t.extend({width:n,height:o,left:r.screenX+(r.outerWidth-n)/2,top:r.screenY+(r.outerHeight-o)/2.5},e)},s.stringifyOptions=function(e){var n=[];return t.forEach(e,function(e,t){n.push(t+"="+e)}),n.join(",")},s}]).service("satellizer.utils",function(){this.camelCase=function(e){return e.replace(/([\:\-\_]+(.))/g,function(e,t,n,o){return o?n.toUpperCase():n})},this.parseQueryString=function(e){var n,o,r={};return t.forEach((e||"").split("&"),function(e){e&&(o=e.split("="),n=decodeURIComponent(o[0]),r[n]=t.isDefined(o[1])?decodeURIComponent(o[1]):!0)}),r}}).config(["$httpProvider","satellizer.config",function(e,t){e.interceptors.push(["$q",function(e){var n=t.tokenPrefix?t.tokenPrefix+"_"+t.tokenName:t.tokenName;return{request:function(e){var o=localStorage.getItem(n);return o&&t.httpInterceptor&&(o="Authorization"===t.authHeader?"Bearer "+o:o,e.headers[t.authHeader]=o),e},responseError:function(t){return e.reject(t)}}}])}])}(window,window.angular),function(){function e(e){this.message=e}var t="undefined"!=typeof exports?exports:this,n="ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/=";e.prototype=new Error,e.prototype.name="InvalidCharacterError",t.btoa||(t.btoa=function(t){for(var o,r,i=String(t),a=0,u=n,l="";i.charAt(0|a)||(u="=",a%1);l+=u.charAt(63&o>>8-a%1*8)){if(r=i.charCodeAt(a+=.75),r>255)throw new e("'btoa' failed: The string to be encoded contains characters outside of the Latin1 range.");o=o<<8|r}return l}),t.atob||(t.atob=function(t){var o=String(t).replace(/=+$/,"");if(o.length%4==1)throw new e("'atob' failed: The string to be decoded is not correctly encoded.");for(var r,i,a=0,u=0,l="";i=o.charAt(u++);~i&&(r=a%4?64*r+i:i,a++%4)?l+=String.fromCharCode(255&r>>(-2*a&6)):0)i=n.indexOf(i);return l})}();
 /*!
  * angular-translate - v2.5.2 - 2014-12-10
  * http://github.com/angular-translate/angular-translate
