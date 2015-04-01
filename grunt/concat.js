@@ -2,7 +2,7 @@ module.exports = {
     angular: {
         src: [
             'bower_components/jquery/dist/jquery.min.js',
-
+            'bower_components/jquery/dist/jquery.min.map',
             'bower_components/angular/angular.js',
 
             'bower_components/angular-animate/angular-animate.js',
@@ -10,7 +10,7 @@ module.exports = {
             'bower_components/angular-resource/angular-resource.js',
             'bower_components/angular-sanitize/angular-sanitize.js',
             'bower_components/angular-touch/angular-touch.js',
-
+            'bower_components/jquery.sparkline/dist/jquery.sparkline.retina.js',
             'bower_components/angular-ui-router/release/angular-ui-router.js',
             'bower_components/ngstorage/ngStorage.js',
             'bower_components/angular-ui-utils/ui-utils.js',
