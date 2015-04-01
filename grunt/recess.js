@@ -1,12 +1,12 @@
 module.exports = {
-	less: {
+    less: {
         files: {
-          'src/css/app.css': [
-            'src/css/less/app.less'
-          ]
+            'app/css/app.css': [
+                'app/css/less/app.less'
+            ]
         },
         options: {
-          compile: true
+            compile: true
         }
     },
     angular: {
@@ -16,7 +16,7 @@ module.exports = {
                 'bower_components/animate.css/animate.css',
                 'bower_components/font-awesome/css/font-awesome.css',
                 'bower_components/simple-line-icons/css/simple-line-icons.css',
-                'src/css/*.css'
+                'app/styles/*.css'
             ]
         },
         options: {
@@ -30,7 +30,7 @@ module.exports = {
                 'bower_components/animate.css/animate.css',
                 'bower_components/font-awesome/css/font-awesome.css',
                 'bower_components/simple-line-icons/css/simple-line-icons.css',
-                'src/css/*.css'
+                'app/css/*.css'
             ]
         },
         options: {
