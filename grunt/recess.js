@@ -2,7 +2,7 @@ module.exports = {
     less: {
         files: {
             'app/css/app.css': [
-                'app/styles/less/app.less'
+                'app/css/less/app.less'
             ]
         },
         options: {
