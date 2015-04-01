@@ -1,0 +1,211 @@
+<div class="hbox hbox-auto-xs hbox-auto-sm" ng-controller="AdmincompaniesCtrl">
+    <!-- main -->
+    <div class="col">
+        <!-- main header -->
+        <div class="bg-light lter b-b wrapper-md">
+            <div class="row">
+                <div class="col-sm-4 col-xs-12">
+                    <h1 class="m-n font-thin h3 text-black">Admin Companies</h1>
+                    <small class="text-muted">Create and Edit companies</small>
+                </div>
+            </div>
+        </div>
+
+
+        <!-- / main header -->
+        <div class="wrapper-md">
+
+            <div class="row">
+
+                <!-- create new companies -->
+                <div class="col-md-12">
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+                            <h5 class="font-thin m-t-none m-b-none">Create Company</h5>
+                        </div>
+                        <div ng-init="showPanel = false" ng-show="showPanel" class="panel-body b-b b-light">
+                            New company name:
+                            <p>
+                                <input name="input" ng-model="searchCompanyField" ng-change="searchCompaniesAvailability()" placeholder="Company Name" type="text" class="form-control input-sm w-sm inline m-r" />
+                            </p>
+
+                            <p> Status:
+                                <span ng-show="isSearching">
+                                    <i class="fa fa-circle-o-notch fa-spin"></i>
+                                </span>
+                                <span ng-show="nameAvailable && !isSearching && !nameTooShort"> 
+                                    <i class="fa fa-check"> Name Available</i>
+                                </span>
+                                <span ng-show="!nameAvailable && !isSearching && !nameTooShort"> 
+                                    <i class="fa fa-times"> Name Not Available</i>
+                                </span>
+                                <span ng-show="nameTooShort && !isSearching">
+                                    <i class="fa fa-times"> Name is Too Short</i>
+                                </span>
+                            </p>
+
+                        </div>
+                        <div class="panel-footer  ">
+                            <button ng-hide="showPanel" ng-click="showPanel = true" class="btn btn-primary btn-addon btn-sm "><i class="fa fa-plus"></i>Add Company</button>
+                            <button ng-click="addCompany()" ng-disabled="nameAvailable == false || nameTooShort == true" ng-show="showPanel" class="btn btn-success btn-addon btn-sm"><i class="fa fa-save"></i>Save New Company</button>
+                            <button ng-show="showPanel" ng-click="showPanel = false" class="btn btn-danger btn-addon btn-sm"><i class="fa fa-times"></i>Cancel</button>
+                        </div>
+                    </div>
+                </div>
+
+
+                <!-- company list -->
+
+                <div class="col-md-6">
+
+                    <div class="panel panel-default">
+                        <div class="panel-heading   ">
+                            <h5 class="font-thin m-t-none m-b-none ">Company List</h5>
+                        </div>
+                        <div class="panel-body b-b b-light">
+                            Search:
+                            <input id="filter" type="text" class="form-control input-sm w-sm inline m-r" />
+                        </div>
+                        <div>
+                            <table class="table m-b-none table-hover" ui-jq="footable" data-filter="#filter" data-page-size="12">
+                                <thead>
+                                    <tr>
+                                        <th>
+                                            Company Name
+                                        </th>
+                                        <th>
+                                            Status
+                                        </th>
+
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <a href="http://www.google.com">
+                                        <tr ng-repeat="company in companyList">
+                                            <td>
+                                                <a ui-sref="app.admincompany({id:company.id})">
+                                                    <div href class="thumb-sm m-r">
+
+                                                        <img ng-src="{{company.logo}}" class="r r-2x">
+                                                    </div>{{company.displayName}}
+                                                    </a>
+                                            </td>
+                                            <td>
+                                                <span ng-show="company.isActive" class="label bg-success" title="Active">Active</span>
+                                                <span ng-show="!company.isActive" class="label bg-dark" title="Active">Deactive</span>
+                                                <span class="label bg-info" ng-click="editCompany(company.id)" title="Edit">Edit</span>
+                                            </td>
+                                        </tr>
+                                    </a>
+
+                                </tbody>
+                                <tfoot class="hide-if-no-paging">
+                                    <tr>
+                                        <td colspan="5" class="text-center">
+                                            <ul class="pagination"></ul>
+                                        </td>
+                                    </tr>
+                                </tfoot>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+                <!--  edit companies -->
+
+
+
+                <div ng-show="currentCompany" class="col-md-6">
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+                            <div class="clearfix">
+                                <a href="" class="pull-left thumb-md avatar b-3x m-r">
+                                    <img ng-src="{{currentCompany.logo}}" alt="...">
+                                </a>
+                                <div class="clear">
+                                    <div class="h3 m-t-xs m-b-xs">
+                                        {{currentCompany.displayName}}
+
+
+                                        <label ng-click="dirtyChange = true; 
+                                         currentCompany.isActive = !currentCompany.isActive;
+                                         currentCompany.isActive == 0 ? deactivateCompany(currentCompany.id)  : activateCompany(currentCompany.id) " ng-class="{false:'btn-dark', true:'btn-success'}[currentCompany.isActive]" class="pull-right btn btn-sm btn-success ng-untouched ng-valid ng-dirty"><i class="fa fa-check text-active"></i> {{currentCompany.isActive == 0 ? "Deactive" : "Active"}}
+
+                                        </label>
+                                    </div>
+                                    Last Release 10 days ago
+                                </div>
+                            </div>
+                        </div>
+                        <div class="list-group no-radius alt">
+                            <a class="list-group-item " href="">
+                                <span class="badge bg-light">{{currentCompany.owners.length}}</span> Owners
+                            </a>
+                            <a class="list-group-item" ng-repeat="owner in currentCompany.owners">
+
+                                <span class="label bg-danger pull-right " ng-click="removeOwner(owner.CompaniesUsers.UserId)" title="Edit">
+                                    <i class="fa fa-times"/> Delete
+                                </span> {{owner.displayName}}
+                            </a>
+
+                            <a class="list-group-item " href=""> 
+                                Add new Owner
+                            </a>
+                            <a class="list-group-item " href="">
+
+
+                                <input name="input" ng-model="searchUserField" ng-change="searchUser()" placeholder="User Display Name" class="form-control input-md">
+
+                                <p> Status:
+                                    <span ng-show="isSearching">
+                            <i class="fa fa-circle-o-notch fa-spin"></i>
+                        </span> {{searchUserResults.length}}
+                                    <span ng-show="searchUserResults.length == 1  && !isSearching"> 
+                            <i class="fa fa-check"> This is a Valid User</i>
+                        </span>
+                                    <span ng-show="searchUserResults.length == 0 && !isSearching"> 
+                            <i class="fa fa-times"> No user available with this name</i>
+                        </span>
+                                    <span ng-show="searchUserResults.length > 1 && !isSearching"> 
+                            <i class="fa fa-times">There are {{searchUserResults.length}} users with this name</i>
+                        </span>
+
+                                    <table ng-show="searchUserResults.length > 1 && !isSearching" class="table">
+                                        <thead>
+                                            <th> User Id </th>
+                                            <th> Name </th>
+                                            <th> Action </th>
+                                        </thead>
+                                        <tbody ng-repeat="user in searchUserResults">
+                                            <tr>
+                                                <td>{{user.id}}</td>
+                                                <td>{{user.displayName}}</td>
+                                                <td>
+                                                    <button ng-click="selectFromMultipleUsers(user)" class="btn btn-primary btn-xs">Select this User</button>
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+
+
+                                </p>
+
+
+                                <button ng-hide="showPanel" ng-click="addUserCompanyAssociation()" ng-disabled="searchUserResults.length != 1 " class="btn btn-primary btn-addon btn-sm"><i class="fa fa-plus"></i>Add Owner</button>
+
+
+                            </a>
+                        </div>
+
+
+
+                    </div>
+
+                </div>
+
+
+
+
+                <!-- / users -->
+            </div>
+        </div>
+    </div>
