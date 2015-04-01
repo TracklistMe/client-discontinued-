@@ -13,6 +13,11 @@ module.exports = {
         }, {
             expand: true,
             src: "**",
+            cwd: 'bower_components/angularjs-toaster/',
+            dest: "angular/bower_components/angularjs-toaster"
+        }, {
+            expand: true,
+            src: "**",
             cwd: 'bower_components/videogular-buffering/',
             dest: "angular/bower_components/videogular-buffering"
         }, {
