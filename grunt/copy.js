@@ -41,14 +41,15 @@ module.exports = {
             cwd: 'bower_components/videogular-overlay-play/',
             dest: "angular/bower_components/videogular-overlay-play"
         }, {
-
-
-
-
             expand: true,
             src: "**",
             cwd: 'bower_components/font-awesome/fonts',
             dest: "angular/fonts"
+        }, {
+            expand: true,
+            src: "**",
+            cwd: 'bower_components/jquery.sparkline/dist',
+            dest: "angular/bower_components/jquery.sparkline/dist"
         }, {
             expand: true,
             src: "**",
