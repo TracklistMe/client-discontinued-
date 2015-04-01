@@ -23,7 +23,6 @@ module.exports = function(grunt) {
         app: require('./bower.json').appPath || 'app',
         dist: 'dist'
     };
-    grunt.loadNpmTasks('grunt-bower-concat');
     grunt.loadNpmTasks('grunt-nodemon');
     grunt.loadNpmTasks('grunt-exec');
     // Define the configuration for all the tasks
@@ -40,7 +39,7 @@ module.exports = function(grunt) {
                 tasks: ['wiredep']
             },
             js: {
-                files: ['<%= yeoman.app %>/js/{,*/}*.js', '<%= yeoman.app %>/l10n/{,*/}*.js'],
+                files: ['<%= yeoman.app %>/js/{,*/}*.js'],
                 tasks: ['newer:jshint:all'],
                 options: {
                     livereload: '<%= connect.options.livereload %>'
@@ -175,23 +174,7 @@ module.exports = function(grunt) {
                 ignorePath: /\.\.\//
             }
         },
-        bower_concat: {
-            all: {
-                dest: 'dist/js/_bower.js',
-                cssDest: 'dist/styles/_bower.css',
-                exclude: [
-                    'jquery',
-                    'modernizr'
-                ],
-                mainFiles: {
-                    'bootstrap-touchspin': ['bower_components/bootstrap-touchspin/src/jquery.bootstrap-touchspin.js', 'bower_components/bootstrap-touchspin/src/jquery.bootstrap-touchspin.css']
 
-                },
-                bowerOptions: {
-                    relative: false
-                }
-            }
-        },
         // Renames files for browser caching purposes
         filerev: {
             dist: {
@@ -332,9 +315,7 @@ module.exports = function(grunt) {
                         '*.html',
                         'tpl/{,*/}*.html',
                         'img/{,*/}*.{webp}',
-                        'favicon/{,*/}*.*',
-                        'fonts/{,*/}*.*',
-                        'l10n/{,*/}*.*'
+                        'fonts/{,*/}*.*'
                     ]
                 }, {
                     expand: true,
@@ -444,6 +425,8 @@ module.exports = function(grunt) {
         'clean:dist',
         'wiredep',
         'useminPrepare',
+
+
         'concurrent:dist',
         'autoprefixer',
         'concat',
@@ -451,7 +434,6 @@ module.exports = function(grunt) {
         'copy:dist',
         'cdnify',
         'cssmin',
-        'bower_concat',
         'uglify',
         'filerev',
         'usemin',
