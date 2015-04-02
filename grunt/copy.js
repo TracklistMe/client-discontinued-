@@ -23,6 +23,11 @@ module.exports = {
         }, {
             expand: true,
             src: "**",
+            cwd: 'bower_components/footable/dist/',
+            dest: "angular/bower_components/footable/dist/"
+        }, {
+            expand: true,
+            src: "**",
             cwd: 'bower_components/videogular-buffering/',
             dest: "angular/bower_components/videogular-buffering"
         }, {
