@@ -1,29 +1,30 @@
 'use strict';
 
 /* Controllers */
-  // signin controller
+// signin controller
 app.controller('headerMusicController', function($scope, $auth, Account, CONFIG, $rootScope) {
-        $scope.serverURL = CONFIG.url
-        $scope.showAccountDropDown = false
-        
-        $scope.epxandCheckout = false;
+    $scope.serverURL = CONFIG.url
+    $scope.showAccountDropDown = false
 
-        console.log("@ASD")
-        $scope.isAuthenticated = function() {
-            return $auth.isAuthenticated();
-        };
+    $scope.epxandCheckout = false;
 
-        Account.getProfile()
-            .success(function(data) {
-                console.log(data)
-                $scope.user = data;
-                console.log(data)
-                $scope.user.avatar = $scope.serverURL + "/images/" + $scope.user.avatar;
-            })
 
-        $scope.clickSearchButton = function() {
-            console.log("HIT")
-            $rootScope.$broadcast('searchActivate', 'test');
-        }
+    console.log($scope.app.settings)
+    $scope.isAuthenticated = function() {
+        return $auth.isAuthenticated();
+    };
 
-    });
+    Account.getProfile()
+        .success(function(data) {
+            console.log(data)
+            $scope.user = data;
+            console.log(data)
+            $scope.user.avatar = $scope.serverURL + "/images/" + $scope.user.avatar;
+        })
+
+    $scope.clickSearchButton = function() {
+        console.log("HIT")
+        $rootScope.$broadcast('searchActivate', 'test');
+    }
+
+});
