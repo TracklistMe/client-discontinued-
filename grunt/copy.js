@@ -58,7 +58,7 @@ module.exports = {
         }, {
             expand: true,
             src: "**",
-            cwd: 'bower_components/jquery.sparkline/dist',
+            cwd: 'bower_components/jquery.sparkline/dist/',
             dest: "angular/bower_components/jquery.sparkline/dist"
         }, {
             expand: true,
