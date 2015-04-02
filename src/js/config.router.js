@@ -43,7 +43,7 @@ angular.module('app')
                         resolve: {
                             deps: ['$ocLazyLoad',
                                 function($ocLazyLoad) {
-                                    return $ocLazyLoad.load(['js/controllers/chart.js']);
+                                    return $ocLazyLoad.load(['js/controllers/chart.js', 'js/controllers/headerAdmin.js', ]);
                                 }
                             ]
                         }
@@ -93,7 +93,7 @@ angular.module('app')
                         resolve: {
                             deps: ['$ocLazyLoad',
                                 function($ocLazyLoad) {
-                return $ocLazyLoad.load('angularFileUpload').then(
+                                    return $ocLazyLoad.load('angularFileUpload').then(
                                         function() {
                                             return $ocLazyLoad.load([
 
