@@ -13,6 +13,11 @@ module.exports = {
         }, {
             expand: true,
             src: "**",
+            cwd: 'bower_components/jquery.sparkline/dist/',
+            dest: "angular/bower_components/jquery.sparkline/dist"
+        }, {
+            expand: true,
+            src: "**",
             cwd: 'bower_components/angularjs-toaster/',
             dest: "angular/bower_components/angularjs-toaster"
         }, {
