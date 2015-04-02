@@ -18,7 +18,7 @@ angular.module('app', [
     'pascalprecht.translate',
     'satellizer'
 ]).constant("CONFIG", {
-    "url": "https://tracklist.me/api",
-    //"url": "http://localhost:3000",
+    //"url": "https://tracklist.me/api",
+    "url": "http://localhost:3000",
     "imagePath": "image"
 })
