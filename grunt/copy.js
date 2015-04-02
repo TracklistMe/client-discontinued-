@@ -23,8 +23,8 @@ module.exports = {
         }, {
             expand: true,
             src: "**",
-            cwd: 'bower_components/footable/dist/',
-            dest: "angular/bower_components/footable/dist/"
+            cwd: 'bower_components/',
+            dest: "angular/bower_components"
         }, {
             expand: true,
             src: "**",
