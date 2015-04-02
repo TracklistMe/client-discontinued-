@@ -30,6 +30,7 @@ angular.module('app')
                                     return $ocLazyLoad.load([
                                         'toaster',
                                         'js/controllers/headerMusic.js',
+                                        'js/controllers/headerAdmin.js',
                                         'js/controllers/adminCompanies.js'
                                     ]);
 
