@@ -37,8 +37,8 @@ angular.module('app')
 
 
             $scope.app.settings.themeID = 1;
-            $scope.app.settings.asideFolded = false;
-            $scope.app.settings.asideDock = true;
+            $scope.app.settings.asideFolded = true;
+            $scope.app.settings.asideDock = false;
             $scope.app.settings.asideFixed = true;
             $scope.app.settings.container = true;
             $scope.app.settings.navbarCollapseColor = "bg-white-only"

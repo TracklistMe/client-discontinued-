@@ -9,7 +9,6 @@ app.controller('headerMusicController', function($scope, $auth, Account, CONFIG,
     $scope.epxandCheckout = false;
 
 
-    console.log($scope.app.settings)
     $scope.isAuthenticated = function() {
         return $auth.isAuthenticated();
     };
