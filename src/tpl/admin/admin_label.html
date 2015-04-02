@@ -6,7 +6,7 @@
             <div class="row">
                 <div class="col-sm-4 col-xs-12">
                     <h1 class="m-n font-thin h3 text-black">Admin Label - {{label.displayName}} </h1>
-                    <small class="text-muted">Create Labels, Add Label Managers </small>
+                    <small class="text-muted">Add new release </small>
                 </div>
             </div>
         </div>
@@ -40,6 +40,30 @@
                 </div>
 
             </div>
+            <!--  edit companies -->
+            <div ng-if="releasesToProcess.success.length != 0" class="panel panel-default">
+        <div class="panel-heading">Release to Process</div>
+        <div class="panel-body">
+            <button type="button" ng-click="processReleases()" class="col-md-12 btn btn-success btn-s">
+                We have detected {{releasesToProcess.success.length}} releases to process. Click to proceed
+            </button>
+
+        </div>
+    </div>
+    <div ng-if="releasesToProcess.success.length != 0" class="panel panel-default">
+        <div class="panel-heading">Incomplete Releaes </div>
+        <div class="panel-body">
+
+            <div ng-if="releasesToProcess.fail.length > 0">
+                There
+                <ng-pluralize count="releasesToProcess.fail.length" when="{'1': 'is 1 release that is missing files',
+                     'other': 'are {} releases that are missing files'}">
+                </ng-pluralize>
+
+            </div>
+        </div>
+    </div>
+
 
             <!-- label list -->
             <div class="row">
@@ -323,10 +347,7 @@
             </div>
 
 
-            <!--  edit companies -->
-
-
-
+ 
 
 
             <!-- / users -->
