@@ -16,9 +16,6 @@ module.exports = {
             cwd: 'bower_components/jquery.sparkline/dist/',
             dest: "angular/bower_components/jquery.sparkline/dist"
         }, {
-            cwd: 'bower_components/jquery.sparkline/dist/jquery.sparkline.retina.js',
-            dest: "angular/bower_components/jquery.sparkline/dist/jquery.sparkline.retina.js"
-        }, {
             expand: true,
             src: "**",
             cwd: 'bower_components/angularjs-toaster/',
