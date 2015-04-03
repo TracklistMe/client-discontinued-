@@ -19,6 +19,8 @@ module.exports = {
 
             'bower_components/oclazyload/dist/ocLazyLoad.js',
 
+            'bower_components/jquery.sparkline/dist/jquery.sparkline.retina.js',
+            'bower_components/jquery.sparkline/dist/jquery.sparkline.retina.js',
             'bower_components/angular-smart-table/dist/smart-table.min.js',
             'bower_components/satellizer/satellizer.js',
 
