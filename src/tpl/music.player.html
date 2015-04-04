@@ -1,6 +1,6 @@
-<!--
+ 
 
-<div class="videogular-container bg-light lter">
+<div  ng-show="audios.length>0" class="videogular-container bg-light lter">
  
   <videogular 
     vg-player-ready="onPlayerReady" 
@@ -15,7 +15,7 @@
       <vg-button ng-show="audios.length-1" ng-click="play('next')"><i class="fa fa-forward"></i></vg-button>
       <vg-timedisplay class="hidden-xs">{{ currentTime | date:'mm:ss' }}</vg-timedisplay>
       <vg-scrubBar>
-        <vg-title class="hidden-xs">{{config.title}}</vg-title>
+        <vg-title class="hidden-xs">{{config.artist}} - {{config.title}}</vg-title>
         <vg-scrubbarcurrenttime class="bg-info" style="height: 4px"></vg-scrubbarcurrenttime>
       </vg-scrubBar>
       <vg-timedisplay>{{ timeLeft | date:'mm:ss' }}</vg-timedisplay>
@@ -31,4 +31,4 @@
  
 </div>
 
--->
+ 

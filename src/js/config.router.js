@@ -760,7 +760,19 @@ angular.module('app')
                     })
                     .state('music.home', {
                         url: '/home',
-                        templateUrl: 'tpl/music.home.html'
+                        templateUrl: 'tpl/music.home.html',
+                        resolve: {
+                            deps: ['$ocLazyLoad',
+                                function($ocLazyLoad) {
+
+                                    return $ocLazyLoad.load([
+                                        'toaster',
+                                        'js/controllers/homePage.js'
+                                    ]);
+
+                                }
+                            ]
+                        }
                     })
                     .state('music.genres', {
                         url: '/genres',

@@ -2,11 +2,41 @@
      app.settings.themeID = 0;
     app.settings.asideFolded = true; 
     app.settings.asideDock = false;
-    app.settings.asideFixed = true;" >
+    app.settings.asideFixed = true;" ng-controller="HomepageController">
   <!-- main -->
   <div class="col wrapper-lg">
     <h3 class="font-thin m-t-n-xs m-b">Recommendation</h3>
     <div class="row row-sm">
+
+      <!-- PULLING FROM RELEASE -->
+
+      <div ng-repeat="release in releases" class="col-xs-6 col-sm-4 col-md-3 col-lg-2-4">
+        <div class="item">
+          <div class="pos-rlt">
+            <div class="top">
+              <span class="badge bg-info m-l-sm m-t-sm">04:10</span>
+            </div>
+            <div class="item-overlay bg-black-opacity r r-2x r r-2x">
+              <div class="center text-center m-t-n w-full">
+                <a ng-click="addRelease($index)"><i class="fa fa-2x fa-play-circle-o text-white"></i></a>
+              </div>
+            </div>
+            <a ui-sref="music.detail"><img ng-src="{{serverURL}}/images/{{release.cover}}" alt="" class="img-full r r-2x"></a>
+          </div>
+          <div class="padder-v">
+            <a ui-sref="music.detail" class="text-ellipsis">{{release.title}}</a>
+            <a ui-sref="music.detail" class="text-ellipsis text-xs text-muted">
+              
+            {{release.Labels[0].displayName}}
+
+            </a>
+          </div>
+        </div>
+      </div>
+
+
+      <!-- end -->
+
       <div class="col-xs-6 col-sm-4 col-md-3 col-lg-2-4">
         <div class="item">
           <div class="pos-rlt">
@@ -26,6 +56,7 @@
           </div>
         </div>
       </div>
+
       <div class="col-xs-6 col-sm-4 col-md-3 col-lg-2-4">
         <div class="item">
           <div class="pos-rlt">
