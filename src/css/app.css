@@ -2458,11 +2458,7 @@ fieldset[disabled] .btn-black.active {
   background-color: #27c24c;
   border-radius: 30px;
 }
-.uploadLabel input{
-  position: absolute;
-  opacity: 0;
-  filter: alpha(opacity=0);
-}
+
 .i-switch input {
   position: absolute;
   opacity: 0;
