@@ -15,7 +15,9 @@ app.controller('AdminlabelCtrl', function($location, $scope, $state, $auth, $sta
     $scope.dropZoneFiles = null
     $scope.releasesToProcess = null
     $scope.catalog = null
-
+    $scope.releasesToProcess = {
+        success: []
+    };
 
 
     var uploader = $scope.uploader = new FileUploader({

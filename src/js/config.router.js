@@ -773,6 +773,20 @@ angular.module('app')
                                 }
                             ]
                         }
+                    }).state('music.release', {
+                        url: '/release/{id:int}',
+                        templateUrl: 'tpl/music.detail.html',
+                        resolve: {
+                            deps: ['$ocLazyLoad',
+                                function($ocLazyLoad) {
+                                    return $ocLazyLoad.load([
+                                        'toaster',
+                                        'js/controllers/homePage.js'
+                                    ]);
+
+                                }
+                            ]
+                        }
                     })
                     .state('music.genres', {
                         url: '/genres',
