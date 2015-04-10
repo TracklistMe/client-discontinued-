@@ -1,12 +1,14 @@
   <!-- navbar -->
-  <div data-ng-include=" 'tpl/blocks/header.html' " class="app-header navbar">
-  </div>
-  <!-- / navbar -->
+  <div ng-controller="headerAdminController">
+    <div data-ng-include=" 'tpl/blocks/header.html' " class="app-header navbar">
+    </div>
+    <!-- / navbar -->
 
-  <!-- menu -->
-  <div data-ng-include=" 'tpl/blocks/aside.html' " class="app-aside hidden-xs {{app.settings.asideColor}}">
-  </div>
+    <!-- menu -->
+    <div data-ng-include=" 'tpl/blocks/aside.html' " class="app-aside hidden-xs {{app.settings.asideColor}}">
+    </div>
   <!-- / menu -->
+  </div>
 
   <!-- content -->
   <div class="app-content">

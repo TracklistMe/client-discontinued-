@@ -89,7 +89,7 @@
         <hr /> 
          <div class="wrapper-md bg-light dk b-b">
            
-            <h3 class="m-n font-thin">File uploaded</h3>
+            <h3 class="m-n font-thin">File uploaded ({{dropZoneFiles.length}})</h3>
         </div>
         <div class="col-md-12">
             <table class="table">
@@ -101,7 +101,7 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <tr ng-repeat="file in dropZoneFiles">
+                    <tr ng-repeat="file in dropZoneFiles | orderBy:'fileName'">
                         <td> {{file.fileName}} </td>
                         <td> {{file.extension}} </td>
                         <td> {{file.size/1024/1024|number:2}} MB </td>

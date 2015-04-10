@@ -15,22 +15,24 @@ app.controller('FileUploadCtrl', function($location, $scope, $state, $auth, $sta
     uploader.filters.push({
         name: 'customFilter',
         fn: function(item /*{File|FileLikeObject}*/ , options) {
-            return this.queue.length < 10;
+            return this.queue.length < 40;
         }
     });
 
 
     // CALLBACKS
 
-
+    uploader.currentUploading = 0
     $scope.processCDNNegotiation = function() {
         console.log("Process CDN NEGOTIATION")
-        for (var i = 0; i < uploader.queue.length; i++) {
-            uploader.processOne(uploader.queue[i]);
-        }
+
+        uploader.processOne(uploader.queue[uploader.currentUploading]);
+
     }
 
     uploader.processOne = function(fileItem) {
+        console.log("PROCESS ---- ITEM  queue.Legth : " + uploader.queue.length);
+        console.log("--------------------")
         var file = fileItem;
         var fname = file._file.name;
         var filename = fname.substr(0, (Math.min(fname.lastIndexOf("."), fname.length)));
@@ -160,7 +162,10 @@ app.controller('FileUploadCtrl', function($location, $scope, $state, $auth, $sta
             // or server returns response with an error status.
         });
 
-
+        if (uploader.currentUploading < uploader.queue.length) {
+            uploader.currentUploading++
+            $scope.processCDNNegotiation();
+        }
         $scope.getDropZoneFiles();
     };
     uploader.onCompleteAll = function() {
@@ -178,6 +183,7 @@ app.controller('FileUploadCtrl', function($location, $scope, $state, $auth, $sta
     }
 
     $scope.getDropZoneFiles = function() {
+        console.log("RETRIVING CDN -----------")
         $http.get(CONFIG.url + '/labels/' + labelId + '/dropZoneFiles')
             .success(function(data) {
                 $scope.dropZoneFiles = data
@@ -214,13 +220,13 @@ app.controller('FileUploadCtrl', function($location, $scope, $state, $auth, $sta
         $location.path('adminRelease/' + labelId + '/' + id);
     }
     $scope.getCatalog = function() {
+
         $http.get(CONFIG.url + '/labels/' + labelId + '/catalog')
             .success(function(data) {
                 $scope.catalog = data
                 console.log(data)
             })
     }
-
 
     $scope.getToProcessReleases();
     $scope.getDropZoneFiles();

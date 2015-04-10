@@ -21,24 +21,47 @@ app.controller('headerAdminController', function($scope, $auth, Account, CONFIG,
     $scope.app.settings.navbarHeaderColor = "bg-black"
     $scope.app.settings.asideColor = "bg-black"
 
+    // AUTENTICATION 
+    $scope.isAdmin = false;
+    $scope.hasCompanies = false;
+    $scope.hasLabels = false;
+    $scope.hasArtists = false;
 
 
-    console.log("----" + $scope.app.settings)
     $scope.isAuthenticated = function() {
         return $auth.isAuthenticated();
     };
-
+    // MAIN CALL FOR PROFILE 
     Account.getProfile()
         .success(function(data) {
-            console.log(data)
             $scope.user = data;
-            console.log(data)
+            $scope.isAdmin = data.isAdmin;
             $scope.user.avatar = $scope.serverURL + "/images/" + $scope.user.avatar;
+
+            // SUB CALLS FOR STATS
+            Account.getCompanies()
+                .success(function(data) {
+                    $scope.user.companies = data;
+                    $scope.hasCompanies = true;
+                })
+            Account.getLabels()
+                .success(function(data) {
+                    $scope.user.labels = data;
+                    $scope.hasLabels = true;
+                })
+            Account.getArtists()
+                .success(function(data) {
+                    $scope.user.artists = data;
+                    $scope.hasArtists = true;
+                })
+
         })
+
 
     $scope.clickSearchButton = function() {
         console.log("HIT")
         $rootScope.$broadcast('searchActivate', 'test');
     }
+
 
 });

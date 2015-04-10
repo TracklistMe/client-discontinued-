@@ -1,0 +1,53 @@
+<div class="hbox hbox-auto-xs hbox-auto-sm" ng-controller="AdminlabelsCtrl">
+    <!-- main -->
+    <div class="bg-light lter b-b wrapper-md">
+      <h1 class="m-n font-thin h3">Your Labels</h1>
+    </div>
+    <div class="wrapper-md" >
+     
+         <div ng-repeat="label in labelList" class="col-lg-4">
+                    <div class="panel panel-default">
+
+
+ 
+                        
+
+                        <div class="panel-body">
+                            <div class="clearfix text-center m-t">
+                                <div class="inline">
+                                    
+                                        <div class="thumb-xl">
+                                          <a ui-sref="app.adminlabel({id:label.id})">
+                                            <img ng-src="{{label.logo}}" class="img-circle thumb-xl" alt="...">
+                                          </a>  
+                                        </div>
+                                  
+                                    <div class="h4 m-t m-b-xs">{{label.displayName}}</div>
+
+                                </div>
+                            </div>
+                        </div>
+                        <footer class="panel-footer bg-info text-center no-padder">
+                            <div class="row no-gutter">
+                              
+                                <div class="col-xs-6  ">
+                                    <div class="wrapper">
+                                        <span class="m-b-xs h3 block text-white">4</span>
+                                        <small class="text-muted">Label Managers</small>
+                                    </div>
+                                </div>
+                                <div class="col-xs-6">
+                                    <div class="wrapper">
+                                        <span class="m-b-xs h3 block text-white">142</span>
+                                        <small class="text-muted">Releases</small>
+                                    </div>
+                                </div>
+                            </div>
+                        </footer>
+                    </div>
+                </div>
+
+
+      </div>
+    </div>
+</div>

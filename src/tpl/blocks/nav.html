@@ -3,14 +3,14 @@
     <li class="hidden-folded padder m-t m-b-sm text-muted text-xs">
         <span translate="aside.nav.HEADER">Navigation</span>
     </li>
-    <li>
+    <li ng-if="isAdmin">
         <a href class="auto">
             <span class="pull-right text-muted">
-        <i class="fa fa-fw fa-angle-right text"></i>
-        <i class="fa fa-fw fa-angle-down text-active"></i>
-      </span>
+                <i class="fa fa-fw fa-angle-right text"></i>
+                <i class="fa fa-fw fa-angle-down text-active"></i>
+            </span>
             <i class="glyphicon glyphicon-stats icon text-primary-dker"></i>
-            <span class="font-bold" translate="aside.nav.ADMIN">Dashboard</span>
+            <span class="font-bold" translate="aside.nav.ADMIN">Admin</span>
         </a>
         <ul class="nav nav-sub dk">
             <li ui-sref-active="active">
@@ -50,50 +50,42 @@
             </li>
         </ul>
     </li>
-    <li ui-sref-active="active">
+    <li ng-if="isAdmin || hasCompanies" >
         <a ui-sref="app.companieslist">
+           <span class="pull-right text-muted">
+                <i class="fa fa-fw fa-angle-right text"></i>
+                <i class="fa fa-fw fa-angle-down text-active"></i>
+              </span>
             <i class="glyphicon glyphicon-calendar icon text-info-dker"></i>
             <span class="font-bold">Companies</span>
         </a>
+        <ul class="nav nav-sub dk">
+            <li ng-repeat="company in user.companies" ui-sref-active="active">
+                    <a ui-sref="app.admincompany({id:company.id})" >
+                        <span>{{company.displayName}}</span>
+                    </a>
+            </li>
+        </ul>
+
     </li>
-    <li>
-        <a href class="auto">
+    <li ng-if="isAdmin || hasLabels">
+        <a ui-sref="app.adminlabels" class="auto">
             <span class="pull-right text-muted">
-        <i class="fa fa-fw fa-angle-right text"></i>
-        <i class="fa fa-fw fa-angle-down text-active"></i>
-      </span>
+                <i class="fa fa-fw fa-angle-right text"></i>
+                <i class="fa fa-fw fa-angle-down text-active"></i>
+              </span>
             <i class="fa fa-database icon text-success"></i>
             <span class="font-bold">Labels</span>
         </a>
         <ul class="nav nav-sub dk">
-            <li class="nav-sub-header">
-                <a href>
-                    <span>Apps</span>
-                </a>
-            </li>
-            <li ui-sref-active="active">
-                <a ui-sref="app.todo">
-                    <span>Todo</span>
-                </a>
-            </li>
-            <li ui-sref-active="active">
-                <a ui-sref="apps.note">
-                    <span>Note</span>
-                </a>
-            </li>
-            <li ui-sref-active="active">
-                <a ui-sref="apps.contact">
-                    <span>Contacts</span>
-                </a>
-            </li>
-            <li ui-sref-active="active">
-                <a ui-sref="app.weather">
-                    <span>Weather</span>
-                </a>
+             <li ng-repeat="label in user.labels" ui-sref-active="active">
+                    <a ui-sref="app.adminlabel({id:label.id})" >
+                        <span>{{label.displayName}}</span>
+                    </a>
             </li>
         </ul>
     </li>
-    <li ui-sref-active="active">
+    <li ng-if="isAdmin || hasArtists" ui-sref-active="active">
         <a ui-sref="app.mail.list">
             <b class="badge bg-info pull-right">9</b>
             <i class="glyphicon glyphicon-envelope icon text-info-lter"></i>
@@ -136,6 +128,31 @@
             <li ui-sref-active="active">
                 <a ui-sref="layout.mobile">
                     <span>Mobile</span>
+                </a>
+            </li>
+            <li class="nav-sub-header">
+                <a href>
+                    <span>Apps</span>
+                </a>
+            </li>
+            <li ui-sref-active="active">
+                <a ui-sref="app.todo">
+                    <span>Todo</span>
+                </a>
+            </li>
+            <li ui-sref-active="active">
+                <a ui-sref="apps.note">
+                    <span>Note</span>
+                </a>
+            </li>
+            <li ui-sref-active="active">
+                <a ui-sref="apps.contact">
+                    <span>Contacts</span>
+                </a>
+            </li>
+            <li ui-sref-active="active">
+                <a ui-sref="app.weather">
+                    <span>Weather</span>
                 </a>
             </li>
         </ul>
