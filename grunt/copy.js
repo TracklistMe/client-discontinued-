@@ -93,6 +93,9 @@ module.exports = {
         }, {
             src: 'src/index.min.html',
             dest: 'angular/index.html'
+        }, {
+            src: 'src/favicon.ico',
+            dest: 'angular/favicon.ico'
         }]
     },
     html: {
