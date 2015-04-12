@@ -810,8 +810,7 @@ angular.module('app')
                         deps: ['$ocLazyLoad',
                             function($ocLazyLoad) {
                                 return $ocLazyLoad.load([
-                                    'toaster',
-                                    'js/controllers/homePage.js'
+                                    'js/controllers/release.js'
                                 ]);
 
                             }

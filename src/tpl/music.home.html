@@ -30,11 +30,11 @@
               <span class="pull-right m-t-sm m-r-sm badge bg-info">6</span>
               -->
             </div>
-            <a ui-sref="music.detail"><img ng-src="{{serverURL}}/images/{{release.cover}}" alt="" class="img-full r r-2x"></a>
+            <a ui-sref="music.release({id:release.id})"><img ng-src="{{serverURL}}/images/{{release.cover}}" alt="" class="img-full r r-2x"></a>
           </div>
           <div class="padder-v">
-            <a ui-sref="music.detail" class="text-ellipsis">{{release.title}}</a>
-            <a ui-sref="music.detail" class="text-ellipsis text-xs text-muted">
+            <a ui-sref="music.release({id:release.id})" class="text-ellipsis">{{release.title}}</a>
+            <a ui-sref="music.release({id:release.id})" class="text-ellipsis text-xs text-muted">
               
             {{release.Labels[0].displayName}}
 
