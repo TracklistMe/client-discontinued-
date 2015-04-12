@@ -19,6 +19,7 @@ app.controller('ReleaseCtrl', function($location, $scope, $state, $auth, $stateP
         $http.get(CONFIG.url + '/releases/' + releaseId)
             .success(function(data) {
                 $scope.release = data
+                console.log(data)
 
                 // TO BE IMPROVE
                 // use the artistID as hash for counting the occurencies of the array.
