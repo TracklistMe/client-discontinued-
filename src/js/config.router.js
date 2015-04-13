@@ -823,7 +823,8 @@ angular.module('app')
                         deps: ['$ocLazyLoad',
                             function($ocLazyLoad) {
                                 return $ocLazyLoad.load([
-                                    'js/controllers/track.js'
+                                    'js/controllers/track.js',
+                                    'js/libs/waveform/waveform.js'
                                 ]);
 
                             }
