@@ -13,7 +13,7 @@ angular.module('app')
             // config
             $scope.app = {
                 name: 'Tracklist.me',
-                version: '0.0.3',
+                version: '0.0.4',
                 // for chart colors
                 color: {
                     primary: '#7266ba',
