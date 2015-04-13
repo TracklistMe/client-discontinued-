@@ -3720,7 +3720,7 @@ fieldset[disabled] .i-checks input + i:before {
 }
 
 .bg-white-opacity {
-  background-color: rgba(255, 255, 255, 0.5);
+  background-color: rgba(255, 255, 255, 0.7);
 }
 
 .bg-black-opacity {

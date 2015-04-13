@@ -816,6 +816,19 @@ angular.module('app')
                             }
                         ]
                     }
+                }).state('music.artist', {
+                    url: '/artist/{id:int}',
+                    templateUrl: 'tpl/music.artist.html',
+                    resolve: {
+                        deps: ['$ocLazyLoad',
+                            function($ocLazyLoad) {
+                                return $ocLazyLoad.load([
+                                    'js/controllers/artist.js'
+                                ]);
+
+                            }
+                        ]
+                    }
                 })
                 .state('music.genres', {
                     url: '/genres',

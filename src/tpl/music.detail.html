@@ -25,7 +25,7 @@
           <span class="text">Artists:</span>
             <div class="clearfix m-b-xs">
               <a ng-repeat="artist in allArtists  | limitTo: 10" class="thumb-sm pull-left m-r-xxs m-b-xxs">
-                <img ng-src="{{serverURL}}/images/{{artist.avatar}}" class="img-circle">
+                <img ui-sref="music.artist({id:artist.id})" ng-src="{{serverURL}}/images/{{artist.avatar}}" class="img-circle">
               </a>
             </div>
              <div ng-if="allArtists.length> 10" class="clearfix m-b-xs">
@@ -47,9 +47,9 @@
       <ul class="list-group no-radius no-border list-group-lg">
         <li ng-repeat="track in release.Tracks" class="list-group-item">
           <div class="pull-right m-l">
-            <a class="m-r-sm"><i class="icon-cloud-download"></i></a>
+            <a class="m-r-sm"><i class="icon-heart"></i></a>
             <a class="m-r-sm"><i class="icon-plus"></i></a>
-            <a><i class="icon-close"></i></a>
+            
           </div>
           <a class="jp-play-me m-r-sm pull-left">
             <i class="icon-control-play text"></i>
@@ -57,7 +57,7 @@
           </a>
           <div class="clear text-ellipsis">
             <span> 
-            <span ng-repeat="producer in track.Producer">{{producer.displayName}}{{$last ? '' : ', '}}</span> -
+             <a ui-sref="music.track({id:track.id})"> <span ng-repeat="producer in track.Producer">{{producer.displayName}}{{$last ? '' : ', '}}</span></a> -
             {{track.title}} ({{track.version}})</span>
             <span class="text-muted"> -- 04:35</span>
           </div>
@@ -65,6 +65,8 @@
          
       </ul>
     </div>
+
+  <!-- 
     <div class="padder-md m-b-lg">
       <h4 class="m-t-lg m-b">3 Comments</h4>
       <div>
@@ -142,12 +144,14 @@
         </div>
       </form>
     </div>
+
+    -->
   </div>
   <!-- / main -->
   <!-- right col -->
   <div class="col w-md bg-light dker b-l bg-auto no-border-xs">    
     <div class="wrapper-md">      
-      <div class="m-b-sm text-md">Top Plays</div>
+      <div class="m-b-sm text-md">Similar Releases</div>
       <ul class="list-group no-bg no-borders pull-in">
         <li class="list-group-item">
           <a herf class="pull-left thumb-sm m-r">
@@ -196,7 +200,7 @@
         </li>
       </ul>
       <div class="text-center">
-        <a href class="btn btn-sm btn-info padder-md m-b">More</a>
+        <hr />
       </div>
     </div>
     <!-- streamline -->
