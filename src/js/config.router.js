@@ -805,12 +805,25 @@ angular.module('app')
                     }
                 }).state('music.release', {
                     url: '/release/{id:int}',
-                    templateUrl: 'tpl/music.detail.html',
+                    templateUrl: 'tpl/music.release.html',
                     resolve: {
                         deps: ['$ocLazyLoad',
                             function($ocLazyLoad) {
                                 return $ocLazyLoad.load([
                                     'js/controllers/release.js'
+                                ]);
+
+                            }
+                        ]
+                    }
+                }).state('music.track', {
+                    url: '/track/{id:int}',
+                    templateUrl: 'tpl/music.track.html',
+                    resolve: {
+                        deps: ['$ocLazyLoad',
+                            function($ocLazyLoad) {
+                                return $ocLazyLoad.load([
+                                    'js/controllers/track.js'
                                 ]);
 
                             }
