@@ -12,6 +12,7 @@ angular.module('app').directive('uiWaveform', function() {
                     container: element[0],
                     width: _width,
                     height: _height,
+                    interpolate: true,
                     innerColor: _innercolor,
                     outerColor: _outercolor
                 });
