@@ -19,15 +19,47 @@ angular.module('app').directive('uiWaveform', function() {
             var ctx = waveform.context;
 
             var gradient = ctx.createLinearGradient(0, 0, waveform.width, waveform.height);
-            gradient.addColorStop(1.0, "#dba066");
-            gradient.addColorStop(0.0, "#208ea5");
-            waveform.innerColor = gradient;
+            gradient.addColorStop(1.0, "#e19143");
+            gradient.addColorStop(0.0, "#0984a2");
+            var gradientNotAvailable = ctx.createLinearGradient(0, 0, waveform.width, waveform.height);
+            gradientNotAvailable.addColorStop(1.0, "#ecc8a6");
+            gradientNotAvailable.addColorStop(0.0, "#70afbe");
+
+            waveform.innerColor = function(x, y) {
+
+                console.log(x)
+                if (startingOfClipNormalized < x && x < endingOfClipNormalized) {
+                    // implement here the split for time
+                    // need to understand how's th
+
+                    return gradient;
+                } else {
+
+                    return gradientNotAvailable
+                }
+
+            };
+            var totalSamples = 0;
+            var startingOfClip = 0;
+            var endingOfClip = 0;
+            var startingOfClipNormalized = 0;
+            var endingOfClipNormalized = 0;
             scope.$watch(attrs.uiWaveform, function(wave) {
+                totalSamples = wave.length;
+                startingOfClip = totalSamples / 2 - 640; //640 is 1:15 seconds with a sample rate of 256
+                endingOfClip = startingOfClip + 1280;
+                console.log("start ending frames", startingOfClip, endingOfClip)
+                startingOfClipNormalized = startingOfClip / totalSamples;
+                endingOfClipNormalized = endingOfClip / totalSamples;
+                console.log(totalSamples)
+                console.log(startingOfClipNormalized, endingOfClipNormalized)
                 if (wave) {
                     waveform.update({
                         data: wave
                     });
                 }
+
+
             });
         }
     }
