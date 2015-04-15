@@ -8,6 +8,7 @@
     vg-theme="config.theme.url"  
     vg-autoplay="config.autoPlay" 
     class="videogular-container audio">
+     <vg-scrubbarcurrenttime class="bg-info w-full" style="height: 4px"></vg-scrubbarcurrenttime>
     <vg-audio vg-src="config.sources"></vg-audio>
     <vg-controls>
       <vg-button ng-show="audios.length-1" ng-click="play('prev')"><i class="fa fa-backward"></i></vg-button>
@@ -16,7 +17,7 @@
       <vg-timedisplay class="hidden-xs">{{ currentTime | date:'mm:ss' }}</vg-timedisplay>
       <vg-scrubBar>
         <vg-title class="hidden-xs">{{config.artist}} - {{config.title}}</vg-title>
-        <vg-scrubbarcurrenttime class="bg-info" style="height: 4px"></vg-scrubbarcurrenttime>
+        
       </vg-scrubBar>
       <vg-timedisplay>{{ timeLeft | date:'mm:ss' }}</vg-timedisplay>
        

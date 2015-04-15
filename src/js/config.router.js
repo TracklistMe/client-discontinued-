@@ -173,6 +173,19 @@ angular.module('app')
                             }
                         ]
                     }
+                }).state('app.admingenres', {
+                    url: '/adminGenres',
+                    templateUrl: 'tpl/admin/admin_genres.html',
+                    resolve: {
+                        deps: ['$ocLazyLoad',
+                            function($ocLazyLoad) {
+                                return $ocLazyLoad.load([
+                                    'js/controllers/chart.js',
+                                    'js/controllers/adminGenres.js'
+                                ]);
+                            }
+                        ]
+                    }
                 }).state('app.adminartists', {
                     url: '/adminArtists',
                     templateUrl: 'tpl/admin/admin_artists.html',
