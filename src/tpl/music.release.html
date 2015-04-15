@@ -42,6 +42,43 @@
         </div>
       </div>
     </div>
+<div class="wrapper-md">
+<table class="table table-border bg-white-only b-a">
+        <tbody>
+          <tr class="bg-light lt">
+            <td colspan="4">Tracklist</td>
+          </tr>
+          <tr ng-repeat="track in release.Tracks">
+            <td class="v-middle">
+                <a class="">
+                  <i class="icon-control-play text"></i>
+                  <i class="icon-control-pause text-active"></i>
+                </a>
+
+            </td>
+            <td> 
+              <a ui-sref="music.track({id:track.id})"> <span ng-repeat="producer in track.Producer">{{producer.displayName}}{{$last ? '' : ', '}}</span> -
+            {{track.title}}  </span>
+              <br />
+            <small>({{track.version}})</small></a> 
+            </td>
+            <td> 
+              <a ui-sref="music.track({id:track.id})"> <span ng-repeat="genres in track.Genres">{{genres.name}}{{$last ? '' : ', '}}</span> -
+            </td>
+
+
+            <td class="v-middle" > 
+              <div class="pull-right">
+                <a class="m-r-sm"><i class="icon-heart"></i></a>
+                <a class="m-r-sm"><i class="icon-plus"></i></a>
+              </div>
+            </td>
+          </tr>
+          
+ 
+        </tbody>
+      </table>
+      </div> 
     <div class="bg-white-only">
       <h4 class="m-n wrapper">Tracklist</h4>
       <ul class="list-group no-radius no-border list-group-lg">
