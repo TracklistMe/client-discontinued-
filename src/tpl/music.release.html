@@ -2,7 +2,7 @@
   <!-- main -->
   <div class="col">
     <div class="wrapper-md">
-      <h3 class="m-t-none text-black">{{release.title}}</h3>
+      <h2 class="m-t-none text-black">{{release.title}}</h2>
       <p class="text-muted m-b-md">{{release.description}}</p>
       <div class="hbox hbox-auto-xs">
         <div class="col w-md">
@@ -46,7 +46,7 @@
 <table class="table table-border bg-white-only b-a">
         <tbody>
           <tr class="bg-light lt">
-            <td colspan="4">Tracklist</td>
+            <td colspan="4"><h4>Tracklist</h4></td>
           </tr>
           <tr ng-repeat="track in release.Tracks">
             <td class="v-middle">
@@ -63,7 +63,9 @@
             <small>({{track.version}})</small></a> 
             </td>
             <td> 
-              <a ui-sref="music.track({id:track.id})"> <span ng-repeat="genres in track.Genres">{{genres.name}}{{$last ? '' : ', '}}</span> -
+                <span> 4:15 / 125bpm </span> <br />
+                 <span ng-repeat="genres in track.Genres">{{genres.name}}{{$last ? '' : ', '}}</span> 
+
             </td>
 
 
@@ -79,29 +81,7 @@
         </tbody>
       </table>
       </div> 
-    <div class="bg-white-only">
-      <h4 class="m-n wrapper">Tracklist</h4>
-      <ul class="list-group no-radius no-border list-group-lg">
-        <li ng-repeat="track in release.Tracks" class="list-group-item">
-          <div class="pull-right m-l">
-            <a class="m-r-sm"><i class="icon-heart"></i></a>
-            <a class="m-r-sm"><i class="icon-plus"></i></a>
-            
-          </div>
-          <a class="jp-play-me m-r-sm pull-left">
-            <i class="icon-control-play text"></i>
-            <i class="icon-control-pause text-active"></i>
-          </a>
-          <div class="clear text-ellipsis">
-            <span> 
-             <a ui-sref="music.track({id:track.id})"> <span ng-repeat="producer in track.Producer">{{producer.displayName}}{{$last ? '' : ', '}}</span> -
-            {{track.title}} ({{track.version}})</span></a> 
-            <span class="text-muted"> -- 04:35</span>
-          </div>
-        </li>
-         
-      </ul>
-    </div>
+    
 
   <!-- 
     <div class="padder-md m-b-lg">
