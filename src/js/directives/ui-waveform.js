@@ -46,6 +46,7 @@ angular.module('app').directive('uiWaveform', function() {
             var endingOfClipNormalized = 0;
             scope.$watch(attrs.uiWaveform, function(wave) {
                 totalSamples = wave.length;
+                console.log("totalSamples: " + wave.length)
                 startingOfClip = totalSamples / 2 - 640; //640 is 1:15 seconds with a sample rate of 256
                 endingOfClip = startingOfClip + 1280;
                 console.log("start ending frames", startingOfClip, endingOfClip)
