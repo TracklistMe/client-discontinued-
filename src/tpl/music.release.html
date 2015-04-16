@@ -63,7 +63,7 @@
             <small>({{track.version}})</small></a> 
             </td>
             <td> 
-                <span> 4:15 / 125bpm </span> <br />
+                <span> {{ 100 | secondsToTimeString }} / 125bpm </span> <br />
                  <span ng-repeat="genres in track.Genres">{{genres.name}}{{$last ? '' : ', '}}</span> 
 
             </td>
