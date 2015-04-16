@@ -1,0 +1,358 @@
+<div class="hbox hbox-auto-xs hbox-auto-sm" ng-controller="AdminEditReleaseCtrl">
+    <!-- main -->
+    <div class="col">
+        <div class="no-pad">
+            <!-- breadcrumb -->
+            <div>
+                <ul class="breadcrumb bg-white  ">
+                    <li><a ui-sref="app.admincompany({id:company[0].id})">{{company[0].displayName}}</a></li>
+                    <li><a ui-sref="app.adminlabel({id:release.Labels[0].id})">{{release.Labels[0].displayName}}</a></li>
+                    <li> <a ui-sref="app.adminrelease({id:release.id})"> {{release.catalogNumber}} - {{release.title}}</li>
+                    <li class="active">  Edit </li>
+
+                </ul>
+            </div>
+             
+        </div>
+        <div class="padder-md">
+            <div class="col-md-6">
+                <h4>Edit Release</h4>
+                <h2 class="m-t-none text-black">{{release.title}}</h2>
+                <p class="text-muted m-b-md">{{release.description}}</p>
+            </div>
+            <div class="col-md-6">
+                <div class="pull-right">
+                    <a ui-sref="app.admineditrelease({id:release.id})"> 
+                        <button class="btn btn-danger">Save Changes Release</button>
+                    </a>
+            </div>
+        </div>
+    </div>
+    <div class="wrapper-md">
+        <div class="hbox hbox-auto-xs">
+            <div class="col-md-3">
+                <div class="item">
+                    <div class="pos-rlt">
+                        <div class="item-overlay bg-black-opacity r r-2x r r-2x">
+                            <div class="center text-center m-t-n-lg w-full">
+                                <a ng-click="addRelease($index)"><i class="fa fa-4x fa-play-circle-o text-white"></i></a>
+                            </div>
+                        </div>
+                        <a ui-sref="music.release({id:release.id})"><img ng-src="{{serverURL}}/images/{{release.cover}}" alt="" class="img-full r r-2x"></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="wrapper-md">
+      <div class="col-md-12">
+        <h4 class="m-t-none m-b">Tracklist <small>(drag to reorder)</small></h4>
+        <ul ui-jq="sortable" class="list-group gutter list-group-lg list-group-sp">
+            <li class="list-group-item bg-primary">
+                <span class="pull-right">
+                  <a href><i class="fa fa-pencil fa-fw m-r-xs"></i></a>
+                  <a href><i class="fa fa-plus fa-fw m-r-xs"></i></a>
+                  <a href><i class="fa fa-times fa-fw"></i></a>                  
+                </span>
+                <span class="pull-left"><i class="fa fa-sort text-muted fa m-r-sm"></i> </span>
+                <div class="clear">
+                    Browser compatibility
+                </div>
+            </li>
+            <li class="list-group-item bg-info">
+                <span class="pull-right">
+        <a href><i class="fa fa-pencil fa-fw m-r-xs"></i></a>
+        <a href><i class="fa fa-plus fa-fw m-r-xs"></i></a>
+        <a href><i class="fa fa-times fa-fw"></i></a>
+      </span>
+                <span class="pull-left"><i class="fa fa-sort text-muted fa m-r-sm"></i> </span>
+                <div class="clear">
+                    Looking for more example templates
+                </div>
+            </li>
+            <li class="list-group-item bg-success">
+                <span class="pull-right">
+        <a href><i class="fa fa-pencil fa-fw m-r-xs"></i></a>
+        <a href><i class="fa fa-plus fa-fw m-r-xs"></i></a>
+        <a href><i class="fa fa-times fa-fw"></i></a>                  
+      </span>
+                <span class="pull-left"><i class="fa fa-sort text-muted fa m-r-sm"></i> </span>
+                <div class="clear">
+                    Customizing components
+                </div>
+            </li>
+            <li class="list-group-item">
+                <span class="pull-right">
+        <a href><i class="fa fa-pencil fa-fw m-r-xs"></i></a>
+        <a href><i class="fa fa-plus fa-fw m-r-xs"></i></a>
+        <a href><i class="fa fa-times fa-fw"></i></a>                  
+      </span>
+                <span class="pull-left"><i class="fa fa-sort text-muted fa m-r-sm"></i> </span>
+                <div class="clear">
+                    The fastest way to get started
+                </div>
+            </li>
+            <li class="list-group-item">
+                <span class="pull-right">
+        <a href><i class="fa fa-fw m-r-xs fa-pencil"></i></a>
+        <a href><i class="fa fa-fw m-r-xs fa-plus"></i></a>
+        <a href><i class="fa fa-fw fa-times"></i></a>
+      </span>
+                <span class="pull-left"><i class="fa fa-sort text-muted fa m-r-sm"></i> </span>
+                <div class="clear">
+                    HTML5 doctype required
+                </div>
+            </li>
+        </ul>
+        <h4 class="m-t-none m-b">Nestable list <small>(touch support)</small></h4>
+        <div class="row">
+            <div class="col-sm-4">
+                <div ui-jq="nestable" class="dd">
+                    <ol class="dd-list">
+                        <li class="dd-item" data-id="1">
+                            <div class="dd-handle">Item 1</div>
+                        </li>
+                        <li class="dd-item" data-id="2">
+                            <div class="dd-handle">Item 2</div>
+                            <ol class="dd-list">
+                                <li class="dd-item" data-id="3">
+                                    <div class="dd-handle">Item 3</div>
+                                </li>
+                                <li class="dd-item" data-id="4">
+                                    <div class="dd-handle">Item 4</div>
+                                </li>
+                                <li class="dd-item" data-id="5">
+                                    <div class="dd-handle">Item 5</div>
+                                    <ol class="dd-list">
+                                        <li class="dd-item" data-id="6">
+                                            <div class="dd-handle">Item 6</div>
+                                        </li>
+                                        <li class="dd-item" data-id="7">
+                                            <div class="dd-handle">Item 7</div>
+                                        </li>
+                                        <li class="dd-item" data-id="8">
+                                            <div class="dd-handle">Item 8</div>
+                                        </li>
+                                    </ol>
+                                </li>
+                                <li class="dd-item" data-id="9">
+                                    <div class="dd-handle">Item 9</div>
+                                </li>
+                            </ol>
+                        </li>
+                    </ol>
+                </div>
+            </div>
+            <div class="col-sm-4">
+                <div ui-jq="nestable" class="dd">
+                    <ol class="dd-list">
+                        <li class="dd-item" data-id="10">
+                            <div class="dd-handle">Item 10</div>
+                            <ol class="dd-list">
+                                <li class="dd-item" data-id="11">
+                                    <div class="dd-handle">Item 11</div>
+                                </li>
+                            </ol>
+                        </li>
+                        <li class="dd-item" data-id="12">
+                            <div class="dd-handle">Item 12</div>
+                        </li>
+                        <li class="dd-item" data-id="13">
+                            <div class="dd-handle">Item 13</div>
+                        </li>
+                        <li class="dd-item" data-id="14">
+                            <div class="dd-handle">Item 14</div>
+                        </li>
+                        <li class="dd-item" data-id="15">
+                            <div class="dd-handle">Item 15</div>
+                            <ol class="dd-list">
+                                <li class="dd-item" data-id="16">
+                                    <div class="dd-handle">Item 16</div>
+                                </li>
+                                <li class="dd-item" data-id="17">
+                                    <div class="dd-handle">Item 17</div>
+                                </li>
+                                <li class="dd-item" data-id="18">
+                                    <div class="dd-handle">Item 18</div>
+                                </li>
+                            </ol>
+                        </li>
+                    </ol>
+                </div>
+            </div>
+            <div class="col-sm-4">
+                <div ui-jq="nestable" class="dd">
+                    <ol class="dd-list">
+                        <li class="dd-item dd3-item" data-id="13">
+                            <div class="dd-handle dd3-handle">Drag</div>
+                            <div class="dd3-content">Item 13</div>
+                        </li>
+                        <li class="dd-item dd3-item" data-id="14">
+                            <div class="dd-handle dd3-handle">Drag</div>
+                            <div class="dd3-content">Item 14</div>
+                        </li>
+                        <li class="dd-item dd3-item" data-id="15">
+                            <div class="dd-handle dd3-handle">Drag</div>
+                            <div class="dd3-content">Item 15</div>
+                            <ol class="dd-list">
+                                <li class="dd-item dd3-item" data-id="16">
+                                    <div class="dd-handle dd3-handle">Drag</div>
+                                    <div class="dd3-content">Item 16</div>
+                                </li>
+                                <li class="dd-item dd3-item" data-id="17">
+                                    <div class="dd-handle dd3-handle">Drag</div>
+                                    <div class="dd3-content">Item 17</div>
+                                </li>
+                                <li class="dd-item dd3-item" data-id="18">
+                                    <div class="dd-handle dd3-handle">Drag</div>
+                                    <div class="dd3-content">Item 18</div>
+                                </li>
+                            </ol>
+                        </li>
+                    </ol>
+                </div>
+            </div>
+        </div>
+      </div>
+    </div>
+    <div class="wrapper-md">
+        <div class="col-md-12">
+            <table class="table table-border bg-white-only b-a">
+                <tbody>
+                    <tr class="bg-light dk">
+                        <td colspan="6">
+                            <h4>Tracklist</h4></td>
+                    </tr>
+                    <tr class="bg-light lt">
+                        <td class="v-middle">
+                            Artist
+                        </td>
+                        <td class="v-middle">
+                            Title
+                        </td>
+                        <td class="v-middle">
+                            Genre
+                        </td>
+                        <td class="v-middle">
+                            Time / BPM
+                        </td>
+                        <td class="v-middle">
+                            Weekly sales
+                        </td>
+                        <td class="v-middle">
+                            Week to Week trend
+                        </td>
+                    </tr>
+                    <tr ng-repeat="track in release.Tracks">
+                        <td>
+                            <a ui-sref="music.track({id:track.id})"> <span ng-repeat="producer in track.Producer">{{producer.displayName}}{{$last ? '' : ', '}}</span>
+                        </td>
+                        <td>
+                            </span>
+                            {{track.title}} </span>
+                            <small>({{track.version}})</small>
+                        </td>
+                        <td>
+                            <span ng-repeat="genres in track.Genres">{{genres.name}}{{$last ? '' : ', '}}</span>
+                        </td>
+                        <td>
+                            <span> {{ track.lengthInSeconds | secondsToTimeString }} / 125bpm </span>
+                            <br />
+                        </td>
+                        <td class="v-middle">
+                            <div>
+                                <div ng-init="data3=[ 16,15,15,14,17,18,16,15,16 ]" ui-jq="sparkline" ui-options="{{data3}}, {type:'line', height:19, width:60, lineColor:'{{app.color.primary}}', fillColor:'#fff'}" class="sparkline inline">loading...</div>
+                            </div>
+                        </td>
+                        <td class="v-middle">
+                            <div class="text-success">
+                                <i class="fa fa-level-up"></i> 5%
+                            </div>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <!-- 
+    <div class="padder-md m-b-lg">
+      <h4 class="m-t-lg m-b">3 Comments</h4>
+      <div>
+        <div>
+          <a class="pull-left thumb-sm">
+            <img src="img/a0.jpg" class="img-circle">
+          </a>
+          <div class="m-l-xxl m-b">
+            <div>
+              <a href><strong>John smith</strong></a>
+              <label class="label bg-info m-l-xs">Editor</label> 
+              <span class="text-muted text-xs block m-t-xs">
+                24 minutes ago
+              </span>
+            </div>
+            <div class="m-t-sm">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi id neque quam. Aliquam sollicitudin venenatis ipsum ac feugiat. Vestibulum.</div>
+          </div>
+        </div>
+
+        <div class="m-l-xxl">
+          <a class="pull-left thumb-sm">
+            <img src="img/a1.jpg" class="img-circle">
+          </a>
+          <div class="m-l-xxl m-b">
+            <div>
+              <a href><strong>John smith</strong></a>
+              <label class="label bg-dark m-l-xs">Admin</label> 
+              <span class="text-muted text-xs block m-t-xs">
+                26 minutes ago
+              </span>
+            </div>
+            <div class="m-t-sm">Lorem ipsum dolor sit amet, consecteter adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet.</div>
+          </div>
+        </div>
+
+        <div>
+          <a class="pull-left thumb-sm">
+            <img src="img/a2.jpg" class="img-circle">
+          </a>
+          <div class="m-l-xxl m-b">
+            <div>
+              <a href><strong>John smith</strong></a>
+              <label class="label bg-dark m-l-xs">Admin</label> 
+              <span class="text-muted text-xs block m-t-xs">
+                26 minutes ago
+              </span>
+            </div>
+            <blockquote class="m-t">
+              <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer posuere erat a ante.</p>
+              <small>Someone famous in <cite title="Source Title">Source Title</cite></small>
+            </blockquote>
+            <div class="m-t-sm">Lorem ipsum dolor sit amet, consecteter adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet.</div>
+          </div>
+        </div>
+
+      </div>
+      <h4 class="m-t-lg m-b">Leave a comment</h4>
+      <form>
+        <div class="form-group pull-in clearfix">
+          <div class="col-sm-6">
+            <label>Your name</label>
+            <input type="text" class="form-control" placeholder="Name">
+          </div>
+          <div class="col-sm-6">
+            <label >Email</label>
+            <input type="email" class="form-control" placeholder="Enter email">
+          </div>
+        </div>
+        <div class="form-group">
+          <label>Comment</label>
+          <textarea class="form-control" rows="5" placeholder="Type your comment"></textarea>
+        </div>
+        <div class="form-group">
+          <button type="submit" class="btn btn-info">Submit comment</button>
+        </div>
+      </form>
+    </div>
+
+    -->
+</div>
+</div>

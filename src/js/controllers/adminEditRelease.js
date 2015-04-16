@@ -7,7 +7,7 @@
  * # AdmincompaniesCtrl
  * Controller of the tracklistmeApp
  */
-app.controller('AdminreleaseCtrl', function($location, $scope, $state, $auth, $stateParams, $http, Account, FileUploader, CONFIG) {
+app.controller('AdminEditReleaseCtrl', function($location, $scope, $state, $auth, $stateParams, $http, Account, FileUploader, CONFIG) {
     var releaseId = $stateParams.id
     $scope.serverURL = CONFIG.url
     $scope.release = null

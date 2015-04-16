@@ -150,7 +150,27 @@ angular.module('app')
                             }
                         ]
                     }
-                }).state('app.adminrelease', {
+                })
+                .state('app.admineditrelease', {
+                    url: '/adminEditRelease/{id:int}',
+                    templateUrl: 'tpl/admin/admin_edit_release.html',
+                    resolve: {
+                        deps: ['$ocLazyLoad',
+                            function($ocLazyLoad) {
+                                return $ocLazyLoad.load('angularFileUpload').then(
+                                    function() {
+                                        return $ocLazyLoad.load([
+
+                                            'js/controllers/chart.js',
+                                            'js/controllers/adminEditRelease.js'
+                                        ]);
+                                    }
+                                );
+                            }
+                        ]
+                    }
+                })
+                .state('app.adminrelease', {
                     url: '/adminRelease/{id:int}',
                     templateUrl: 'tpl/admin/admin_release.html',
                     resolve: {

@@ -1,105 +1,109 @@
 <div class="hbox hbox-auto-xs hbox-auto-sm" ng-controller="AdminreleaseCtrl">
     <!-- main -->
-        
-
-  <div class="col">
-    <div class="wrapper-md">
-       <div>
-          <!-- breadcrumb -->
-        <div>
-          <ul class="breadcrumb bg-white b-a">
-          <li><a ui-sref="app.admincompany({id:company[0].id})" >{{company[0].displayName}}</a></li>
-          <li><a ui-sref="app.adminlabel({id:release.Labels[0].id})" >{{release.Labels[0].displayName}}</a></li>
-          <li class="active">{{release.catalogNumber}} - {{release.title}}</li>
-        </ul>
+    <div class="col">
+        <div class="no-pad">
+            <!-- breadcrumb -->
+            <div>
+                <ul class="breadcrumb bg-white  ">
+                    <li><a ui-sref="app.admincompany({id:company[0].id})">{{company[0].displayName}}</a></li>
+                    <li><a ui-sref="app.adminlabel({id:release.Labels[0].id})">{{release.Labels[0].displayName}}</a></li>
+                    <li class="active">{{release.catalogNumber}} - {{release.title}}</li>
+                </ul>
+            </div>
+             
         </div>
-      <!-- / breadcrumb -->
-        <h4>Admin Release</h4>
- 
-      </div>
-
-      <h2 class="m-t-none text-black">{{release.title}}</h2>
-      <p class="text-muted m-b-md">{{release.description}}</p>
-      <div class="hbox hbox-auto-xs">
-        <div class="col w-md">
-       
-            <div class="item">
-              <div class="pos-rlt">
-               
-                <div class="item-overlay bg-black-opacity r r-2x r r-2x">
-                  <div class="center text-center m-t-n-lg w-full">
-                    <a ng-click="addRelease($index)"><i class="fa fa-4x fa-play-circle-o text-white"></i></a>
-                  </div>
+        <div class="padder-md">
+            <div class="col-md-6">
+                <h4>Admin Release</h4>
+                <h2 class="m-t-none text-black">{{release.title}}</h2>
+                <p class="text-muted m-b-md">{{release.description}}</p>
+            </div>
+            <div class="col-md-6">
+                <div class="pull-right">
+                    <a ui-sref="app.admineditrelease({id:release.id})"> 
+                        <button class="btn btn-primary">Edit Release</button>
+                    </a>
                 </div>
-                
-                <a ui-sref="music.release({id:release.id})"><img ng-src="{{serverURL}}/images/{{release.cover}}" alt="" class="img-full r r-2x"></a>
-              </div>
+            </div>
+        
+        </div>
+             
+        <div class="wrapper-md">
+            <div class="hbox hbox-auto-xs">
+                <div class="col-md-3">
+                    <div class="item">
+                        <div class="pos-rlt">
+                            <div class="item-overlay bg-black-opacity r r-2x r r-2x">
+                                <div class="center text-center m-t-n-lg w-full">
+                                    <a ng-click="addRelease($index)"><i class="fa fa-4x fa-play-circle-o text-white"></i></a>
+                                </div>
+                            </div>
+                            <a ui-sref="music.release({id:release.id})"><img ng-src="{{serverURL}}/images/{{release.cover}}" alt="" class="img-full r r-2x"></a>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
-        <div class="col">
-          <div class="m-l-md">
-          <span class="text">Artists:</span>
-            <div class="clearfix m-b-xs">
-              <a ng-repeat="artist in allArtists  | limitTo: 10" class="thumb-sm pull-left m-r-xxs m-b-xxs">
-                <img ui-sref="music.artist({id:artist.id})" ng-src="{{serverURL}}/images/{{artist.avatar}}" class="img-circle">
-              </a>
+        <div class="wrapper-md">
+            <div class="col-md-12">
+            <table class="table table-border bg-white-only b-a">
+                <tbody>
+                    <tr class="bg-light dk">
+                        <td colspan="6">
+                            <h4>Tracklist</h4></td>
+                    </tr>
+                    <tr class="bg-light lt">
+                        <td class="v-middle">
+                            Artist
+                        </td>
+                        <td class="v-middle">
+                            Title
+                        </td>
+                        <td class="v-middle">
+                            Genre
+                        </td>
+                        <td class="v-middle">
+                            Time / BPM
+                        </td>
+                        <td class="v-middle">
+                            Weekly sales
+                        </td>
+                        <td class="v-middle">
+                            Week to Week trend
+                        </td>
+                    </tr>
+                    <tr ng-repeat="track in release.Tracks">
+                        <td>
+                            <a ui-sref="music.track({id:track.id})"> <span ng-repeat="producer in track.Producer">{{producer.displayName}}{{$last ? '' : ', '}}</span>
+                        </td>
+                        <td>
+                            </span>
+                            {{track.title}} </span>
+                            <small>({{track.version}})</small>
+                        </td>
+                        <td>
+                            <span ng-repeat="genres in track.Genres">{{genres.name}}{{$last ? '' : ', '}}</span>
+                        </td>
+                        <td>
+                            <span> {{ track.lengthInSeconds | secondsToTimeString }} / 125bpm </span>
+                            <br />
+                        </td>
+                        <td class="v-middle">
+                            <div>
+                                <div ng-init="data3=[ 16,15,15,14,17,18,16,15,16 ]" ui-jq="sparkline" ui-options="{{data3}}, {type:'line', height:19, width:60, lineColor:'{{app.color.primary}}', fillColor:'#fff'}" class="sparkline inline">loading...</div>
+                            </div>
+                        </td>
+                        <td class="v-middle ">
+                            <div class="text-success text-center">
+                                <i class="fa fa-level-up"></i> 5%
+                            </div>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
             </div>
-             <div ng-if="allArtists.length> 10" class="clearfix m-b-xs">
-                   <small class="block text-muted"> There are other artists in this release</small>
-            </div> 
-            <div class="m-b-xxs">
-              <span class="text-muted">Label:</span>{{release.Labels[0].displayName}}
-            </div>
-            <div class="m-b-xxs">
-              <span class="text-muted">Release Date:</span>{{release.releaseDate}}
-            </div>
-           
-          </div>
         </div>
-      </div>
-    </div>
-<div class="wrapper-md">
-<table class="table table-border bg-white-only b-a">
-        <tbody>
-          <tr class="bg-light lt">
-            <td colspan="4"><h4>Tracklist</h4></td>
-          </tr>
-          <tr ng-repeat="track in release.Tracks">
-            <td class="v-middle">
-                <a class="">
-                  <i class="icon-control-play text"></i>
-                  <i class="icon-control-pause text-active"></i>
-                </a>
-
-            </td>
-            <td> 
-              <a ui-sref="music.track({id:track.id})"> <span ng-repeat="producer in track.Producer">{{producer.displayName}}{{$last ? '' : ', '}}</span> -
-            {{track.title}}  </span>
-              <br />
-            <small>({{track.version}})</small></a> 
-            </td>
-            <td> 
-                <span> {{ 100 | secondsToTimeString }} / 125bpm </span> <br />
-                 <span ng-repeat="genres in track.Genres">{{genres.name}}{{$last ? '' : ', '}}</span> 
-
-            </td>
-
-
-            <td class="v-middle" > 
-              <div class="pull-right">
-                <a class="m-r-sm"><i class="icon-heart"></i></a>
-                <a class="m-r-sm"><i class="icon-plus"></i></a>
-              </div>
-            </td>
-          </tr>
-          
- 
-        </tbody>
-      </table>
-      </div> 
-    
-
-  <!-- 
+        <!-- 
     <div class="padder-md m-b-lg">
       <h4 class="m-t-lg m-b">3 Comments</h4>
       <div>
@@ -179,6 +183,5 @@
     </div>
 
     -->
-  </div>
- 
+    </div>
 </div>
