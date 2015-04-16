@@ -7,20 +7,22 @@
  * # AdmincompaniesCtrl
  * Controller of the tracklistmeApp
  */
-app.controller('AdminlabelCtrl', function($location, $scope, $state, $auth, $stateParams, $http, Account, FileUploader, CONFIG) {
-    var labelId = $stateParams.id
+app.controller('AdminreleaseCtrl', function($location, $scope, $state, $auth, $stateParams, $http, Account, FileUploader, CONFIG) {
+    var releaseId = $stateParams.id
     $scope.serverURL = CONFIG.url
-    $scope.label = null
+    $scope.release = null
+    $scope.company = null
     $scope.dropZoneFiles = null
     $scope.releasesToProcess = null
     $scope.catalog = null
+    $scope.label = null
     $scope.releasesToProcess = {
         success: []
     };
 
 
     var uploader = $scope.uploader = new FileUploader({
-        url: CONFIG.url + '/labels/' + labelId + '/profilePicture/500/500/',
+        url: CONFIG.url + '/labels/' + releaseId + '/profilePicture/500/500/',
         headers: {
             'Authorization': 'Bearer ' + $auth.getToken()
         },
@@ -46,7 +48,7 @@ app.controller('AdminlabelCtrl', function($location, $scope, $state, $auth, $sta
 
     var catalogUploader = $scope.catalogUploader = new FileUploader({
         method: 'POST',
-        url: CONFIG.url + '/labels/' + labelId + '/dropZone/'
+        url: CONFIG.url + '/labels/' + releaseId + '/dropZone/'
     });
 
 
@@ -64,7 +66,7 @@ app.controller('AdminlabelCtrl', function($location, $scope, $state, $auth, $sta
         var extension = fname.substr((Math.max(0, fname.lastIndexOf(".")) || Infinity) + 1);
         console.log(filename);
         console.log(extension);
-        $http.post(CONFIG.url + '/labels/' + labelId + '/dropZone/createFile/', {
+        $http.post(CONFIG.url + '/labels/' + releaseId + '/dropZone/createFile/', {
             filename: filename,
             extension: extension,
             size: file.file.size
@@ -106,7 +108,7 @@ app.controller('AdminlabelCtrl', function($location, $scope, $state, $auth, $sta
             var extension = fname.substr((Math.max(0, fname.lastIndexOf(".")) || Infinity) + 1);
             console.log(filename);
             console.log(extension);
-            $http.post(CONFIG.url + '/labels/' + labelId + '/dropZone/createFile/', {
+            $http.post(CONFIG.url + '/labels/' + releaseId + '/dropZone/createFile/', {
                 filename: filename,
                 extension: extension
             }).success(function(data, status, headers, config) {
@@ -134,7 +136,7 @@ app.controller('AdminlabelCtrl', function($location, $scope, $state, $auth, $sta
         // 
         //  
         /*
-            $http.post(CONFIG.url + '/labels/' + labelId + '/dropZone/createFile/', {}).
+            $http.post(CONFIG.url + '/labels/' + releaseId + '/dropZone/createFile/', {}).
             success(function(data, status, headers, config) {
                 console.log("DONE")
                 console.log(data);
@@ -176,7 +178,7 @@ app.controller('AdminlabelCtrl', function($location, $scope, $state, $auth, $sta
         var extension = fname.substr((Math.max(0, fname.lastIndexOf(".")) || Infinity) + 1);
 
 
-        $http.post(CONFIG.url + '/labels/' + labelId + '/dropZone/confirmFile', {
+        $http.post(CONFIG.url + '/labels/' + releaseId + '/dropZone/confirmFile', {
             filename: filename,
             extension: extension
         }).success(function(data, status, headers, config) {
@@ -197,23 +199,16 @@ app.controller('AdminlabelCtrl', function($location, $scope, $state, $auth, $sta
         //$scope.getDropZoneFiles();
     };
 
-    $scope.getLabel = function() {
-        $http.get(CONFIG.url + '/labels/' + labelId)
-            .success(function(data) {
-                $scope.label = data
-                $scope.label.logo = CONFIG.url + "/images/" + data.logo;
 
-            })
-    }
 
     $scope.getDropZoneFiles = function() {
-        $http.get(CONFIG.url + '/labels/' + labelId + '/dropZoneFiles')
+        $http.get(CONFIG.url + '/labels/' + releaseId + '/dropZoneFiles')
             .success(function(data) {
                 $scope.dropZoneFiles = data
             })
     }
     $scope.processReleases = function() {
-        $http.post(CONFIG.url + '/labels/' + labelId + '/processReleases/', {}).
+        $http.post(CONFIG.url + '/labels/' + releaseId + '/processReleases/', {}).
         success(function(data, status, headers, config) {
             console.log("DONE")
             $scope.getToProcessReleases();
@@ -228,7 +223,7 @@ app.controller('AdminlabelCtrl', function($location, $scope, $state, $auth, $sta
     }
 
     $scope.getToProcessReleases = function() {
-        $http.get(CONFIG.url + '/labels/' + labelId + '/processReleases/info')
+        $http.get(CONFIG.url + '/labels/' + releaseId + '/processReleases/info')
             .success(function(data) {
                 $scope.releasesToProcess = data
             })
@@ -236,14 +231,14 @@ app.controller('AdminlabelCtrl', function($location, $scope, $state, $auth, $sta
 
     $scope.createRelease = function(id) {
         console.log("Create Release")
-        $location.path('createRelease/' + labelId);
+        $location.path('createRelease/' + releaseId);
     }
     $scope.adminRelease = function(id) {
         console.log("adminRelease")
-        $location.path('adminRelease/' + labelId + '/' + id);
+        $location.path('adminRelease/' + releaseId + '/' + id);
     }
     $scope.getCatalog = function() {
-        $http.get(CONFIG.url + '/labels/' + labelId + '/catalog')
+        $http.get(CONFIG.url + '/labels/' + releaseId + '/catalog')
             .success(function(data) {
                 $scope.catalog = data
                 for (var prop in data) {
@@ -254,9 +249,23 @@ app.controller('AdminlabelCtrl', function($location, $scope, $state, $auth, $sta
     }
 
 
-    $scope.getToProcessReleases();
-    $scope.getDropZoneFiles();
-    $scope.getCatalog();
-    $scope.getLabel();
+
+
+    $scope.getRelease = function() {
+        $http.get(CONFIG.url + '/releases/' + releaseId)
+            .success(function(data) {
+                $scope.release = data
+                $scope.getCompany($scope.release.Labels[0].id);
+            })
+    }
+    $scope.getCompany = function(labelId) {
+        $http.get(CONFIG.url + '/labels/' + labelId + '/companies')
+            .success(function(data) {
+                $scope.company = data
+
+            })
+    }
+
+    $scope.getRelease();
 
 });

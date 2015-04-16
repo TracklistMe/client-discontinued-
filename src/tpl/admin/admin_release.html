@@ -1,7 +1,23 @@
-<div class="hbox hbox-auto-xs hbox-auto-sm" ng-controller="ReleaseCtrl">
-  <!-- main -->
+<div class="hbox hbox-auto-xs hbox-auto-sm" ng-controller="AdminreleaseCtrl">
+    <!-- main -->
+        
+
   <div class="col">
     <div class="wrapper-md">
+       <div>
+          <!-- breadcrumb -->
+        <div>
+          <ul class="breadcrumb bg-white b-a">
+          <li><a ui-sref="app.admincompany({id:company[0].id})" >{{company[0].displayName}}</a></li>
+          <li><a ui-sref="app.adminlabel({id:release.Labels[0].id})" >{{release.Labels[0].displayName}}</a></li>
+          <li class="active">{{release.catalogNumber}} - {{release.title}}</li>
+        </ul>
+        </div>
+      <!-- / breadcrumb -->
+        <h4>Admin Release</h4>
+ 
+      </div>
+
       <h2 class="m-t-none text-black">{{release.title}}</h2>
       <p class="text-muted m-b-md">{{release.description}}</p>
       <div class="hbox hbox-auto-xs">
@@ -63,8 +79,7 @@
             <small>({{track.version}})</small></a> 
             </td>
             <td> 
-            
-                <span> {{ track.lengthInSeconds | secondsToTimeString }} / 125bpm </span> <br />
+                <span> {{ 100 | secondsToTimeString }} / 125bpm </span> <br />
                  <span ng-repeat="genres in track.Genres">{{genres.name}}{{$last ? '' : ', '}}</span> 
 
             </td>
@@ -165,83 +180,5 @@
 
     -->
   </div>
-  <!-- / main -->
-  <!-- right col -->
-  <div class="col w-md bg-light dker b-l bg-auto no-border-xs">    
-    <div class="wrapper-md">      
-      <div class="m-b-sm text-md">Similar Releases</div>
-      <ul class="list-group no-bg no-borders pull-in">
-        <li class="list-group-item">
-          <a herf class="pull-left thumb-sm m-r">
-            <img src="img/b1.jpg" alt="..." class="r">
-          </a>
-          <div class="clear">
-            <div><a href>On the road</a></div>
-            <small class="text-muted">by Chris Fox</small>
-          </div>
-        </li>
-        <li class="list-group-item">
-          <a herf class="pull-left thumb-sm m-r">
-            <img src="img/b2.jpg" alt="..." class="r">
-          </a>
-          <div class="clear">
-            <div><a href>Find a way</a></div>
-            <small class="text-muted">by Lucy</small>
-          </div>
-        </li>
-        <li class="list-group-item">
-          <a herf class="pull-left thumb-sm m-r">
-            <img src="img/b3.jpg" alt="..." class="r">
-          </a>
-          <div class="clear">
-            <div><a href>Nothing to lose</a></div>
-            <small class="text-muted">Joge Lucky</small>
-          </div>
-        </li>
-        <li class="list-group-item">
-          <a herf class="pull-left thumb-sm m-r">
-            <img src="img/b4.jpg" alt="..." class="r">
-          </a>
-          <div class="clear">
-            <div><a href>New day</a></div>
-            <small class="text-muted">by Folisise Chosielie</small>
-          </div>
-        </li>
-        <li class="list-group-item">
-          <a herf class="pull-left thumb-sm m-r">
-            <img src="img/b5.jpg" alt="..." class="r">
-          </a>
-          <div class="clear">
-            <div><a href>Running</a></div>
-            <small class="text-muted">by Aron Gonzalez</small>
-          </div>
-        </li>
-      </ul>
-      <div class="text-center">
-        <hr />
-      </div>
-    </div>
-    <!-- streamline -->
-    <div class="text-md wrapper-md">Activity</div>
-    <div class="list-group no-borders no-bg m-l-xs m-r-xs m-t-n">
-      <div class="list-group-item">
-        <div class="text-muted">5 minutes ago</div>
-        <div><a href class="text-info">Jessi</a> commented your post.</div>
-      </div>
-      <div class="list-group-item">
-        <div class="text-muted">11:30</div>
-        <div><a ui-sref="music.detail">Jone</a> published a song</div>
-      </div>
-      <div class="list-group-item">
-        <div class="text-muted">Sun, 11 Feb</div>
-        <div><a href class="text-info">Jessi</a> upload a video <a href class="text-info">Cat</a>.</div>
-      </div>
-      <div class="list-group-item">
-        <div class="text-muted">Thu, 17 Jan</div>
-        <div>Mike Followed you</div>
-      </div>
-    </div>
-    <!-- / streamline -->
-  </div>
-  <!-- / right col -->
+ 
 </div>

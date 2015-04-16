@@ -63,7 +63,8 @@
           </a>
           <div class="clear text-ellipsis">
             <span> 
-             <a ui-sref="music.track({id:track.id})"> <span ng-repeat="producer in track.Producer">{{producer.displayName}}{{$last ? '' : ', '}}</span> -
+             <a ui-sref="music.track({id:track.id})"> 
+                <span ng-repeat="producer in track.Producer">{{producer.displayName}}{{$last ? '' : ', '}}</span> -
             {{track.title}} ({{track.version}})</span></a> 
             <span class="text-muted"> -- 04:35</span>
           </div>

@@ -25,7 +25,6 @@ angular.module('app')
             if (hours > 0) {
                 timeString = hours + ":" + timeString;
             }
-
             return timeString;
         }
     });

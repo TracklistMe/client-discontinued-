@@ -201,9 +201,10 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <a href="http://www.google.com">
-                                        <tr ng-repeat="release in catalog">
-                                            <td>
+                                   
+                                        <tr ui-sref="app.adminrelease({id:release.id})" ng-repeat="release in catalog">
+                                            <a ui-sref="app.adminrelease({id:release.id})">  
+                                            <td class="v-middle">
                                                 <div href class="thumb-sm m-r">
                                                     <img ng-src="{{release.cover}}" class="r r-2x">
                                                 </div>
@@ -211,10 +212,10 @@
 
 
                                             </td>
-                                            <td>
+                                            <td class="v-middle">
                                                 {{release.title}}
                                             </td>
-                                            <td>
+                                            <td class="v-middle">
 
 
                                                 <span ng-show="release.isActive" ng-click="currentLabel = null" class="label bg-success">
@@ -228,7 +229,7 @@
 
 
                                             </td>
-                                            <td>
+                                            <td class="v-middle">
                                                 <span ng-show="release.status == 'PROCESSING' " class="badge bg-warning">{{release.status}}</span>
 
                                                 <span ng-show="release.status == 'PROCESSING_FAILED' " class="badge bg-danger">{{release.status}}</span>
@@ -236,8 +237,9 @@
 
                                                 <span ng-show="release.status == 'PROCESSED' " class="badge bg-success">{{release.status}}</span>
                                             </td>
+                                            </a>
                                         </tr>
-                                    </a>
+                                     
 
                                 </tbody>
                                 <tfoot class="hide-if-no-paging">
