@@ -8,6 +8,53 @@
  * Controller of the tracklistmeApp
  */
 app.controller('AdminEditReleaseCtrl', function($location, $scope, $state, $auth, $stateParams, $http, Account, FileUploader, CONFIG) {
+    // DATA PICHER 
+
+
+    $scope.today = function() {
+        $scope.dt = new Date();
+    };
+    $scope.today();
+
+    $scope.clear = function() {
+        $scope.dt = null;
+    };
+
+    // Disable weekend selection
+    $scope.disabled = function(date, mode) {
+        return (mode === 'day' && (date.getDay() === 0 || date.getDay() === 6));
+    };
+
+    $scope.toggleMin = function() {
+        $scope.minDate = $scope.minDate ? null : new Date();
+    };
+    $scope.toggleMin();
+
+    $scope.open = function($event) {
+        $event.preventDefault();
+        $event.stopPropagation();
+
+        $scope.opened = true;
+    };
+
+    $scope.dateOptions = {
+        formatYear: 'yy',
+        startingDay: 1,
+        class: 'datepicker'
+    };
+
+    $scope.initDate = new Date('2016-15-20');
+    $scope.formats = ['dd-MMMM-yyyy', 'yyyy/MM/dd', 'dd.MM.yyyy', 'shortDate'];
+    $scope.format = $scope.formats[0];
+
+
+
+
+
+
+
+
+
     var releaseId = $stateParams.id
     $scope.serverURL = CONFIG.url
     $scope.release = null
@@ -15,92 +62,16 @@ app.controller('AdminEditReleaseCtrl', function($location, $scope, $state, $auth
     $scope.dropZoneFiles = null
     $scope.releasesToProcess = null
     $scope.catalog = null
-    $scope.label = null
+    $scope.label = null;
 
-    $scope.d = [
-        [1, 6.5],
-        [2, 6.5],
-        [3, 7],
-        [4, 8],
-        [5, 7.5],
-        [6, 7],
-        [7, 6.8],
-        [8, 7],
-        [9, 7.2],
-        [10, 7],
-        [11, 6.8],
-        [12, 7]
-    ];
+    $scope.sortableOptions = {
+        placeholder: '<div class="sortable-placeholder"><div></div></div>',
+        forcePlaceholderSize: false
+    };
 
-    $scope.d0_1 = [
-        [0, 7],
-        [1, 6.5],
-        [2, 12.5],
-        [3, 7],
-        [4, 9],
-        [5, 6],
-        [6, 11],
-        [7, 6.5],
-        [8, 8],
-        [9, 7]
-    ];
-
-    $scope.d0_2 = [
-        [0, 4],
-        [1, 4.5],
-        [2, 7],
-        [3, 4.5],
-        [4, 3],
-        [5, 3.5],
-        [6, 6],
-        [7, 3],
-        [8, 4],
-        [9, 3]
-    ];
-
-    $scope.d1_1 = [
-        [10, 120],
-        [20, 70],
-        [30, 70],
-        [40, 60]
-    ];
-
-    $scope.d1_2 = [
-        [10, 50],
-        [20, 60],
-        [30, 90],
-        [40, 35]
-    ];
-
-    $scope.d1_3 = [
-        [10, 80],
-        [20, 40],
-        [30, 30],
-        [40, 20]
-    ];
-
-    $scope.d2 = [];
-
-    for (var i = 0; i < 20; ++i) {
-        $scope.d2.push([i, Math.round(Math.sin(i) * 100) / 100]);
-    }
-
-    $scope.d3 = [{
-        label: "iPhone5S",
-        data: 40
-    }, {
-        label: "iPad Mini",
-        data: 10
-    }, {
-        label: "iPad Mini Retina",
-        data: 20
-    }, {
-        label: "iPhone4S",
-        data: 12
-    }, {
-        label: "iPad Air",
-        data: 18
-    }];
+    $scope.sortableCallback = function(startModel, destModel, start, end) {
+        console.log("MOVED")
+    };
 
 
 
@@ -110,7 +81,7 @@ app.controller('AdminEditReleaseCtrl', function($location, $scope, $state, $auth
 
 
     var uploader = $scope.uploader = new FileUploader({
-        url: CONFIG.url + '/labels/' + releaseId + '/profilePicture/500/500/',
+        url: CONFIG.url + '/releases/' + releaseId + '/cover/',
         headers: {
             'Authorization': 'Bearer ' + $auth.getToken()
         },
