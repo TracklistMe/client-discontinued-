@@ -10,7 +10,7 @@
 app.controller('AdminEditReleaseCtrl', function($location, $scope, $state, $auth, $stateParams, $http, Account, FileUploader, CONFIG) {
     // DATA PICHER 
 
-
+    var CHARACTER_BEFORE_SEARCH = 1;
     $scope.today = function() {
         $scope.dt = new Date();
     };
@@ -25,10 +25,8 @@ app.controller('AdminEditReleaseCtrl', function($location, $scope, $state, $auth
         return (mode === 'day' && (date.getDay() === 0 || date.getDay() === 6));
     };
 
-    $scope.toggleMin = function() {
-        $scope.minDate = $scope.minDate ? null : new Date();
-    };
-    $scope.toggleMin();
+
+
 
     $scope.open = function($event) {
         $event.preventDefault();
@@ -56,6 +54,7 @@ app.controller('AdminEditReleaseCtrl', function($location, $scope, $state, $auth
 
 
     var releaseId = $stateParams.id
+    $scope.releaseId = releaseId;
     $scope.serverURL = CONFIG.url
     $scope.release = null
     $scope.company = null
@@ -323,6 +322,111 @@ app.controller('AdminEditReleaseCtrl', function($location, $scope, $state, $auth
                 $scope.company = data
 
             })
+    }
+
+
+    // ADD NEW TRACK
+    $scope.addNewTrack = function() {
+        if (!$scope.release.Tracks) { // create array of tracks
+            $scope.release.Tracks = []
+        }
+        $scope.release.Tracks.push({
+            path: null,
+            infoVisible: true, // open the panel for editing
+            title: "Track Title",
+            version: "Version Name",
+            ReleaseTracks: {
+                position: $scope.release.Tracks.length + 1
+            },
+            Producer: [],
+            Remixer: []
+        });
+    }
+
+    $scope.deleteProducer = function(artist, track) {
+        var index = -1;
+        for (var i = track.Producer.length - 1; i >= 0; i--) {
+            if (track.Producer[i].id == artist.id) {
+                index = i;
+            }
+        };
+        track.Producer.splice(index, 1);
+    }
+
+    $scope.searchArtist = function(track) {
+        if (track.searchArtist.length > CHARACTER_BEFORE_SEARCH) {
+            track.searchingArtist = true;
+            track.resultArrived = false
+            $scope.nameTooShort = false;
+            $http.get(CONFIG.url + '/artists/search/' + track.searchArtist)
+                .success(function(data) {
+
+                    track.resultArrived = true
+
+                    if (!data) {
+                        //!date --> the object is empty, there is no other company with this name, the name is available
+                        track.artistResults = []
+                    } else {
+                        //date --> the object has something
+                        track.artistResults = data
+
+                    }
+                })
+        } else {
+            $scope.nameTooShort = true;
+        }
+    };
+
+    $scope.candidateArtist = function(track, artist) {
+
+        track.searchingArtist = false;
+        track.candidateArtist = artist;
+        track.searchArtist = artist.displayName
+    };
+    $scope.stopAddingNewArtist = function(track) {
+        track.searchingArtist = false;
+        track.candidateArtist = null;
+        track.searchArtist = ""
+        track.showAddArtist = false
+        track.searchingArtist = false
+    }
+    $scope.addAsProducer = function(track, artist) {
+        if (track.candidateArtist) {
+            track.Producer.push({
+                id: track.candidateArtist.id,
+                displayName: track.candidateArtist.displayName
+            });
+            track.candidateArtist = null;
+            track.searchArtist = "";
+            track.showAddArtist = false
+            track.searchingArtist = false
+        } else {
+            //TODO DISPLAY SOMETHING 
+        }
+    }
+
+    $scope.saveRelease = function() {
+
+        // ADMIN RELEASE 
+        console.log($scope.release)
+        for (var i = $scope.release.Tracks.length - 1; i >= 0; i--) {
+            $scope.release.Tracks[i].ReleaseTracks.position = i + 1;
+        };
+        console.log("---RELEASE---")
+        console.log($scope.release)
+        $http.put(CONFIG.url + '/releases/' + $scope.releaseId, {
+            release: $scope.release
+        }).
+        success(function(data, status, headers, config) {
+            $scope.getRelease();
+            $scope.editedTrack = null
+
+        }).
+        error(function(data, status, headers, config) {
+            // called asynchronously if an error occurs
+            // or server returns response with an error status.
+        });
+
     }
 
     $scope.getRelease();
