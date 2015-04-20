@@ -447,28 +447,31 @@ app.controller('AdminEditReleaseCtrl', function($location, $scope, $state, $auth
     };
 
     $scope.candidateRemixer = function(track, remix) {
-
-        track.searchingRemix = false;
-        track.candidateRemix = remix;
-        track.searchRemix = remix.displayName
+        track.searchingRemixer = false;
+        track.candidateRemixer = remix;
+        track.searchRemixer = remix.displayName
     };
     $scope.stopAddingNewRemixer = function(track) {
-        track.searchingRemix = false;
-        track.candidateRemix = null;
-        track.searchRemix = ""
-        track.showAddRemix = false
-        track.searchingRemix = false
+
+        track.candidateRemixer = null;
+        track.searchRemixer = ""
+        track.showAddRemixer = false
+        track.searchingRemixer = false
     }
-    $scope.addAsRemixer = function(track, remix) {
-        if (track.candidateRemix) {
-            track.Remix.push({
-                id: track.candidateRemix.id,
-                displayName: track.candidateRemix.displayName
+    $scope.addAsRemixer = function(track, remixer) {
+        console.log(track)
+        if (track.candidateRemixer) {
+            if (!track.Remixer) {
+                track.Remixer = []
+            }
+            track.Remixer.push({
+                id: track.candidateRemixer.id,
+                displayName: track.candidateRemixer.displayName
             });
-            track.candidateRemix = null;
-            track.searchRemix = "";
-            track.showAddRemix = false
-            track.searchingRemix = false
+            track.candidateRemixer = null;
+            track.searchRemixer = "";
+            track.showAddRemixer = false;
+            track.searchingRemixerer = false;
         } else {
             //TODO DISPLAY SOMETHING 
         }
@@ -484,7 +487,7 @@ app.controller('AdminEditReleaseCtrl', function($location, $scope, $state, $auth
         };
         console.log("---RELEASE---")
         console.log($scope.release)
-        $http.put(CONFIG.url + '/releases/' + $scope.releaseId, {
+        $http.put(CONFIG.url + ' / releases / ' + $scope.releaseId, {
             release: $scope.release
         }).
         success(function(data, status, headers, config) {
