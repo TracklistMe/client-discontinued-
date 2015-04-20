@@ -343,6 +343,9 @@ app.controller('AdminEditReleaseCtrl', function($location, $scope, $state, $auth
         });
     }
 
+
+    // PRODUCER-ARTIST - 
+
     $scope.deleteProducer = function(artist, track) {
         var index = -1;
         for (var i = track.Producer.length - 1; i >= 0; i--) {
@@ -404,6 +407,73 @@ app.controller('AdminEditReleaseCtrl', function($location, $scope, $state, $auth
             //TODO DISPLAY SOMETHING 
         }
     }
+
+
+
+    // REMIXER-ARTIST - 
+
+    $scope.deleteRemixer = function(remixer, track) {
+        var index = -1;
+        for (var i = track.Remixer.length - 1; i >= 0; i--) {
+            if (track.Remixer[i].id == remixer.id) {
+                index = i;
+            }
+        };
+        track.Remixer.splice(index, 1);
+    }
+
+    $scope.searchRemixer = function(track) {
+        if (track.searchRemixer.length > CHARACTER_BEFORE_SEARCH) {
+            track.searchingRemixer = true;
+            track.resultRemixerArrived = false
+            $scope.nameTooShort = false;
+            $http.get(CONFIG.url + '/artists/search/' + track.searchRemixer)
+                .success(function(data) {
+
+                    track.resultRemixerArrived = true
+
+                    if (!data) {
+                        //!date --> the object is empty, there is no other company with this name, the name is available
+                        track.remixerResults = []
+                    } else {
+                        //date --> the object has something
+                        track.remixerResults = data
+
+                    }
+                })
+        } else {
+            $scope.nameTooShort = true;
+        }
+    };
+
+    $scope.candidateRemixer = function(track, remix) {
+
+        track.searchingRemix = false;
+        track.candidateRemix = remix;
+        track.searchRemix = remix.displayName
+    };
+    $scope.stopAddingNewRemixer = function(track) {
+        track.searchingRemix = false;
+        track.candidateRemix = null;
+        track.searchRemix = ""
+        track.showAddRemix = false
+        track.searchingRemix = false
+    }
+    $scope.addAsRemixer = function(track, remix) {
+        if (track.candidateRemix) {
+            track.Remix.push({
+                id: track.candidateRemix.id,
+                displayName: track.candidateRemix.displayName
+            });
+            track.candidateRemix = null;
+            track.searchRemix = "";
+            track.showAddRemix = false
+            track.searchingRemix = false
+        } else {
+            //TODO DISPLAY SOMETHING 
+        }
+    }
+
 
     $scope.saveRelease = function() {
 

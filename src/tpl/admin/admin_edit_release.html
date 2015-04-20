@@ -125,7 +125,7 @@
                                     <input id="trackTitle " name="trackTitle " type="text " ng-model="track.title " value="{{track.title}} " placeholder="Track Title " class="form-control " stop-event> Version:
                                     <input id="trackTitle " name="trackVersion " type="text " ng-model="track.version " value="{{track.version}} " placeholder="Track Version " class="form-control " stop-event>
                                 </div>
-                                <div ng-init="track.searchArtist= '' "class="col-md-4 ">
+                                <div ng-init="track.searchArtist= ''; track.searchRemixer= '' "class="col-md-4 ">
                                     Artists:
                                     <br />
                                     <button ng-repeat="producer in track.Producer " class="btn m-xs btn-default btn-sm btn-addon">
@@ -163,7 +163,41 @@
                                         </tbody>
                                     </table>
                                     <br /> Remixers:
-                                    <span ng-repeat="remixer in track.Remixer "> {{remixer.displayName}}, </span>
+                                     <br />
+                                     <button ng-repeat="remixer in track.Remixer " class="btn m-xs btn-default btn-sm btn-addon">
+                                        <i ng-click="deleteRemixer(remixer,track)" class="fa fa-times"></i>{{remixer.displayName}}
+                                    </button>
+                                    <button ng-show="!track.showAddRemixer" ng-init="track.showAddRemixer = false" ng-click="track.showAddRemixer = true" class="btn m-xs btn-sm btn-addon btn-default">
+                                        <i class="fa fa-plus"></i>Add New
+                                    </button>
+                                    <div ng-show="track.showAddRemixer" class="padder-sm input-group">
+                                        <span class="input-group-btn">
+                                        <button ng-click="addAsRemixer(track,remixer)" class="btn btn-default" type="button">  <i class="fa fa-check"></i>
+                                        </button>
+                                      </span>
+                                        <input type="text" placeholder="Remixer Name" ng-model="track.searchRemixer" ng-change="searchRemixer(track)" class="btn  btn-default btn-sm form-control">
+                                        <span class="input-group-btn">
+                                        <button ng-click="stopAddingNewRemixer(track)" class="btn btn-default" type="button">
+                                          <i class="fa fa-times"></i>
+                                        </button>
+                                      </span>
+                                    </div>
+                                    
+                                    <table ng-show="track.showAddRemixer && track.searchingRemixer"   class="table table-border padder-md  bg-white-only b-a">
+                                        <tbody>
+                                            <tr ng-show="!track.resultRemixerArrived" class="bg-light lt text-center">
+                                                <td ><i class="fa fa-spin fa-spinner "> </i></td>
+                                            </tr>
+                                            <tr ng-repeat="remixer in track.remixerResults" class="bg-light lt text-center">
+ 
+                                                  <td  >
+                                                     <a href ng-click="candidateRemixer(track,remixer)">  {{remixer.displayName}}  </a>
+                                                  </td>
+                                                
+                                            </tr>
+                                            
+                                        </tbody>
+                                    </table>
                                 </div>
                                 <div class="col-md-4 ">
                                     Genre:
