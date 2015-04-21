@@ -1,0 +1,22 @@
+ <div class=" ">
+                        <div class=" ">
+                            <div class="modal-header">
+                                <button type="button" class="close" ng-click="closeSelectFromCDN()"  aria-label="Close"><span aria-hidden="true">&times;</span>
+                                </button>
+                                <h4 class="modal-title" id="myModalLabel">Select From Dropzone</h4>
+                            </div>
+                            <div class="modal-body">
+                                <input id="" name="" type="text" ng-model="searchFile" placeholder="Search File Name" class="form-control input-md-5" stop-event>
+                                <hr />  
+                                <ul   class="list-group">
+                                    <li ng-click="$parent.selectFileFromDropZone = file" ng-class="{'active': $parent.selectFileFromDropZone == file}" ng-repeat="file in dropZoneFiles | orderBy : file.fileName  | filter:searchFile  " class="list-group-item">
+                                        {{file.fileName}}.{{file.extension}}
+                                    </li>
+                                </ul>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-default" ng-click="closeSelectFromCDN()"  >Exit without updating</button>
+                                <button ng-if="selectFileFromDropZone" ng-click="assignDropZoneFileToTrack(selectFileFromDropZone)" type="button"   class="btn btn-primary">Ok,you still need to save later</button>
+                            </div>
+                        </div>
+                    </div>

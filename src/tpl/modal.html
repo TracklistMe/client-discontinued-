@@ -1,15 +1,50 @@
-<div class="modal-header">
-    <h3 class="modal-title">Modal!</h3>
-</div>
-<div class="modal-body">
-    <ul>
-        <li ng-repeat="item in items">
-            <a ng-click="selected.item = item">{{ item }}</a>
-        </li>
-    </ul>
-    Selected: <b>{{ selected.item }}</b>
-</div>
-<div class="modal-footer">                  
-    <button class="btn btn-default" ng-click="cancel()">Cancel</button>
-    <button class="btn btn-primary" ng-click="ok()">OK</button>
-</div>
+    <div class="modal fade" id="associateTrackModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span>
+                    </button>
+                    <h4 class="modal-title" id="myModalLabel">Select From Dropzone</h4>
+                </div>
+                <div class="modal-body">
+                    <input id="" name="" type="text" ng-model="searchFile" placeholder="Search File Name" class="form-control input-md-5" stop-event>
+                    <hr /> {{selectFileFromDropZone}}
+                    <ul ng-init="selectItem = null" class="list-group">
+
+                        <li ng-click="$parent.selectFileFromDropZone = file" ng-class="{'active': $parent.selectFileFromDropZone == file}" ng-repeat="file in dropZoneFiles | orderBy : file.fileName  | filter:searchFile  " class="list-group-item">
+                            {{file.fileName}}.{{file.extension}}
+                        </li>
+
+                    </ul>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Exit without updating</button>
+                    <button ng-if="selectFileFromDropZone" ng-click="assignDropZoneFileToTrack(selectTrackToChangeFile)" type="button" data-dismiss="modal" class="btn btn-primary">Ok,you still need to save later</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Upload Track(s) to Drop Zone -->
+
+    <div class="modal fade" id="uploadTrackModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span>
+                    </button>
+                    <h4 class="modal-title" id="myModalLabel">Upload to Dropzone</h4>
+                </div>
+                <div class="modal-body">
+                    <label class="myLabel">
+                        <input type="file" nv-file-select="" uploader="trackUploader" />
+                        <span>Upload</span>
+                    </label>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close without changing</button>
+                    <button ng-if="selectFileFromDropZone" ng-click="assignDropZoneFileToTrack(selectTrackToChangeFile)" type="button" data-dismiss="modal" class="btn btn-primary">Ok,you still need to save later</button>
+                </div>
+            </div>
+        </div>
+    </div>

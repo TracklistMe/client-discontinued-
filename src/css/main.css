@@ -11,3 +11,7 @@ label.uploadAvatar input[type="file"] {
     position: fixed;
     top: -1000px;
 }
+
+.modal {
+	background-color: rgba(40,50,60,0.94);
+}
