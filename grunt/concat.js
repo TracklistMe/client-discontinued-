@@ -4,7 +4,8 @@ module.exports = {
             'bower_components/jquery/dist/jquery.min.js',
 
             'bower_components/angular/angular.js',
-
+            'bower_components/html.sortable/dist/html.sortable.js',
+            'bower_components/html.sortable/dist/html.sortable.angular.js',
             'bower_components/angular-animate/angular-animate.js',
             'bower_components/angular-cookies/angular-cookies.js',
             'bower_components/angular-resource/angular-resource.js',

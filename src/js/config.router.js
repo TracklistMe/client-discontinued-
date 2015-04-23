@@ -155,17 +155,24 @@ angular.module('app')
                     url: '/adminEditRelease/{id:int}',
                     templateUrl: 'tpl/admin/admin_edit_release.html',
                     resolve: {
-                        deps: ['$ocLazyLoad',
-                            function($ocLazyLoad) {
-                                return $ocLazyLoad.load('angularFileUpload').then(
-                                    function() {
-                                        return $ocLazyLoad.load([
+                        deps: ['uiLoad', '$ocLazyLoad',
+                            function(uiLoad, $ocLazyLoad) {
+                                return uiLoad.load(JQ_CONFIG.sortable).then(function() {
+                                    return $ocLazyLoad.load('angularFileUpload').then(
+                                        function() {
+                                            return $ocLazyLoad.load('toaster').then(
+                                                function() {
+                                                    return $ocLazyLoad.load([
 
-                                            'js/controllers/chart.js',
-                                            'js/controllers/adminEditRelease.js'
-                                        ]);
-                                    }
-                                );
+                                                        'js/controllers/chart.js',
+                                                        'js/controllers/adminEditRelease.js'
+                                                    ]);
+                                                }
+                                            );
+
+                                        })
+
+                                });
                             }
                         ]
                     }

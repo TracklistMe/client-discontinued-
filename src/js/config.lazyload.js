@@ -19,7 +19,9 @@ angular.module('app')
     moment: ['../bower_components/moment/moment.js'],
     screenfull: ['../bower_components/screenfull/dist/screenfull.min.js'],
     slimScroll: ['../bower_components/slimscroll/jquery.slimscroll.min.js'],
-    sortable: ['../bower_components/htmlSortable/jquery.sortable.js'],
+    sortable: ['../bower_components/html.sortable/dist/html.sortable.angular.js',
+        '../bower_components/html.sortable/dist/html.sortable.js'
+    ],
     nestable: ['../bower_components/nestable/jquery.nestable.js',
         '../bower_components/nestable/jquery.nestable.css'
     ],
