@@ -91,6 +91,9 @@ module.exports = {
             cwd: 'src/tpl',
             dest: "angular/tpl"
         }, {
+            src: 'bower_components/jquery/dist/jquery.min.map',
+            dest: 'angular/js/jquery.min.map'
+        }, {
             src: 'src/index.min.html',
             dest: 'angular/index.html'
         }, {
