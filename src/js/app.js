@@ -16,7 +16,8 @@ angular.module('app', [
     'smart-table',
     'oc.lazyLoad',
     'pascalprecht.translate',
-    'satellizer'
+    'satellizer',
+    'htmlSortable'
 ]).constant("CONFIG", {
     "url": "https://tracklist.me/api",
     //"url": "http://localhost:3000",
