@@ -53,8 +53,8 @@ module.exports = {
         }, {
             expand: true,
             src: "**",
-            cwd: 'bower_components/html5sortable/',
-            dest: "angular/bower_components/htmlSortable"
+            cwd: 'bower_components/nestable/',
+            dest: "angular/bower_components/nestable"
         }, {
             expand: true,
             src: "**",
@@ -95,6 +95,9 @@ module.exports = {
             src: "**",
             cwd: 'src/tpl',
             dest: "angular/tpl"
+        }, {
+            src: 'bower_components/jquery/dist/jquery.min.map',
+            dest: 'angular/js/jquery.min.map'
         }, {
             src: 'src/index.min.html',
             dest: 'angular/index.html'
