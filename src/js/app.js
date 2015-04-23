@@ -8,6 +8,7 @@ angular.module('app', [
     'ngSanitize',
     'ngTouch',
     'ngStorage',
+    'htmlSortable',
     'ui.router',
     'ui.bootstrap',
     'ui.utils',
@@ -16,8 +17,7 @@ angular.module('app', [
     'smart-table',
     'oc.lazyLoad',
     'pascalprecht.translate',
-    'satellizer',
-    'htmlSortable'
+    'satellizer'
 ]).constant("CONFIG", {
     "url": "https://tracklist.me/api",
     //"url": "http://localhost:3000",
