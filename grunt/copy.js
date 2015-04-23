@@ -53,6 +53,11 @@ module.exports = {
         }, {
             expand: true,
             src: "**",
+            cwd: 'bower_components/nestable/',
+            dest: "angular/bower_components/nestable"
+        }, {
+            expand: true,
+            src: "**",
             cwd: 'bower_components/html5sortable/',
             dest: "angular/bower_components/htmlSortable"
         }, {
