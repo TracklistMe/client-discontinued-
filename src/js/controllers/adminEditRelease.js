@@ -78,7 +78,7 @@ app.controller('AdminEditReleaseCtrl', function($location, $scope, $state, $auth
             backdropClass: 'bg-dark'
 
         });
-
+        console.log("OPEN UPLOAD DROPBOX")
         $scope.modalUploadDropbox.result.then(function(selectedItem) {
             console.log(selectedItem);
         }, function() {
