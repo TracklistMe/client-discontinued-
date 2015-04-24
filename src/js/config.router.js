@@ -151,6 +151,32 @@ angular.module('app')
                         ]
                     }
                 })
+                .state('app.admincreaterelease', {
+                    url: '/createRelease/{labelId:int}',
+                    templateUrl: 'tpl/admin/admin_edit_release.html',
+                    resolve: {
+                        deps: ['uiLoad', '$ocLazyLoad',
+                            function(uiLoad, $ocLazyLoad) {
+                                return uiLoad.load(JQ_CONFIG.sortable).then(function() {
+                                    return $ocLazyLoad.load('angularFileUpload').then(
+                                        function() {
+                                            return $ocLazyLoad.load('toaster').then(
+                                                function() {
+                                                    return $ocLazyLoad.load([
+
+                                                        'js/controllers/chart.js',
+                                                        'js/controllers/adminEditRelease.js'
+                                                    ]);
+                                                }
+                                            );
+
+                                        })
+
+                                });
+                            }
+                        ]
+                    }
+                })
                 .state('app.admineditrelease', {
                     url: '/adminEditRelease/{id:int}',
                     templateUrl: 'tpl/admin/admin_edit_release.html',

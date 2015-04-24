@@ -34,6 +34,28 @@ app.controller('AdminEditReleaseCtrl', function($location, $scope, $state, $auth
         return (mode === 'day' && (date.getDay() === 0 || date.getDay() === 6));
     };
 
+    $scope.today = function() {
+        $scope.dt = new Date();
+    };
+    $scope.today();
+
+    $scope.clear = function() {
+        $scope.dt = null;
+    };
+
+    // Disable weekend selection
+    $scope.disabled = function(date, mode) {
+        return (mode === 'day' && (date.getDay() === 0 || date.getDay() === 6));
+    };
+
+
+
+    $scope.open = function($event) {
+        $event.preventDefault();
+        $event.stopPropagation();
+
+        $scope.opened = true;
+    };
 
 
 
@@ -43,7 +65,7 @@ app.controller('AdminEditReleaseCtrl', function($location, $scope, $state, $auth
         class: 'datepicker'
     };
 
-    $scope.initDate = new Date('2016-15-20');
+    $scope.initDate = new Date();
     $scope.formats = ['dd-MMMM-yyyy', 'yyyy/MM/dd', 'dd.MM.yyyy', 'shortDate'];
     $scope.format = $scope.formats[0];
 
@@ -68,8 +90,10 @@ app.controller('AdminEditReleaseCtrl', function($location, $scope, $state, $auth
     $scope.modalUploadDropbox;
     $scope.selectedTrack;
     $scope.selectFileFromDropZone;
+    $scope.addMode;
     // MODAL ADMIN
     // 
+
     $scope.openUploadToDropbox = function(track) {
         $scope.selectedTrack = track;
         $scope.modalUploadDropbox = $modal.open({
@@ -152,7 +176,7 @@ app.controller('AdminEditReleaseCtrl', function($location, $scope, $state, $auth
     }
     $scope.processCDNNegotiation = function() {
         console.log("Process CDN NEGOTIATION")
-        trackUploader.url = CONFIG.url + '/labels/' + $scope.release.Labels[0].id + '/dropZone/';
+        trackUploader.url = CONFIG.url + '/labels/' + $scope.labelId + '/dropZone/';
         for (var i = 0; i < trackUploader.queue.length; i++) {
             console.log("ELEMENT IN QUEUE")
             trackUploader.processOne(trackUploader.queue[i]);
@@ -167,7 +191,7 @@ app.controller('AdminEditReleaseCtrl', function($location, $scope, $state, $auth
         var extension = fname.substr((Math.max(0, fname.lastIndexOf(".")) || Infinity) + 1);
         console.log(filename);
         console.log(extension);
-        $http.post(CONFIG.url + '/labels/' + $scope.release.Labels[0].id + '/dropZone/createFile/', {
+        $http.post(CONFIG.url + '/labels/' + $scope.labelId + '/dropZone/createFile/', {
             filename: filename,
             extension: extension,
             size: file.file.size
@@ -214,7 +238,7 @@ app.controller('AdminEditReleaseCtrl', function($location, $scope, $state, $auth
         var extension = fname.substr((Math.max(0, fname.lastIndexOf(".")) || Infinity) + 1);
 
 
-        $http.post(CONFIG.url + '/labels/' + $scope.release.Labels[0].id + '/dropZone/confirmFile', {
+        $http.post(CONFIG.url + '/labels/' + $scope.labelId + '/dropZone/confirmFile', {
             filename: filename,
             extension: extension
         }).success(function(data, status, headers, config) {
@@ -223,7 +247,7 @@ app.controller('AdminEditReleaseCtrl', function($location, $scope, $state, $auth
             $scope.selectFileFromDropZone = {
                 filaName: filename,
                 extension: extension,
-                path: 'dropZone/' + $scope.release.Labels[0].id + '/' + fname
+                path: 'dropZone/' + $scope.labelId + '/' + fname
             };
 
         }).error(function(data, status, headers, config) {
@@ -240,6 +264,7 @@ app.controller('AdminEditReleaseCtrl', function($location, $scope, $state, $auth
         // url: CONFIG.url + '/labels/' + $scope.release.Labels[0].id + '/dropZone/'
 
     });
+
 
     uploader.onAfterAddingFile = function(fileItem) {
         console.info('onAfterAddingFile', fileItem);
@@ -282,7 +307,7 @@ app.controller('AdminEditReleaseCtrl', function($location, $scope, $state, $auth
         var extension = fname.substr((Math.max(0, fname.lastIndexOf(".")) || Infinity) + 1);
         console.log(filename);
         console.log(extension);
-        $http.post(CONFIG.url + '/labels/' + $scope.release.Labels[0].id + '/dropZone/createFile/', {
+        $http.post(CONFIG.url + '/labels/' + $scope.labelId + '/dropZone/createFile/', {
             filename: filename,
             extension: extension,
             size: file.file.size
@@ -317,7 +342,7 @@ app.controller('AdminEditReleaseCtrl', function($location, $scope, $state, $auth
         var extension = fname.substr((Math.max(0, fname.lastIndexOf(".")) || Infinity) + 1);
 
 
-        $http.post(CONFIG.url + '/labels/' + $scope.release.Labels[0].id + '/dropZone/confirmFile', {
+        $http.post(CONFIG.url + '/labels/' + $scope.labelId + '/dropZone/confirmFile', {
             filename: filename,
             extension: extension
         }).success(function(data, status, headers, config) {
@@ -351,7 +376,7 @@ app.controller('AdminEditReleaseCtrl', function($location, $scope, $state, $auth
 
 
     var uploader = $scope.uploader = new FileUploader({
-        url: CONFIG.url + '/releases/' + releaseId + '/cover/',
+        url: CONFIG.url + '/labels/' + $scope.labelId + '/dropZone/',
         headers: {
             'Authorization': 'Bearer ' + $auth.getToken()
         },
@@ -364,6 +389,7 @@ app.controller('AdminEditReleaseCtrl', function($location, $scope, $state, $auth
 
 
     uploader.onAfterAddingFile = function(fileItem) {
+        uploader.url = CONFIG.url + '/labels/' + $scope.labelId + '/dropZone/';
         console.info('onAfterAddingFile', fileItem);
         uploader.queue[0].upload();
         uploader.queue.pop();
@@ -381,7 +407,7 @@ app.controller('AdminEditReleaseCtrl', function($location, $scope, $state, $auth
 
 
     $scope.getDropZoneFiles = function() {
-        $http.get(CONFIG.url + '/labels/' + $scope.release.Labels[0].id + '/dropZoneFiles')
+        $http.get(CONFIG.url + '/labels/' + $scope.labelId + '/dropZoneFiles')
             .success(function(data) {
                 // concat the array with the file from the dropbox with the array of file that have been deatached.
                 // Remove duplicates
@@ -471,7 +497,9 @@ app.controller('AdminEditReleaseCtrl', function($location, $scope, $state, $auth
         $http.get(CONFIG.url + '/releases/' + releaseId)
             .success(function(data) {
                 $scope.release = data
-                $scope.getCompany($scope.release.Labels[0].id);
+                $scope.labelId = $scope.release.Labels[0].id;
+                $scope.getLabel($scope.labelId);
+                $scope.getCompany($scope.labelId);
                 $scope.getGenres();
             })
     }
@@ -490,6 +518,13 @@ app.controller('AdminEditReleaseCtrl', function($location, $scope, $state, $auth
             })
     }
 
+
+    $scope.getLabel = function(labelId) {
+        $http.get(CONFIG.url + '/labels/' + labelId)
+            .success(function(data) {
+                $scope.label = data
+            })
+    }
 
     // ADD NEW TRACK
     $scope.addNewTrack = function() {
@@ -716,10 +751,11 @@ app.controller('AdminEditReleaseCtrl', function($location, $scope, $state, $auth
         console.log($scope.release)
         $http.put(CONFIG.url + '/releases/' + $scope.releaseId, {
             release: $scope.release
-        }).
-        success(function(data, status, headers, config) {
-            $scope.getRelease();
-            $scope.editedTrack = null
+        }).success(function(data, status, headers, config) {
+            //  $scope.getRelease();
+            //$scope.editedTrack = null
+            console.log("SUCCESS!")
+            $location.path("app/adminRelease/" + $scope.releaseId);
 
         }).
         error(function(data, status, headers, config) {
@@ -729,6 +765,26 @@ app.controller('AdminEditReleaseCtrl', function($location, $scope, $state, $auth
 
     }
 
-    $scope.getRelease();
+    $scope.initialize = function() {
+        if ($stateParams.id != null) {
+            // WE GOT A RELEASE 
+            $scope.releaseId = $stateParams.id;
+            $scope.addMode = false;
+            $scope.getRelease();
+        } else {
+            // we are creating a release
+            $scope.labelId = $stateParams.labelId;
+            $scope.addMode = true;
+            $scope.release = {
+                title: "Release Title",
+                isActive: false
+
+            }
+            $scope.getLabel($scope.labelId)
+            $scope.getCompany($scope.labelId);
+            $scope.getGenres();
+        }
+    }
+    $scope.initialize();
 
 });

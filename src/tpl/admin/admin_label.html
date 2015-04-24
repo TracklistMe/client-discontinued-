@@ -27,7 +27,7 @@
                             <h5 class="font-thin m-t-none m-b-none">Create new Release</h5>
                         </div>
                         <div class="panel-body b-b b-light">
-                            <button class="btn btn-primary btn-addon btn-sm "><i class="fa fa-plus"></i>Add New Release Manually</button>
+                            <button ui-sref="app.admincreaterelease({labelId:label.id})" class="btn btn-primary btn-addon btn-sm "><i class="fa fa-plus"></i>Add New Release Manually</button>
                             <a ui-sref="app.dropzone({id:label.id})">   
                                 <button class="btn btn-primary btn-addon btn-sm "><i class="fa fa-upload"></i>Upload files (and beatport packages)</button>
                              </a>

@@ -13,15 +13,17 @@
             <div>
                 <ul class="breadcrumb bg-white col-md-12">
                     <li><a ui-sref="app.admincompany({id:company[0].id})">{{company[0].displayName}}</a></li>
-                    <li><a ui-sref="app.adminlabel({id:release.Labels[0].id})">{{release.Labels[0].displayName}}</a></li>
-                    <li> <a ui-sref="app.adminrelease({id:release.id})"> {{release.catalogNumber}} - {{release.title}}</a></li>
-                    <li> Edit </li>
+                    <li><a ui-sref="app.adminlabel({id:label.id})">{{label.displayName}}</a></li>
+                    <li ng-show="!addMode"> <a ui-sref="app.adminrelease({id:release.id})"> {{release.catalogNumber}} - {{release.title}}</a></li>
+                    <li ng-show="!addMode"> Edit </li>
+                    <li ng-show="addMode"> Create New </li>
                 </ul>
             </div>
         </div>
         <div class="padder-md">
             <div class="col-md-6">
-                <h4>Edit Release </h4>
+                <h4 ng-show="!addMode">Edit Release </h4>
+                <h4 ng-show="addMode">Create Release </h4>
                 <h2 class="m-t-none text-black">{{release.title}}</h2>
                 <p class="text-muted m-b-md">{{release.description}}</p>
             </div>
@@ -51,7 +53,7 @@
                                             </div>
                                         </div>
                                     </div>
-                                    <a ui-sref="music.release({id:release.id})"><img ng-src="{{serverURL}}/images/{{release.cover}}" alt="" class="img-full r r-2x"></a>
+                                    <a ui-sref="music.release({id:release.id})"><img src="img/cover.png" ng-src="{{serverURL}}/images/{{release.cover}}" alt="" class="img-full r r-2x"></a>
                                 </div>
                             </div>
                         </div>
