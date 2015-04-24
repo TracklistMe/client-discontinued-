@@ -203,16 +203,20 @@
                                 </div>
                                 <div class="col-md-4 ">
                                     Genre:
-                                        <select class="form-control m-n ng-dirty ng-valid-parse ng-valid ng-valid-required ng-touched" ng-model="f.b" required="">
+                                    <br />
+                                    
+
+                                        <select class="form-control m-b-sm ng-dirty ng-valid-parse ng-valid ng-valid-required ng-touched" ng-model="track.Genres[0]"  >
                                           <option value="">Please choose</option>
-                                          <option value="foo">Foo</option>
-                                          <option value="bar">Bar</option>
-                                      </select>
+                                          <option ng-repeat="genre in genres" ng-selected="{{genre.id == track.Genres[0].id}} " value="{{genre.id}}">{{genre.name}}</option>
+                                        </select>
 
 
-                                    <br /> ISRC:
+                                   ISRC:
                                     <input id="trackTitle " name="trackTitle " type="text " ng-model="track.ISRC " value="{{track.ISRC}} " placeholder="Track ISRC " class="form-control " stop-event>
                                 </div>
+
+                              
                             </div>
                         </div>
                     </li>

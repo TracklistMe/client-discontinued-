@@ -60,7 +60,7 @@ app.controller('AdminEditReleaseCtrl', function($location, $scope, $state, $auth
     $scope.serverURL = CONFIG.url
     $scope.release = null
     $scope.company = null
-
+    $scope.genres;
     $scope.releasesToProcess = null
     $scope.catalog = null
 
@@ -472,6 +472,14 @@ app.controller('AdminEditReleaseCtrl', function($location, $scope, $state, $auth
             .success(function(data) {
                 $scope.release = data
                 $scope.getCompany($scope.release.Labels[0].id);
+                $scope.getGenres();
+            })
+    }
+    $scope.getGenres = function() {
+        $http.get(CONFIG.url + '/genres/')
+            .success(function(data) {
+                $scope.genres = data
+
             })
     }
     $scope.getCompany = function(labelId) {
@@ -706,7 +714,7 @@ app.controller('AdminEditReleaseCtrl', function($location, $scope, $state, $auth
         };
         console.log("---RELEASE---")
         console.log($scope.release)
-        $http.put(CONFIG.url + ' / releases / ' + $scope.releaseId, {
+        $http.put(CONFIG.url + '/releases/' + $scope.releaseId, {
             release: $scope.release
         }).
         success(function(data, status, headers, config) {
