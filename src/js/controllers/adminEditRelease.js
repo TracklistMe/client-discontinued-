@@ -262,17 +262,18 @@ app.controller('AdminEditReleaseCtrl', function($location, $scope, $state, $auth
             console.log(fileItem)
             $scope.release.cover = "dropZone/" + $scope.labelId + "/" + fileItem._file.name;
             console.log("COVER" + $scope.release.cover)
+            uploader.queue.pop();
+            if (uploader.currentUploading < uploader.queue.length) {
+                uploader.currentUploading++
+                uploader.processCDNNegotiation();
+            }
 
         }).error(function(data, status, headers, config) {
             console.log(data)
             // called asynchronously if an error occurs
             // or server returns response with an error status.
         });
-        uploader.queue.pop();
-        if (uploader.currentUploading < uploader.queue.length) {
-            uploader.currentUploading++
-            uploader.processCDNNegotiation();
-        }
+
 
     };
 
@@ -728,19 +729,43 @@ app.controller('AdminEditReleaseCtrl', function($location, $scope, $state, $auth
         };
         console.log("---RELEASE---")
         console.log($scope.release)
-        $http.put(CONFIG.url + '/releases/' + $scope.releaseId, {
-            release: $scope.release
-        }).success(function(data, status, headers, config) {
-            //  $scope.getRelease();
-            //$scope.editedTrack = null
-            console.log("SUCCESS!")
-            $location.path("app/adminRelease/" + $scope.releaseId);
+        if ($scope.addMode == true) {
+            // need to create a new relase 
+            console.log("CREATE RELEASE")
+            $http.post(CONFIG.url + '/releases/', {
+                release: $scope.release,
+                idLabel: $scope.labelId
+            }).success(function(data, status, headers, config) {
+                //  $scope.getRelease();
+                //$scope.editedTrack = null
+                console.log("SUCCESS!")
+                $location.path("app/adminRelease/" + data.id);
 
-        }).
-        error(function(data, status, headers, config) {
-            // called asynchronously if an error occurs
-            // or server returns response with an error status.
-        });
+            }).
+            error(function(data, status, headers, config) {
+                // called asynchronously if an error occurs
+                // or server returns response with an error status.
+            });
+
+
+        } else {
+            // update an already existing release
+            console.log("UPDATE")
+            $http.put(CONFIG.url + '/releases/' + $scope.releaseId, {
+                release: $scope.release
+            }).success(function(data, status, headers, config) {
+                //  $scope.getRelease();
+                //$scope.editedTrack = null
+                console.log("SUCCESS!")
+                $location.path("app/adminRelease/" + $scope.releaseId);
+
+            }).
+            error(function(data, status, headers, config) {
+                // called asynchronously if an error occurs
+                // or server returns response with an error status.
+            });
+
+        }
 
     }
 
@@ -756,7 +781,8 @@ app.controller('AdminEditReleaseCtrl', function($location, $scope, $state, $auth
             $scope.addMode = true;
             $scope.release = {
                 title: "Release Title",
-                isActive: false
+                isActive: false,
+                Tracks: []
 
             }
             $scope.getLabel($scope.labelId)

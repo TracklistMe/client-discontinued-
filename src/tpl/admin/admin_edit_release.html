@@ -29,7 +29,8 @@
             </div>
             <div class="col-md-6">
                 <div class="pull-right">
-                    <button ng-click="saveRelease()" class="btn btn-danger">Save Changes Release</button>
+                    <button ng-show="!addMode" ng-click="saveRelease()" class="btn btn-danger">Save Changes Release</button>
+                    <button ng-show="addMode" ng-click="saveRelease()" class="btn btn-danger">Create Release</button>
                 </div>
             </div>
         </div>
