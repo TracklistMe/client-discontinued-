@@ -270,11 +270,43 @@ angular.module('app')
                             }
                         ]
                     }
+                }).state('app.artisteditlist', {
+                    url: '/editArtists',
+                    templateUrl: 'tpl/admin.edit.artist.html',
+                    resolve: {
+                        deps: ['$ocLazyLoad',
+                            function($ocLazyLoad) {
+                                return $ocLazyLoad.load([
+                                    'js/controllers/adminEditArtist.js'
+                                ]);
+                            }
+                        ]
+                    }
                 })
-                .state('app.ui', {
-                    url: '/ui',
-                    template: '<div ui-view class="fade-in-up"></div>'
+                .state('app.admineditprofile', {
+                    url: '/adminEditArtistProfile/{id:int}',
+                    templateUrl: 'tpl/admin/admin_artist_profile.html',
+                    resolve: {
+                        deps: ['$ocLazyLoad',
+                            function($ocLazyLoad) {
+                                return $ocLazyLoad.load('angularFileUpload').then(
+                                    function() {
+                                        return $ocLazyLoad.load([
+
+                                            'js/controllers/chart.js',
+                                            'js/controllers/adminEditArtistProfile.js'
+                                        ]);
+                                    }
+                                );
+                            }
+                        ]
+                    }
                 })
+
+            .state('app.ui', {
+                url: '/ui',
+                template: '<div ui-view class="fade-in-up"></div>'
+            })
                 .state('app.ui.buttons', {
                     url: '/buttons',
                     templateUrl: 'tpl/ui_buttons.html'

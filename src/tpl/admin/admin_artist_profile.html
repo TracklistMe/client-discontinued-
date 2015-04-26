@@ -1,0 +1,79 @@
+<div ng-controller="AdminEditArtistProfile" class="hbox hbox-auto-xs hbox-auto-sm">
+    <div class="col">
+        <div style="background:url({{serverURL}}/images/{{artist.avatar}})  center center; background-size:cover">
+            <div class="wrapper-lg bg-white-opacity">
+                <div class="row m-t">
+                    <div class="col-sm-2">
+                        <div nv-file-drop="" uploader="uploader">
+                            <div nv-file-over="" uploader="uploader" over-class="my-drop-zone-over-class" class="  my-drop-zone">
+                                <div ui-refresh="loadedImage" ui-jq="easyPieChart" ui-options="{
+                      percent: '{{loadedImage}}',
+                      lineWidth: 5,
+                      trackColor: '{{app.color.light}}',
+                      barColor: '{{app.color.info}}',
+                      scaleColor: false,
+                      color: '{{app.color.dark}}',
+                      size: 134,
+                      lineCap: 'butt',
+                      rotate: -90,
+                      animate: 2000
+                    }">
+                                    <div class="item">
+                                        <div class="pos-rlt">
+                                            <div class="item-overlay bg-black-opacity img-circle ">
+                                                <label class="uploadAvatar ">
+                                                    <input type="file" nv-file-select="" uploader="uploader" />
+                                                    <span class="btn m-b-xs   btn-dark btn-rounded">change avatar</span>
+                                                </label>
+
+                                            
+                                            </div>
+                                            <div class="thumb-xl">
+                                                <img ng-src="{{serverURL}}/images/{{artist.avatar}}" class="img-circle thumb-xl" alt="...">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-5">
+                        <div class="clear m-b">
+                            <div class="m-b m-t-sm">
+                                <span class="h3 text-black">{{artist.displayName}}</span>
+                                <br />
+                                <small class="m-l">London, UK</small>
+                            </div>
+                            <p class="m-b">
+                                <a href class="btn btn-sm btn-bg btn-rounded btn-default btn-icon"><i class="fa fa-twitter"></i></a>
+                                <a href class="btn btn-sm btn-bg btn-rounded btn-default btn-icon"><i class="fa fa-facebook"></i></a>
+                                <a href class="btn btn-sm btn-bg btn-rounded btn-default btn-icon"><i class="fa fa-google-plus"></i></a>
+                            </p>
+                        </div>
+                    </div>
+                    <div class="col-sm-5">
+                        <div class="pull-right pull-none-xs text-center">
+                            <a href class="m-b-md inline m">
+                                <span class="h3 block font-bold">2k</span>
+                                <small>Followers</small>
+                            </a>
+                            <a href class="m-b-md inline m">
+                                <span class="h3 block font-bold">250</span>
+                                <small>Tracks</small>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!--
+    <div class="wrapper bg-white b-b">
+      <ul class="nav nav-pills nav-sm">
+        <li class="active"><a href>Stream</a></li>
+        <li><a href>Profile</a></li>
+        <li><a href>Messages</a></li>
+      </ul>
+    </div>
+    -->
+    </div>
+</div>

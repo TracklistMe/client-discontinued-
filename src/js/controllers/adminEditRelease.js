@@ -11,6 +11,10 @@ app.controller('AdminEditReleaseCtrl', function($location, $scope, $state, $auth
     // when deataching a file from his track, remember to add in the list
     // of potential file to added back. Those files will not fetched back from the call dropzone/
     // so must be handled manually 
+    // 
+    $scope.serverURL = CONFIG.url
+
+
     $scope.deatachedList = [];
     $scope.assignedList = [];
     $scope.dropZoneFiles = [];
