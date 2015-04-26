@@ -23,7 +23,7 @@
   <!-- / header -->
  
   <!-- list -->
-  <ul class="list-group list-group-lg no-radius m-b-none m-t-n-xxs">
+  <ul class="list-group list-group-lg no-radius wrapper">
     <li ng-repeat="artist in artists" ng-class="labelClass(mail.label)" class="list-group-item clearfix b-l-3x">
       <a ui-sref="app.admineditprofile({id:artist.id})" class="avatar thumb pull-left m-r">
         <img   ng-src=" {{serverURL}}/images/img/default/avatar.gif">

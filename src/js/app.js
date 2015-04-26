@@ -8,18 +8,19 @@ angular.module('app', [
     'ngSanitize',
     'ngTouch',
     'ngStorage',
-    'htmlSortable',
+
     'ui.router',
     'ui.bootstrap',
     'ui.utils',
     'ui.load',
     'ui.jq',
     'smart-table',
+    'htmlSortable',
     'oc.lazyLoad',
     'pascalprecht.translate',
     'satellizer'
 ]).constant("CONFIG", {
-    "url": "https://tracklist.me/api",
-    //"url": "http://localhost:3000",
+    //"url": "https://tracklist.me/api",
+    "url": "http://localhost:3000",
     "imagePath": "image"
 })
