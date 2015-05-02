@@ -52,16 +52,13 @@ app.controller('HomepageController', function($sce, $scope, $http, CONFIG, toast
             track.sources = []
             // Mp3 version 
             track.sources.push({
-                src: $sce.trustAsResourceUrl($scope.serverURL + "/snippets/" + release.Tracks[i].snippetPath),
-                type: "audio/mpeg"
+                    src: $sce.trustAsResourceUrl($scope.serverURL + "/snippets/" + release.Tracks[i].snippetPath),
+                    type: "audio/mpeg"
+                }, {
+                src: $sce.trustAsResourceUrl($scope.serverURL + "/snippets/" + release.Tracks[i].oggSnippetPath),
+                type: "audio/ogg"
             })
-            /*
-            ADD OGGG
-            track.sources.push({
-                 src: $sce.trustAsResourceUrl("http://flatfull.com/themes/assets/musics/Miaow-03-Lentement.ogg"),
-                    type: "audio/ogg"
-            })
-            */
+
 
             tracksObject.push(track)
         };
