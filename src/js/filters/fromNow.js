@@ -1,7 +1,7 @@
 'use strict';
 
-/* Filters */
-// need load the moment.js to use this filter. 
+/* Time Management Filters */
+
 angular.module('app')
     .filter('fromNow', function() {
         return function(date) {
