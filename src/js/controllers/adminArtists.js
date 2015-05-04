@@ -9,7 +9,7 @@
  */
 app.controller('AdminartistsCtrl', function($scope, $http, CONFIG, toaster) {
     var CHARACTER_BEFORE_SEARCH = 2;
-
+    $scope.serverURL = CONFIG.url
     $scope.itemsByPage = 10;
     $scope.currentArtist = null;
     $scope.isSearching = false
