@@ -363,7 +363,7 @@ angular.module('ngCart.directives', ['ngCart.fulfilment'])
                 data: '='
             },
             transclude: true,
-            templateUrl: 'tpl/cart/addtocart.html',
+        templateUrl: 'tpl/cart/addtocart.html',
             link: function(scope, element, attrs) {
                 scope.attrs = attrs;
                 scope.inCart = function() {

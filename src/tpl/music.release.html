@@ -36,8 +36,13 @@
             </div>
             <div class="m-b-xxs">
               <span class="text-muted">Release Date:</span>{{release.releaseDate}}
+
             </div>
-           
+            <ngcart-addtocart id="'release-'{{release.id}}" name="asd" price="123" quantity="1.4" quantity-max="100" data="item"> </ngcart-addtocart>
+             
+
+            
+              
           </div>
         </div>
       </div>
@@ -73,16 +78,17 @@
             <td class="v-middle" > 
               <div class="pull-right">
                 <a class="m-r-sm"><i class="icon-heart"></i></a>
-                <a class="m-r-sm"><i class="icon-plus"></i></a>
+                <ngcart-addtocart id="'track-'{{track.id}}" name="asd" price="1.3" quantity="1" quantity-max="100" data="item"> </ngcart-addtocart>
               </div>
             </td>
           </tr>
+
           
  
         </tbody>
       </table>
       </div> 
-    
+   
 
   <!-- 
     <div class="padder-md m-b-lg">
