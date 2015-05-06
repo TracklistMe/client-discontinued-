@@ -1,0 +1,8 @@
+<a class="m-l-xs" ng-show="!inCart()"  ng-click="ngCart.addItem(id, name, price, q, data)"  > 
+    <i class="fa fa-3x fa-plus-circle text-white"></i> 
+</a>
+<a class="m-l-xs" ng-show="inCart()" ng-click="ngCart.removeItemById(id)" style="cursor: pointer;">
+    <i class="fa fa-3x fa-minus-circle text-white"></i> 
+</a>
+  
+ 

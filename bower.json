@@ -104,7 +104,6 @@
     "bootstrap-tagsinput": "~0.4.2",
     "satellizer": "~0.9.4",
     "flot-spline": "*",
-    "html.sortable": "~0.1.8",
-    "ngcart": "~0.0.3-rc.2"
+    "html.sortable": "~0.1.8"
   }
 }

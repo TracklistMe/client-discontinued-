@@ -1,3 +1,7 @@
+ 
+
+
+
 <div class="hbox hbox-auto-xs hbox-auto-sm" ng-init="
      app.settings.themeID = 0;
     app.settings.asideFolded = true; 
@@ -18,13 +22,14 @@
             </div>
             <div class="item-overlay bg-black-opacity r r-2x r r-2x">
               <div class="center text-center m-t-n w-full">
-                <a ng-click="addRelease($index)"><i class="fa fa-2x fa-play-circle-o text-white"></i></a>
-
+                <a ng-click="addRelease($index)"><i class="fa fa-3x fa-play-circle text-white"></i></a>
+                    <ngcart-addtocart id="'release-'{{release.id}}" name="asd" price="123" quantity="2" quantity-max="2" data="item"></ngcart-addtocart>
               </div>
             </div>
             <div class="top w-full">
-              <span class="pull-right m-t-n-xs m-r-sm text-white">
-                <i class="fa fa-bookmark i-lg"></i>
+              <span class="pull-right m-t-n-xs m-r-sm  ">
+                  
+                 <ngcart-isincart id="1">  </ngcart-isincart> 
               </span>
               <!-- 
               <span class="pull-right m-t-sm m-r-sm badge bg-info">6</span>
@@ -36,9 +41,10 @@
             <a ui-sref="music.release({id:release.id})" class="text-ellipsis">{{release.title}}</a>
             <a ui-sref="music.release({id:release.id})" class="text-ellipsis text-xs text-muted">
               
-            {{release.Labels[0].displayName}}
-
+               {{release.Labels[0].displayName}}
+              
             </a>
+            
           </div>
         </div>
       </div>
