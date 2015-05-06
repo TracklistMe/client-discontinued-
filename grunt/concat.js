@@ -34,6 +34,7 @@ module.exports = {
             'src/js/directives/*.js',
             'src/js/services/*.js',
             'src/js/filters/*.js',
+            'src/js/libs/cart/*.js',
             'src/js/controllers/bootstrap.js'
         ],
         dest: 'angular/js/app.min.js'
