@@ -8,7 +8,7 @@ angular.module('app', [
     'ngSanitize',
     'ngTouch',
     'ngStorage',
-
+    'ngCart',
     'ui.router',
     'ui.bootstrap',
     'ui.utils',
