@@ -38,9 +38,21 @@
              <!-- signin button -->
        
 
+
+           <li ng-if="isAuthenticated()" class="dropdown" dropdown>
+            <a href class="dropdown-toggle" dropdown-toggle>
+              <i class="fa fa-shopping-cart"></i>
+              <span class="visible-xs-inline">Cart</span>
+              <span class="badge badge-sm up bg-info pull-right-xs">2</span>
+            </a>
+ 
+          </li>
+
+
+
           <li ng-if="isAuthenticated()" class="dropdown" dropdown>
             <a href class="dropdown-toggle" dropdown-toggle>
-              <i class="icon-bell fa-fw"></i>
+              <i class="fa fa-bell   "></i>
               <span class="visible-xs-inline">Notifications</span>
               <span class="badge badge-sm up bg-danger pull-right-xs">2</span>
             </a>
@@ -77,29 +89,26 @@
           </li>
 
           <li class="dropdown" ng-if="!isAuthenticated()">
-            <a ui-sref="access.signup"  >Sign In</a>
+            <a ui-sref="access.signup">Sign In</a>
           </li>
           <li ng-if="!isAuthenticated()">
-            <a ui-sref="access.signin"  >Login</a>
+            <a ui-sref="access.signin">Login</a>
           </li>
 
 
           <!-- There is an autenticated user here -->
           <li ng-if="isAuthenticated()" class="dropdown" dropdown>
             <a href class="dropdown-toggle clear" dropdown-toggle>
-              <span class="thumb-sm avatar pull-right m-t-n-sm m-b-n-sm m-l-sm">
+              <span class="thumb-sm avatar pull-right m-t-n-sm m-b-n-sm m-l-xs">
                 <img ng-src="{{user.avatar}}" alt="...">
                 <i class="on md b-white bottom"></i>
               </span>
-              <span class="hidden-sm hidden-md">{{user.displayName}}</span> <b class="caret"></b>
+              <!-- <b class=" pull-right caret"></b> -->
             </a>
             <!-- dropdown -->
             <ul class="dropdown-menu   w">
               <li class="wrapper b-b m-b-sm bg-light m-t-n-xs">
-                <div>
-                  <p>300mb of 500mb used</p>
-                </div>
-                <progressbar value="60" class="progress-xs m-b-none bg-white"></progressbar>
+                {{user.displayName}}
               </li>
               <li>
                 <a href>
