@@ -39,8 +39,9 @@
        
 
 
-           <li ng-if="isAuthenticated()" class="dropdown" dropdown>
-            <a href class="dropdown-toggle" dropdown-toggle>
+           <li ng-if="isAuthenticated()"  >
+ 
+            <a ui-sref="music.cart"  >
               <i class="fa fa-shopping-cart"></i>
               <span class="visible-xs-inline">Cart</span>
               <span class="badge badge-sm up bg-info pull-right-xs"><ngcart-counter></ngcart-counter></span>

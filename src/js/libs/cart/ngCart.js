@@ -370,6 +370,7 @@ angular.module('ngCart.directives', ['ngCart.fulfilment'])
             scope: {
                 id: '@',
                 name: '@',
+                currency: '@',
                 quantity: '@',
                 quantityMax: '@',
                 price: '@',
