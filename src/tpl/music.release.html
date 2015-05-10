@@ -38,7 +38,7 @@
               <span class="text-muted">Release Date:</span>{{release.releaseDate}}
 
             </div>
-            <ngcart-addtocart id="'release-'{{release.id}}" name="asd" currency="$" price="11" quantity="1" quantity-max="100" data="item"> </ngcart-addtocart>
+            <ngcart-addtocart id="release-{{release.id}}" name="{{release.title}} - Release" currency="$" price="11" quantity="1" quantity-max="100" data="release"> </ngcart-addtocart>
              
 
             
@@ -82,7 +82,7 @@
                       <i class="icon-heart"></i>
                   </button>
                 </a>
-                <ngcart-addtocart id="'track-'{{track.id}}" name="asd" price="1" currency="$" quantity="1" quantity-max="100" data="item"> </ngcart-addtocart>
+                <ngcart-addtocart id="track-{{track.id}}" name="{{track.title}} ({{track.version}})" currency="$" price="1"   quantity="1" quantity-max="100" data="track"> </ngcart-addtocart>
               </div>
             </td>
           </tr>

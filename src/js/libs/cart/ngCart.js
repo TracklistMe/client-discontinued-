@@ -31,17 +31,30 @@ angular.module('ngCart', ['ngCart.directives'])
     }
 ])
 
-.service('ngCart', ['$rootScope', 'ngCartItem', 'store',
-    function($rootScope, ngCartItem, store) {
+.service('ngCart', ['$rootScope', 'ngCartItem', 'store', '$http', '$auth', 'CONFIG',
+
+    function($rootScope, ngCartItem, store, $http, $auth, CONFIG) {
 
         this.init = function() {
+
             this.$cart = {
                 shipping: null,
                 taxRate: null,
                 tax: null,
                 items: []
             };
+
+            console.log("FETCH THE DATA FROM DB ")
+            $http.get(CONFIG.url + '/me/cart/')
+                .success(function(data) {
+                    console.log(data)
+                    console.log("DATA RECEIVED")
+                })
+
+
         };
+
+        // in the database there is a row for each element, even if duplicate. It is later flatter at application level
 
         this.addItem = function(id, name, currency, price, quantity, data) {
 
@@ -55,6 +68,25 @@ angular.module('ngCart', ['ngCart.directives'])
                 this.$cart.items.push(newItem);
                 $rootScope.$broadcast('ngCart:itemAdded', newItem);
             }
+            console.log(id)
+            if (id.indexOf('release') > -1) {
+                $http.post(CONFIG.url + '/me/cart/release/' + data.id)
+                    .success(function(data) {
+                        console.log(data)
+                        console.log("DATA RECEIVED")
+                    })
+            }
+
+            if (id.indexOf('track') > -1) {
+                $http.post(CONFIG.url + '/me/cart/track/' + data.id)
+                    .success(function(data) {
+                        console.log(data)
+                        console.log("DATA RECEIVED")
+                    })
+            }
+
+
+
 
             $rootScope.$broadcast('ngCart:change', {});
         };
@@ -210,6 +242,7 @@ angular.module('ngCart', ['ngCart.directives'])
         };
 
 
+
         item.prototype.setId = function(id) {
             if (id) this._id = id;
             else {
@@ -303,6 +336,7 @@ angular.module('ngCart', ['ngCart.directives'])
             return {
                 id: this.getId(),
                 name: this.getName(),
+                currency: this.getCurrency(),
                 price: this.getPrice(),
                 quantity: this.getQuantity(),
                 data: this.getData(),

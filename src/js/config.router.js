@@ -934,7 +934,17 @@ angular.module('app')
                     }
                 }).state('music.cart', {
                     url: '/cart',
-                    templateUrl: 'tpl/cart.html'
+                    templateUrl: 'tpl/cart.html',
+                    resolve: {
+                        deps: ['$ocLazyLoad',
+                            function($ocLazyLoad) {
+                                return $ocLazyLoad.load([
+                                    'js/controllers/cart.js'
+                                ]);
+
+                            }
+                        ]
+                    }
                 }).state('music.track', {
                     url: '/track/{id:int}',
                     templateUrl: 'tpl/music.track.html',

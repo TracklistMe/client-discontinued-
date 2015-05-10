@@ -1,48 +1,75 @@
-<div class="bg-light dker b-b wrapper-md hidden-print">
- 
-  <h1 class="m-n font-thin h3">Cart</h1>
-</div>
-<div class="wrapper-md">
-  <div>
+<div ng-controller="CartCtrl">
+  <div class="bg-light dker b-b wrapper-md hidden-print"  >
+   
+    <h1 class="m-n font-thin h3">Cart</h1>
+  </div>
+  <div class="wrapper-md">
+    <div>
     
-    {{ngCart}}
-    <div class="line"></div>
-    <table class="table table-striped bg-white b-a">
-      <thead>
-        <tr>
-          <th style="width: 60px">QTY</th>
-          <th>DESCRIPTION</th>
-          <th style="width: 140px">UNIT PRICE</th>
-          <th style="width: 90px">TOTAL</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr>
-          <td>1</td>
-          <td>iPhone 5 32GB White & Silver (GSM) Unlocked</td>
-          <td>$749.00</td>
-          <td>$749.00</td>
-        </tr>
-        <tr>
-          <td>2</td>
-          <td>iPad mini with Wi-Fi 32GB - White & Silver</td>
-          <td>$429.00</td>
-          <td>$858.00</td>
-        </tr>
-        <tr>
-          <td colspan="3" class="text-right"><strong>Subtotal</strong></td>
-          <td>$1607.00</td>
-        </tr>
-        
-        <tr>
-          <td colspan="3" class="text-right no-border"><strong>VAT Included in Total</strong></td>
-          <td>$0.00</td>
-        </tr>
-        <tr>
-          <td colspan="3" class="text-right no-border"><strong>Total</strong></td>
-          <td><strong>$1607.00</strong></td>
-        </tr>
-      </tbody>
-    </table>              
+      <div class="line"></div>
+      <table class="table table-striped bg-white b-a">
+        <thead>
+          <tr>
+            <th style="width: 20px"> </th>
+            <th style="width: 120px">QTY</th>
+            <th>DESCRIPTION</th>
+            <th style="width: 140px">UNIT PRICE</th>
+            <th style="width: 90px">TOTAL</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr ng-repeat="item in cart.getItems()" ng-init="itemData = item.getData()">
+            <!-- if release -->
+            <td ng-if="item._id.indexOf('release') > -1"> 
+                 <div href="" class="thumb-sm">
+                  <img class="r r-2x" ng-src="{{serverURL}}/images/{{itemData.cover}}">
+                </div>
+            </td>
+            <!-- if track -->
+            <td ng-if="item._id.indexOf('track') > -1"> 
+                 <div href="" class="thumb-sm">
+                  <img class="r r-2x" ng-src="{{serverURL}}/images/{{itemData.cover}}">
+                </div>
+            </td>
+
+            <td class="v-middle" > 
+               <div  class="padder-sm input-group">
+                    <span ng-click="item.setQuantity(1,true)" class="badge bg-dark"  >  
+                      <i class="fa fa-plus"></i>
+                    </span>
+                    <span class="text-center m-xs ">
+                      {{item.getQuantity()}}
+                    </span>
+                    <span ng-click="item.getQuantity() > 1 ? item.setQuantity(-1,true) : cart.removeItem($index)" class="badge bg-dark "  >
+                      <i class="fa fa-minus"></i>
+                    </span>
+                </div>
+            </td>
+            <td class="v-middle" ng-if="item._id.indexOf('release') > -1">
+                {{itemData.title}} Release , includes {{itemData.Tracks.length}} tracks
+            </td>
+            <td class="v-middle" ng-if="item._id.indexOf('track') > -1">
+                <span ng-repeat="producer in itemData.Producer">{{producer.displayName}}{{$last ? '' : ', '}}</span> - {{itemData.title}} ({{itemData.version}}) 
+                
+            </td>
+            <td>{{item.getCurrency()}}{{item.getPrice()}}</td>
+            <td>{{item.getCurrency()}}{{item.getTotal()}}</td>
+          </tr>
+          <tr>
+            <td colspan="4" class="text-right"><strong>Subtotal</strong></td>
+            <td>{{cart.getSubTotal()}}</td>
+          </tr>
+          
+          <tr>
+            <td colspan="4" class="text-right no-border"><strong>{{cart.getTaxRate}} VAT Included in Total</strong></td>
+            <td>{{cart.getTax()}}</td>
+          </tr>
+          <tr>
+            <td colspan="4" class="text-right no-border"><strong>Total</strong></td>
+            <td><strong>{{cart.totalCost()}}</strong></td>
+          </tr>
+        </tbody>
+      </table>              
+    </div>
   </div>
 </div>
