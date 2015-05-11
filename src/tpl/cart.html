@@ -32,9 +32,11 @@
                 </div>
             </td>
 
+            
+
             <td class="v-middle" > 
                <div  class="padder-sm input-group">
-                    <span ng-click="item.setQuantity(1,true)" class="badge bg-dark"  >  
+                    <span ng-click="cart.addItemAndSaveToDB(item.getId(),item.getName(),item.getCurrency(),item.getPrice(), 1, item.getData())" class="badge bg-dark"  >  
                       <i class="fa fa-plus"></i>
                     </span>
                     <span class="text-center m-xs ">
