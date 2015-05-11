@@ -44,12 +44,6 @@ angular.module('ngCart', ['ngCart.directives'])
                 items: []
             };
 
-            console.log("FETCH THE DATA FROM DB ")
-            $http.get(CONFIG.url + '/me/cart/')
-                .success(function(data) {
-                    console.log(data)
-                    console.log("DATA RECEIVED")
-                })
 
 
         };
@@ -194,17 +188,77 @@ angular.module('ngCart', ['ngCart.directives'])
             }
         };
 
+        this.consolidate = function() {
+            var _self = this;
+            console.log("FETCH THE DATA FROM DB ")
+            $http.get(CONFIG.url + '/me/cart/')
+                .success(function(data) {
+                    console.log(data)
 
+                    // Part 1 ->  ALL THE ELEMENT THAT ARE IN THE DB BUT NOT IN THE LOCAL STORAGE VERSION
+
+                    // remove from the elements fetch from the database, all the elements that are already available in db.
+                    for (var j = 0; j < data.length; j++) {
+
+                        data[j].frontEndId = (data[j].TrackId) ? "track-" + data[j].TrackId : "release-" + data[j].ReleaseId;
+                        console.log(data[j].frontEndId);
+                        var found = false;
+
+                        console.log("local storage cart: " + _self.$cart)
+                        console.log(_self.$cart.items);
+
+                        for (var i = 0; i < _self.$cart.items.length && (found == false); i++) {
+
+                            console.log("Compare " + _self.$cart.items[i]._id + " with " + data[j].frontEndId);
+                            if (_self.$cart.items[i]._id == data[j].frontEndId) {
+                                console.log(" I REMOVE THIS OBJECT FROM THE LOCAL STORAGE, IT COMES FROM THE DB ALREADY")
+                                data.splice(j, 1);
+                                found = true;
+                            }
+
+                        };
+                    }
+                    // ADD BACK ALL THE ELEMENT IN THE CART 
+                    for (var j = 0; j < data.length; j++) {
+                        if (data[j].TrackId) {
+                            // IS A 
+                            _self.$cart.items.push(new ngCartItem(data[j].frontEndId, data[j].Track.title + "(" + data[j].Track.version + ")", "$", 123, 1, data[j].Track));
+                        } else {
+                            // IS A RELEASE
+                            _self.$cart.items.push(new ngCartItem(data[j].frontEndId, data[j].Release.title, "$", 123, 1, data[j].Release));
+
+                        }
+
+                    }
+
+
+                    // PART 2 -> ALL THE ELEMENTS THAT ARE IN THE LOCAL STORAGE BUT NOT IN DB 
+
+
+
+
+                })
+
+            this.$save();
+
+
+
+        }
         this.$restore = function(storedCart) {
             var _self = this;
             _self.init();
             _self.$cart.shipping = storedCart.shipping;
             _self.$cart.tax = storedCart.tax;
 
+            /*
             angular.forEach(storedCart.items, function(item) {
                 _self.$cart.items.push(new ngCartItem(item._id, item._name, item._currency, item._price, item._quantity, item._data));
             });
+            */
+            //_self.$cart.items = []
             this.$save();
+            this.consolidate();
+
         };
 
         this.$save = function() {
@@ -297,6 +351,7 @@ angular.module('ngCart', ['ngCart.directives'])
             }
 
 
+            /*
             if (quantity < 0) {
                 console.log("REMOVE AN ITEM")
                 if (this.getId().indexOf('release') > -1) {
@@ -334,7 +389,7 @@ angular.module('ngCart', ['ngCart.directives'])
 
             }
 
-
+*/
 
             $rootScope.$broadcast('ngCart:change', {});
 
