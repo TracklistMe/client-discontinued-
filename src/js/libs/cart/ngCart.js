@@ -68,25 +68,6 @@ angular.module('ngCart', ['ngCart.directives'])
                 this.$cart.items.push(newItem);
                 $rootScope.$broadcast('ngCart:itemAdded', newItem);
             }
-            console.log(id)
-            if (id.indexOf('release') > -1) {
-                $http.post(CONFIG.url + '/me/cart/release/' + data.id)
-                    .success(function(data) {
-                        console.log(data)
-                        console.log("DATA RECEIVED")
-                    })
-            }
-
-            if (id.indexOf('track') > -1) {
-                $http.post(CONFIG.url + '/me/cart/track/' + data.id)
-                    .success(function(data) {
-                        console.log(data)
-                        console.log("DATA RECEIVED")
-                    })
-            }
-
-
-
 
             $rootScope.$broadcast('ngCart:change', {});
         };
@@ -165,6 +146,9 @@ angular.module('ngCart', ['ngCart.directives'])
         };
 
         this.removeItem = function(index) {
+            console.log("TRYING TO REMOVE AN ITEM")
+
+
             this.$cart.items.splice(index, 1);
             $rootScope.$broadcast('ngCart:itemRemoved', {});
             $rootScope.$broadcast('ngCart:change', {});
@@ -172,6 +156,7 @@ angular.module('ngCart', ['ngCart.directives'])
         };
 
         this.removeItemById = function(id) {
+            console.log("remove by id")
             var cart = this.getCart();
             angular.forEach(cart.items, function(item, index) {
                 if (item.getId() === id) {
@@ -229,8 +214,8 @@ angular.module('ngCart', ['ngCart.directives'])
     }
 ])
 
-.factory('ngCartItem', ['$rootScope', '$log',
-    function($rootScope, $log) {
+.factory('ngCartItem', ['$rootScope', '$auth', '$http', '$log', 'CONFIG',
+    function($rootScope, $auth, $http, $log, CONFIG) {
 
         var item = function(id, name, currency, price, quantity, data) {
             this.setId(id);
@@ -296,7 +281,7 @@ angular.module('ngCart', ['ngCart.directives'])
 
         item.prototype.setQuantity = function(quantity, relative) {
 
-
+            console.log("CHANGE QUANTITY")
             var quantityInt = parseInt(quantity);
             if (quantityInt % 1 === 0) {
                 if (relative === true) {
@@ -310,6 +295,47 @@ angular.module('ngCart', ['ngCart.directives'])
                 this._quantity = 1;
                 $log.info('Quantity must be an integer and was defaulted to 1');
             }
+
+
+            if (quantity < 0) {
+                console.log("REMOVE AN ITEM")
+                if (this.getId().indexOf('release') > -1) {
+                    $http.delete(CONFIG.url + '/me/cart/release/' + this.getId().split("-").pop())
+                        .success(function(data) {
+                            console.log(data)
+                            console.log("DATA RECEIVED")
+                        })
+                }
+
+                if (this.getId().indexOf('track') > -1) {
+                    $http.delete(CONFIG.url + '/me/cart/track/' + this.getId().split("-").pop())
+                        .success(function(data) {
+                            console.log(data)
+                            console.log("DATA RECEIVED")
+                        })
+                }
+            } else {
+                console.log(this)
+                if (this.getId().indexOf('release') > -1) {
+                    $http.post(CONFIG.url + '/me/cart/release/' + this.getId().split("-").pop())
+                        .success(function(data) {
+                            console.log(data)
+                            console.log("DATA RECEIVED")
+                        })
+                }
+
+                if (this.getId().indexOf('track') > -1) {
+                    $http.post(CONFIG.url + '/me/cart/track/' + this.getId().split("-").pop())
+                        .success(function(data) {
+                            console.log(data)
+                            console.log("DATA RECEIVED")
+                        })
+                }
+
+            }
+
+
+
             $rootScope.$broadcast('ngCart:change', {});
 
         };
