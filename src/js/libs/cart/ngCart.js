@@ -47,6 +47,23 @@ angular.module('ngCart', ['ngCart.directives'])
 
 
         };
+        // in the database there is a row for each element, even if duplicate. It is later flatter at application level
+        // remove an entry from the db.
+        this.removeItemAndSaveToDB = function(id, quantity) {
+            console.log("ADDED ITEM AND SAVE TO DB ")
+            if (id.indexOf('release') > -1) {
+                $http.delete(CONFIG.url + '/me/cart/release/' + id.split("-").pop())
+                    .success(function(data) {
+
+                    })
+            }
+
+            if (id.indexOf('track') > -1) {
+                $http.delete(CONFIG.url + '/me/cart/track/' + id.split("-").pop())
+                    .success(function(data) {})
+            }
+            this.removeItemById(id, quantity);
+        }
 
         // in the database there is a row for each element, even if duplicate. It is later flatter at application level
         this.addItemAndSaveToDB = function(id, name, currency, price, quantity, data) {
@@ -55,19 +72,13 @@ angular.module('ngCart', ['ngCart.directives'])
                 $http.post(CONFIG.url + '/me/cart/release/' + id.split("-").pop())
                     .success(function(data) {
 
-
-
                     })
             }
 
             if (id.indexOf('track') > -1) {
                 $http.post(CONFIG.url + '/me/cart/track/' + id.split("-").pop())
-                    .success(function(data) {
-
-
-                    })
+                    .success(function(data) {})
             }
-
             this.addItem(id, name, currency, price, quantity, data);
         }
         this.addItem = function(id, name, currency, price, quantity, data) {
@@ -168,13 +179,22 @@ angular.module('ngCart', ['ngCart.directives'])
             $rootScope.$broadcast('ngCart:change', {});
 
         };
-
-        this.removeItemById = function(id) {
+        // quantity is a positive number
+        this.removeItemById = function(id, quantity) {
             console.log("remove by id")
+
             var cart = this.getCart();
             angular.forEach(cart.items, function(item, index) {
                 if (item.getId() === id) {
-                    cart.items.splice(index, 1);
+                    if (!quantity) {
+                        // if there is no quantity left, set the quantity to the current quantity
+                        // when checking the quantity of the object in order to remove it, it will always return to 0.
+                        quantity = cart.items[index].getQuantity()
+                    }
+                cart.items[index].setQuantity(-quantity, true)
+                    if (cart.items[index].getQuantity() <= 0) {
+                        cart.items.splice(index, 1);
+                    }
                 }
             });
             this.setCart(cart);
@@ -362,7 +382,7 @@ angular.module('ngCart', ['ngCart.directives'])
                 } else {
                     this._quantity = quantityInt;
                 }
-                if (this._quantity < 1) this._quantity = 1;
+
 
             } else {
                 this._quantity = 1;

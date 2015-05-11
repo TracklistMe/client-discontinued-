@@ -32,7 +32,7 @@
                 </div>
             </td>
 
-            
+
 
             <td class="v-middle" > 
                <div  class="padder-sm input-group">
@@ -42,7 +42,7 @@
                     <span class="text-center m-xs ">
                       {{item.getQuantity()}}
                     </span>
-                    <span ng-click="item.getQuantity() > 1 ? item.setQuantity(-1,true) : cart.removeItem($index)" class="badge bg-dark "  >
+                    <span ng-click="cart.removeItemAndSaveToDB(item.getId(),1)" class="badge bg-dark "  >
                       <i class="fa fa-minus"></i>
                     </span>
                 </div>
