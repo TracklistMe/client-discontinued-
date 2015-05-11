@@ -49,7 +49,27 @@ angular.module('ngCart', ['ngCart.directives'])
         };
 
         // in the database there is a row for each element, even if duplicate. It is later flatter at application level
+        this.addItemAndSaveToDB = function(id, name, currency, price, quantity, data) {
+            console.log("ADDED ITEM AND SAVE TO DB ")
+            if (id.indexOf('release') > -1) {
+                $http.post(CONFIG.url + '/me/cart/release/' + id.split("-").pop())
+                    .success(function(data) {
 
+
+
+                    })
+            }
+
+            if (id.indexOf('track') > -1) {
+                $http.post(CONFIG.url + '/me/cart/track/' + id.split("-").pop())
+                    .success(function(data) {
+
+
+                    })
+            }
+
+            this.addItem(id, name, currency, price, quantity, data);
+        }
         this.addItem = function(id, name, currency, price, quantity, data) {
 
             var inCart = this.getItemById(id);
@@ -221,14 +241,13 @@ angular.module('ngCart', ['ngCart.directives'])
                     // ADD BACK ALL THE ELEMENT IN THE CART 
                     for (var j = 0; j < data.length; j++) {
                         if (data[j].TrackId) {
-                            // IS A 
-                            _self.$cart.items.push(new ngCartItem(data[j].frontEndId, data[j].Track.title + "(" + data[j].Track.version + ")", "$", 123, 1, data[j].Track));
+                            // IS A TRACK 
+                            _self.addItem(data[j].frontEndId, data[j].Track.title + "(" + data[j].Track.version + ")", "$", 123, 1, data[j].Track);
+
                         } else {
                             // IS A RELEASE
-                            _self.$cart.items.push(new ngCartItem(data[j].frontEndId, data[j].Release.title, "$", 123, 1, data[j].Release));
-
+                            _self.addItem(data[j].frontEndId, data[j].Release.title, "$", 123, 1, data[j].Release);
                         }
-
                     }
 
 
@@ -504,6 +523,8 @@ angular.module('ngCart.directives', ['ngCart.fulfilment'])
                 } else {
                     scope.q = parseInt(scope.quantity);
                 }
+
+
 
                 scope.qtyOpt = [];
                 for (var i = 1; i <= scope.quantityMax; i++) {
