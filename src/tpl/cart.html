@@ -48,7 +48,7 @@
                 </div>
             </td>
             <td class="v-middle" ng-if="item._id.indexOf('release') > -1">
-                {{itemData.title}} Release , includes {{itemData.Tracks.length}} tracks
+                {{itemData.title}}, <span class="label bg-info"> includes {{itemData.Tracks.length}} tracks </span>
             </td>
             <td class="v-middle" ng-if="item._id.indexOf('track') > -1">
                 <span ng-repeat="producer in itemData.Producer">{{producer.displayName}}{{$last ? '' : ', '}}</span> - {{itemData.title}} ({{itemData.version}}) 
