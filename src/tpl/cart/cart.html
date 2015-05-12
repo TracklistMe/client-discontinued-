@@ -2,7 +2,7 @@
 <div class="alert alert-warning" role="alert" ng-show="ngCart.getTotalItems() === 0">
     Your cart is empty
 </div>
-
+{{ngCart}}
 <div class="table-responsive col-lg-12" ng-show="ngCart.getTotalItems() > 0">
 
     <table class="table table-striped ngCart cart">
@@ -47,7 +47,7 @@
             <td><span class="glyphicon glyphicon-minus" ng-class="{'disabled':item.getQuantity()==1}"
                       ng-click="item.setQuantity(-1, true)"></span>&nbsp;&nbsp;
                 {{ item.getQuantity() | number }}&nbsp;&nbsp;
-                <span class="glyphicon glyphicon-plus" ng-click="ngCart.addItemAndSaveToDB(item.id,item.name,item.currency,item.price, 1, item.data)"></span></td>
+                <span class="glyphicon glyphicon-plus" ng-click="ngCart.addItemAndSaveToDB(item.id,item.name, item.price, 1, item.data)"></span></td>
             <td>{{ item.getPrice() | currency}}</td>
             <td>{{ item.getTotal() | currency }}</td>
         </tr>

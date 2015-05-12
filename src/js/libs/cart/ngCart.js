@@ -14,8 +14,9 @@ angular.module('ngCart', ['ngCart.directives'])
     this.$get = function() {};
 })
 
-.run(['$rootScope', 'ngCart', 'ngCartItem', 'store',
-    function($rootScope, ngCart, ngCartItem, store) {
+.run(['$rootScope', 'ngCart', 'ngCartItem', 'store', '$http', 'CONFIG',
+
+    function($rootScope, ngCart, ngCartItem, store, $http, CONFIG) {
 
         $rootScope.$on('ngCart:change', function() {
             ngCart.$save();
@@ -26,7 +27,26 @@ angular.module('ngCart', ['ngCart.directives'])
 
         } else {
             ngCart.init();
+
         }
+        $http.get(CONFIG.url + '/me/cart/currency')
+            .success(function(data) {
+
+                ngCart.$cart.currencySymbol = data.symbol;
+                ngCart.$cart.currency = data.id;
+                $http.get(CONFIG.url + '/pricesTable/' + ngCart.$cart.currency)
+                    .success(function(data) {
+                        ngCart.$cart.convertedPriceTable = [];
+                        for (var i = 0; i < data.length; i++) {
+                            ngCart.$cart.convertedPriceTable[data[i].MasterPrice] = data[i].price;
+                        }
+                        ngCart.consolidateWithDB();
+                    })
+
+            })
+
+
+
 
     }
 ])
@@ -38,6 +58,9 @@ angular.module('ngCart', ['ngCart.directives'])
         this.init = function() {
 
             this.$cart = {
+                currency: null,
+                currencySymbol: null,
+                convertedPriceTable: null,
                 shipping: null,
                 taxRate: null,
                 tax: null,
@@ -66,7 +89,7 @@ angular.module('ngCart', ['ngCart.directives'])
         }
 
         // in the database there is a row for each element, even if duplicate. It is later flatter at application level
-        this.addItemAndSaveToDB = function(id, name, currency, price, quantity, data) {
+        this.addItemAndSaveToDB = function(id, name, price, quantity, data) {
             console.log("ADDED ITEM AND SAVE TO DB ")
             if (id.indexOf('release') > -1) {
                 $http.post(CONFIG.url + '/me/cart/release/' + id.split("-").pop())
@@ -79,17 +102,18 @@ angular.module('ngCart', ['ngCart.directives'])
                 $http.post(CONFIG.url + '/me/cart/track/' + id.split("-").pop())
                     .success(function(data) {})
             }
-            this.addItem(id, name, currency, price, quantity, data);
+            this.addItem(id, name, price, quantity, data);
         }
-        this.addItem = function(id, name, currency, price, quantity, data) {
-
+        this.addItem = function(id, name, price, quantity, data) {
+            console.log("QUANTITY " + quantity)
+            console.log(price)
             var inCart = this.getItemById(id);
 
             if (typeof inCart === 'object') {
                 //Update quantity of an item if it's already in the cart
                 inCart.setQuantity(quantity, true);
             } else {
-                var newItem = new ngCartItem(id, name, currency, price, quantity, data);
+                var newItem = new ngCartItem(id, name, price, quantity, data);
                 this.$cart.items.push(newItem);
                 $rootScope.$broadcast('ngCart:itemAdded', newItem);
             }
@@ -118,7 +142,19 @@ angular.module('ngCart', ['ngCart.directives'])
             if (this.getCart().items.length == 0) return 0;
             return this.getCart().shipping;
         };
+        this.getConvertedPrice = function(masterPrice) {
+            var price;
+            try {
+                price = this.getCart().convertedPriceTable[masterPrice];
 
+            } catch (err) {
+                price = "Price no available";
+            }
+            return price;
+        };
+        this.getCurrencySymbol = function() {
+            return this.getCart().currencySymbol;
+        };
         this.setTaxRate = function(taxRate) {
             this.$cart.taxRate = +parseFloat(taxRate).toFixed(2);
             return this.getTaxRate();
@@ -191,7 +227,7 @@ angular.module('ngCart', ['ngCart.directives'])
                         // when checking the quantity of the object in order to remove it, it will always return to 0.
                         quantity = cart.items[index].getQuantity()
                     }
-                cart.items[index].setQuantity(-quantity, true)
+                    cart.items[index].setQuantity(-quantity, true)
                     if (cart.items[index].getQuantity() <= 0) {
                         cart.items.splice(index, 1);
                     }
@@ -228,12 +264,12 @@ angular.module('ngCart', ['ngCart.directives'])
             }
         };
 
-        this.consolidate = function() {
+        this.consolidateWithDB = function() {
             var _self = this;
             console.log("FETCH THE DATA FROM DB ")
             $http.get(CONFIG.url + '/me/cart/')
                 .success(function(data) {
-                    console.log(data)
+
 
                     // Part 1 ->  ALL THE ELEMENT THAT ARE IN THE DB BUT NOT IN THE LOCAL STORAGE VERSION
 
@@ -262,11 +298,13 @@ angular.module('ngCart', ['ngCart.directives'])
                     for (var j = 0; j < data.length; j++) {
                         if (data[j].TrackId) {
                             // IS A TRACK 
-                            _self.addItem(data[j].frontEndId, data[j].Track.title + "(" + data[j].Track.version + ")", "$", 123, 1, data[j].Track);
+                            console.log("^^^^^")
+                            console.log(data[j]);
+                            _self.addItem(data[j].frontEndId, data[j].Track.title + "(" + data[j].Track.version + ")", data[j].Track.Price, 1, data[j].Track);
 
                         } else {
                             // IS A RELEASE
-                            _self.addItem(data[j].frontEndId, data[j].Release.title, "$", 123, 1, data[j].Release);
+                            _self.addItem(data[j].frontEndId, data[j].Release.title, 123, 1, data[j].Release);
                         }
                     }
 
@@ -277,10 +315,7 @@ angular.module('ngCart', ['ngCart.directives'])
 
 
                 })
-
             this.$save();
-
-
 
         }
         this.$restore = function(storedCart) {
@@ -291,12 +326,12 @@ angular.module('ngCart', ['ngCart.directives'])
 
             /*
             angular.forEach(storedCart.items, function(item) {
-                _self.$cart.items.push(new ngCartItem(item._id, item._name, item._currency, item._price, item._quantity, item._data));
+        _self.$cart.items.push(new ngCartItem(item._id, item._name,   item._price, item._quantity, item._data));
             });
             */
             //_self.$cart.items = []
             this.$save();
-            this.consolidate();
+
 
         };
 
@@ -310,9 +345,8 @@ angular.module('ngCart', ['ngCart.directives'])
 .factory('ngCartItem', ['$rootScope', '$auth', '$http', '$log', 'CONFIG',
     function($rootScope, $auth, $http, $log, CONFIG) {
 
-        var item = function(id, name, currency, price, quantity, data) {
+        var item = function(id, name, price, quantity, data) {
             this.setId(id);
-            this.setCurrency(currency)
             this.setName(name);
             this.setPrice(price);
             this.setQuantity(quantity);
@@ -343,29 +377,19 @@ angular.module('ngCart', ['ngCart.directives'])
             return this._name;
         };
 
-        item.prototype.setCurrency = function(currency) {
-            if (currency) this._currency = currency;
-            else {
-                $log.error('A currency must be provided');
-            }
-        };
-        item.prototype.getCurrency = function() {
-            return this._currency;
-        };
 
 
 
         item.prototype.setPrice = function(price) {
+            console.log(price)
             var priceFloat = parseFloat(price);
-            if (priceFloat) {
-                if (priceFloat <= 0) {
-                    $log.error('A price must be over 0');
-                } else {
-                    this._price = (priceFloat);
-                }
+
+            if (priceFloat < 0) {
+                $log.error('A price must be over 0');
             } else {
-                $log.error('A price must be provided');
+                this._price = (priceFloat);
             }
+
         };
         item.prototype.getPrice = function() {
             return this._price;
@@ -449,14 +473,16 @@ angular.module('ngCart', ['ngCart.directives'])
 
 
         item.prototype.getTotal = function() {
-            return +parseFloat(this.getQuantity() * this.getPrice()).toFixed(2);
+
+            console.log("ROOOT SCOPE ")
+            console.log(this)
+            return parseFloat(this.getQuantity() * this.getPrice()).toFixed(2);
         };
 
         item.prototype.toObject = function() {
             return {
                 id: this.getId(),
                 name: this.getName(),
-                currency: this.getCurrency(),
                 price: this.getPrice(),
                 quantity: this.getQuantity(),
                 data: this.getData(),
@@ -524,7 +550,6 @@ angular.module('ngCart.directives', ['ngCart.fulfilment'])
             scope: {
                 id: '@',
                 name: '@',
-                currency: '@',
                 quantity: '@',
                 quantityMax: '@',
                 price: '@',

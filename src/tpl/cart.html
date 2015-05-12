@@ -3,6 +3,7 @@
    
     <h1 class="m-n font-thin h3">Cart</h1>
   </div>
+
   <div class="wrapper-md">
     <div>
     
@@ -36,7 +37,7 @@
 
             <td class="v-middle" > 
                <div  class="padder-sm input-group">
-                    <span ng-click="cart.addItemAndSaveToDB(item.getId(),item.getName(),item.getCurrency(),item.getPrice(), 1, item.getData())" class="badge bg-dark"  >  
+                    <span ng-click="cart.addItemAndSaveToDB(item.getId(),item.getName(), item.getPrice(), 1, item.getData())" class="badge bg-dark"  >  
                       <i class="fa fa-plus"></i>
                     </span>
                     <span class="text-center m-xs ">
@@ -54,21 +55,21 @@
                 <span ng-repeat="producer in itemData.Producer">{{producer.displayName}}{{$last ? '' : ', '}}</span> - {{itemData.title}} ({{itemData.version}}) 
                 
             </td>
-            <td>{{item.getCurrency()}}{{item.getPrice()}}</td>
-            <td>{{item.getCurrency()}}{{item.getTotal()}}</td>
+            <td> {{cart.getCurrencySymbol()}}{{cart.getConvertedPrice(item.getPrice())}}</td>
+            <td>{{cart.getCurrencySymbol()}}{{item.getTotal()}}</td>
           </tr>
           <tr>
             <td colspan="4" class="text-right"><strong>Subtotal</strong></td>
-            <td>{{cart.getSubTotal()}}</td>
+            <td>{{cart.getCurrencySymbol()}}{{cart.getSubTotal()}}</td>
           </tr>
           
           <tr>
-            <td colspan="4" class="text-right no-border"><strong>{{cart.getTaxRate}} VAT Included in Total</strong></td>
-            <td>{{cart.getTax()}}</td>
+            <td colspan="4" class="text-right no-border"><strong>{{cart.getTaxRate()}}% VAT Included in Total</strong></td>
+            <td>{{cart.getCurrencySymbol()}}{{cart.getTax()}}</td>
           </tr>
           <tr>
             <td colspan="4" class="text-right no-border"><strong>Total</strong></td>
-            <td><strong>{{cart.totalCost()}}</strong></td>
+            <td><strong>{{cart.getCurrencySymbol()}}{{cart.totalCost()}}</strong></td>
           </tr>
         </tbody>
       </table>              

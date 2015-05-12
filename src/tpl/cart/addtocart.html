@@ -14,8 +14,7 @@
  
   
 <button class="btn btn-primary btn-addon">
-        <a class="m-l-xs" ng-click="ngCart.addItemAndSaveToDB(id, name,currency, price, q, data)"  >
+        <a class="m-l-xs" ng-click="ngCart.addItemAndSaveToDB(id, name, price, q, data)"  >
             <i class="fa fa-plus text-white"></i> 
-        </a>
-        {{currency}} {{price}}
+        </a>{{ngCart.getCurrencySymbol()}} {{price && ngCart.getConvertedPrice(price)}}
 </button>
