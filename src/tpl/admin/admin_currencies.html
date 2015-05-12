@@ -1,0 +1,54 @@
+<div ng-controller="AdmincurrenciesCtrl" >
+<div  class="bg-light lter b-b wrapper-md">
+  <h1 class="m-n font-thin h3">Currencies</h1>
+</div>
+ 
+<div ng-repeat="currency in currencies" class="wrapper-md">
+  <h4>{{currency.name}} Prices</h4>
+ 
+  <table class="table table-bordered table-hover table-condensed bg-white-only">
+    <tr style="font-weight: bold">
+      <td style="width:35%">Tracklistme Currency</td>
+      <td style="width:20%">{{currency.shortname}}</td>
+ 
+      <td style="width:25%">Edit</td>
+    </tr>
+    <tr ng-repeat="price in pricesMasterTable">
+      <td class="v-middle">
+        <!-- editable username (text with validation) -->
+        <span  >
+          {{price.price}}
+        </span>
+      </td>
+      <td class="v-middle">
+        <!-- editable status (select-local) -->
+        <span editable-text="findConvertedPrice(price.price, currency.id).price"  e-name="status" e-form="rowform"  >
+        {{findConvertedPrice(price.price, currency.id).price}}
+        {{ !findConvertedPrice(price.price, currency.id) ? 'N/A' : currency.symbol}}
+       
+        </span>
+      </td>
+ 
+      <td style="white-space: nowrap">
+        <!-- form -->
+        <form editable-form name="rowform"   
+        onaftersave="  
+        save(price.price, currency.id,findConvertedPrice(price.price, currency.id).price)" ng-show="rowform.$visible" class="form-buttons form-inline" shown="inserted == user">
+          <button type="submit" ng-disabled="rowform.$waiting" class="btn btn-sm btn-info">
+            save
+          </button>
+          <button type="button" ng-disabled="rowform.$waiting" ng-click="rowform.$cancel()" class="btn btn-sm btn-default">
+            cancel
+          </button>
+        </form>
+        <div class="buttons" ng-show="!rowform.$visible">
+          <button class="btn btn-sm btn-info" ng-click="rowform.$show(); !findConvertedPrice(price.price, currency.id) ? createConvertedPrice(price.price, currency.id) : ''; ">edit</button>
+         
+        </div>  
+      </td>
+    </tr>
+  </table>
+ 
+ 
+</div>
+</div>

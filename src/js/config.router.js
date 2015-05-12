@@ -270,6 +270,21 @@ angular.module('app')
                             }
                         ]
                     }
+                }).state('app.admincurrencies', {
+                    url: '/adminCurrencies',
+                    templateUrl: 'tpl/admin/admin_currencies.html',
+
+                    resolve: {
+                        deps: ['$ocLazyLoad',
+                            function($ocLazyLoad) {
+                                return $ocLazyLoad.load('xeditable').then(
+                                    function() {
+                                        return $ocLazyLoad.load('js/controllers/adminCurrencies.js');
+                                    }
+                                );
+                            }
+                        ]
+                    }
                 }).state('app.artisteditlist', {
                     url: '/editArtists',
                     templateUrl: 'tpl/admin.edit.artist.html',
