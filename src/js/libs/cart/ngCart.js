@@ -196,8 +196,10 @@ angular.module('ngCart', ['ngCart.directives'])
 
         this.getSubTotal = function() {
             var total = 0;
+            var cart = this;
             angular.forEach(this.getCart().items, function(item) {
-                total += item.getTotal();
+
+                total += cart.getItemTotal(item);
             });
             return +parseFloat(total).toFixed(2);
         };
@@ -207,7 +209,7 @@ angular.module('ngCart', ['ngCart.directives'])
         };
 
         this.removeItem = function(index) {
-            console.log("TRYING TO REMOVE AN ITEM")
+
 
 
             this.$cart.items.splice(index, 1);
@@ -338,6 +340,14 @@ angular.module('ngCart', ['ngCart.directives'])
         this.$save = function() {
             return store.set('cart', JSON.stringify(this.getCart()));
         }
+
+
+        // MANIPULATOR TO ITEMS
+        this.getItemTotal = function(item) {
+
+            return +parseFloat(item.getQuantity() * this.getConvertedPrice(item.getPrice())).toFixed(2);
+        };
+
 
     }
 ])
@@ -472,12 +482,7 @@ angular.module('ngCart', ['ngCart.directives'])
         };
 
 
-        item.prototype.getTotal = function() {
 
-            console.log("ROOOT SCOPE ")
-            console.log(this)
-            return parseFloat(this.getQuantity() * this.getPrice()).toFixed(2);
-        };
 
         item.prototype.toObject = function() {
             return {

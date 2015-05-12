@@ -56,7 +56,7 @@
                 
             </td>
             <td> {{cart.getCurrencySymbol()}}{{cart.getConvertedPrice(item.getPrice())}}</td>
-            <td>{{cart.getCurrencySymbol()}}{{item.getTotal()}}</td>
+            <td>{{cart.getCurrencySymbol()}}{{cart.getItemTotal(item)}}</td>
           </tr>
           <tr>
             <td colspan="4" class="text-right"><strong>Subtotal</strong></td>
