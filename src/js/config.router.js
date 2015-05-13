@@ -941,6 +941,7 @@ angular.module('app')
                         deps: ['$ocLazyLoad',
                             function($ocLazyLoad) {
                                 return $ocLazyLoad.load([
+                                    'js/libs/cart/ngCart.js',
                                     'js/controllers/release.js'
                                 ]);
 

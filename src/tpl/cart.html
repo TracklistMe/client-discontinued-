@@ -55,7 +55,7 @@
                 <span ng-repeat="producer in itemData.Producer">{{producer.displayName}}{{$last ? '' : ', '}}</span> - {{itemData.title}} ({{itemData.version}}) 
                 
             </td>
-            <td> {{cart.getCurrencySymbol()}}{{cart.getConvertedPrice(item.getPrice())}}</td>
+            <td> {{cart.getCurrencySymbol()}}{{cart.getConvertedPrice(item.getPrice(),item.getData())}}</td>
             <td>{{cart.getCurrencySymbol()}}{{cart.getItemTotal(item)}}</td>
           </tr>
           <tr>

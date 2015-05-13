@@ -24,24 +24,24 @@ angular.module('ngCart', ['ngCart.directives'])
 
         if (angular.isObject(store.get('cart'))) {
             ngCart.$restore(store.get('cart'));
-
         } else {
             ngCart.init();
-
         }
         $http.get(CONFIG.url + '/me/cart/currency')
             .success(function(data) {
 
                 ngCart.$cart.currencySymbol = data.symbol;
                 ngCart.$cart.currency = data.id;
-                $http.get(CONFIG.url + '/pricesTable/' + ngCart.$cart.currency)
-                    .success(function(data) {
-                        ngCart.$cart.convertedPriceTable = [];
-                        for (var i = 0; i < data.length; i++) {
-                            ngCart.$cart.convertedPriceTable[data[i].MasterPrice] = data[i].price;
-                        }
-                        ngCart.consolidateWithDB();
-                    })
+
+                ngCart.$cart.convertedPriceTable = [];
+                for (var i = 0; i < data.ConvertedPrices.length; i++) {
+                    ngCart.$cart.convertedPriceTable[data.ConvertedPrices[i].MasterPrice] = data.ConvertedPrices[i].price;
+                }
+
+
+
+                ngCart.consolidateWithDB();
+
 
             })
 
@@ -73,7 +73,7 @@ angular.module('ngCart', ['ngCart.directives'])
         // in the database there is a row for each element, even if duplicate. It is later flatter at application level
         // remove an entry from the db.
         this.removeItemAndSaveToDB = function(id, quantity) {
-            console.log("ADDED ITEM AND SAVE TO DB ")
+
             if (id.indexOf('release') > -1) {
                 $http.delete(CONFIG.url + '/me/cart/release/' + id.split("-").pop())
                     .success(function(data) {
@@ -90,7 +90,7 @@ angular.module('ngCart', ['ngCart.directives'])
 
         // in the database there is a row for each element, even if duplicate. It is later flatter at application level
         this.addItemAndSaveToDB = function(id, name, price, quantity, data) {
-            console.log("ADDED ITEM AND SAVE TO DB ")
+
             if (id.indexOf('release') > -1) {
                 $http.post(CONFIG.url + '/me/cart/release/' + id.split("-").pop())
                     .success(function(data) {
@@ -105,8 +105,7 @@ angular.module('ngCart', ['ngCart.directives'])
             this.addItem(id, name, price, quantity, data);
         }
         this.addItem = function(id, name, price, quantity, data) {
-            console.log("QUANTITY " + quantity)
-            console.log(price)
+
             var inCart = this.getItemById(id);
 
             if (typeof inCart === 'object') {
@@ -142,13 +141,25 @@ angular.module('ngCart', ['ngCart.directives'])
             if (this.getCart().items.length == 0) return 0;
             return this.getCart().shipping;
         };
-        this.getConvertedPrice = function(masterPrice) {
-            var price;
-            try {
+        this.getConvertedPrice = function(masterPrice, data, id) {
+            var price = 0.0; // force the runtime enviroment to consider price as a float.
+            if (!isNaN(parseFloat(masterPrice))) {
+                //MASTER PRICE IS A NUMBER 
+
                 price = this.getCart().convertedPriceTable[masterPrice];
 
-            } catch (err) {
-                price = "Price no available";
+            } else {
+                if (data) {
+                    // IF THERE IS NO MASTER PRICE, AND THERE IS A DATA
+                    //this must be a release, let's run through all the Tracks
+                    for (var i = 0; i < data.Tracks.length; i++) {
+                        price += +parseFloat(this.getCart().convertedPriceTable[data.Tracks[i].Price]);
+
+                    }
+                } else {
+                    // VISUALIZE THE IMPOSSIBILITY TO CALCULATE A PRICE
+                    price = "Price not Available"
+                }
             }
             return price;
         };
@@ -219,7 +230,7 @@ angular.module('ngCart', ['ngCart.directives'])
         };
         // quantity is a positive number
         this.removeItemById = function(id, quantity) {
-            console.log("remove by id")
+
 
             var cart = this.getCart();
             angular.forEach(cart.items, function(item, index) {
@@ -268,7 +279,6 @@ angular.module('ngCart', ['ngCart.directives'])
 
         this.consolidateWithDB = function() {
             var _self = this;
-            console.log("FETCH THE DATA FROM DB ")
             $http.get(CONFIG.url + '/me/cart/')
                 .success(function(data) {
 
@@ -279,17 +289,11 @@ angular.module('ngCart', ['ngCart.directives'])
                     for (var j = 0; j < data.length; j++) {
 
                         data[j].frontEndId = (data[j].TrackId) ? "track-" + data[j].TrackId : "release-" + data[j].ReleaseId;
-                        console.log(data[j].frontEndId);
                         var found = false;
-
-                        console.log("local storage cart: " + _self.$cart)
-                        console.log(_self.$cart.items);
-
                         for (var i = 0; i < _self.$cart.items.length && (found == false); i++) {
 
-                            console.log("Compare " + _self.$cart.items[i]._id + " with " + data[j].frontEndId);
                             if (_self.$cart.items[i]._id == data[j].frontEndId) {
-                                console.log(" I REMOVE THIS OBJECT FROM THE LOCAL STORAGE, IT COMES FROM THE DB ALREADY")
+
                                 data.splice(j, 1);
                                 found = true;
                             }
@@ -300,8 +304,7 @@ angular.module('ngCart', ['ngCart.directives'])
                     for (var j = 0; j < data.length; j++) {
                         if (data[j].TrackId) {
                             // IS A TRACK 
-                            console.log("^^^^^")
-                            console.log(data[j]);
+
                             _self.addItem(data[j].frontEndId, data[j].Track.title + "(" + data[j].Track.version + ")", data[j].Track.Price, 1, data[j].Track);
 
                         } else {
@@ -345,7 +348,7 @@ angular.module('ngCart', ['ngCart.directives'])
         // MANIPULATOR TO ITEMS
         this.getItemTotal = function(item) {
 
-            return +parseFloat(item.getQuantity() * this.getConvertedPrice(item.getPrice())).toFixed(2);
+            return +parseFloat(item.getQuantity() * this.getConvertedPrice(item.getPrice(), item.getData())).toFixed(2);
         };
 
 
@@ -391,7 +394,7 @@ angular.module('ngCart', ['ngCart.directives'])
 
 
         item.prototype.setPrice = function(price) {
-            console.log(price)
+
             var priceFloat = parseFloat(price);
 
             if (priceFloat < 0) {
@@ -408,7 +411,7 @@ angular.module('ngCart', ['ngCart.directives'])
 
         item.prototype.setQuantity = function(quantity, relative) {
 
-            console.log("CHANGE QUANTITY")
+
             var quantityInt = parseInt(quantity);
             if (quantityInt % 1 === 0) {
                 if (relative === true) {
@@ -431,7 +434,7 @@ angular.module('ngCart', ['ngCart.directives'])
                     $http.delete(CONFIG.url + '/me/cart/release/' + this.getId().split("-").pop())
                         .success(function(data) {
                             console.log(data)
-                            console.log("DATA RECEIVED")
+        console.log("DATA RECEIVED")
                         })
                 }
 
