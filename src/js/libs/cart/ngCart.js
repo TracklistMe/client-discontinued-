@@ -38,8 +38,6 @@ angular.module('ngCart', ['ngCart.directives'])
                     ngCart.$cart.convertedPriceTable[data.ConvertedPrices[i].MasterPrice] = data.ConvertedPrices[i].price;
                 }
 
-
-
                 ngCart.consolidateWithDB();
 
 
@@ -309,7 +307,7 @@ angular.module('ngCart', ['ngCart.directives'])
 
                         } else {
                             // IS A RELEASE
-                            _self.addItem(data[j].frontEndId, data[j].Release.title, 123, 1, data[j].Release);
+                            _self.addItem(data[j].frontEndId, data[j].Release.title, data[j].Release.Price, 1, data[j].Release);
                         }
                     }
 
