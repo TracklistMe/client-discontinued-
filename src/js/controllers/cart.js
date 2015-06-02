@@ -20,6 +20,10 @@ app.controller('CartCtrl', function($location, $scope, $state, $auth, $statePara
      STRIPE PROCESS TO CHECKOUT
 
      1. create a card object and send to stripe.
+     2. stripe send back an object to sign a transaction with
+     3. send to nodejs the request to process the payment
+     4. node sign with the secret key the request
+
      */
     $scope.charge = function() {
         $scope.payment.card = $scope.card;
@@ -30,7 +34,10 @@ app.controller('CartCtrl', function($location, $scope, $state, $auth, $statePara
             .then(function(token) {
                 console.log('token created for card ending in ', token.card.last4);
                 var payment = angular.copy($scope.payment);
+                console.log("TOKEN " + token.id)
                 payment.card = void 0;
+                payment.value = $scope.cart.totalCost();
+                payment.currency = $scope.cart.getCurrencyISOName();
                 payment.token = token.id;
                 return $http.post($scope.serverURL + '/payments', payment);
             })

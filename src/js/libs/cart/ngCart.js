@@ -29,7 +29,7 @@ angular.module('ngCart', ['ngCart.directives'])
         }
         $http.get(CONFIG.url + '/me/cart/currency')
             .success(function(data) {
-
+                ngCart.$cart.currencyISOName = data.shortname;
                 ngCart.$cart.currencySymbol = data.symbol;
                 ngCart.$cart.currency = data.id;
 
@@ -57,6 +57,7 @@ angular.module('ngCart', ['ngCart.directives'])
 
             this.$cart = {
                 currency: null,
+                currencyISOName: null,
                 currencySymbol: null,
                 convertedPriceTable: null,
                 shipping: null,
@@ -161,6 +162,9 @@ angular.module('ngCart', ['ngCart.directives'])
             }
             return price;
         };
+        this.getCurrencyISOName = function() {
+            return this.getCart().currencyISOName;
+        }
         this.getCurrencySymbol = function() {
             return this.getCart().currencySymbol;
         };
