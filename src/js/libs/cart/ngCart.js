@@ -193,6 +193,15 @@ angular.module('ngCart', ['ngCart.directives'])
         this.getItems = function() {
             return this.getCart().items;
         };
+        this.getItemsIds = function() {
+            var ids = []
+            var items = this.getItems();
+            angular.forEach(items, function(item) {
+                ids.push(item.getId());
+            });
+            console.log(ids);
+            return ids;
+        };
 
         this.getTotalItems = function() {
             var count = 0;

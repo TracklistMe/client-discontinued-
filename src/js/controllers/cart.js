@@ -22,7 +22,13 @@ app.controller('CartCtrl', function($location, $scope, $state, $auth, $statePara
      1. create a card object and send to stripe.
      2. stripe send back an object to sign a transaction with
      3. send to nodejs the request to process the payment
-     4. node sign with the secret key the request
+     -----------
+     4. NODE JS RECALCULATE PRICE TO BE SURE IS CORRECT
+     5. NODE JS MARK AS TRANSACTION ALL THE TRACKS
+     6. node sign with the secret key the request
+	 7. NODE MOVE ALL THE TRACKS/RELEASE FROM CART TO LIBRARY
+	 8. send back confirmation (should redirect to the library of the user)
+
 
      */
     $scope.charge = function() {
@@ -39,10 +45,14 @@ app.controller('CartCtrl', function($location, $scope, $state, $auth, $statePara
                 payment.value = $scope.cart.totalCost();
                 payment.currency = $scope.cart.getCurrencyISOName();
                 payment.token = token.id;
+                payment.cart = $scope.cart.getItemsIds();
                 return $http.post($scope.serverURL + '/payments', payment);
             })
             .then(function(payment) {
-                console.log('successfully submitted payment for $', payment.amount);
+                console.log('successfully submitted payment for $');
+                console.log(payment)
+
+
             })
             .catch(function(err) {
                 if (err.type && /^Stripe/.test(err.type)) {
