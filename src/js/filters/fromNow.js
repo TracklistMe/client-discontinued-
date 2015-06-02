@@ -27,4 +27,8 @@ angular.module('app')
             }
             return timeString;
         }
+    }).filter('yesNo', function() {
+        return function(boolean) {
+            return boolean ? 'Yes' : 'No';
+        }
     });

@@ -105,6 +105,7 @@
     "satellizer": "~0.9.4",
     "flot-spline": "*",
     "html.sortable": "~0.1.8",
-    "angular-stripe": "~4.2.4"
+    "angular-stripe": "~4.2.4",
+    "angular-credit-cards": "~2.3.2"
   }
 }
