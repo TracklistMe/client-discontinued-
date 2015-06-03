@@ -31,7 +31,11 @@ angular.module('ngCart', ['ngCart.directives'])
             .success(function(data) {
                 ngCart.$cart.currencyISOName = data.shortname;
                 ngCart.$cart.currencySymbol = data.symbol;
-                ngCart.$cart.currency = data.id;
+                ngCart.$cart.currency = {
+                    id: data.id,
+                    symbol: data.symbol,
+                    shortname: data.shortname
+                };
 
                 ngCart.$cart.convertedPriceTable = [];
                 for (var i = 0; i < data.ConvertedPrices.length; i++) {
@@ -56,9 +60,11 @@ angular.module('ngCart', ['ngCart.directives'])
         this.init = function() {
 
             this.$cart = {
-                currency: null,
-                currencyISOName: null,
-                currencySymbol: null,
+                currency: {
+                    id: null,
+                    symbol: null,
+                    shortname: null
+                },
                 convertedPriceTable: null,
                 shipping: null,
                 taxRate: null,
@@ -162,11 +168,14 @@ angular.module('ngCart', ['ngCart.directives'])
             }
             return price;
         };
+        this.getCurrency = function() {
+            return this.$cart.currency;
+        }
         this.getCurrencyISOName = function() {
-            return this.getCart().currencyISOName;
+            return this.$cart.currency.shortname;
         }
         this.getCurrencySymbol = function() {
-            return this.getCart().currencySymbol;
+            return this.$cart.currency.symbol;
         };
         this.setTaxRate = function(taxRate) {
             this.$cart.taxRate = +parseFloat(taxRate).toFixed(2);
