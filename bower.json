@@ -1,8 +1,8 @@
 {
-    "name": "BootstrapAngularAdminWebApp",
+    "name": "Tracklistme",
     "version": "2.0.1",
     "authors": [
-        "Flatfull"
+        "Nicola Bortignon"
     ],
     "description": "Admin web application template with Bootstrap 3 and AngularJS.",
     "keywords": [
