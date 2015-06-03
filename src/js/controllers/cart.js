@@ -45,7 +45,7 @@ app.controller('CartCtrl', function($location, $scope, $state, $auth, $statePara
                 payment.value = $scope.cart.totalCost();
                 payment.currency = $scope.cart.getCurrencyISOName();
                 payment.token = token.id;
-                payment.cart = $scope.cart.getItemsIds();
+                payment.cart = $scope.cart.getItemsIdsAndQuantities();
                 return $http.post($scope.serverURL + '/payments', payment);
             })
             .then(function(payment) {
