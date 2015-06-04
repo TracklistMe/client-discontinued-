@@ -18,7 +18,10 @@ angular.module('app', [
     'htmlSortable',
     'oc.lazyLoad',
     'pascalprecht.translate',
-    'satellizer'
+    'satellizer',
+    'angular-stripe',
+    'credit-cards'
+
 ]).constant("CONFIG", {
     "url": "https://tracklist.me/api",
     //"url": "http://localhost:3000",

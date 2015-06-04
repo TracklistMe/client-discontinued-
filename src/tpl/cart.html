@@ -55,7 +55,7 @@
                 <span ng-repeat="producer in itemData.Producer">{{producer.displayName}}{{$last ? '' : ', '}}</span> - {{itemData.title}} ({{itemData.version}}) 
                 
             </td>
-            <td> {{cart.getCurrencySymbol()}}{{cart.getConvertedPrice(item.getPrice(),item.getData())}}</td>
+            <td>{{cart.getCurrencySymbol()}}{{cart.getConvertedPrice(item.getPrice(),item.getData())}}</td>
             <td>{{cart.getCurrencySymbol()}}{{cart.getItemTotal(item)}}</td>
           </tr>
           <tr>
@@ -71,8 +71,110 @@
             <td colspan="4" class="text-right no-border"><strong>Total</strong></td>
             <td><strong>{{cart.getCurrencySymbol()}}{{cart.totalCost()}}</strong></td>
           </tr>
+          <tr>
+           <td colspan="5">
+                <button ng-click="charge()" class="btn m-r-md pull-right btn-primary">Buy</button>
+
+            </td>
+          </tr>
+         
         </tbody>
       </table>              
     </div>
+
+                       <form name="ccForm">
+                    <div class="form-group">
+                      <label for="card-number">Card Number</label>
+                      <input type="text" class="form-control" id="cardNumber" cc-number name="ccNumber" ng-model="card.number">
+                    </div>
+                    <table class="table">
+                      <tr>
+                        <th>Valid</th>
+                        <th>Type</th>
+                      </tr>
+                      <tr>
+                        <td>
+                          {{ccForm.ccNumber.$valid | yesNo}}
+                        </td>
+                        <td>
+                     
+                          {{ccForm.ccNumber.$ccType || 'Unknown'}}
+                         
+                        </td>
+                      </tr>
+                    </table>
+                    <div class="form-group">
+                      <label for="cvc">CVC</label>
+                      <input type="text" class="form-control" id="cvc" cc-cvc cc-type="ccForm.ccNumber.$ccType" name="ccCvc" ng-model="card.cvc">
+                    </div>
+                    <table class="table">
+                      <tr>
+                        <th>Valid</th>
+                      </tr>
+                      <tr>
+                        <td>
+                          {{ccForm.ccCvc.$valid | yesNo}}
+                        </td>
+                      </tr>
+                    </table>
+                    <div class="form-group">
+                      <label for="card-number">Expiration</label>
+                      <div class="row" cc-exp>
+                        <div class="col-xs-3">
+                          <input placeholder="MM" type="text" class="form-control" cc-exp-month name="ccExpMonth" ng-model="card.expiration.month">
+                        </div>
+                        <div class="col-xs-3">
+                          <input placeholder="YY" type="text" class="form-control" cc-exp-year name="ccExpYear" ng-model="card.expiration.year">
+                        </div>
+                      </div>
+                    </div>
+                    <table class="table">
+                      <tr>
+                        <th>Valid Month</th>
+                        <th>Valid Year</th>
+                        <th>Valid Pair</th>
+                      </tr>
+                      <tr>
+                        <td>
+                          {{ccForm.ccExpMonth.$valid | yesNo}}
+                        </td>
+                        <td>
+                          {{ccForm.ccExpYear.$valid | yesNo}}
+                        </td>
+                        <td>
+                          {{!ccForm.$error.ccExp | yesNo}}
+                        </td>
+                      </tr>
+                    </table>
+                  </form>
+<table>
+  <thead>
+    <tr>
+    <th colspan="2">
+      Credit Cards 
+    </th>
+    </tr>
+    <tr>
+    <th>Number</th>
+    <th>Card type</th>
+  </tr></thead>
+  <tbody>
+    <tr><td class="number"><code>4242<span></span>4242<span></span>4242<span></span>4242</code></td><td>Visa</td></tr>
+    <tr><td class="number"><code>4012<span></span>8888<span></span>8888<span></span>1881</code></td><td>Visa</td></tr>
+    <tr><td class="number"><code>4000<span></span>0566<span></span>5566<span></span>5556</code></td><td>Visa (debit)</td></tr>
+    <tr><td class="number"><code>5555<span></span>5555<span></span>5555<span></span>4444</code></td><td>MasterCard</td></tr>
+    <tr><td class="number"><code>5200<span></span>8282<span></span>8282<span></span>8210</code></td><td>MasterCard (debit)</td></tr>
+    <tr><td class="number"><code>5105<span></span>1051<span></span>0510<span></span>5100</code></td><td>MasterCard (prepaid)</td></tr>
+    <tr><td class="number"><code>3782<span></span>822463<span></span>10005</code></td><td>American Express</td></tr>
+    <tr><td class="number"><code>3714<span></span>496353<span></span>98431</code></td><td>American Express</td></tr>
+    <tr><td class="number"><code>6011<span></span>1111<span></span>1111<span></span>1117</code></td><td>Discover</td></tr>
+    <tr><td class="number"><code>6011<span></span>0009<span></span>9013<span></span>9424</code></td><td>Discover</td></tr>
+    <tr><td class="number"><code>3056<span></span>9309<span></span>0259<span></span>04</code></td><td>Diners Club</td></tr>
+    <tr><td class="number"><code>3852<span></span>0000<span></span>0232<span></span>37</code></td><td>Diners Club</td></tr>
+    <tr><td class="number"><code>3530<span></span>1113<span></span>3330<span></span>0000</code></td><td>JCB</td></tr>
+    <tr><td class="number"><code>3566<span></span>0020<span></span>2036<span></span>0505</code></td><td>JCB</td></tr>
+  </tbody>
+</table>
+
   </div>
 </div>
