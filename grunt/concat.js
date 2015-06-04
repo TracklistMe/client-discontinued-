@@ -30,11 +30,6 @@ module.exports = {
             'bower_components/angular-translate-storage-cookie/angular-translate-storage-cookie.js',
             'bower_components/angular-translate-storage-local/angular-translate-storage-local.js',
 
-            'bower_components/angular-stripe/release/angular-stripe.js',
-            'bower_components/angular-credit-cards/release/angular-credit-cards.js',
-
-
-
             'src/js/*.js',
             'src/js/directives/*.js',
             'src/js/services/*.js',
