@@ -29,13 +29,9 @@ angular.module('ngCart', ['ngCart.directives'])
         }
         $http.get(CONFIG.url + '/me/cart/currency')
             .success(function(data) {
-                ngCart.$cart.currencyISOName = data.shortname;
+
                 ngCart.$cart.currencySymbol = data.symbol;
-                ngCart.$cart.currency = {
-                    id: data.id,
-                    symbol: data.symbol,
-                    shortname: data.shortname
-                };
+                ngCart.$cart.currency = data.id;
 
                 ngCart.$cart.convertedPriceTable = [];
                 for (var i = 0; i < data.ConvertedPrices.length; i++) {
@@ -60,11 +56,8 @@ angular.module('ngCart', ['ngCart.directives'])
         this.init = function() {
 
             this.$cart = {
-                currency: {
-                    id: null,
-                    symbol: null,
-                    shortname: null
-                },
+                currency: null,
+                currencySymbol: null,
                 convertedPriceTable: null,
                 shipping: null,
                 taxRate: null,
@@ -168,14 +161,8 @@ angular.module('ngCart', ['ngCart.directives'])
             }
             return price;
         };
-        this.getCurrency = function() {
-            return this.$cart.currency;
-        }
-        this.getCurrencyISOName = function() {
-            return this.$cart.currency.shortname;
-        }
         this.getCurrencySymbol = function() {
-            return this.$cart.currency.symbol;
+            return this.getCart().currencySymbol;
         };
         this.setTaxRate = function(taxRate) {
             this.$cart.taxRate = +parseFloat(taxRate).toFixed(2);
@@ -202,27 +189,6 @@ angular.module('ngCart', ['ngCart.directives'])
         this.getItems = function() {
             return this.getCart().items;
         };
-        this.getItemsIds = function() {
-            var ids = []
-            var items = this.getItems();
-            angular.forEach(items, function(item) {
-                ids.push(item.getId());
-            });
-            console.log(ids);
-            return ids;
-        };
-        this.getItemsIdsAndQuantities = function() {
-            var objects = []
-            var items = this.getItems();
-            angular.forEach(items, function(item) {
-                objects.push({
-                    id: item.getId(),
-                    quantity: item.getQuantity()
-                });
-            });
-
-            return objects;
-        }
 
         this.getTotalItems = function() {
             var count = 0;

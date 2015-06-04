@@ -38,15 +38,6 @@
             <td>Total:</td>
             <td>{{ ngCart.totalCost() | currency }}</td>
         </tr>
-        <tr>
-            <td  >
-        
-                <button class="btn m-b-xs w-xs btn-primary">Buy</button>
-
-            </td>
-             
-        </tr>
-
         </tfoot>
         <tbody>
         <tr ng-repeat="item in ngCart.getCart().items track by $index">
@@ -63,7 +54,6 @@
         </tbody>
     </table>
 </div>
-
 <style>
     .ngCart.cart span[ng-click] {
         cursor: pointer;
