@@ -23,6 +23,6 @@
     "after": true,
     "beforeEach": true,
     "afterEach": true
-  }
+  },
   "predef": ["angular"]
 }
