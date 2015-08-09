@@ -11,6 +11,7 @@ module.exports = function(grunt) {
   gtx.alias('build:angular', ['recess:less', 'clean:angular', 'copy:angular', 'recess:angular', 'concat:angular', 'uglify:angular']);
   gtx.alias('build:html', ['clean:html', 'copy:html', 'recess:html', 'swig:html', 'concat:html', 'uglify:html']);
   gtx.alias('build:landing', ['copy:landing', 'swig:landing']);
+  gtx.alias('lint',['jshint']);
   gtx.alias('release', ['bower-install-simple', 'build:angular', 'bump-commit']);
   gtx.alias('release-patch', ['bump-only:patch', 'release']);
   gtx.alias('release-minor', ['bump-only:minor', 'release']);
@@ -18,8 +19,7 @@ module.exports = function(grunt) {
   gtx.alias('prerelease', ['bump-only:prerelease', 'release']);
 
  
-
-  grunt.loadNpmTasks('grunt-contrib-jshint');
+ 
 
   grunt.initConfig({
     jshint: {
