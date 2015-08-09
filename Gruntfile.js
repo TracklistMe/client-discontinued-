@@ -16,6 +16,23 @@ module.exports = function(grunt) {
     }
   });
 
+  gtx.initConfig({
+    connect: {
+      production: {
+        options: {
+          port: 9000,
+          base: 'angular/'
+        }
+      },
+      debug: {
+        options: {
+          port: 9000,
+          base: 'src/'
+        }
+      }
+    }
+  });
+
   gtx.config(gruntConfig);
   //Built the client 
   gtx.alias('build:angular', ['recess:less', 'clean:angular', 'copy:angular', 'recess:angular', 'concat:angular', 'uglify:angular']);
@@ -25,6 +42,10 @@ module.exports = function(grunt) {
   gtx.alias('build:landing', ['copy:landing', 'swig:landing']);
   //Run the linter
   gtx.alias('lint', ['jshint']);
+  //Start the local webserver with the debug version of the site
+  gtx.alias('serve:debug', ['connect:debug:keepalive'])
+    //Compile the site and start the local webserver on the production code
+  gtx.alias('serve:production', ['build:angular', 'connect:production:keepalive'])
 
   /* Do not use the following command, they are not consistent at the momet.
   gtx.alias('release', ['bower-install-simple', 'build:angular', 'bump-commit']);
