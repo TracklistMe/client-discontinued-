@@ -24,4 +24,5 @@
     "beforeEach": true,
     "afterEach": true
   }
+  "predef": ["angular"]
 }
