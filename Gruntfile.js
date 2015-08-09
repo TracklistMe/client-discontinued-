@@ -11,14 +11,13 @@ module.exports = function(grunt) {
   gtx.alias('build:angular', ['recess:less', 'clean:angular', 'copy:angular', 'recess:angular', 'concat:angular', 'uglify:angular']);
   gtx.alias('build:html', ['clean:html', 'copy:html', 'recess:html', 'swig:html', 'concat:html', 'uglify:html']);
   gtx.alias('build:landing', ['copy:landing', 'swig:landing']);
-
   gtx.alias('release', ['bower-install-simple', 'build:angular', 'bump-commit']);
   gtx.alias('release-patch', ['bump-only:patch', 'release']);
   gtx.alias('release-minor', ['bump-only:minor', 'release']);
   gtx.alias('release-major', ['bump-only:major', 'release']);
   gtx.alias('prerelease', ['bump-only:prerelease', 'release']);
 
-  gtx.finalise();
+ 
 
   grunt.loadNpmTasks('grunt-contrib-jshint');
 
@@ -27,18 +26,10 @@ module.exports = function(grunt) {
       options: {
         jshintrc: '.jshintrc',
         reporter: require('jshint-stylish')
-      },
-      all: {
-        src: [
-          'Gruntfile.js', 'src/js/**/*.js'
-        ]
-      },
-      test: {
-        options: {
-          jshintrc: 'test/.jshintrc'
-        },
-        src: ['test/spec/{,*/}*.js']
       }
     }
-  });
+  })
+      
+   
+  gtx.finalise();
 }
