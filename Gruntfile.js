@@ -37,7 +37,7 @@ module.exports = function(grunt) {
     watch: {
       scripts: {
         files: ['**/*.js'],
-        tasks: ['lint --force']
+        tasks: ['lint']
       },
     },
   });
@@ -66,7 +66,7 @@ module.exports = function(grunt) {
   gtx.alias('lint', ['jshint']);
   //Run the webserver on the src/ folder and keep watching the changes.
   //Every time you save a file the linter starts.
-  gtx.alias('develop', ['lint','concurrent:developEnviroment']);
+  gtx.alias('develop', ['concurrent:developEnviroment']);
   //Start the local webserver with the debug version of the site
   gtx.alias('serve:debug', ['connect:debug:keepalive']);
   //Compile the site and start the local webserver on the production code
