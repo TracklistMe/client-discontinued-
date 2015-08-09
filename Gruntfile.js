@@ -32,6 +32,28 @@ module.exports = function(grunt) {
       }
     }
   });
+  // Configuration for watch
+  gtx.initConfig({
+    watch: {
+      scripts: {
+        files: ['**/*.js'],
+        tasks: ['lint --force']
+      },
+    },
+  });
+
+  // Configuration for concurrent
+  gtx.initConfig({
+    concurrent: {
+      developEnviroment: {
+        tasks: ['watch', 'serve:debug'],
+        options: {
+          logConcurrentOutput: true
+        }
+      }
+    }
+  });
+
 
   gtx.config(gruntConfig);
   //Built the client 
@@ -42,9 +64,12 @@ module.exports = function(grunt) {
   gtx.alias('build:landing', ['copy:landing', 'swig:landing']);
   //Run the linter
   gtx.alias('lint', ['jshint']);
+  //Run the webserver on the src/ folder and keep watching the changes.
+  //Every time you save a file the linter starts.
+  gtx.alias('develop', ['concurrent:developEnviroment']);
   //Start the local webserver with the debug version of the site
-  gtx.alias('serve:debug', ['connect:debug:keepalive'])
-    //Compile the site and start the local webserver on the production code
+  gtx.alias('serve:debug', ['connect:debug:keepalive']);
+  //Compile the site and start the local webserver on the production code
   gtx.alias('serve:production', ['build:angular', 'connect:production:keepalive'])
 
   /* Do not use the following command, they are not consistent at the momet.
