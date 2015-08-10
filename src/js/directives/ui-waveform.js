@@ -1,7 +1,7 @@
+/* jshint shadow:true */
+'use strict';
+
 angular.module('app').directive('uiWaveform', function() {
-  console.log('BOUNDING CREATE')
-
-
   return {
     link: function(scope, element, attrs) {
       var _width = attrs.width || element.parent().width(),
@@ -18,24 +18,23 @@ angular.module('app').directive('uiWaveform', function() {
         });
       var ctx = waveform.context;
 
-      var gradient = ctx.createLinearGradient(0, 0, waveform.width, waveform.height);
+      var gradient = ctx.createLinearGradient(
+        0, 0, waveform.width, waveform.height);
       gradient.addColorStop(1.0, '#e19143');
       gradient.addColorStop(0.0, '#0984a2');
-      var gradientNotAvailable = ctx.createLinearGradient(0, 0, waveform.width, waveform.height);
+      var gradientNotAvailable = ctx.createLinearGradient(
+        0, 0, waveform.width, waveform.height);
       gradientNotAvailable.addColorStop(1.0, '#ecc8a6');
       gradientNotAvailable.addColorStop(0.0, '#70afbe');
 
-      waveform.innerColor = function(x, y) {
+      // define the color of the wavelength.
+      waveform.innerColor = function(x) {
+        // change gradient based on the availability of the clip.
         if (startingOfClipNormalized < x && x < endingOfClipNormalized) {
-          // implement here the split for time
-          // need to understand how's th
-
           return gradient;
         } else {
-
-          return gradientNotAvailable
+          return gradientNotAvailable;
         }
-
       };
       var totalSamples = 0;
       var startingOfClip = 0;
@@ -47,22 +46,17 @@ angular.module('app').directive('uiWaveform', function() {
           return;
         }
         totalSamples = wave.length;
-        console.log('totalSamples: ' + wave.length)
-        startingOfClip = totalSamples / 2 - 640; //640 is 1:15 seconds with a sample rate of 256
+        //640 is 1:15 seconds with a sample rate of 256
+        startingOfClip = totalSamples / 2 - 640;
         endingOfClip = startingOfClip + 1280;
-        console.log('start ending frames', startingOfClip, endingOfClip)
         startingOfClipNormalized = startingOfClip / totalSamples;
         endingOfClipNormalized = endingOfClip / totalSamples;
-        console.log(totalSamples)
-        console.log(startingOfClipNormalized, endingOfClipNormalized)
         if (wave) {
           waveform.update({
             data: wave
           });
         }
-
-
       });
     }
-  }
+  };
 });

@@ -1,4 +1,6 @@
 /*jslint browser: true*/
+/* jshint shadow:true */
+
 (function() {
   var JSONP, Waveform,
     __bind = function(fn, me) {
