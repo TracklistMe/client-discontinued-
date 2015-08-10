@@ -1,8 +1,5 @@
-/*jslint browser:true */
-'use strict';
-
+/*jslint browser: true*/
 (function() {
-
   var JSONP, Waveform,
     __bind = function(fn, me) {
       return function() {
@@ -25,12 +22,11 @@
       if (options.interpolate === false) {
         this.interpolate = false;
       }
-      if (this.canvas === null) {
+      if (!this.canvas) {
         if (this.container) {
-          this.canvas =
-            this.createCanvas(this.container, options.width ||
-              this.container.clientWidth, options.height ||
-              this.container.clientHeight);
+          this.canvas = this.createCanvas(this.container, options.width ||
+            this.container.clientWidth, options.height ||
+            this.container.clientHeight);
         } else {
           throw 'Either canvas or container option must be passed';
         }
@@ -116,7 +112,6 @@
           canvas.getContext = oldGetContext;
           return ctx;
         };
-
         return canvas.getContext;
       }
     };
@@ -139,7 +134,7 @@
       if (data.length > limit) {
         newData = data.slice(data.length - limit, data.length);
       } else {
-        for (i = _i = 0, _ref = limit - 1; 0 <= _ref ? _i <= _ref : _i >= _ref; i = 0 <= _ref ? ++_i : --_i) {
+        for (i = _i = 0, _ref = limit - 1; 0 <= _ref ? _i <= _ref : _i >= _ref; i = 0 <= _ref ? ++_i : --_i) { // jshint ignore:line
           newData[i] = data[i] || defaultValue;
         }
       }
@@ -153,7 +148,7 @@
     Waveform.prototype.interpolateArray = function(data, fitCount) {
       var after, atPoint, before, i, newData, springFactor, tmp;
       newData = [];
-      springFactor = new Number((data.length - 1) / (fitCount - 1));
+      springFactor = (data.length - 1) / (fitCount - 1);
       newData[0] = data[0];
       i = 1;
       while (i < fitCount - 1) {
@@ -170,7 +165,7 @@
 
     Waveform.prototype.optionsForSyncedStream = function(options) {
       var innerColorWasSet, that;
-      if (options == null) {
+      if (!options) {
         options = {};
       }
       innerColorWasSet = false;
@@ -181,7 +176,7 @@
           var stream;
           if (!innerColorWasSet) {
             stream = this;
-            that.innerColor = function(x, y) {
+            that.innerColor = function(x) {
               if (x < stream.position / stream.durationEstimate) {
                 return options.playedColor || 'rgba(255,  102, 0, 0.8)';
               } else if (x < stream.bytesLoaded / stream.bytesTotal) {
@@ -213,8 +208,8 @@
   })();
 
   JSONP = (function() {
-    var config, counter, encode, head, jsonp, key,
-      load, query, setDefaults, window;
+    var config, counter, encode, head, jsonp,
+      key, load, query, setDefaults, window;
     load = function(url) {
       var done, head, script;
       script = document.createElement('script');
@@ -243,7 +238,7 @@
     jsonp = function(url, params, callback, callbackName) {
       var key, query, uniqueName;
       query = ((url || '').indexOf('?') === -1 ? '?' : '&');
-      callbackName = callbackName || config['callbackName'] || 'callback';
+      callbackName = callbackName || config.callbackName || 'callback';
       uniqueName = callbackName + '_json' + (++counter);
       params = params || {};
       for (key in params) {
@@ -256,14 +251,16 @@
         try {
           delete window[uniqueName];
         } catch (_error) {}
-        return window[uniqueName] = null;
+        window[uniqueName] = null;
+        return window[uniqueName];
       };
       load(url + query + callbackName + '=' + uniqueName);
       return uniqueName;
     };
     setDefaults = function(obj) {
       var config;
-      return config = obj;
+      config = obj;
+      return config;
     };
     counter = 0;
     head = void 0;
