@@ -24,7 +24,10 @@
     "beforeEach": true,
     "afterEach": true
   },
-  "predef": ["angular",
-    "moment"
+  "predef": [
+    "angular",
+    "moment",
+    "app",
+    "$"
   ]
 }

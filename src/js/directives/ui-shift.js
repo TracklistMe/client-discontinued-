@@ -1,3 +1,6 @@
+/*jslint browser: true*/
+'use strict';
+
 angular.module('app')
   .directive('uiShift', ['$timeout', function($timeout) {
     return {
@@ -5,34 +8,49 @@ angular.module('app')
       link: function(scope, el, attr) {
         // get the $prev or $parent of this el
         var _el = $(el),
-            _window = $(window),
-            prev = _el.prev(),
-            parent,
-            width = _window.width()
-            ;
+          _window = $(window),
+          prev = _el.prev(),
+          parent,
+          width = _window.width();
 
-        !prev.length && (parent = _el.parent());
-        
-        function sm(){
-          $timeout(function () {
+        if (!prev.length) {
+          (parent = _el.parent());
+        }
+
+        function sm() {
+          $timeout(function() {
             var method = attr.uiShift;
             var target = attr.target;
-            _el.hasClass('in') || _el[method](target).addClass('in');
+            if (!_el.hasClass('in')) {
+              _el[method](target).addClass('in');
+            }
           });
         }
-        
-        function md(){
-          parent && parent['prepend'](el);
-          !parent && _el['insertAfter'](prev);
+
+        function md() {
+          if (parent) {
+            parent.prepend(el);
+          }
+          if (!parent) {
+            _el.insertAfter(prev);
+          }
           _el.removeClass('in');
         }
 
-        (width < 768 && sm()) || md();
+        if (width < 768) {
+          sm();
+        } else {
+          md();
+        }
 
         _window.resize(function() {
-          if(width !== _window.width()){
-            $timeout(function(){
-              (_window.width() < 768 && sm()) || md();
+          if (width !== _window.width()) {
+            $timeout(function() {
+              if (_window.width() < 768) {
+                sm();
+              } else {
+                md();
+              }
               width = _window.width();
             });
           }

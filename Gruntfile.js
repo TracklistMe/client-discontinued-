@@ -1,3 +1,5 @@
+'use strict';
+
 module.exports = function(grunt) {
 
   var gtx = require('gruntfile-gtx').wrap(grunt);
@@ -57,9 +59,13 @@ module.exports = function(grunt) {
 
   gtx.config(gruntConfig);
   //Built the client 
-  gtx.alias('build:angular', ['recess:less', 'clean:angular', 'copy:angular', 'recess:angular', 'concat:angular', 'uglify:angular']);
+  gtx.alias('build:angular', ['recess:less', 'clean:angular', 'copy:angular',
+    'recess:angular', 'concat:angular', 'uglify:angular'
+  ]);
   //Build the html miniwebsite 
-  gtx.alias('build:html', ['clean:html', 'copy:html', 'recess:html', 'swig:html', 'concat:html', 'uglify:html']);
+  gtx.alias('build:html', ['clean:html', 'copy:html', 'recess:html',
+    'swig:html', 'concat:html', 'uglify:html'
+  ]);
   //Build the landing page
   gtx.alias('build:landing', ['copy:landing', 'swig:landing']);
   //Run the linter
@@ -70,10 +76,13 @@ module.exports = function(grunt) {
   //Start the local webserver with the debug version of the site
   gtx.alias('serve:debug', ['connect:debug:keepalive']);
   //Compile the site and start the local webserver on the production code
-  gtx.alias('serve:production', ['build:angular', 'connect:production:keepalive'])
+  gtx.alias('serve:production', ['build:angular',
+    'connect:production:keepalive'
+  ]);
 
   /* Do not use the following command, they are not consistent at the momet.
-  gtx.alias('release', ['bower-install-simple', 'build:angular', 'bump-commit']);
+  gtx.alias('release', ['bower-install-simple',
+   'build:angular', 'bump-commit']);
   gtx.alias('release-patch', ['bump-only:patch', 'release']);
   gtx.alias('release-minor', ['bump-only:minor', 'release']);
   gtx.alias('release-major', ['bump-only:major', 'release']);
@@ -81,4 +90,4 @@ module.exports = function(grunt) {
   */
 
   gtx.finalise();
-}
+};
