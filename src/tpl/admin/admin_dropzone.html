@@ -9,16 +9,11 @@
                 <div class="b-a b-2x b-dashed wrapper-lg bg-white text-center m-b" nv-file-over="" over-class="b-info" uploader="uploader">
                     Drag and Drop file here
                 </div>
-
                 <!-- Example: nv-file-drop="" uploader="{Object}" options="{Object}" filters="{String}" -->
-
             </div>
-
             <!-- Example: nv-file-select="" uploader="{Object}" options="{Object}" filters="{String}" -->
             <p>Or select file from here </p>
             <input type="file" nv-file-select="" uploader="uploader" multiple />
-
-
         </div>
     </div>
     <div class="col">
@@ -82,13 +77,10 @@
                 <button type="button" class="btn btn-addon btn-danger" ng-click="uploader.clearQueue()" ng-disabled="!uploader.queue.length">
                     <i class="fa fa-trash-o"></i> Remove all
                 </button>
-
             </div>
-
         </div>
-        <hr /> 
-         <div class="wrapper-md bg-light dk b-b">
-           
+        <hr />
+        <div class="wrapper-md bg-light dk b-b">
             <h3 class="m-n font-thin">File uploaded ({{dropZoneFiles.length}})</h3>
         </div>
         <div class="col-md-12">
@@ -98,6 +90,7 @@
                         <th width="50%">Name</th>
                         <th>Extension</th>
                         <th>Size</th>
+                        <th>Edit</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -105,13 +98,12 @@
                         <td> {{file.fileName}} </td>
                         <td> {{file.extension}} </td>
                         <td> {{file.size/1024/1024|number:2}} MB </td>
+                        <td>
+                            <button ng-click="deleteFile(file)" class=" btn m-b-xs btn-sm btn-danger btn-addon "><i class="fa fa-times pull-right "></i>Delete</button>
+                        </td>
                     </tr>
                 </tbody>
             </table>
         </div>
-
-
-
     </div>
-
 </div>
