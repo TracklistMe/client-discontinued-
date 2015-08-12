@@ -172,7 +172,8 @@ app.controller('AdmincompanyCtrl', function($scope, $state, $auth,
         $scope.company.logo =
           CONFIG.url + '/companies/' +
           companyId +
-          '/profilePicture/small';
+          '/profilePicture/small' +
+          '?d=' + Date.now();
       });
   };
 
