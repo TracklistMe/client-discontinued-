@@ -44,7 +44,6 @@ app.controller('AdmincompanyCtrl', function($scope, $state, $auth,
       }]
       file.url = data.action;
       file.formData = formDataArray;
-      console.log(file);
       file.upload();
 
 
@@ -66,13 +65,13 @@ app.controller('AdmincompanyCtrl', function($scope, $state, $auth,
     console.info('onCompleteItem', fileItem, response, status, headers);
 
     $http.post(
-        CONFIG.url + '/companies/' + companyId + '/profilePicture/confirmFile/', {})
+        CONFIG.url +
+        '/companies/' +
+        companyId +
+        '/profilePicture/confirmFile/', {})
       .success(function(data, status, headers, config) {
-        console.log(data);
-      }).error(function(data, status, headers, config) {
-        // called asynchronously if an error occurs
-        // or server returns response with an error status.
-      });
+        $scope.getCompany();
+      })
   };
 
   $scope.addLabel = function() {
@@ -151,7 +150,7 @@ app.controller('AdmincompanyCtrl', function($scope, $state, $auth,
       .success(function(data) {
         $scope.labelList = data;
         for (var prop in data) {
-          data[prop].logo = 
+          data[prop].logo =
             CONFIG.url + '/labels/' + data[prop].id + '/profilePicture/small';
         }
       });
@@ -161,7 +160,7 @@ app.controller('AdmincompanyCtrl', function($scope, $state, $auth,
     $http.get(CONFIG.url + '/labels/' + idLabel)
       .success(function(data) {
         $scope.currentLabel = data;
-        data.logo = 
+        data.logo =
           CONFIG.url + '/labels/' + idLabel + '/profilePicture/small';
       });
   };
@@ -171,7 +170,9 @@ app.controller('AdmincompanyCtrl', function($scope, $state, $auth,
       .success(function(data) {
         $scope.company = data;
         $scope.company.logo =
-          CONFIG.url + '/companies/' + companyId + '/profilePicture/small';
+          CONFIG.url + '/companies/' +
+          companyId +
+          '/profilePicture/small';
       });
   };
 
