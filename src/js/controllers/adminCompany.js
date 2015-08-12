@@ -23,36 +23,56 @@ app.controller('AdmincompanyCtrl', function($scope, $state, $auth,
   $scope.loadedImage = 100;
 
   var uploader = $scope.uploader = new FileUploader({
-    url: CONFIG.url + '/companies/' + companyId + '/profilePicture/500/500/',
-    headers: {
-      'Authorization': 'Bearer ' + $auth.getToken()
-    },
-    data: {
-      user: $scope.user
-    },
+    method: 'POST',
+    url: CONFIG.url + '/companies/' + companyId + '/profilePicture/'
   });
 
-  uploader.onProgressItem = function(fileItem, progress) {
-    console.info('onProgressItem', fileItem, progress);
-    $scope.loadedImage = progress;
+  uploader.onAfterAddingFile = function(fileItem) {
+    console.info('onAfterAddingFile', fileItem);
+    var file = fileItem;
+    var filename = file._file.name;
+    $http.post(
+      CONFIG.url + '/companies/' + companyId + '/profilePicture/createFile/', {
+        filename: filename,
+      }).success(function(data, status, headers, config) {
+      console.log("DONE")
+      var formDataArray = [{
+        "GoogleAccessId": data.GoogleAccessId,
+        "signature": data.signature,
+        "policy": data.policy,
+        "key": data.key
+      }]
+      file.url = data.action;
+      file.formData = formDataArray;
+      console.log(file);
+      file.upload();
 
+
+    }).error(function(data, status, headers, config) {
+      // called asynchronously if an error occurs
+      // or server returns response with an error status.
+    });
+
+    //uploader.queue[0].upload();
+    //uploader.queue.pop();
+  };
+
+  uploader.onCompleteAll = function() {
+    console.info('onCompleteAll');
+    $scope.getCompany();
   };
 
   uploader.onCompleteItem = function(fileItem, response, status, headers) {
     console.info('onCompleteItem', fileItem, response, status, headers);
-  };
 
-  uploader.onAfterAddingFile = function(fileItem) {
-
-    $scope.loadedImage = 0;
-    console.info('onAfterAddingFile', fileItem);
-    uploader.queue[0].upload();
-    uploader.queue.pop();
-  };
-
-  uploader.onSuccessItem = function() {
-    console.info('onCompleteAll');
-    $scope.getCompany();
+    $http.post(
+        CONFIG.url + '/companies/' + companyId + '/profilePicture/confirmFile/', {})
+      .success(function(data, status, headers, config) {
+        console.log(data);
+      }).error(function(data, status, headers, config) {
+        // called asynchronously if an error occurs
+        // or server returns response with an error status.
+      });
   };
 
   $scope.addLabel = function() {
@@ -131,7 +151,8 @@ app.controller('AdmincompanyCtrl', function($scope, $state, $auth,
       .success(function(data) {
         $scope.labelList = data;
         for (var prop in data) {
-          data[prop].logo = CONFIG.url + '/images/' + data[prop].logo;
+          data[prop].logo = 
+            CONFIG.url + '/labels/' + data[prop].id + '/profilePicture/small';
         }
       });
   };
@@ -140,7 +161,8 @@ app.controller('AdmincompanyCtrl', function($scope, $state, $auth,
     $http.get(CONFIG.url + '/labels/' + idLabel)
       .success(function(data) {
         $scope.currentLabel = data;
-        data.logo = CONFIG.url + '/images/' + data.logo;
+        data.logo = 
+          CONFIG.url + '/labels/' + idLabel + '/profilePicture/small';
       });
   };
 
@@ -148,7 +170,8 @@ app.controller('AdmincompanyCtrl', function($scope, $state, $auth,
     $http.get(CONFIG.url + '/companies/' + companyId)
       .success(function(data) {
         $scope.company = data;
-        $scope.company.logo = CONFIG.url + '/images/' + data.logo;
+        $scope.company.logo =
+          CONFIG.url + '/companies/' + companyId + '/profilePicture/small';
       });
   };
 
