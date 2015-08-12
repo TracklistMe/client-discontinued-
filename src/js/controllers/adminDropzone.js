@@ -230,6 +230,9 @@ app.controller('FileUploadCtrl', function($location, $scope, $state, $auth, $sta
     //'/labels/:labelId/dropZone/:id
   $scope.deleteFile = function(file) {
     $http.delete(CONFIG.url + '/labels/' + labelId + '/dropZone/' + file.id)
+      .success(function(data) {
+        $scope.getDropZoneFiles();
+      })
   }
 
   $scope.getToProcessReleases();

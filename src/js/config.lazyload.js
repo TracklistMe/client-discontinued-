@@ -7,7 +7,7 @@ angular.module('app')
    * value: array of the css js file located
    */
   .constant('JQ_CONFIG', {
-    easyPieChart: ['../bower_components/jquery.easy-pie-chart/dist/jquery.easypiechart.min.js'],
+    easyPieChart: ['../bower_components/bower-jquery-easyPieChart/dist/jquery.easypiechart.fill.js'],
     sparkline: ['../bower_components/bower-jquery-sparkline/dist/jquery.sparkline.retina.js'],
     plot: ['../bower_components/flot/jquery.flot.js',
       '../bower_components/flot/jquery.flot.pie.js',
