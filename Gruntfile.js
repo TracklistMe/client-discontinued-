@@ -74,7 +74,7 @@ module.exports = function(grunt) {
   //Every time you save a file the linter starts.
   gtx.alias('develop', ['concurrent:developEnviroment']);
   //Start the local webserver with the debug version of the site
-  gtx.alias('serve:debug', ['connect:debug:keepalive']);
+  gtx.alias('serve:debug', ['copy:bowerDevelop', 'connect:debug:keepalive']);
   //Compile the site and start the local webserver on the production code
   gtx.alias('serve:production', ['build:angular',
     'connect:production:keepalive'
