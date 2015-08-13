@@ -330,7 +330,8 @@ app.controller('AdminEditReleaseCtrl', function($location, $scope, $state,
 
   /* SORTABLE PLUGIN FOR ANGULAR */
   $scope.sortableOptions = {
-    placeholder: '<div class="sortable - placeholder "><div></div></div>',
+    placeholder: '<div class='
+    sortable - placeholder '><div></div></div>',
     forcePlaceholderSize: false
   };
 
