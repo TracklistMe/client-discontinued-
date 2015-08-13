@@ -7,10 +7,14 @@ app.controller('FileUploadCtrl', ['$scope', 'FileUploader',
     });
 
     // FILTERS
+    // Example of a filter function:
+    // fn: function(item /*{File|FileLikeObject}*/ , options) {
+    //    return this.queue.length < 10;
+    // }
 
     uploader.filters.push({
       name: 'customFilter',
-      fn: function(item /*{File|FileLikeObject}*/ , options) {
+      fn: function() {
         return this.queue.length < 10;
       }
     });

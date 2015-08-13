@@ -66,7 +66,9 @@ app.controller('CarouselDemoCtrl', ['$scope', function($scope) {
   $scope.addSlide = function() {
     slides.push({
       image: 'img/c' + slides.length + '.jpg',
-      text: ['Carousel text #0', 'Carousel text #1', 'Carousel text #2', 'Carousel text #3'][slides.length % 4]
+      text: ['Carousel text #0', 'Carousel text #1', 'Carousel text #2',
+        'Carousel text #3'
+      ][slides.length % 4]
     });
   };
   for (var i = 0; i < 4; i++) {
@@ -84,7 +86,8 @@ app.controller('DropdownDemoCtrl', ['$scope', function($scope) {
     isopen: false
   };
 
-  $scope.toggled = function(open) {
+  // Pass boolean isOpen to the toggled function; 
+  $scope.toggled = function() {
     //console.log('Dropdown is now: ', open);
   };
 
@@ -94,41 +97,45 @@ app.controller('DropdownDemoCtrl', ['$scope', function($scope) {
     $scope.status.isopen = !$scope.status.isopen;
   };
 }]);
-app.controller('ModalInstanceCtrl', ['$scope', '$modalInstance', 'items', function($scope, $modalInstance, items) {
-  $scope.items = items;
-  $scope.selected = {
-    item: $scope.items[0]
-  };
+app.controller('ModalInstanceCtrl', ['$scope', '$modalInstance', 'items',
+  function($scope, $modalInstance, items) {
+    $scope.items = items;
+    $scope.selected = {
+      item: $scope.items[0]
+    };
 
-  $scope.ok = function() {
-    $modalInstance.close($scope.selected.item);
-  };
+    $scope.ok = function() {
+      $modalInstance.close($scope.selected.item);
+    };
 
-  $scope.cancel = function() {
-    $modalInstance.dismiss('cancel');
-  };
-}]);
-app.controller('ModalDemoCtrl', ['$scope', '$modal', '$log', function($scope, $modal, $log) {
-  $scope.items = ['item1', 'item2', 'item3'];
-  $scope.open = function(size) {
-    var modalInstance = $modal.open({
-      templateUrl: 'myModalContent.html',
-      controller: 'ModalInstanceCtrl',
-      size: size,
-      resolve: {
-        items: function() {
-          return $scope.items;
+    $scope.cancel = function() {
+      $modalInstance.dismiss('cancel');
+    };
+  }
+]);
+app.controller('ModalDemoCtrl', ['$scope', '$modal', '$log',
+  function($scope, $modal, $log) {
+    $scope.items = ['item1', 'item2', 'item3'];
+    $scope.open = function(size) {
+      var modalInstance = $modal.open({
+        templateUrl: 'myModalContent.html',
+        controller: 'ModalInstanceCtrl',
+        size: size,
+        resolve: {
+          items: function() {
+            return $scope.items;
+          }
         }
-      }
-    });
+      });
 
-    modalInstance.result.then(function(selectedItem) {
-      $scope.selected = selectedItem;
-    }, function() {
-      $log.info('Modal dismissed at: ' + new Date());
-    });
-  };
-}]);
+      modalInstance.result.then(function(selectedItem) {
+        $scope.selected = selectedItem;
+      }, function() {
+        $log.info('Modal dismissed at: ' + new Date());
+      });
+    };
+  }
+]);
 app.controller('PaginationDemoCtrl', ['$scope', '$log', function($scope, $log) {
   $scope.totalItems = 64;
   $scope.currentPage = 4;
@@ -212,25 +219,38 @@ app.controller('TooltipDemoCtrl', ['$scope', function($scope) {
   $scope.dynamicTooltipText = 'dynamic';
   $scope.htmlTooltip = 'I\'ve been made <b>bold</b>!';
 }]);
-app.controller('TypeaheadDemoCtrl', ['$scope', '$http', function($scope, $http) {
-  $scope.selected = undefined;
-  $scope.states = ['Alabama', 'Alaska', 'Arizona', 'Arkansas', 'California', 'Colorado', 'Connecticut', 'Delaware', 'Florida', 'Georgia', 'Hawaii', 'Idaho', 'Illinois', 'Indiana', 'Iowa', 'Kansas', 'Kentucky', 'Louisiana', 'Maine', 'Maryland', 'Massachusetts', 'Michigan', 'Minnesota', 'Mississippi', 'Missouri', 'Montana', 'Nebraska', 'Nevada', 'New Hampshire', 'New Jersey', 'New Mexico', 'New York', 'North Dakota', 'North Carolina', 'Ohio', 'Oklahoma', 'Oregon', 'Pennsylvania', 'Rhode Island', 'South Carolina', 'South Dakota', 'Tennessee', 'Texas', 'Utah', 'Vermont', 'Virginia', 'Washington', 'West Virginia', 'Wisconsin', 'Wyoming'];
-  // Any function returning a promise object can be used to load values asynchronously
-  $scope.getLocation = function(val) {
-    return $http.get('http://maps.googleapis.com/maps/api/geocode/json', {
-      params: {
-        address: val,
-        sensor: false
-      }
-    }).then(function(res) {
-      var addresses = [];
-      angular.forEach(res.data.results, function(item) {
-        addresses.push(item.formatted_address);
+app.controller('TypeaheadDemoCtrl', ['$scope', '$http',
+  function($scope, $http) {
+    $scope.selected = undefined;
+    $scope.states = ['Alabama', 'Alaska', 'Arizona', 'Arkansas', 'California',
+      'Colorado', 'Connecticut', 'Delaware', 'Florida', 'Georgia', 'Hawaii',
+      'Idaho', 'Illinois', 'Indiana', 'Iowa', 'Kansas', 'Kentucky', 'Louisiana',
+      'Maine', 'Maryland', 'Massachusetts', 'Michigan', 'Minnesota',
+      'Mississippi', 'Missouri', 'Montana', 'Nebraska', 'Nevada',
+      'New Hampshire', 'New Jersey', 'New Mexico', 'New York',
+      'North Dakota', 'North Carolina', 'Ohio', 'Oklahoma',
+      'Oregon', 'Pennsylvania', 'Rhode Island', 'South Carolina',
+      'South Dakota', 'Tennessee', 'Texas', 'Utah', 'Vermont',
+      'Virginia', 'Washington', 'West Virginia', 'Wisconsin', 'Wyoming'
+    ];
+    // Any function returning a promise object can be 
+    // used to load values asynchronously
+    $scope.getLocation = function(val) {
+      return $http.get('http://maps.googleapis.com/maps/api/geocode/json', {
+        params: {
+          address: val,
+          sensor: false
+        }
+      }).then(function(res) {
+        var addresses = [];
+        angular.forEach(res.data.results, function(item) {
+          addresses.push(item.formatted_address);
+        });
+        return addresses;
       });
-      return addresses;
-    });
-  };
-}]);
+    };
+  }
+]);
 app.controller('DatepickerDemoCtrl', ['$scope', function($scope) {
   $scope.today = function() {
     $scope.dt = new Date();

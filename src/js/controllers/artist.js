@@ -9,12 +9,11 @@
  */
 app.controller('ArtistCtrl', function($location, $scope, $state,
   $auth, $stateParams, $http, CONFIG) {
-  var artistId = $stateParams.id
+  var artistId = $stateParams.id;
 
-  console.log("Artist PAGE")
-  $scope.serverURL = CONFIG.url
-  $scope.artist;
-  $scope.allArtists = []
+  $scope.serverURL = CONFIG.url;
+  $scope.artist = null;
+  $scope.allArtists = [];
 
   $scope.getArtist = function() {
     $http.get(CONFIG.url + '/artists/' + artistId)
@@ -31,7 +30,7 @@ app.controller('ArtistCtrl', function($location, $scope, $state,
           '/profilePicture/large/' +
           '?d=' + Date.now();
       });
-  }
-  $scope.getArtist()
+  };
+  $scope.getArtist();
 
 });

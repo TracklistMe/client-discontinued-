@@ -25,7 +25,8 @@ app.controller('AdminEditArtistProfile',
     $scope.searchUserResults = [];
 
     var artistEndPoint = CONFIG.url + '/artists/';
-    var profilePictureAPIEndPoint = artistEndPoint + $scope.artistId + '/profilePicture/1400/1400/';
+    var profilePictureAPIEndPoint =
+      artistEndPoint + $scope.artistId + '/profilePicture/1400/1400/';
 
     var uploader = $scope.uploader = new FileUploader({
       method: 'POST',
@@ -40,12 +41,12 @@ app.controller('AdminEditArtistProfile',
         CONFIG.url + '/artists/' + artistId + '/profilePicture/createFile/', {
           filename: filename,
         }).success(function(data, status, headers, config) {
-        console.log("DONE")
+        console.log('DONE')
         var formDataArray = [{
-          "GoogleAccessId": data.GoogleAccessId,
-          "signature": data.signature,
-          "policy": data.policy,
-          "key": data.key
+          'GoogleAccessId': data.GoogleAccessId,
+          'signature': data.signature,
+          'policy': data.policy,
+          'key': data.key
         }]
         file.url = data.action;
         file.formData = formDataArray;

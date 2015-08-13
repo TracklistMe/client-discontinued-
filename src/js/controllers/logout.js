@@ -8,12 +8,11 @@
  * Controller of the tracklistmeApp
  */
 app.controller('LogoutCtrl', function($auth) {
-    console.log("LOGOUT CONTROLLER")
-    if (!$auth.isAuthenticated()) {
-        return;
-    }
-    $auth.logout()
-      .then(function() {
-        console.log("LOGOUT")
-      });
-  });
+  if (!$auth.isAuthenticated()) {
+    return;
+  }
+  $auth.logout()
+    .then(function() {
+      //Successful logout
+    });
+});

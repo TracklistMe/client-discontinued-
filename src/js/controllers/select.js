@@ -1,7 +1,7 @@
 'use strict';
 
 // this is a lazy load controller, 
-// so start with "app." to register this controller
+// so start with 'app.' to register this controller
 
 app.filter('propsFilter', function() {
   return function(items, props) {
@@ -32,7 +32,8 @@ app.filter('propsFilter', function() {
 
     return out;
   };
-})
+});
+
 app.controller('SelectCtrl', function($scope, $http, $timeout) {
   $scope.disabled = undefined;
   $scope.searchEnabled = undefined;
@@ -47,11 +48,11 @@ app.controller('SelectCtrl', function($scope, $http, $timeout) {
 
   $scope.enableSearch = function() {
     $scope.searchEnabled = true;
-  }
+  };
 
   $scope.disableSearch = function() {
     $scope.searchEnabled = false;
-  }
+  };
 
   $scope.clear = function() {
     $scope.person.selected = undefined;
@@ -61,16 +62,18 @@ app.controller('SelectCtrl', function($scope, $http, $timeout) {
 
   $scope.someGroupFn = function(item) {
 
-    if (item.name[0] >= 'A' && item.name[0] <= 'M')
+    if (item.name[0] >= 'A' && item.name[0] <= 'M') {
       return 'From A - M';
+    }
 
-    if (item.name[0] >= 'N' && item.name[0] <= 'Z')
+    if (item.name[0] >= 'N' && item.name[0] <= 'Z') {
       return 'From N - Z';
+    }
 
   };
 
   $scope.personAsync = {
-    selected: "wladimir@email.com"
+    selected: 'wladimir@email.com'
   };
   $scope.peopleAsync = [];
 
@@ -197,13 +200,25 @@ app.controller('SelectCtrl', function($scope, $http, $timeout) {
     country: 'Colombia'
   }];
 
-  $scope.availableColors = ['Red', 'Green', 'Blue', 'Yellow', 'Magenta', 'Maroon', 'Umbra', 'Turquoise'];
+  $scope.availableColors = [
+    'Red', 'Green', 'Blue', 'Yellow', 'Magenta',
+    'Maroon', 'Umbra', 'Turquoise'
+  ];
 
   $scope.multipleDemo = {};
   $scope.multipleDemo.colors = ['Blue', 'Red'];
-  $scope.multipleDemo.selectedPeople = [$scope.people[5], $scope.people[4]];
-  $scope.multipleDemo.selectedPeopleWithGroupBy = [$scope.people[8], $scope.people[6]];
-  $scope.multipleDemo.selectedPeopleSimple = ['samantha@email.com', 'wladimir@email.com'];
+  $scope.multipleDemo.selectedPeople = [
+    $scope.people[5],
+    $scope.people[4]
+  ];
+  $scope.multipleDemo.selectedPeopleWithGroupBy = [
+    $scope.people[8],
+    $scope.people[6]
+  ];
+  $scope.multipleDemo.selectedPeopleSimple = [
+    'samantha@email.com',
+    'wladimir@email.com'
+  ];
 
 
   $scope.address = {};

@@ -74,19 +74,19 @@ app
   }
 
   $scope.d3 = [{
-    label: "iPhone5S",
+    label: 'iPhone5S',
     data: 40
   }, {
-    label: "iPad Mini",
+    label: 'iPad Mini',
     data: 10
   }, {
-    label: "iPad Mini Retina",
+    label: 'iPad Mini Retina',
     data: 20
   }, {
-    label: "iPhone4S",
+    label: 'iPhone4S',
     data: 12
   }, {
-    label: "iPad Air",
+    label: 'iPad Air',
     data: 18
   }];
 
@@ -97,8 +97,9 @@ app
   $scope.getRandomData = function() {
     var data = [],
       totalPoints = 150;
-    if (data.length > 0)
+    if (data.length > 0) {
       data = data.slice(1);
+    }
     while (data.length < totalPoints) {
       var prev = data.length > 0 ? data[data.length - 1] : 50,
         y = prev + Math.random() * 10 - 5;
@@ -112,10 +113,10 @@ app
     // Zip the generated y values with the x values
     var res = [];
     for (var i = 0; i < data.length; ++i) {
-      res.push([i, data[i]])
+      res.push([i, data[i]]);
     }
     return res;
-  }
+  };
 
   $scope.d4 = $scope.getRandomData();
 }]);

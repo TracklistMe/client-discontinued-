@@ -9,24 +9,22 @@
  */
 app.controller('AdminlabelsCtrl', function($scope, $http, CONFIG) {
   // add new company form
-  $scope.labelList = [{}]
+  $scope.labelList = [{}];
 
 
   $scope.updateLabelList = function() {
     $http.get(CONFIG.url + '/me/labels/')
       .success(function(data) {
-        $scope.labelList = data
+        $scope.labelList = data;
         for (var prop in data) {
           data[prop].logo =
             CONFIG.url +
-            "/labels/" +
+            '/labels/' +
             data[prop].id +
             '/profilePicture/small';
         }
       });
-  }
-
-  $scope.updateLabelList()
-
+  };
+  $scope.updateLabelList();
 
 });

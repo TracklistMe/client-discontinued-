@@ -1,10 +1,10 @@
 'use strict';
-
+/* jshint browser: true */
 
 app.controller('ImgCropCtrl', ['$scope', function($scope) {
   $scope.myImage = '';
   $scope.myCroppedImage = '';
-  $scope.cropType = "circle";
+  $scope.cropType = 'circle';
 
   var handleFileSelect = function(evt) {
     var file = evt.currentTarget.files[0];

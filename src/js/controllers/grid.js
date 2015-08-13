@@ -2,7 +2,7 @@
 
 app.controller('GridDemoCtrl', ['$scope', '$http', function($scope, $http) {
   $scope.filterOptions = {
-    filterText: "",
+    filterText: '',
     useExternalFilter: true
   };
   $scope.totalServerItems = 0;
@@ -26,7 +26,7 @@ app.controller('GridDemoCtrl', ['$scope', '$http', function($scope, $http) {
         var ft = searchText.toLowerCase();
         $http.get('js/controllers/largeLoad.json').success(function(largeLoad) {
           data = largeLoad.filter(function(item) {
-            return JSON.stringify(item).toLowerCase().indexOf(ft) != -1;
+            return JSON.stringify(item).toLowerCase().indexOf(ft) !== -1;
           });
           $scope.setPagingData(data, page, pageSize);
         });
@@ -38,16 +38,24 @@ app.controller('GridDemoCtrl', ['$scope', '$http', function($scope, $http) {
     }, 100);
   };
 
-  $scope.getPagedDataAsync($scope.pagingOptions.pageSize, $scope.pagingOptions.currentPage);
+  $scope.getPagedDataAsync(
+    $scope.pagingOptions.pageSize,
+    $scope.pagingOptions.currentPage);
 
   $scope.$watch('pagingOptions', function(newVal, oldVal) {
     if (newVal !== oldVal && newVal.currentPage !== oldVal.currentPage) {
-      $scope.getPagedDataAsync($scope.pagingOptions.pageSize, $scope.pagingOptions.currentPage, $scope.filterOptions.filterText);
+      $scope.getPagedDataAsync(
+        $scope.pagingOptions.pageSize,
+        $scope.pagingOptions.currentPage,
+        $scope.filterOptions.filterText);
     }
   }, true);
   $scope.$watch('filterOptions', function(newVal, oldVal) {
     if (newVal !== oldVal) {
-      $scope.getPagedDataAsync($scope.pagingOptions.pageSize, $scope.pagingOptions.currentPage, $scope.filterOptions.filterText);
+      $scope.getPagedDataAsync(
+        $scope.pagingOptions.pageSize,
+        $scope.pagingOptions.currentPage,
+        $scope.filterOptions.filterText);
     }
   }, true);
 
