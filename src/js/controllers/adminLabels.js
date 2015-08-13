@@ -17,10 +17,13 @@ app.controller('AdminlabelsCtrl', function($scope, $http, CONFIG) {
       .success(function(data) {
         $scope.labelList = data
         for (var prop in data) {
-          data[prop].logo = CONFIG.url + "/images/" + data[prop].logo;
+          data[prop].logo =
+            CONFIG.url +
+            "/labels/" +
+            data[prop].id +
+            '/profilePicture/small';
         }
-
-      })
+      });
   }
 
   $scope.updateLabelList()

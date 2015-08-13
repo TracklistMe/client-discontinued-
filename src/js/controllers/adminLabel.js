@@ -62,8 +62,7 @@ app.controller('AdminlabelCtrl', function($location, $scope, $state, $auth,
   uploader.onCompleteItem = function(fileItem, response, status, headers) {
     console.info('onCompleteItem', fileItem, response, status, headers);
 
-    $http.post(CONFIG.url + '/labels/' + labelId + '/profilePicture/confirmFile/', {
-    }).success(function(data, status, headers, config) {
+    $http.post(CONFIG.url + '/labels/' + labelId + '/profilePicture/confirmFile/', {}).success(function(data, status, headers, config) {
       console.log(data);
     }).error(function(data, status, headers, config) {
       // called asynchronously if an error occurs
@@ -228,7 +227,12 @@ app.controller('AdminlabelCtrl', function($location, $scope, $state, $auth,
     $http.get(CONFIG.url + '/labels/' + labelId)
       .success(function(data) {
         $scope.label = data;
-        $scope.label.logo = CONFIG.url + '/labels/' + labelId + '/profilePicture/small';
+        $scope.label.logo =
+          CONFIG.url +
+          '/labels/' +
+          labelId +
+          '/profilePicture/small' +
+          '?d=' + Date.now();;
 
       });
   }

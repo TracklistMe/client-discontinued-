@@ -1,6 +1,6 @@
 <div ng-controller="AdminEditArtistProfile" class="hbox hbox-auto-xs hbox-auto-sm">
     <div class="col">
-        <div style="background:url({{serverURL}}/images/{{artist.avatar}})  center center; background-size:cover">
+        <div style="background:url({{artist.largeAvatar}})  center center; background-size:cover">
             <div class="wrapper-lg bg-white-opacity">
                 <div class="row m-t">
                     <div class="col-sm-2">
@@ -29,7 +29,7 @@
                                             
                                             </div>
                                             <div class="thumb-xl">
-                                                <img ng-src="{{serverURL}}/images/{{artist.avatar}}" class="img-circle thumb-xl" alt="...">
+                                                <img ng-src="{{artist.avatar}}" class="img-circle thumb-xl" alt="...">
                                             </div>
                                         </div>
                                     </div>

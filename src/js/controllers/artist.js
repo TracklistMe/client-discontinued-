@@ -19,9 +19,18 @@ app.controller('ArtistCtrl', function($location, $scope, $state,
   $scope.getArtist = function() {
     $http.get(CONFIG.url + '/artists/' + artistId)
       .success(function(data) {
-        $scope.artist = data
-
-      })
+        $scope.artist = data;
+        $scope.artist.avatar =
+          CONFIG.url + '/artists/' +
+          artistId +
+          '/profilePicture/small/' +
+          '?d=' + Date.now();
+        $scope.artist.largeAvatar =
+          CONFIG.url + '/artists/' +
+          artistId +
+          '/profilePicture/large/' +
+          '?d=' + Date.now();
+      });
   }
   $scope.getArtist()
 
