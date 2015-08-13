@@ -34,26 +34,18 @@ app.controller('AdmincompanyCtrl', function($scope, $state, $auth,
     $http.post(
       CONFIG.url + '/companies/' + companyId + '/profilePicture/createFile/', {
         filename: filename,
-      }).success(function(data, status, headers, config) {
-      console.log("DONE")
+      }).success(function(data) {
       var formDataArray = [{
-        "GoogleAccessId": data.GoogleAccessId,
-        "signature": data.signature,
-        "policy": data.policy,
-        "key": data.key
-      }]
+        'GoogleAccessId': data.GoogleAccessId,
+        'signature': data.signature,
+        'policy': data.policy,
+        'key': data.key
+      }];
       file.url = data.action;
       file.formData = formDataArray;
       file.upload();
-
-
-    }).error(function(data, status, headers, config) {
-      // called asynchronously if an error occurs
-      // or server returns response with an error status.
     });
 
-    //uploader.queue[0].upload();
-    //uploader.queue.pop();
   };
 
   uploader.onCompleteAll = function() {
@@ -69,9 +61,9 @@ app.controller('AdmincompanyCtrl', function($scope, $state, $auth,
         '/companies/' +
         companyId +
         '/profilePicture/confirmFile/', {})
-      .success(function(data, status, headers, config) {
+      .success(function() {
         $scope.getCompany();
-      })
+      });
   };
 
   $scope.addLabel = function() {

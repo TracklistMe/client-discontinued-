@@ -178,6 +178,7 @@ app.controller('AdmincurrenciesCtrl', function($scope, $http, CONFIG, $filter,
           });
       });
   };
+
   $scope.findConvertedPrice = function(masterPrice, currency) {
     for (var i = 0; i < $scope.priceTable.length; i++) {
       if ($scope.priceTable[i].MasterPrice === masterPrice &&
