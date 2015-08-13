@@ -97,7 +97,7 @@ app.controller('AdminEditReleaseCtrl', function($location, $scope, $state,
       backdropClass: 'bg-dark'
     });
 
-    $scope.modalUploadDropbox.result.then(function(selectedItem) {
+    $scope.modalUploadDropbox.result.then(function() {
 
     }, function() {
 
@@ -118,7 +118,7 @@ app.controller('AdminEditReleaseCtrl', function($location, $scope, $state,
       scope: $scope
     });
 
-    $scope.modalSelectFromCDN.result.then(function(selectedItem) {},
+    $scope.modalSelectFromCDN.result.then(function() {},
       function() {});
   };
 
@@ -176,10 +176,6 @@ app.controller('AdminEditReleaseCtrl', function($location, $scope, $state,
       file.formData = formDataArray;
       console.log(file);
       file.upload();
-
-    }).error(function(data) {
-      // called asynchronously if an error occurs
-      // or server returns response with an error status.
     });
   };
 
@@ -188,7 +184,7 @@ app.controller('AdminEditReleaseCtrl', function($location, $scope, $state,
       console.info('onWhenAddingFileFailed', item, filter, options);
     };
 
-  uploader.onAfterAddingFile = function(fileItem) {
+  uploader.onAfterAddingFile = function() {
     uploader.processCDNNegotiation();
   };
   /*
@@ -253,7 +249,7 @@ app.controller('AdminEditReleaseCtrl', function($location, $scope, $state,
     // url: CONFIG.url + '/labels/' + $scope.release.Labels[0].id + '/dropZone/'
   });
 
-  trackUploader.onAfterAddingFile = function(fileItem) {
+  trackUploader.onAfterAddingFile = function() {
     $scope.processCDNNegotiation();
   };
 
@@ -277,7 +273,7 @@ app.controller('AdminEditReleaseCtrl', function($location, $scope, $state,
         filename: filename,
         extension: extension,
         size: file.file.size
-      }).success(function(data, status, headers, config) {
+      }).success(function(data) {
 
       var formDataArray = [{
         'GoogleAccessId': data.GoogleAccessId,
@@ -301,7 +297,7 @@ app.controller('AdminEditReleaseCtrl', function($location, $scope, $state,
   };
   */
 
-  trackUploader.onCompleteItem = function(fileItem, response, status, headers) {
+  trackUploader.onCompleteItem = function(fileItem) {
 
     var fname = fileItem._file.name;
     var filename =
@@ -313,7 +309,7 @@ app.controller('AdminEditReleaseCtrl', function($location, $scope, $state,
       $scope.labelId + '/dropZone/confirmFile', {
         filename: filename,
         extension: extension
-      }).success(function(data) {
+      }).success(function() {
       $scope.selectFileFromDropZone = {
         filaName: filename,
         extension: extension,
@@ -384,7 +380,7 @@ app.controller('AdminEditReleaseCtrl', function($location, $scope, $state,
       });
   };
 
-  $scope.createRelease = function(id) {
+  $scope.createRelease = function() {
     $location.path('createRelease/' + releaseId);
   };
 
@@ -476,7 +472,7 @@ app.controller('AdminEditReleaseCtrl', function($location, $scope, $state,
     track.searchingArtist = false;
   };
 
-  $scope.addAsProducer = function(track, artist) {
+  $scope.addAsProducer = function(track) {
     if (track.candidateArtist) {
       track.Producer.push({
         id: track.candidateArtist.id,
@@ -538,7 +534,7 @@ app.controller('AdminEditReleaseCtrl', function($location, $scope, $state,
     track.searchingRemixer = false;
   };
 
-  $scope.addAsRemixer = function(track, remixer) {
+  $scope.addAsRemixer = function(track) {
     if (track.candidateRemixer) {
       if (!track.Remixer) {
         track.Remixer = [];
@@ -667,6 +663,7 @@ app.controller('AdminEditReleaseCtrl', function($location, $scope, $state,
         isActive: false,
         Tracks: []
       };
+
       $scope.getLabel($scope.labelId);
       $scope.getCompany($scope.labelId);
       $scope.getGenres();
