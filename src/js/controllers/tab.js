@@ -8,5 +8,5 @@ app.controller('CustomTabController', ['$scope', function($scope) {
       $scope.tabs[v] = false;
     });
     $scope.tabs[index] = true;
-  }
+  };
 }]);

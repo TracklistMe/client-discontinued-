@@ -52,7 +52,7 @@ app.controller('TableCtrl', ['$scope', '$timeout', function($scope, $timeout) {
       lastName: lastname,
       birthDate: new Date(birthdate),
       balance: balance
-    }
+    };
   }
 
   $scope.rowCollection = [];
@@ -77,7 +77,7 @@ app.controller('TableCtrl', ['$scope', '$timeout', function($scope, $timeout) {
     if (index !== -1) {
       $scope.rowCollection.splice(index, 1);
     }
-  }
+  };
 
   //  pagination
   $scope.itemsByPage = 10;
@@ -88,7 +88,6 @@ app.controller('TableCtrl', ['$scope', '$timeout', function($scope, $timeout) {
   }
 
   // pip
-  var promise = null;
   $scope.isLoading = false;
   $scope.rowCollectionPip = [];
   $scope.getPage = function() {
@@ -96,9 +95,9 @@ app.controller('TableCtrl', ['$scope', '$timeout', function($scope, $timeout) {
     for (var j = 0; j < 20; j++) {
       $scope.rowCollectionPip.push(generateRandomItem(j));
     }
-  }
+  };
 
-  $scope.callServer = function getData(tableState) {
+  $scope.callServer = function getData() {
     //here you could create a query string from tableState
     //fake ajax call
     $scope.isLoading = true;

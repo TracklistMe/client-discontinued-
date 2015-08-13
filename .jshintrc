@@ -1,33 +1,33 @@
 {
-  'bitwise': true,
-  'curly': true,
-  'eqeqeq': true,
-  'esnext': true,
-  'freeze': true,
-  'immed': true,
-  'indent': 2,
-  'latedef': 'nofunc',
-  'maxlen': 80,
-  'newcap': true,
-  'node': true,
-  'noarg': true,
-  'quotmark': 'single',
-  'strict': true,
-  'trailing': true,
-  'undef': true,
-  'unused': true,
-  'globals': {
-    'describe': true,
-    'it': true,
-    'before': true,
-    'after': true,
-    'beforeEach': true,
-    'afterEach': true
+  "bitwise": true,
+  "curly": true,
+  "eqeqeq": true,
+  "esnext": true,
+  "freeze": true,
+  "immed": true,
+  "indent": 2,
+  "latedef": "nofunc",
+  "maxlen": 80,
+  "newcap": true,
+  "node": true,
+  "noarg": true,
+  "quotmark": "single",
+  "strict": true,
+  "trailing": true,
+  "undef": true,
+  "unused": true,
+  "globals": {
+    "describe": true,
+    "it": true,
+    "before": true,
+    "after": true,
+    "beforeEach": true,
+    "afterEach": true
   },
-  'predef': [
-    'angular',
-    'moment',
-    'app',
-    '$'
+  "predef": [
+    "angular",
+    "moment",
+    "app",
+    "$"
   ]
 }
