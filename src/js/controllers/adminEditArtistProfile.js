@@ -24,10 +24,6 @@ app.controller('AdminEditArtistProfile',
     $scope.editNameTooShort = true;
     $scope.searchUserResults = [];
 
-    var artistEndPoint = CONFIG.url + '/artists/';
-    var profilePictureAPIEndPoint =
-      artistEndPoint + $scope.artistId + '/profilePicture/1400/1400/';
-
     var uploader = $scope.uploader = new FileUploader({
       method: 'POST',
       url: CONFIG.url + '/artists/' + artistId + '/profilePicture/'
@@ -40,22 +36,19 @@ app.controller('AdminEditArtistProfile',
       $http.post(
         CONFIG.url + '/artists/' + artistId + '/profilePicture/createFile/', {
           filename: filename,
-        }).success(function(data, status, headers, config) {
-        console.log('DONE')
+        }).success(function(data) {
+
         var formDataArray = [{
           'GoogleAccessId': data.GoogleAccessId,
           'signature': data.signature,
           'policy': data.policy,
           'key': data.key
-        }]
+        }];
         file.url = data.action;
         file.formData = formDataArray;
         file.upload();
 
 
-      }).error(function(data, status, headers, config) {
-        // called asynchronously if an error occurs
-        // or server returns response with an error status.
       });
 
       //uploader.queue[0].upload();
@@ -75,9 +68,9 @@ app.controller('AdminEditArtistProfile',
           '/artists/' +
           artistId +
           '/profilePicture/confirmFile/', {})
-        .success(function(data, status, headers, config) {
+        .success(function() {
           $scope.getCompany();
-        })
+        });
     };
 
 
@@ -96,7 +89,8 @@ app.controller('AdminEditArtistProfile',
             '/profilePicture/large/' +
             '?d=' + Date.now();
         });
-    }
+    };
 
-    $scope.getArtist()
+    $scope.getArtist();
+
   });
