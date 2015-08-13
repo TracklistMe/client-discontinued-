@@ -37,9 +37,9 @@ app.controller('FileUploadCtrl', function($location, $scope, $state, $auth,
     var file = fileItem;
     var fname = file._file.name;
     var filename =
-      fname.substr(0, (Math.min(fname.lastIndexOf("."), fname.length)));
+      fname.substr(0, (Math.min(fname.lastIndexOf('.'), fname.length)));
     var extension =
-      fname.substr((Math.max(0, fname.lastIndexOf(".")) || Infinity) + 1);
+      fname.substr((Math.max(0, fname.lastIndexOf('.')) || Infinity) + 1);
 
     $http.post(CONFIG.url + '/labels/' + labelId + '/dropZone/createFile/', {
       filename: filename,
@@ -47,16 +47,16 @@ app.controller('FileUploadCtrl', function($location, $scope, $state, $auth,
       size: file.file.size
     }).success(function(data) {
       var formDataArray = [{
-        "GoogleAccessId": data.GoogleAccessId,
-        "signature": data.signature,
-        "policy": data.policy,
-        "key": data.key
+        'GoogleAccessId': data.GoogleAccessId,
+        'signature': data.signature,
+        'policy': data.policy,
+        'key': data.key
       }];
       file.url = data.action;
       file.formData = formDataArray;
       file.upload();
     });
-  }
+  };
 
   /*
     uploader.onAfterAddingFile = function(fileItem) {
@@ -80,12 +80,12 @@ app.controller('FileUploadCtrl', function($location, $scope, $state, $auth,
     uploader.onErrorItem = function(fileItem, response, status, headers) {};
     uploader.onCancelItem = function(fileItem, response, status, headers) {};
     */
-  uploader.onCompleteItem = function(fileItem, response, status, headers) {
+  uploader.onCompleteItem = function(fileItem) {
     var fname = fileItem._file.name;
     var filename =
-      fname.substr(0, (Math.min(fname.lastIndexOf("."), fname.length)));
+      fname.substr(0, (Math.min(fname.lastIndexOf('.'), fname.length)));
     var extension =
-      fname.substr((Math.max(0, fname.lastIndexOf(".")) || Infinity) + 1);
+      fname.substr((Math.max(0, fname.lastIndexOf('.')) || Infinity) + 1);
 
 
     $http.post(CONFIG.url + '/labels/' + labelId + '/dropZone/confirmFile', {
@@ -155,7 +155,7 @@ app.controller('FileUploadCtrl', function($location, $scope, $state, $auth,
   //'/labels/:labelId/dropZone/:id
   $scope.deleteFile = function(file) {
     $http.delete(CONFIG.url + '/labels/' + labelId + '/dropZone/' + file.id)
-      .success(function(data) {
+      .success(function() {
         $scope.getDropZoneFiles();
       });
   };
