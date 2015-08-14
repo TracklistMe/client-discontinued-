@@ -138,104 +138,48 @@ app.controller('AdminEditReleaseCtrl', function($location, $scope, $state,
   };
 
   /* UPLOAD THE COVER */
-  var uploader = $scope.uploader = new FileUploader({
-    method: 'POST'
-  });
-  // Callbacks
-
-  uploader.currentUploading = 0;
-
-  uploader.processCDNNegotiation = function() {
-    // Processing CDN Negotiation
-    uploader.url = CONFIG.url + '/labels/' + $scope.labelId + '/dropZone/';
-    uploader.processOne(uploader.queue[uploader.currentUploading]);
-  };
-
-  uploader.processOne = function(fileItem) {
-    var file = fileItem;
-    var fname = file._file.name;
-    var filename =
-      fname.substr(0, (Math.min(fname.lastIndexOf('.'), fname.length)));
-    var extension =
-      fname.substr((Math.max(0, fname.lastIndexOf('.')) || Infinity) + 1);
-    console.log(filename);
-    console.log(extension);
-    $http.post(CONFIG.url + '/labels/' +
-      $scope.labelId + '/dropZone/createFile/', {
-        filename: filename,
-        extension: extension,
-        size: file.file.size
-      }).success(function(data) {
-      var formDataArray = [{
-        'GoogleAccessId': data.GoogleAccessId,
-        'signature': data.signature,
-        'policy': data.policy,
-        'key': data.key
-      }];
-      file.url = data.action;
-      file.formData = formDataArray;
-      console.log(file);
-      file.upload();
+    var uploader = $scope.uploader = new FileUploader({
+      method: 'POST',
+      url: CONFIG.url + '/releases/' + releaseId + '/cover/'
     });
-  };
 
-  uploader.onWhenAddingFileFailed =
-    function(item /*{File|FileLikeObject}*/ , filter, options) {
-      console.info('onWhenAddingFileFailed', item, filter, options);
+    uploader.onAfterAddingFile = function(fileItem) {
+      console.info('onAfterAddingFile', fileItem);
+      var file = fileItem;
+      var filename = file._file.name;
+      $http.post(
+        CONFIG.url + '/releases/' + releaseId + '/cover/createFile/', {
+          filename: filename,
+        }).success(function(data) {
+
+        var formDataArray = [{
+          'GoogleAccessId': data.GoogleAccessId,
+          'signature': data.signature,
+          'policy': data.policy,
+          'key': data.key
+        }];
+        file.url = data.action;
+        file.formData = formDataArray;
+        file.upload();
+      });
     };
 
-  uploader.onAfterAddingFile = function() {
-    uploader.processCDNNegotiation();
-  };
-  /*
-  uploader.onAfterAddingAll = function(addedFileItems) {
-    console.info('onAfterAddingAll', addedFileItems);
-  };
-  uploader.onBeforeUploadItem = function(item) {
-    console.info('onBeforeUploadItem', item);
-  };
-  uploader.onProgressItem = function(fileItem, progress) {
-    console.info('onProgressItem', fileItem, progress);
-  };
-  uploader.onProgressAll = function(progress) {
-    console.info('onProgressAll', progress);
-  };
-  uploader.onSuccessItem = function(fileItem, response, status, headers) {
-    console.info('onSuccessItem', fileItem, response, status, headers);
-  };
-  uploader.onErrorItem = function(fileItem, response, status, headers) {
-    console.info('onErrorItem', fileItem, response, status, headers);
-  };
-  uploader.onCancelItem = function(fileItem, response, status, headers) {
-    console.info('onCancelItem', fileItem, response, status, headers);
-  };
-  */
-  uploader.onCompleteItem = function(fileItem, response, status, headers) {
-    console.info('onCompleteItem', fileItem, response, status, headers);
+    uploader.onCompleteAll = function() {
+      console.info('onCompleteAll');
+      $scope.getRelease();
+    };
 
-    var fname = fileItem._file.name;
-    var filename =
-      fname.substr(0, (Math.min(fname.lastIndexOf('.'), fname.length)));
-    var extension =
-      fname.substr((Math.max(0, fname.lastIndexOf('.')) || Infinity) + 1);
+    uploader.onCompleteItem = function(fileItem, response, status, headers) {
+      console.info('onCompleteItem', fileItem, response, status, headers);
 
-
-    $http.post(CONFIG.url + '/labels/' +
-      $scope.labelId + '/dropZone/confirmFile', {
-        filename: filename,
-        extension: extension
-      }).success(function() {
-
-      $scope.release.cover = 'dropZone/' + $scope.labelId +
-        '/' + fileItem._file.name;
-
-      uploader.queue.pop();
-      if (uploader.currentUploading < uploader.queue.length) {
-        uploader.currentUploading++;
-        uploader.processCDNNegotiation();
-      }
-    });
-  };
+      $http.post(
+          CONFIG.url +
+          '/releases/' +
+          artistId +
+          '/cover/confirmFile/', {})
+        .success(function() {
+        });
+    };
 
   $scope.uploadToDropZone = function(track) {
     $scope.selectTrackToChangeFile = track;

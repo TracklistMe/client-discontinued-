@@ -62,7 +62,6 @@ app.controller('AdmincompanyCtrl', function($scope, $state, $auth,
         companyId +
         '/profilePicture/confirmFile/', {})
       .success(function() {
-        $scope.getCompany();
       });
   };
 

@@ -262,7 +262,11 @@ catalogUploader.onAfterAddingFile = function(fileItem) {
       .success(function(data) {
         $scope.catalog = data;
         for (var prop in data) {
-          data[prop].cover = CONFIG.url + '/images/' + data[prop].cover;
+          data[prop].cover = 
+            CONFIG.url + 
+            '/releases/' + 
+            data[prop].id + 
+            '/cover/small';
         }
       });
   };

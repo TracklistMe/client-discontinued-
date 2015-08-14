@@ -47,12 +47,7 @@ app.controller('AdminEditArtistProfile',
         file.url = data.action;
         file.formData = formDataArray;
         file.upload();
-
-
       });
-
-      //uploader.queue[0].upload();
-      //uploader.queue.pop();
     };
 
     uploader.onCompleteAll = function() {
@@ -69,7 +64,6 @@ app.controller('AdminEditArtistProfile',
           artistId +
           '/profilePicture/confirmFile/', {})
         .success(function() {
-          $scope.getCompany();
         });
     };
 
