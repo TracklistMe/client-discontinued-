@@ -175,7 +175,7 @@ app.controller('AdminEditReleaseCtrl', function($location, $scope, $state,
       $http.post(
           CONFIG.url +
           '/releases/' +
-          artistId +
+          releaseId +
           '/cover/confirmFile/', {})
         .success(function() {
         });
