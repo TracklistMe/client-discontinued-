@@ -8,29 +8,29 @@
  * Controller of the tracklistmeApp
  */
 app.controller('ArtistCtrl', function($location, $scope, $state,
-    $auth, $stateParams, $http, CONFIG) {
-    var artistId = $stateParams.id;
+  $auth, $stateParams, $http, CONFIG) {
+  var artistId = $stateParams.id;
 
-    $scope.serverURL = CONFIG.url;
-    $scope.artist = null;
-    $scope.allArtists = [];
+  $scope.serverURL = CONFIG.url;
+  $scope.artist = null;
+  $scope.allArtists = [];
 
-    $scope.getArtist = function() {
-        $http.get(CONFIG.url + '/artists/' + artistId)
-            .success(function(data) {
-                $scope.artist = data;
-                $scope.artist.avatar =
-                    $scope.serverURL + '/artists/' +
-                    artistId +
-                    '/profilePicture/small/' +
-                    '?d=' + Date.now();
-                $scope.artist.largeAvatar =
-                    $scope.serverURL + '/artists/' +
-                    artistId +
-                    '/profilePicture/large/' +
-                    '?d=' + Date.now();
-            });
-    };
-    $scope.getArtist();
+  $scope.getArtist = function() {
+    $http.get(CONFIG.url + '/artists/' + artistId)
+      .success(function(data) {
+        $scope.artist = data;
+        $scope.artist.avatar =
+          $scope.serverURL + '/artists/' +
+          artistId +
+          '/profilePicture/small/' +
+          '?d=' + Date.now();
+        $scope.artist.largeAvatar =
+          $scope.serverURL + '/artists/' +
+          artistId +
+          '/profilePicture/large/' +
+          '?d=' + Date.now();
+      });
+  };
+  $scope.getArtist();
 
 });
