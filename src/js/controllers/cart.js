@@ -36,8 +36,10 @@ app.controller('CartCtrl', function($location, $scope, $state, $auth,
         console.log('token created for card ending in ', token.card.last4);
         var payment = angular.copy($scope.payment);
         payment.card = void 0;
+        console.log($scope.cart.totalCost());
         payment.value = $scope.cart.totalCost();
         payment.currency = $scope.cart.getCurrency();
+        payment.taxRate = $scope.cart.getTaxRate();
         payment.token = token.id;
         payment.cart = $scope.cart.getItemsIdsAndQuantities();
         return $http.post($scope.serverURL + '/payments', payment);
