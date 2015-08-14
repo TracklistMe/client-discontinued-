@@ -8,47 +8,40 @@
  * Controller of the tracklistmeApp
  */
 app.controller('ReleaseCtrl', function($location, $scope, $state, $auth,
-  $stateParams, $http, CONFIG) {
-  var releaseId = $stateParams.id;
+    $stateParams, $http, CONFIG) {
+    var releaseId = $stateParams.id;
 
-  $scope.serverURL = CONFIG.url;
-  $scope.release = null;
-  $scope.allArtists = [];
+    $scope.serverURL = CONFIG.url;
+    $scope.release = null;
+    $scope.allArtists = [];
 
-  $scope.getRelease = function() {
-    $http.get(CONFIG.url + '/releases/' + releaseId)
-      .success(function(data) {
-        $scope.release = data;
-        // use the artistID as hash for counting the occurencies of the array.
-        var countOccurencies = [];
-        // for each track in the release
-        for (var i = 0; i < $scope.release.Tracks.length; i++) {
-          // for each producer in the track
-          for (var j = 0; j < $scope.release.Tracks[i].Producer.length; j++) {
-            var id = $scope.release.Tracks[i].Producer[j].id;
-            if (countOccurencies[id] === null) {
-              // first time that i found this Producer
-              countOccurencies[id] = {
-                occurencies: 1,
-                producer: $scope.release.Tracks[i].Producer[j]
-              };
-            } else {
-              countOccurencies[id].occurencies++;
-            }
+    $scope.getRelease = function() {
+        console.log("STOP ");
+        $http.get(CONFIG.url + '/releases/' + releaseId)
+            .success(function(data) {
+                $scope.release = data;
+                // I want to list all the producer that belongs to the release
+                // without repeating them.
 
-          }
-        }
+                // for each track
+                for (var i = 0; i < $scope.release.Tracks.length; i++) {
+                    // for each Producer
+                    for (var j = 0; j < $scope.release.Tracks[i].Producer.length; j++) {
+                        var foundInAlreadyAddedProducers = false;
+                        for (var k = 0; k < $scope.allArtists.length; k++) {
+                            if ($scope.allArtists[k].id == $scope.release.Tracks[i].Producer[j].id) {
+                                // the artists already exists
+                                foundInAlreadyAddedProducers = true;
+                            }
+                        }
+                        //if it wasn't already added, add it.
+                        if (!foundInAlreadyAddedProducers) {
+                            $scope.allArtists.push($scope.release.Tracks[i].Producer[j]);
+                        }
+                    }
+                }
 
-        countOccurencies.sort(function(a, b) {
-          return b.occurencies - a.occurencies;
-        });
-
-        var k = 0;
-        while (countOccurencies[k] !== null) {
-          $scope.allArtists.push(countOccurencies[k].producer);
-          k++;
-        }
-      });
-  };
-  $scope.getRelease();
+            });
+    };
+    $scope.getRelease();
 });
