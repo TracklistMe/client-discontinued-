@@ -39,6 +39,13 @@ angular.module('app')
         }
       };
 
+      $scope.app.colorArray = [];
+      for (var o in $scope.app.color) {
+        $scope.app.colorArray.push($scope.app.color[o]);
+      }
+
+
+
 
       $scope.app.settings.themeID = 1;
       $scope.app.settings.asideFolded = true;
