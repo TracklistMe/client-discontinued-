@@ -20,8 +20,8 @@ angular.module('app', [
   'pascalprecht.translate',
   'satellizer',
   'angular-stripe',
-  'credit-cards'
-
+  'credit-cards',
+  'nvd3'
 ]).constant("CONFIG", {
   "url": "https://tracklist.me/api",
   //"url": "http://localhost:3000",
