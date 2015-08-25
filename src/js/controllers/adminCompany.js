@@ -211,10 +211,10 @@ app.controller('AdmincompanyCtrl', function($scope, $state, $auth,
   };
   $scope.data = [{
     x: 0,
-    val_0: 0,
-    val_1: 0,
-    val_2: 0,
-    val_3: 0
+    val_0: 1,
+    val_1: 2,
+    val_2: 3,
+    val_3: 4
   }, {
     x: 1,
     val_0: 0.993,
@@ -397,9 +397,11 @@ app.controller('AdmincompanyCtrl', function($scope, $state, $auth,
       series: [
         "id_0",
         "id_1",
-        "id_2"
+        "id_2",
+        "id_3"
       ]
     }],
+    height: 120,
     lineMode: "cardinal",
     series: [{
       id: "id_0",
@@ -416,6 +418,12 @@ app.controller('AdmincompanyCtrl', function($scope, $state, $auth,
     }, {
       id: "id_2",
       y: "val_2",
+      label: "Baz",
+      type: "column",
+      color: "#d62728"
+    }, {
+      id: "id_3",
+      y: "val_3",
       label: "Baz",
       type: "column",
       color: "#d62728"
