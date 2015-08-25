@@ -249,7 +249,10 @@ app.controller('AdmincompanyCtrl', function($scope, $state, $auth,
 
         $scope.data = values;
         $scope.options = {
-
+          margin: {
+            right: 0,
+            top: 20,
+          },
           stacks: [{
             axis: "y",
             series: [labels[0].id, labels[1].id, labels[2].id]
