@@ -4,7 +4,7 @@ module.exports = {
       'bower_components/angular/angular.js',
 
       'bower_components/jquery/dist/jquery.min.js',
-
+      'bower_components/moment/min/moment.min.js',
       'bower_components/d3/d3.min.js',
       'bower_components/n3-line-chart/build/line-chart.min.js',
 
