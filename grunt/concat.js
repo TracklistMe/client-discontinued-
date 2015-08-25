@@ -1,9 +1,8 @@
 module.exports = {
   angular: {
     src: [
-      'bower_components/jquery/dist/jquery.min.js',
-
       'bower_components/angular/angular.js',
+      'bower_components/jquery/dist/jquery.min.js',
       'bower_components/html.sortable/dist/html.sortable.js',
       'bower_components/html.sortable/dist/html.sortable.angular.js',
       'bower_components/angular-animate/angular-animate.js',
