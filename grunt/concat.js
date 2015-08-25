@@ -5,9 +5,8 @@ module.exports = {
 
       'bower_components/jquery/dist/jquery.min.js',
 
-      'bower_components/d3/d3.js',
-      'bower_components/nvd3/nv.d3.js',
-      'bower_components/angular-nvd3/dist/angular-nvd3.js',
+      'bower_components/d3/d3.min.js',
+      'bower_components/n3-line-chart/build/line-chart.min.js',
 
       'bower_components/html.sortable/dist/html.sortable.js',
       'bower_components/html.sortable/dist/html.sortable.angular.js',
