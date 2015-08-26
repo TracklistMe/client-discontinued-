@@ -109,7 +109,8 @@
     "angular-credit-cards": "~2.3.2",
     "bower-jquery-sparkline": "~2.1.3",
     "bower-jquery-easyPieChart": "~0.0.1",
-    "n3-line-chart": "~1.1.11"
+    "n3-line-chart": "~1.1.11",
+    "ocLazyLoad": "1.0.4"
   },
   "devDependencies": {
     "bower-jquery-sparkline": "~2.1.3"
