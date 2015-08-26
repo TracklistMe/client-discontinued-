@@ -1,0 +1,43 @@
+<div class="hbox hbox-auto-xs hbox-auto-sm" ng-controller="LibraryCtrl">
+    <div class="wrapper-md">
+        <h2 class="m-t-none text-black">Library</h2>
+    </div>
+    <div class="wrapper-md">
+        <table class="table table-border bg-white-only b-a">
+            <tbody>
+                <tr ng-repeat="libraryItem in library">
+                    <td>
+                        <div href="" class="thumb-sm">
+                            <img class="r r-2x" ng-src="{{serverURL}}/images/{{libraryItem.Track.cover}}">
+                        </div>
+                    </td>
+                    <td class="v-middle">
+                        <a class="">
+                            <i class="icon-control-play text"></i>
+                            <i class="icon-control-pause text-active"></i>
+                        </a>
+                    </td>
+                    <td>
+                        <a ui-sref="music.track({id:libraryItem.Track.id})"> <span ng-repeat="producer in libraryItem.Track.Producer">{{producer.displayName}}{{$last ? '' : ', '}}</span> - {{libraryItem.Track.title}} </span>
+                            <br />
+                            <small>({{libraryItem.Track.version}})</small></a>
+                    </td>
+                    <td>
+                        <span> {{ libraryItem.Track.lengthInSeconds | secondsToTimeString }} / 125bpm </span>
+                        <br />
+                        <span ng-repeat="genres in libraryItem.Track.Genres">{{genres.name}}{{$last ? '' : ', '}}</span>
+                    </td>
+                    <td class="v-middle">
+                        <div class="pull-right">
+                            <a class="m-r-sm">
+                                <button class="btn  btn-default">
+                                    <i class="icon-arrow-down"></i>
+                                </button>
+                            </a>
+                        </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>

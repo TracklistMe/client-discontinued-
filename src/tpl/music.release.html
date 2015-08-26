@@ -49,47 +49,40 @@
     </div>
 <div class="wrapper-md">
 <table class="table table-border bg-white-only b-a">
-        <tbody>
-          <tr class="bg-light lt">
-            <td colspan="4"><h4>Tracklist</h4></td>
-          </tr>
-          <tr ng-repeat="track in release.Tracks">
+    <tbody>
+        <tr class="bg-light lt">
+            <td colspan="4">
+                <h4>Tracklist</h4></td>
+        </tr>
+        <tr ng-repeat="track in release.Tracks">
             <td class="v-middle">
                 <a class="">
-                  <i class="icon-control-play text"></i>
-                  <i class="icon-control-pause text-active"></i>
+                    <i class="icon-control-play text"></i>
+                    <i class="icon-control-pause text-active"></i>
                 </a>
-
             </td>
-            <td> 
-              <a ui-sref="music.track({id:track.id})"> <span ng-repeat="producer in track.Producer">{{producer.displayName}}{{$last ? '' : ', '}}</span> -
-            {{track.title}}  </span>
-              <br />
-            <small>({{track.version}})</small></a> 
+            <td>
+                <a ui-sref="music.track({id:track.id})"> <span ng-repeat="producer in track.Producer">{{producer.displayName}}{{$last ? '' : ', '}}</span> - {{track.title}} </span>
+                    <br />
+                    <small>({{track.version}})</small></a>
             </td>
-            <td> 
-            
-                <span> {{ track.lengthInSeconds | secondsToTimeString }} / 125bpm </span> <br />
-                 <span ng-repeat="genres in track.Genres">{{genres.name}}{{$last ? '' : ', '}}</span> 
-
+            <td>
+                <span> {{ track.lengthInSeconds | secondsToTimeString }} / 125bpm </span>
+                <br />
+                <span ng-repeat="genres in track.Genres">{{genres.name}}{{$last ? '' : ', '}}</span>
             </td>
-
-
-            <td class="v-middle" > 
-              <div class="pull-right">
-                <a class="m-r-sm">
-                  <button class="btn  btn-default">
-                      <i class="icon-heart"></i>
-                  </button>
-                </a>
-                <ngcart-addtocart id="track-{{track.id}}" name="{{track.title}} ({{track.version}})"  price="{{track.Price}}"   quantity="1" quantity-max="100" data="track"> 
-                </ngcart-addtocart>
-              </div>
+            <td class="v-middle">
+                <div class="pull-right">
+                    <a class="m-r-sm">
+                        <button class="btn  btn-default">
+                            <i class="icon-heart"></i>
+                        </button>
+                    </a>
+                    <ngcart-addtocart id="track-{{track.id}}" name="{{track.title}} ({{track.version}})" price="{{track.Price}}" quantity="1" quantity-max="100" data="track">
+                    </ngcart-addtocart>
+                </div>
             </td>
-          </tr>
-
-          
- 
+        </tr>
         </tbody>
       </table>
       </div> 
