@@ -1,33 +1,37 @@
 module.exports = {
   angular: {
     src: [
-      'bower_components/angular/angular.js',
-
       'bower_components/jquery/dist/jquery.js',
+      'bower_components/angular/angular.js',
       'bower_components/moment/min/moment.min.js',
       'bower_components/d3/d3.min.js',
       'bower_components/n3-line-chart/build/line-chart.min.js',
 
-      'bower_components/html.sortable/dist/html.sortable.js',
-      'bower_components/html.sortable/dist/html.sortable.angular.js',
+
       'bower_components/angular-animate/angular-animate.js',
       'bower_components/angular-cookies/angular-cookies.js',
       'bower_components/angular-resource/angular-resource.js',
       'bower_components/angular-sanitize/angular-sanitize.js',
       'bower_components/angular-touch/angular-touch.js',
 
+
       'bower_components/angular-ui-router/release/angular-ui-router.js',
       'bower_components/ngstorage/ngStorage.js',
       'bower_components/angular-ui-utils/ui-utils.js',
+      'bower_components/satellizer/satellizer.js',
 
+      'bower_components/html.sortable/dist/html.sortable.js',
+      'bower_components/html.sortable/dist/html.sortable.angular.js',
+
+      'bower_components/bower-jquery-sparkline/dist/jquery.sparkline.retina.js',
+      'bower_components/bower-jquery-easyPieChart/dist/jquery.easypiechart.fill.js',
       'bower_components/angular-bootstrap/ui-bootstrap-tpls.js',
-
       'bower_components/oclazyload/dist/ocLazyLoad.js',
 
       'bower_components/jquery.sparkline/dist/jquery.sparkline.retina.js',
 
       'bower_components/angular-smart-table/dist/smart-table.min.js',
-      'bower_components/satellizer/satellizer.js',
+
 
       'bower_components/angular-translate/angular-translate.js',
       'bower_components/angular-translate-loader-static-files/angular-translate-loader-static-files.js',

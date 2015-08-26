@@ -17,8 +17,8 @@
  * @example <input ui-jq="datepicker" ui-options="{showOn:'click'},secondParameter,thirdParameter" ui-refresh="iChange">
  */
 angular.module('ui.jq', ['ui.load']).
-  value('uiJqConfig', {}).
-  directive('uiJq', ['uiJqConfig', 'JQ_CONFIG', 'uiLoad', '$timeout', function uiJqInjectingFunction(uiJqConfig, JQ_CONFIG, uiLoad, $timeout) {
+value('uiJqConfig', {}).
+directive('uiJq', ['uiJqConfig', 'JQ_CONFIG', 'uiLoad', '$timeout', function uiJqInjectingFunction(uiJqConfig, JQ_CONFIG, uiLoad, $timeout) {
 
   return {
     restrict: 'A',
@@ -31,7 +31,7 @@ angular.module('ui.jq', ['ui.load']).
 
       return function uiJqLinkingFunction(scope, elm, attrs) {
 
-        function getOptions(){
+        function getOptions() {
           var linkOptions = [];
 
           // If ui-options are passed, merge (or override) them onto global defaults and pass to the jQuery method
@@ -55,12 +55,14 @@ angular.module('ui.jq', ['ui.load']).
 
         // Call jQuery method and pass relevant options
         function callPlugin() {
+          console.log(attrs.uiJq);
+          console.log(elm);
           $timeout(function() {
             elm[attrs.uiJq].apply(elm, getOptions());
           }, 0, false);
         }
 
-        function refresh(){
+        function refresh() {
           // If ui-refresh is used, re-fire the the method upon every change
           if (attrs.uiRefresh) {
             scope.$watch(attrs.uiRefresh, function() {
@@ -69,12 +71,12 @@ angular.module('ui.jq', ['ui.load']).
           }
         }
 
-        if ( JQ_CONFIG[attrs.uiJq] ) {
+        if (JQ_CONFIG[attrs.uiJq]) {
           uiLoad.load(JQ_CONFIG[attrs.uiJq]).then(function() {
             callPlugin();
             refresh();
           }).catch(function() {
-            
+
           });
         } else {
           callPlugin();
