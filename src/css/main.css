@@ -1,23 +1,34 @@
-.uploadLabel input
-{
-    position: absolute;
-
-    opacity: 0;
-
-    filter: alpha(opacity=0);
-}
-.waveform canvas
-{
-    width: 100%;
+.uploadLabel input {
+  position: absolute;
+  opacity: 0;
+  filter: alpha(opacity=0);
 }
 
-label.uploadAvatar input[type='file']
-{
-    position: fixed;
-    top: -1000px;
+.waveform canvas {
+  width: 100%;
 }
 
-.modal
-{
-    background-color: rgba(40,50,60,.94);
+label.uploadAvatar input[type='file'] {
+  position: fixed;
+  top: -1000px;
+}
+
+.modal {
+  background-color: rgba(40, 50, 60, .94);
+}
+
+.chart *[style] {
+  font-size: 11px !important;
+  font-family: "Source Sans Pro", "Helvetica Neue", Helvetica, Arial, sans-serif !important;
+  -webkit-font-smoothing: antialiased;
+}
+
+.chart *[font-family] {
+  font-size: 12px !important;
+  font-family: "Source Sans Pro", "Helvetica Neue", Helvetica, Arial, sans-serif !important;
+}
+
+.glass-container *[font-family] {
+  font-size: 13px !important;
+  font-family: "Source Sans Pro", "Helvetica Neue", Helvetica, Arial, sans-serif !important;
 }
