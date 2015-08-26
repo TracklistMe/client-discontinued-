@@ -177,6 +177,9 @@ app.controller('AdmincompanyCtrl', function($scope, $state, $auth,
         console.log(data);
         // Get the json with the informations:
         var values = [];
+        //Price in the db are stored as 100x time bigger. Restore the right . 
+        //representation of the number 
+        var currencyDivision = 100;
         var currentIndex = 0;
         var labels = [];
         for (var i = 0; i < data.length; i++) {
@@ -188,7 +191,7 @@ app.controller('AdmincompanyCtrl', function($scope, $state, $auth,
             //First Element.
             var object = {};
             object['x'] = moment(data[i].dataColumn, "DD-MM-YY").toDate();
-            object[data[i].LabelId] = data[i].price;
+            object[data[i].LabelId] = data[i].price / currencyDivision;
             values.push(
               object
             );
@@ -196,13 +199,13 @@ app.controller('AdmincompanyCtrl', function($scope, $state, $auth,
             // ho almeno un valore 
             if (values[currentIndex].x.getTime() == moment(data[i].dataColumn, "DD-MM-YY").toDate().getTime()) {
               //same day
-              values[currentIndex][data[i].LabelId] = data[i].price;
+              values[currentIndex][data[i].LabelId] = data[i].price / currencyDivision;
             } else {
               // me moved to the next data
               currentIndex++;
               var object = {};
               object['x'] = moment(data[i].dataColumn, "DD-MM-YY").toDate();
-              object[data[i].LabelId] = data[i].price;
+              object[data[i].LabelId] = data[i].price / currencyDivision;;
               values.push(
                 object
               );
@@ -268,6 +271,7 @@ app.controller('AdmincompanyCtrl', function($scope, $state, $auth,
             y: {
               zoomable: true,
               ticksFormat: '.2f',
+              ticks: 5,
               min: 0
             }
           },
