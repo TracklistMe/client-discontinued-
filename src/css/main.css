@@ -19,16 +19,16 @@ label.uploadAvatar input[type='file'] {
 
 .chart *[style] {
   font-size: 11px !important;
-  font-family: "Impact", "Source Sans Pro", "Helvetica Neue", Helvetica, Arial, sans-serif !important;
+  font-family: "Source Sans Pro", "Helvetica Neue", Helvetica, Arial, sans-serif !important;
   -webkit-font-smoothing: antialiased;
 }
 
 .chart *[font-family] {
   font-size: 12px !important;
-  font-family: "Impact", "Source Sans Pro", "Helvetica Neue", Helvetica, Arial, sans-serif !important;
+  font-family: "Source Sans Pro", "Helvetica Neue", Helvetica, Arial, sans-serif !important;
 }
 
 .glass-container *[font-family] {
   font-size: 13px !important;
-  font-family: "Impact", "Source Sans Pro", "Helvetica Neue", Helvetica, Arial, sans-serif !important;
+  font-family: "Source Sans Pro", "Helvetica Neue", Helvetica, Arial, sans-serif !important;
 }
