@@ -104,14 +104,22 @@
     "bootstrap-tagsinput": "~0.4.2",
     "satellizer": "~0.9.4",
     "flot-spline": "*",
-    "html.sortable": "~0.2.0",
+    "html.sortable": "~0.3.0",
     "angular-stripe": "~4.2.4",
     "angular-credit-cards": "~2.3.2",
     "bower-jquery-sparkline": "~2.1.3",
     "bower-jquery-easyPieChart": "~0.0.1",
-    "n3-line-chart": "~1.1.11"
+    "n3-line-chart": "~1.1.11",
+    "jengine-jqlite": "~0.2.10",
+    "nvd3": "~1.8.1"
   },
   "devDependencies": {
     "bower-jquery-sparkline": "~2.1.3"
+  },
+  "resolutions": {
+    "angular": "~1.3.11",
+    "angular-cookies": "~1.3.11",
+    "angular-resource": "~1.4.4",
+    "moment": "2.10.6"
   }
 }
