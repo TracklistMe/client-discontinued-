@@ -1,67 +1,67 @@
 <div class="hbox hbox-auto-xs hbox-auto-sm" ng-controller="AdmincompanyCtrl">
-    <!-- main -->
-    <div class="col">
-        <!-- main header -->
-        <div class="bg-light lter b-b wrapper-md">
-            <div class="row">
-                <div class="col-sm-4 col-xs-12">
-                    <h1 class="m-n font-thin h3 text-black">Admin Company - {{company.displayName}} </h1>
-                    <small class="text-muted">Create Labels, Add Label Managers, </small>
-                </div>
-            </div>
+  <!-- main -->
+  <div class="col">
+    <!-- main header -->
+    <div class="bg-light lter b-b wrapper-md">
+      <div class="row">
+        <div class="col-sm-4 col-xs-12">
+          <h1 class="m-n font-thin h3 text-black">Admin Company - {{company.displayName}} </h1>
+          <small class="text-muted">Create Labels, Add Label Managers, </small>
         </div>
-        <!-- / main header -->
-        <div class="wrapper-md">
-            <!-- create new label -->
-            <div class="row">
-                <div class="col-md-12">
-                    <div class="panel panel-default">
-                        <div class="panel-heading">
-                            <h5 class="font-thin m-t-none m-b-none">Add Label</h5>
-                        </div>
-                        <div ng-init="showPanel = false" ng-show="showPanel" class="panel-body b-b b-light">
-                            New label name:
-                            <p>
-                                <input name="input" ng-model="seachLabelField" ng-change="searchLabelAvailability()" placeholder="Label Name" type="text" class="form-control input-sm w-sm inline m-r" />
-                            </p>
-                            <p> Status:
-                                <span ng-show="isSearching">
+      </div>
+    </div>
+    <!-- / main header -->
+    <div class="wrapper-md">
+      <!-- create new label -->
+      <div class="row">
+        <div class="col-md-12">
+          <div class="panel panel-default">
+            <div class="panel-heading">
+              <h5 class="font-thin m-t-none m-b-none">Add Label</h5>
+            </div>
+            <div ng-init="showPanel = false" ng-show="showPanel" class="panel-body b-b b-light">
+              New label name:
+              <p>
+                <input name="input" ng-model="seachLabelField" ng-change="searchLabelAvailability()" placeholder="Label Name" type="text" class="form-control input-sm w-sm inline m-r" />
+              </p>
+              <p> Status:
+                <span ng-show="isSearching">
                                     <i class="fa fa-circle-o-notch fa-spin"></i>
                                 </span>
-                                <span ng-show="nameAvailable && !isSearching && !nameTooShort"> 
+                <span ng-show="nameAvailable && !isSearching && !nameTooShort"> 
                                     <i class="fa fa-check"> Name Available</i>
                                 </span>
-                                <span ng-show="!nameAvailable && !isSearching && !nameTooShort"> 
+                <span ng-show="!nameAvailable && !isSearching && !nameTooShort"> 
                                     <i class="fa fa-times"> Name Not Available</i>
                                 </span>
-                                <span ng-show="nameTooShort && !isSearching">
+                <span ng-show="nameTooShort && !isSearching">
                                     <i class="fa fa-times"> Name is Too Short</i>
                                 </span>
-                            </p>
-                        </div>
-                        <div class="panel-footer  ">
-                            <button ng-hide="showPanel" ng-click="showPanel = true" class="btn btn-primary btn-addon btn-sm "><i class="fa fa-plus"></i>Add New Label</button>
-                            <button ng-click="addLabel()" ng-disabled="nameAvailable == false || nameTooShort == true" ng-show="showPanel" class="btn btn-success btn-addon btn-sm"><i class="fa fa-save"></i>Save New Label</button>
-                            <button ng-show="showPanel" ng-click="showPanel = false" class="btn btn-danger btn-addon btn-sm"><i class="fa fa-times"></i>Cancel</button>
-                        </div>
-                    </div>
-                </div>
+              </p>
             </div>
-            <!-- label list -->
-            <div class="row">
-                <div class="col-lg-4">
-                    <div class="panel panel-default">
-                        <label class="uploadLabel">
-                            <input type="file" nv-file-select="" uploader="uploader" />
-                            <span class="btn btn-sm btn-default text-muted m-t-sm m-l inline">
+            <div class="panel-footer  ">
+              <button ng-hide="showPanel" ng-click="showPanel = true" class="btn btn-primary btn-addon btn-sm "><i class="fa fa-plus"></i>Add New Label</button>
+              <button ng-click="addLabel()" ng-disabled="nameAvailable == false || nameTooShort == true" ng-show="showPanel" class="btn btn-success btn-addon btn-sm"><i class="fa fa-save"></i>Save New Label</button>
+              <button ng-show="showPanel" ng-click="showPanel = false" class="btn btn-danger btn-addon btn-sm"><i class="fa fa-times"></i>Cancel</button>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- label list -->
+      <div class="row">
+        <div class="col-lg-4">
+          <div class="panel panel-default">
+            <label class="uploadLabel">
+              <input type="file" nv-file-select="" uploader="uploader" />
+              <span class="btn btn-sm btn-default text-muted m-t-sm m-l inline">
                                 <i class="fa fa-cloud-upload text"></i>
                                 <span class="text">Upload company logo</span>
-                            </span>
-                        </label>
-                        <div class="panel-body">
-                            <div class="clearfix text-center m-t">
-                                <div class="inline">
-                                    <div ui-refresh="loadedImage" ui-jq="easyPieChart" ui-options="{
+              </span>
+            </label>
+            <div class="panel-body">
+              <div class="clearfix text-center m-t">
+                <div class="inline">
+                  <div ui-refresh="loadedImage" ui-jq="easyPieChart" ui-options="{
                     percent: '{{loadedImage}}',
                     lineWidth: 5,
                     trackColor: '{{app.color.light}}',
@@ -73,51 +73,51 @@
                     rotate: -90,
                     animate: 2000
                   }">
-                                        <div class="thumb-xl">
-                                            <img ng-src="{{company.logo}}" class="img-circle thumb-xl" alt="...">
-                                        </div>
-                                    </div>
-                                    <div class="h4 m-t m-b-xs">{{company.displayName}}</div>
-                                </div>
-                            </div>
-                        </div>
-                        <footer class="panel-footer bg-info text-center no-padder">
-                            <div class="row no-gutter">
-                                <div class="col-xs-4">
-                                    <div class="wrapper">
-                                        <span class="m-b-xs h3 block text-white">{{labelList.length}}</span>
-                                        <small class="text-muted">Labels</small>
-                                    </div>
-                                </div>
-                                <div class="col-xs-4  ">
-                                    <div class="wrapper">
-                                        <span class="m-b-xs h3 block text-white">4</span>
-                                        <small class="text-muted">Label Managers</small>
-                                    </div>
-                                </div>
-                                <div class="col-xs-4">
-                                    <div class="wrapper">
-                                        <span class="m-b-xs h3 block text-white">142</span>
-                                        <small class="text-muted">Releases</small>
-                                    </div>
-                                </div>
-                            </div>
-                        </footer>
+                    <div class="thumb-xl">
+                      <img ng-src="{{company.logo}}" class="img-circle thumb-xl" alt="...">
                     </div>
+                  </div>
+                  <div class="h4 m-t m-b-xs">{{company.displayName}}</div>
                 </div>
-                <div class="col-lg-8">
-                    <div class="panel panel-default">
-                        <div class="panel-heading font-bold">Revenue Stream</div>
-                        <div class="panel-body">
-                            <div class="clearfix text-center m-t">
-                                <div class="">
-                                    <linechart data="data" options="options" height="258"></linechart>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+              </div>
+            </div>
+            <footer class="panel-footer bg-info text-center no-padder">
+              <div class="row no-gutter">
+                <div class="col-xs-4">
+                  <div class="wrapper">
+                    <span class="m-b-xs h3 block text-white">{{labelList.length}}</span>
+                    <small class="text-muted">Labels</small>
+                  </div>
                 </div>
-                <!--
+                <div class="col-xs-4  ">
+                  <div class="wrapper">
+                    <span class="m-b-xs h3 block text-white">4</span>
+                    <small class="text-muted">Label Managers</small>
+                  </div>
+                </div>
+                <div class="col-xs-4">
+                  <div class="wrapper">
+                    <span class="m-b-xs h3 block text-white">142</span>
+                    <small class="text-muted">Releases</small>
+                  </div>
+                </div>
+              </div>
+            </footer>
+          </div>
+        </div>
+        <div class="col-lg-8">
+          <div class="panel panel-default">
+            <div class="panel-heading font-bold">Revenue Stream</div>
+            <div class="panel-body">
+              <div class="clearfix text-center m-t">
+                <div class="">
+                  <linechart data="data" options="options" height="258"></linechart>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!--
         <div class="col-lg-4">
           <div class="panel panel-default">
             <div class="panel-heading font-bold">Revenue Stream</div>
@@ -149,136 +149,136 @@
           </div>
         </div>
         -->
+      </div>
+      <div class="row">
+        <div class="col-md-6">
+          <div class="panel panel-default">
+            <div class="panel-heading   ">
+              <h5 class="font-thin m-t-none m-b-none ">Labels List</h5>
             </div>
-            <div class="row">
-                <div class="col-md-6">
-                    <div class="panel panel-default">
-                        <div class="panel-heading   ">
-                            <h5 class="font-thin m-t-none m-b-none ">Labels List</h5>
-                        </div>
-                        <div class="panel-body b-b b-light">
-                            Search:
-                            <input id="filter" type="text" class="form-control input-sm w-sm inline m-r" />
-                        </div>
-                        <div>
-                            <table class="table m-b-none table-hover" ui-jq="footable" data-filter="#filter" data-page-size="12">
-                                <thead>
-                                    <tr>
-                                        <th>
-                                            Label Name
-                                        </th>
-                                        <th>
-                                            Status
-                                        </th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <a href="http://www.google.com">
-                                        <tr ng-repeat="label in labelList">
-                                            <td>
-                                                <a ui-sref="app.adminlabel({id:label.id})">
-                                                    <div href class="thumb-sm m-r">
-                                                        <img ng-src="{{label.logo}}" class="r r-2x">
-                                                    </div> {{label.displayName}}</a>
-                                            </td>
-                                            <td>
-                                                <span class="label bg-info" ng-click="editLabel(label.id)">Edit Label</span>
-                                                <span ng-click="activateCompany(label.id)" ng-show="label.isActive" ng-click="currentLabel = null" class="label bg-success">
+            <div class="panel-body b-b b-light">
+              Search:
+              <input id="filter" type="text" class="form-control input-sm w-sm inline m-r" />
+            </div>
+            <div>
+              <table class="table m-b-none table-hover" ui-jq="footable" data-filter="#filter" data-page-size="12">
+                <thead>
+                  <tr>
+                    <th>
+                      Label Name
+                    </th>
+                    <th>
+                      Status
+                    </th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <a href="http://www.google.com">
+                    <tr ng-repeat="label in labelList">
+                      <td>
+                        <a ui-sref="app.adminlabel({id:label.id})">
+                          <div href class="thumb-sm m-r">
+                            <img ng-src="{{label.logo}}" class="r r-2x">
+                          </div> {{label.displayName}}</a>
+                      </td>
+                      <td>
+                        <span class="label bg-info" ng-click="editLabel(label.id)">Edit Label</span>
+                        <span ng-click="activateCompany(label.id)" ng-show="label.isActive" ng-click="currentLabel = null" class="label bg-success">
                                 Activate
                             </span>
-                                                <span ng-click="deactivateCompany(label.id)" ng-show="!label.isActive" ng-click="currentLabel = null" class="label bg-dark">
+                        <span ng-click="deactivateCompany(label.id)" ng-show="!label.isActive" ng-click="currentLabel = null" class="label bg-dark">
                                 Dectivate
                             </span>
-                                            </td>
-                                        </tr>
-                                    </a>
-                                </tbody>
-                                <tfoot class="hide-if-no-paging">
-                                    <tr>
-                                        <td colspan="5" class="text-center">
-                                            <ul class="pagination"></ul>
-                                        </td>
-                                    </tr>
-                                </tfoot>
-                            </table>
-                        </div>
-                    </div>
-                </div>
-                <div ng-show="currentLabel" class="col-md-6">
-                    <div class="panel panel-default">
-                        <div class="panel-heading">
-                            <div class="clearfix">
-                                <a href="" class="pull-left thumb-md avatar b-3x m-r">
-                                    <img ng-src="{{currentLabel.logo}}" alt="...">
-                                </a>
-                                <div class="clear">
-                                    <div class="h3 m-t-xs m-b-xs">
-                                        {{currentLabel.displayName}}
-                                        <label ng-click="dirtyChange = true; 
+                      </td>
+                    </tr>
+                  </a>
+                </tbody>
+                <tfoot class="hide-if-no-paging">
+                  <tr>
+                    <td colspan="5" class="text-center">
+                      <ul class="pagination"></ul>
+                    </td>
+                  </tr>
+                </tfoot>
+              </table>
+            </div>
+          </div>
+        </div>
+        <div ng-show="currentLabel" class="col-md-6">
+          <div class="panel panel-default">
+            <div class="panel-heading">
+              <div class="clearfix">
+                <a href="" class="pull-left thumb-md avatar b-3x m-r">
+                  <img ng-src="{{currentLabel.logo}}" alt="...">
+                </a>
+                <div class="clear">
+                  <div class="h3 m-t-xs m-b-xs">
+                    {{currentLabel.displayName}}
+                    <label ng-click="dirtyChange = true; 
                                          currentCompany.isActive = !currentCompany.isActive;
                                          currentCompany.isActive == 0 ? deactivateCompany(currentCompany.id)  : activateCompany(currentCompany.id) " ng-class="{false:'btn-dark', true:'btn-success'}[currentCompany.isActive]" class="pull-right btn btn-sm btn-success ng-untouched ng-valid ng-dirty"><i class="fa fa-check text-active"></i> {{currentLabel.isActive == 0 ? "Deactive" : "Active"}}
-                                        </label>
-                                    </div>
-                                    Last Release 10 days ago
-                                </div>
-                            </div>
-                        </div>
-                        <div class="list-group no-radius alt">
-                            <a class="list-group-item " href="">
-                                <span class="badge bg-light">{{currentLabel.labelManagers.length}}</span> Label Managers
-                            </a>
-                            <a class="list-group-item" ng-repeat="labelManager in currentLabel.labelManagers">
-                                <span class="label bg-danger pull-right " ng-click="removeLabelManager(labelManager.LabelsUsers.UserId)" title="Delete">
+                    </label>
+                  </div>
+                  Last Release 10 days ago
+                </div>
+              </div>
+            </div>
+            <div class="list-group no-radius alt">
+              <a class="list-group-item " href="">
+                <span class="badge bg-light">{{currentLabel.labelManagers.length}}</span> Label Managers
+              </a>
+              <a class="list-group-item" ng-repeat="labelManager in currentLabel.labelManagers">
+                <span class="label bg-danger pull-right " ng-click="removeLabelManager(labelManager.LabelsUsers.UserId)" title="Delete">
                                     <i class="fa fa-times"/> Delete
                                 </span> {{labelManager.displayName}}
-                            </a>
-                            <a class="list-group-item " href=""> 
+              </a>
+              <a class="list-group-item " href=""> 
                                 Add new Owner
                             </a>
-                            <a class="list-group-item " href="">
-                                <input name="input" ng-model="searchUserField" ng-change="searchUser()" placeholder="User Display Name" class="form-control input-md">
-                                <p> Status:
-                                    <span ng-show="isSearching">
+              <a class="list-group-item " href="">
+                <input name="input" ng-model="searchUserField" ng-change="searchUser()" placeholder="User Display Name" class="form-control input-md">
+                <p> Status:
+                  <span ng-show="isSearching">
                             <i class="fa fa-circle-o-notch fa-spin"></i>
                         </span> {{searchUserResults.length}}
-                                    <span ng-show="searchUserResults.length == 1  && !isSearching"> 
+                  <span ng-show="searchUserResults.length == 1  && !isSearching"> 
                             <i class="fa fa-check"> This is a Valid User</i>
                         </span>
-                                    <span ng-show="searchUserResults.length == 0 && !isSearching"> 
+                  <span ng-show="searchUserResults.length == 0 && !isSearching"> 
                             <i class="fa fa-times"> No user available with this name</i>
                         </span>
-                                    <span ng-show="searchUserResults.length > 1 && !isSearching"> 
+                  <span ng-show="searchUserResults.length > 1 && !isSearching"> 
                             <i class="fa fa-times">There are {{searchUserResults.length}} users with this name</i>
                         </span>
-                                    <table ng-show="searchUserResults.length > 1 && !isSearching" class="table">
-                                        <thead>
-                                            <th> </th>
-                                            <th> Name </th>
-                                            <th> Action </th>
-                                        </thead>
-                                        <tbody ng-repeat="user in searchUserResults">
-                                            <tr>
-                                                <td>
-                                                    <div href class="thumb-sm m-r">
-                                                        <img ng-src="{{user.avatar}}" class="r r-2x">
-                                                    </div>
-                                                </td>
-                                                <td>{{user.displayName}}</td>
-                                                <td>
-                                                    <button ng-click="selectFromMultipleUsers(user)" class="btn btn-primary btn-xs">Add User</button>
-                                                </td>
-                                            </tr>
-                                        </tbody>
-                                    </table>
-                                </p>
-                                <button ng-hide="showPanel" ng-click="addLabelManager()" ng-disabled="searchUserResults.length!=1 " class="btn btn-primary btn-addon btn-sm"><i class="fa fa-plus"></i>Add Label Manager</button>
-                            </a>
-                        </div>
-                    </div>
-                </div>
+                  <table ng-show="searchUserResults.length > 1 && !isSearching" class="table">
+                    <thead>
+                      <th> </th>
+                      <th> Name </th>
+                      <th> Action </th>
+                    </thead>
+                    <tbody ng-repeat="user in searchUserResults">
+                      <tr>
+                        <td>
+                          <div href class="thumb-sm m-r">
+                            <img ng-src="{{user.avatar}}" class="r r-2x">
+                          </div>
+                        </td>
+                        <td>{{user.displayName}}</td>
+                        <td>
+                          <button ng-click="selectFromMultipleUsers(user)" class="btn btn-primary btn-xs">Add User</button>
+                        </td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </p>
+                <button ng-hide="showPanel" ng-click="addLabelManager()" ng-disabled="searchUserResults.length!=1 " class="btn btn-primary btn-addon btn-sm"><i class="fa fa-plus"></i>Add Label Manager</button>
+              </a>
             </div>
-            <!--  edit companies -->
-            <!-- / users -->
+          </div>
         </div>
+      </div>
+      <!--  edit companies -->
+      <!-- / users -->
     </div>
+  </div>
 </div>
