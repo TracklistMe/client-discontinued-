@@ -254,7 +254,7 @@ app.controller('AdmincompanyCtrl', function($scope, $state, $auth,
         $scope.data = values;
         $scope.options = {
           margin: {
-            right: 0,
+            right: 30,
             top: 20,
           },
           stacks: [{
