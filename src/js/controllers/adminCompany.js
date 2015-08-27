@@ -184,6 +184,7 @@ app.controller('AdmincompanyCtrl', function($scope, $state, $auth,
         var labels = [];
         for (var i = 0; i < data.length; i++) {
           //Data is sorted by data.dataColumn;
+          var finalPrice = Math.floor(data[i].price) / currencyDivision;
 
           console.log(data[i].dataColumn, moment(data[i].dataColumn, "DD-MM-YY").toDate());
 
@@ -191,7 +192,7 @@ app.controller('AdmincompanyCtrl', function($scope, $state, $auth,
             //First Element.
             var object = {};
             object['x'] = moment(data[i].dataColumn, "DD-MM-YY").toDate();
-            object[data[i].LabelId] = data[i].price / currencyDivision;
+            object[data[i].LabelId] = finalPrice;
             values.push(
               object
             );
@@ -199,13 +200,13 @@ app.controller('AdmincompanyCtrl', function($scope, $state, $auth,
             // ho almeno un valore 
             if (values[currentIndex].x.getTime() == moment(data[i].dataColumn, "DD-MM-YY").toDate().getTime()) {
               //same day
-              values[currentIndex][data[i].LabelId] = data[i].price / currencyDivision;
+              values[currentIndex][data[i].LabelId] = finalPrice;
             } else {
               // me moved to the next data
               currentIndex++;
               var object = {};
               object['x'] = moment(data[i].dataColumn, "DD-MM-YY").toDate();
-              object[data[i].LabelId] = data[i].price / currencyDivision;;
+              object[data[i].LabelId] = finalPrice;
               values.push(
                 object
               );
@@ -273,6 +274,13 @@ app.controller('AdmincompanyCtrl', function($scope, $state, $auth,
               ticksFormat: '.2f',
               ticks: 5,
               min: 0
+            }
+          },
+          tooltip: {
+            mode: 'scrubber',
+            formatter: function(x, y, series) {
+              console.log(series);
+              return moment(x).format("Do MMM, dddd") + " " + y + " " + series.label;
             }
           },
           lineMode: "cardinal",
