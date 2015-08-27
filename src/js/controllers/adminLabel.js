@@ -212,6 +212,66 @@ app.controller('AdminlabelCtrl', function($location, $scope, $state, $auth,
       });
   };
 
+
+  // REVENUE PART //
+
+  // DATA PICKER 
+
+  var CHARACTER_BEFORE_SEARCH = 1;
+  $scope.today = function() {
+    $scope.dt = new Date();
+  };
+  $scope.today();
+
+  $scope.clear = function() {
+    $scope.dt = null;
+  };
+
+  // Disable weekend selection
+  $scope.disabled = function(date, mode) {
+    return (mode === 'day' && (date.getDay() === 0 || date.getDay() === 6));
+  };
+
+  $scope.today = function() {
+    $scope.dt = new Date();
+  };
+  $scope.today();
+
+  $scope.clear = function() {
+    $scope.dt = null;
+  };
+
+  // Disable weekend selection
+  $scope.disabled = function(date, mode) {
+    return (mode === 'day' && (date.getDay() === 0 || date.getDay() === 6));
+  };
+
+
+
+  $scope.open = function($event) {
+    $event.preventDefault();
+    $event.stopPropagation();
+    if (!$scope.opened || $scope.opened === false) {
+      $scope.opened = true;
+    } else {
+      $scope.opened = false;
+    }
+  };
+
+  $scope.dateOptions = {
+    formatYear: 'yy',
+    startingDay: 1,
+    class: 'datepicker'
+  };
+
+  $scope.initDate = new Date();
+  $scope.formats = ['dd-MMMM-yyyy', 'yyyy/MM/dd', 'dd.MM.yyyy', 'shortDate'];
+  $scope.format = $scope.formats[0];
+  //END OF DATA PICKER 
+
+
+
+
   $scope.getToProcessReleases();
   $scope.getDropZoneFiles();
   $scope.getCatalog();
