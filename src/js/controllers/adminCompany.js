@@ -279,7 +279,7 @@ app.controller('AdmincompanyCtrl', function($scope, $state, $auth,
           tooltip: {
             mode: 'scrubber',
             formatter: function(x, y, series) {
-              console.log(series);
+
               return moment(x).format("Do MMM, dddd") + " " + y + " " + series.label;
             }
           },
