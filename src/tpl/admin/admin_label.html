@@ -113,35 +113,32 @@
               <div class="row">
                 <div class="col-lg-6"> Revenue Stream </div>
                 <div class="col-lg-6">
-                  <p class=" input-group">
-                    <input placeholder="Release Date" type="text" class="form-control" datepicker-popup="dd-MMMM-yyyy" ng-model="release.releaseDate" is-open="opened" min-date="minDate" datepicker-options="dateOptions" ng-required="true" close-text="Close" />
-                    <span class="input-group-btn">
-                      <button type="button" class="btn btn-default" ng-click="open($event)"><i class="glyphicon glyphicon-calendar"></i></button>
-                    </span>
-                  </p>
+                  <div>
+                    <input class="pull-right" ranges="ranges" type="daterange" ng-model="dateRangeStartingEnding" /><code>{{dateRangeStartingEnding|json}}</code>
+                  </div>
                 </div>
               </div>
             </div>
-            <div class="bg-light dker wrapper m-t-n-xxs">
-              <span class="pull-right">Friday</span>
-              <span class="h4">$540</span>
-              <div class="text-center m-b-n m-t-sm">
-                <div ui-jq="sparkline" ui-options="[50.32,45.23,47.56,36.25,53.85,40.15,41.25,50.15,57.14,36.15,97.26,50.15,45.32,47.19,37.75,25.15,56.34,50.35,47.25,53.15], {type:'line', height:65, width: '100%', lineWidth:2, valueSpots:{'0:':'#fff'}, lineColor:'#fff', spotColor:'#fff', fillColor:'', highlightLineColor:'#fff', spotRadius:3}"></div>
-                <div ui-jq="sparkline" ui-options="[ 10,9,11,10,11,10,12,10,9,10,11,9,8 ], {type:'bar', height:45, barWidth:6, barSpacing:6, barColor:'{{app.color.primary}}'}" class="sparkline inline">loading...</div>
+            <div class="bg-light dker wrapper m-t-n-xxs ">
+              <span class="pull-right ">Friday</span>
+              <span class="h4 ">$540</span>
+              <div class="text-center m-b-n m-t-sm ">
+                <div ui-jq="sparkline " ui-options="[50.32,45.23,47.56,36.25,53.85,40.15,41.25,50.15,57.14,36.15,97.26,50.15,45.32,47.19,37.75,25.15,56.34,50.35,47.25,53.15], {type: 'line', height:65, width: '100%', lineWidth:2, valueSpots:{ '0:': '#fff'}, lineColor: '#fff', spotColor: '#fff', fillColor: '', highlightLineColor: '#fff', spotRadius:3} "></div>
+                <div ui-jq="sparkline " ui-options="[ 10,9,11,10,11,10,12,10,9,10,11,9,8 ], {type: 'bar', height:45, barWidth:6, barSpacing:6, barColor: '{{app.color.primary}}'} " class="sparkline inline ">loading...</div>
               </div>
             </div>
-            <div class="panel-body">
-              <div class="row">
-                <div class="col-xs-4">
-                  <small class="text-muted block">Year to Date</small>
+            <div class="panel-body ">
+              <div class="row ">
+                <div class="col-xs-4 ">
+                  <small class="text-muted block ">Year to Date</small>
                   <span>$1500.00</span>
                 </div>
-                <div class="col-xs-4">
-                  <small class="text-muted block">Quarter to Date</small>
+                <div class="col-xs-4 ">
+                  <small class="text-muted block ">Quarter to Date</small>
                   <span>$600.00</span>
                 </div>
-                <div class="col-xs-4">
-                  <small class="text-muted block">Today</small>
+                <div class="col-xs-4 ">
+                  <small class="text-muted block ">Today</small>
                   <span>$400.00</span>
                 </div>
               </div>
@@ -149,18 +146,18 @@
           </div>
         </div>
       </div>
-      <div class="row">
-        <div class="col-md-12">
-          <div class="panel panel-default">
-            <div class="panel-heading   ">
+      <div class="row ">
+        <div class="col-md-12 ">
+          <div class="panel panel-default ">
+            <div class="panel-heading ">
               <h5 class="font-thin m-t-none m-b-none ">Catalog</h5>
             </div>
-            <div class="panel-body b-b b-light">
+            <div class="panel-body b-b b-light ">
               Search:
-              <input id="filter" type="text" class="form-control input-sm w-sm inline m-r" />
+              <input id="filter " type="text " class="form-control input-sm w-sm inline m-r " />
             </div>
             <div>
-              <table class="table m-b-none table-hover" ui-jq="footable" data-filter="#filter" data-page-size="12">
+              <table class="table m-b-none table-hover " ui-jq="footable " data-filter="#filter " data-page-size="12 ">
                 <thead>
                   <tr>
                     <th>
@@ -178,37 +175,37 @@
                   </tr>
                 </thead>
                 <tbody>
-                  <tr ui-sref="app.adminrelease({id:release.id})" ng-repeat="release in catalog">
-                    <a ui-sref="app.adminrelease({id:release.id})">
-                      <td class="v-middle">
-                        <div href class="thumb-sm m-r">
-                          <img ng-src="{{release.cover}}" class="r r-2x">
+                  <tr ui-sref="app.adminrelease({id:release.id}) " ng-repeat="release in catalog ">
+                    <a ui-sref="app.adminrelease({id:release.id}) ">
+                      <td class="v-middle ">
+                        <div href class="thumb-sm m-r ">
+                          <img ng-src="{{release.cover}} " class="r r-2x ">
                         </div>
                         {{release.catalogNumber}}
                       </td>
-                      <td class="v-middle">
+                      <td class="v-middle ">
                         {{release.title}}
                       </td>
-                      <td class="v-middle">
-                        <span ng-show="release.isActive" ng-click="currentLabel = null" class="label bg-success">
+                      <td class="v-middle ">
+                        <span ng-show="release.isActive " ng-click="currentLabel=null " class="label bg-success ">
                                 {{release.isActive}}
                             </span>
-                        <span ng-show="!release.isActive" ng-click="currentLabel = null" class="label bg-dark">
+                        <span ng-show="!release.isActive " ng-click="currentLabel=null " class="label bg-dark ">
                                 {{release.isActive}}
                             </span>
                       </td>
-                      <td class="v-middle">
-                        <span ng-show="release.status == 'PROCESSING' " class="badge bg-warning">{{release.status}}</span>
-                        <span ng-show="release.status == 'PROCESSING_FAILED' " class="badge bg-danger">{{release.status}}</span>
-                        <span ng-show="release.status == 'PROCESSED' " class="badge bg-success">{{release.status}}</span>
+                      <td class="v-middle ">
+                        <span ng-show="release.status=='PROCESSING' " class="badge bg-warning ">{{release.status}}</span>
+                        <span ng-show="release.status=='PROCESSING_FAILED' " class="badge bg-danger ">{{release.status}}</span>
+                        <span ng-show="release.status=='PROCESSED' " class="badge bg-success ">{{release.status}}</span>
                       </td>
                     </a>
                   </tr>
                 </tbody>
-                <tfoot class="hide-if-no-paging">
+                <tfoot class="hide-if-no-paging ">
                   <tr>
-                    <td colspan="5" class="text-center">
-                      <ul class="pagination"></ul>
+                    <td colspan="5 " class="text-center ">
+                      <ul class="pagination "></ul>
                     </td>
                   </tr>
                 </tfoot>
@@ -216,52 +213,50 @@
             </div>
           </div>
         </div>
-        <div ng-show="currentLabel" class="col-md-6">
-          <div class="panel panel-default">
-            <div class="panel-heading">
-              <div class="clearfix">
-                <a href="" class="pull-left thumb-md avatar b-3x m-r">
-                  <img ng-src="{{currentLabel.logo}}" alt="...">
+        <div ng-show="currentLabel " class="col-md-6 ">
+          <div class="panel panel-default ">
+            <div class="panel-heading ">
+              <div class="clearfix ">
+                <a href=" " class="pull-left thumb-md avatar b-3x m-r ">
+                  <img ng-src="{{currentLabel.logo}} " alt="... ">
                 </a>
-                <div class="clear">
-                  <div class="h3 m-t-xs m-b-xs">
+                <div class="clear ">
+                  <div class="h3 m-t-xs m-b-xs ">
                     {{currentLabel.displayName}}
-                    <label ng-click="dirtyChange = true; 
-                                         currentCompany.isActive = !currentCompany.isActive;
-                                         currentCompany.isActive == 0 ? deactivateCompany(currentCompany.id)  : activateCompany(currentCompany.id) " ng-class="{false:'btn-dark', true:'btn-success'}[currentCompany.isActive]" class="pull-right btn btn-sm btn-success ng-untouched ng-valid ng-dirty"><i class="fa fa-check text-active"></i> {{currentLabel.isActive == 0 ? "Deactive" : "Active"}}
+                    <label ng-click="dirtyChange=true; currentCompany.isActive=! currentCompany.isActive; currentCompany.isActive==0 ? deactivateCompany(currentCompany.id) : activateCompany(currentCompany.id) " ng-class="{false: 'btn-dark', true: 'btn-success'}[currentCompany.isActive] " class="pull-right btn btn-sm btn-success ng-untouched ng-valid ng-dirty "><i class="fa fa-check text-active "></i> {{currentLabel.isActive == 0 ? "Deactive " : "Active "}}
                     </label>
                   </div>
                   Last Release 10 days ago
                 </div>
               </div>
             </div>
-            <div class="list-group no-radius alt">
-              <a class="list-group-item " href="">
-                <span class="badge bg-light">{{currentLabel.labelManagers.length}}</span> Label Managers
+            <div class="list-group no-radius alt ">
+              <a class="list-group-item " href=" ">
+                <span class="badge bg-light ">{{currentLabel.labelManagers.length}}</span> Label Managers
               </a>
-              <a class="list-group-item" ng-repeat="labelManager in currentLabel.labelManagers">
-                <span class="label bg-danger pull-right " ng-click="removeLabelManager(labelManager.LabelsUsers.UserId)" title="Delete">
-                                    <i class="fa fa-times"/> Delete
+              <a class="list-group-item " ng-repeat="labelManager in currentLabel.labelManagers ">
+                <span class="label bg-danger pull-right " ng-click="removeLabelManager(labelManager.LabelsUsers.UserId) " title="Delete ">
+                                    <i class="fa fa-times "/> Delete
                                 </span> {{labelManager.displayName}}
               </a>
-              <a class="list-group-item " href=""> 
+              <a class="list-group-item " href=" "> 
                                 Add new Owner
                             </a>
-              <a class="list-group-item " href="">
-                <input name="input" ng-model="searchUserField" ng-change="searchUser()" placeholder="User Display Name" class="form-control input-md">
+              <a class="list-group-item " href=" ">
+                <input name="input " ng-model="searchUserField " ng-change="searchUser() " placeholder="User Display Name " class="form-control input-md ">
                 <p> Status:
-                  <span ng-show="isSearching">
-                            <i class="fa fa-circle-o-notch fa-spin"></i>
+                  <span ng-show="isSearching ">
+                            <i class="fa fa-circle-o-notch fa-spin "></i>
                         </span> {{searchUserResults.length}}
-                  <span ng-show="searchUserResults.length == 1  && !isSearching"> 
-                            <i class="fa fa-check"> This is a Valid User</i>
+                  <span ng-show="searchUserResults.length==1 && !isSearching "> 
+                            <i class="fa fa-check "> This is a Valid User</i>
                         </span>
-                  <span ng-show="searchUserResults.length == 0 && !isSearching"> 
-                            <i class="fa fa-times"> No user available with this name</i>
+                  <span ng-show="searchUserResults.length==0 && !isSearching "> 
+                            <i class="fa fa-times "> No user available with this name</i>
                         </span>
-                  <span ng-show="searchUserResults.length > 1 && !isSearching"> 
-                            <i class="fa fa-times">There are {{searchUserResults.length}} users with this name</i>
-                        </span>
+                  <span ng-show="searchUserResults.length> 1 && !isSearching">
+                    <i class="fa fa-times">There are {{searchUserResults.length}} users with this name</i>
+                    </span>
                   <table ng-show="searchUserResults.length > 1 && !isSearching" class="table">
                     <thead>
                       <th> </th>

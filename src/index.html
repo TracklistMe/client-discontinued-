@@ -4,13 +4,14 @@
 <head>
   <meta charset="utf-8" />
   <title>Tracklist.me</title>
-  <meta name="description" content="Tracklist.me - Your next music store " />
+  <meta name="description" content="Tracklist.me - Your next music hub " />
   <meta name="keywords" content="Music, Dj, Producers, Electronic Music" />
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
   <link rel="stylesheet" href="../bower_components/bootstrap/dist/css/bootstrap.css" type="text/css" />
   <link rel="stylesheet" href="../bower_components/animate.css/animate.css" type="text/css" />
   <link rel="stylesheet" href="../bower_components/font-awesome/css/font-awesome.min.css" type="text/css" />
   <link rel="stylesheet" href="../bower_components/simple-line-icons/css/simple-line-icons.css" type="text/css" />
+  <link rel="stylesheet" type="text/css" href="../bower_components/bower-range-datePicker/daterangepicker.css">
   <link rel="stylesheet" href="../bower_components/nvd3/build/nv.d3.css">
   <link rel="stylesheet" href="css/font.css" type="text/css" />
   <link rel="stylesheet" href="css/app.css" type="text/css" />
@@ -36,10 +37,12 @@
   <div class="app" id="app" ng-class="{'app-header-fixed':app.settings.headerFixed, 'app-aside-fixed':app.settings.asideFixed, 'app-aside-folded':app.settings.asideFolded, 'app-aside-dock':app.settings.asideDock, 'container':app.settings.container}" ui-view></div>
   <!-- jQuery -->
   <script src="../bower_components/jquery/dist/jquery.min.js"></script>
+  <script src="../bower_components/bootstrap/dist/js/bootstrap.js"></script>
   <!-- Angular -->
+  <script src="../bower_components/moment/moment.js"></script>
+  <script src="../bower_components/bower-range-datePicker/daterangepicker.js"></script>
   <script src="../bower_components/angular/angular.js"></script>
   <script src="../bower_components/d3/d3.min.js"></script>
-  <script src="../bower_components/moment/min/moment.min.js"></script>
   <script src="../bower_components/n3-line-chart/build/line-chart.min.js"></script>
   <script src="../bower_components/angular-animate/angular-animate.js"></script>
   <script src="../bower_components/angular-cookies/angular-cookies.js"></script>
@@ -58,6 +61,7 @@
   </script>
   <!-- bootstrap -->
   <script src="../bower_components/angular-bootstrap/ui-bootstrap-tpls.js"></script>
+  <script src="../bower_components/ng-bs-daterangepicker/dist/ng-bs-daterangepicker.min.js"></script>
   <!-- lazyload -->
   <script src="../bower_components/oclazyload/dist/ocLazyLoad.js"></script>
   <!-- myDependencies -->

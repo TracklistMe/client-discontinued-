@@ -75,7 +75,7 @@
     "videogular-ima-ads": "~0.7.0",
     "jquery": "~2.1.3",
     "animate.css": "~3.2.0",
-    "bootstrap": "~3.3.0",
+    "bootstrap": "~3.3.5",
     "bootstrap-filestyle": "~1.1.2",
     "bootstrap-slider": "*",
     "bootstrap-touchspin": "~3.0.1",
@@ -100,7 +100,6 @@
     "flot": "~0.8.3",
     "flot.tooltip": "~0.8.4",
     "flot.orderbars": "*",
-    "bootstrap-daterangepicker": "~1.3.17",
     "bootstrap-tagsinput": "~0.4.2",
     "satellizer": "~0.9.4",
     "flot-spline": "*",
@@ -110,7 +109,9 @@
     "bower-jquery-sparkline": "~2.1.3",
     "bower-jquery-easyPieChart": "~0.0.1",
     "n3-line-chart": "~1.1.11",
-    "ocLazyLoad": "1.0.4"
+    "ocLazyLoad": "1.0.4",
+    "ng-bs-daterangepicker": "~0.0.5",
+    "bower-range-datePicker": "0.0.2"
   },
   "devDependencies": {
     "bower-jquery-sparkline": "~2.1.3"
