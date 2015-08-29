@@ -217,21 +217,167 @@ app.controller('AdminlabelCtrl', function($location, $scope, $state, $auth,
 
   // DATA PICKER 
 
-  $scope.dateRangeStartingEnding = {
-    startDate: moment('2013-09-20'),
-    endDate: moment('2013-09-25')
+  $scope.dates = {
+    startDate: moment().startOf('quarter'),
+    endDate: moment()
   };
 
-  console.log($scope.dateRangeStartingEnding);
   $scope.ranges = {
     'Today': [moment(), moment()],
     'Yesterday': [moment().subtract(1, 'days'), moment().subtract(1, 'days')],
     'Last 7 days': [moment().subtract(7, 'days'), moment()],
-    'Last 30 days': [moment().subtract(30, 'days'), moment()],
-    'This quarter': [moment().startOf('quarter'), moment().endOf('quarter')],
+    'Last 30 days': [moment().subtract(30,
+      'days'), moment()],
+    'This quarter': [moment().startOf('quarter'), moment()],
     'Previous quarter': [moment().startOf('quarter').subtract(3, 'months'), moment().endOf('quarter').subtract(3, 'months')]
   };
   //END OF DATA PICKER 
+
+  $scope.dates2 = {
+    startDate: moment().startOf('quarter'),
+    endDate: moment()
+  };
+
+  $scope.dateChanged = function(start, end, other, b) {
+    $scope.getRevenueData(start, end);
+  }
+
+
+
+
+  $scope.getRevenueData = function(startDate, endDate) {
+    if (!startDate) {
+      startDate = moment().startOf('quarter');
+      endDate = moment();
+    }
+    var startDateFormatted = startDate.format("DD-MM-YYYY");
+    var endDateFormatted = endDate.format("DD-MM-YYYY");
+    $http.get(CONFIG.url + '/labels/' + labelId + '/revenues/' + startDateFormatted + '/' + endDateFormatted)
+      .success(function(data) {
+        console.log(data);
+        // Get the json with the informations:
+        var values = [];
+        //Price in the db are stored as 100x time bigger. Restore the right . 
+        //representation of the number 
+        var currencyDivision = 100;
+        var currentIndex = 0;
+        var labels = [];
+        for (var i = 0; i < data.length; i++) {
+          //Data is sorted by data.dataColumn;
+          var finalPrice = Math.floor(data[i].price) / currencyDivision;
+          if (!values[currentIndex]) {
+            //First Element.
+            var object = {};
+            object['x'] = moment(data[i].dataColumn, "DD-MM-YY").toDate();
+            object[data[i].ReleaseId] = finalPrice;
+            values.push(
+              object
+            );
+          } else {
+            // ho almeno un valore 
+            if (values[currentIndex].x.getTime() == moment(data[i].dataColumn, "DD-MM-YY").toDate().getTime()) {
+              //same day
+              values[currentIndex][data[i].ReleaseId] = finalPrice;
+            } else {
+              // me moved to the next data
+              currentIndex++;
+              var object = {};
+              object['x'] = moment(data[i].dataColumn, "DD-MM-YY").toDate();
+              object[data[i].ReleaseId] = finalPrice;
+              values.push(
+                object
+              );
+            }
+          }
+          var found = false;
+          for (var l = 0; l < labels.length; l++) {
+            if ((labels[l].id) == data[i].ReleaseId) {
+              found = true;
+            }
+          }
+          if (!found) {
+            labels.push({
+              id: data[i].ReleaseId,
+              name: data[i].Release.catalogNumber
+            })
+          }
+        }
+        // FILLERS: ads for each label a valid number per each time point
+        for (var v = 0; v < values.length; v++) {
+          for (var l = 0; l < labels.length; l++) {
+            if (!values[v][labels[l].id]) {
+              values[v][labels[l].id] = 0
+            }
+          }
+        }
+        console.log("------")
+
+        console.log(labels.map(function(obj) {
+          return obj.name;
+        }));
+
+        console.log("-------")
+          // data ready to be displayed in the chart;
+
+
+        var series = [];
+        for (var i = labels.length - 1; i >= 0; i--) {
+
+          series[i] = {
+            color: $scope.app.colorArray[i],
+            id: labels[i].id,
+            y: labels[i].id,
+            axis: 'y',
+            thickness: '2px',
+            type: 'column',
+            label: labels[i].name
+          }
+        };
+        console.log(JSON.stringify(values));
+
+        $scope.data = values;
+        $scope.options = {
+          margin: {
+            right: 30,
+            top: 20,
+          },
+          stacks: [{
+            axis: "y",
+            series: labels.map(function(obj) {
+              return obj.name;
+            })
+          }],
+          axes: {
+            x: {
+              zoomable: false,
+              type: 'date',
+              ticksFormat: '%B',
+              ticks: d3.time.months,
+              ticksRotate: 0
+            },
+            y: {
+              zoomable: true,
+              ticksFormat: '.2f',
+              ticks: 5,
+              min: 0
+            }
+          },
+          tooltip: {
+            mode: 'scrubber',
+            formatter: function(x, y, series) {
+
+              return moment(x).format("Do MMM, dddd") + " " + y + " " + series.label;
+            }
+          },
+          lineMode: "cardinal",
+          series: series,
+          columnsHGap: 0,
+        }
+      });
+
+
+  };
+
 
 
 
@@ -240,5 +386,6 @@ app.controller('AdminlabelCtrl', function($location, $scope, $state, $auth,
   $scope.getDropZoneFiles();
   $scope.getCatalog();
   $scope.getLabel();
+  $scope.getRevenueData();
 
 });

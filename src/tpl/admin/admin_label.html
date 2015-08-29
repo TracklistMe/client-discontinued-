@@ -112,19 +112,14 @@
             <div class="panel-heading font-bold">
               <div class="row">
                 <div class="col-lg-6"> Revenue Stream </div>
-                <div class="col-lg-6">
-                  <div>
-                    <input class="pull-right" ranges="ranges" type="daterange" ng-model="dateRangeStartingEnding" /><code>{{dateRangeStartingEnding|json}}</code>
-                  </div>
+                <div class="col-lg-6 p">
+                  <input ranges="ranges" type=" daterange " ng-model="dates" format="DD/MM/YYYY" separator=" - " callback="dateChanged" class="pull-right">
                 </div>
               </div>
             </div>
             <div class="bg-light dker wrapper m-t-n-xxs ">
-              <span class="pull-right ">Friday</span>
-              <span class="h4 ">$540</span>
-              <div class="text-center m-b-n m-t-sm ">
-                <div ui-jq="sparkline " ui-options="[50.32,45.23,47.56,36.25,53.85,40.15,41.25,50.15,57.14,36.15,97.26,50.15,45.32,47.19,37.75,25.15,56.34,50.35,47.25,53.15], {type: 'line', height:65, width: '100%', lineWidth:2, valueSpots:{ '0:': '#fff'}, lineColor: '#fff', spotColor: '#fff', fillColor: '', highlightLineColor: '#fff', spotRadius:3} "></div>
-                <div ui-jq="sparkline " ui-options="[ 10,9,11,10,11,10,12,10,9,10,11,9,8 ], {type: 'bar', height:45, barWidth:6, barSpacing:6, barColor: '{{app.color.primary}}'} " class="sparkline inline ">loading...</div>
+              <div class="">
+                <linechart data="data" options="options" height="258"></linechart>
               </div>
             </div>
             <div class="panel-body ">
@@ -255,8 +250,8 @@
                             <i class="fa fa-times "> No user available with this name</i>
                         </span>
                   <span ng-show="searchUserResults.length> 1 && !isSearching">
-                    <i class="fa fa-times">There are {{searchUserResults.length}} users with this name</i>
-                    </span>
+                      <i class="fa fa-times">There are {{searchUserResults.length}} users with this name</i>
+                      </span>
                   <table ng-show="searchUserResults.length > 1 && !isSearching" class="table">
                     <thead>
                       <th> </th>

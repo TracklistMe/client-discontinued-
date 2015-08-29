@@ -55,8 +55,6 @@ directive('uiJq', ['uiJqConfig', 'JQ_CONFIG', 'uiLoad', '$timeout', function uiJ
 
         // Call jQuery method and pass relevant options
         function callPlugin() {
-          console.log(attrs.uiJq);
-          console.log(elm);
           $timeout(function() {
             elm[attrs.uiJq].apply(elm, getOptions());
           }, 0, false);
