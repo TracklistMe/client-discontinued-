@@ -269,7 +269,7 @@ app.controller('AdminlabelCtrl', function($location, $scope, $state, $auth,
             //First Element.
             var object = {};
             object['x'] = moment(data[i].dataColumn, "DD-MM-YY").toDate();
-            object[data[i].ReleaseId] = finalPrice;
+            object[data[i].Release.catalogNumber] = finalPrice;
             values.push(
               object
             );
@@ -277,13 +277,13 @@ app.controller('AdminlabelCtrl', function($location, $scope, $state, $auth,
             // ho almeno un valore 
             if (values[currentIndex].x.getTime() == moment(data[i].dataColumn, "DD-MM-YY").toDate().getTime()) {
               //same day
-              values[currentIndex][data[i].ReleaseId] = finalPrice;
+              values[currentIndex][data[i].Release.catalogNumber] = finalPrice;
             } else {
               // me moved to the next data
               currentIndex++;
               var object = {};
               object['x'] = moment(data[i].dataColumn, "DD-MM-YY").toDate();
-              object[data[i].ReleaseId] = finalPrice;
+              object[data[i].Release.catalogNumber] = finalPrice;
               values.push(
                 object
               );
@@ -291,16 +291,17 @@ app.controller('AdminlabelCtrl', function($location, $scope, $state, $auth,
           }
           var found = false;
           for (var l = 0; l < labels.length; l++) {
-            if ((labels[l].id) == data[i].ReleaseId) {
+            if ((labels[l].id) == data[i].Release.catalogNumber) {
               found = true;
             }
           }
           if (!found) {
             labels.push({
-              id: data[i].ReleaseId,
+              id: data[i].Release.catalogNumber,
               name: data[i].Release.catalogNumber
             })
           }
+          labels = labels.sort();
         }
         // FILLERS: ads for each label a valid number per each time point
         for (var v = 0; v < values.length; v++) {
@@ -310,14 +311,14 @@ app.controller('AdminlabelCtrl', function($location, $scope, $state, $auth,
             }
           }
         }
-        console.log("------")
+
 
         console.log(labels.map(function(obj) {
           return obj.name;
-        }));
+        }).sort());
 
-        console.log("-------")
-          // data ready to be displayed in the chart;
+
+        // data ready to be displayed in the chart;
 
 
         var series = [];
@@ -343,9 +344,9 @@ app.controller('AdminlabelCtrl', function($location, $scope, $state, $auth,
           },
           stacks: [{
             axis: "y",
-            series: labels.map(function(obj) {
+            series: (labels.map(function(obj) {
               return obj.name;
-            })
+            }).sort())
           }],
           axes: {
             x: {
