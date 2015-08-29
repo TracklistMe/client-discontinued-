@@ -2,8 +2,10 @@ module.exports = {
   angular: {
     src: [
       'bower_components/jquery/dist/jquery.js',
-      'bower_components/angular/angular.js',
+      'bower_components/bootstrap/dist/js/bootstrap.js',
       'bower_components/moment/min/moment.min.js',
+      'bower_components/bootstrap-daterangepicker/daterangepicker.js',
+      'bower_components/angular/angular.js',
       'bower_components/d3/d3.min.js',
       'bower_components/n3-line-chart/build/line-chart.js',
 
