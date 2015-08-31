@@ -10,6 +10,7 @@
 app.controller('AdminlabelCtrl', function($location, $scope, $state, $auth,
   $stateParams, $http, Account, FileUploader, CONFIG) {
   var labelId = $stateParams.id;
+  var currencyDivision = 100;
   $scope.serverURL = CONFIG.url;
   $scope.label = null;
   $scope.dropZoneFiles = null;
@@ -215,6 +216,39 @@ app.controller('AdminlabelCtrl', function($location, $scope, $state, $auth,
 
   // REVENUE PART //
 
+  $scope.getYearToDateRevenue = function() {
+    var startDateFormatted = moment().startOf('year').format("DD-MM-YYYY");
+    var endDateFormatted = moment().format("DD-MM-YYYY");
+    $http.get(CONFIG.url + '/labels/' + labelId + '/revenues/total/' +
+        startDateFormatted + '/' + endDateFormatted)
+      .success(function(data) {
+        $scope.YearToDateRevenue = Math.floor(data[0].price) / currencyDivision;
+      });
+  };
+
+  $scope.getQuarterToDateRevenue = function() {
+    var startDateFormatted = moment().startOf('quarter').format("DD-MM-YYYY");
+    var endDateFormatted = moment().format("DD-MM-YYYY");
+    $http.get(CONFIG.url + '/labels/' + labelId + '/revenues/total/' +
+        startDateFormatted + '/' + endDateFormatted)
+      .success(function(data) {
+        $scope.QuarterToDateRevenue = Math.floor(data[0].price) / currencyDivision;
+      });
+
+
+  };
+  $scope.getTodayRevenue = function() {
+    var startDateFormatted = moment().format("DD-MM-YYYY");
+    var endDateFormatted = moment().format("DD-MM-YYYY");
+    $http.get(CONFIG.url + '/labels/' + labelId + '/revenues/total/' +
+        startDateFormatted + '/' + endDateFormatted)
+      .success(function(data) {
+        $scope.TodayRevenue = Math.floor(data[0].price) / currencyDivision;
+      });
+
+  };
+
+
   // DATA PICKER 
 
   $scope.dates = {
@@ -252,7 +286,8 @@ app.controller('AdminlabelCtrl', function($location, $scope, $state, $auth,
     }
     var startDateFormatted = startDate.format("DD-MM-YYYY");
     var endDateFormatted = endDate.format("DD-MM-YYYY");
-    $http.get(CONFIG.url + '/labels/' + labelId + '/revenues/' + startDateFormatted + '/' + endDateFormatted)
+    $http.get(CONFIG.url + '/labels/' + labelId +
+        '/revenues/expanded/' + startDateFormatted + '/' + endDateFormatted)
       .success(function(data) {
         console.log(data);
         // Get the json with the informations:
@@ -388,5 +423,7 @@ app.controller('AdminlabelCtrl', function($location, $scope, $state, $auth,
   $scope.getCatalog();
   $scope.getLabel();
   $scope.getRevenueData();
-
+  $scope.getYearToDateRevenue();
+  $scope.getQuarterToDateRevenue();
+  $scope.getTodayRevenue();
 });

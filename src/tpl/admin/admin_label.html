@@ -111,9 +111,9 @@
           <div class="panel panel-default">
             <div class="panel-heading font-bold">
               <div class="row">
-                <div class="col-lg-6"> Revenue Stream </div>
-                <div class="col-lg-6 p">
-                  <input ranges="ranges" type=" daterange " ng-model="dates" format="DD/MM/YYYY" separator=" - " callback="dateChanged" class="pull-right">
+                <div class="col-lg-6 "> Revenue Stream </div>
+                <div class="col-lg-6 text-right">
+                  <input ranges="ranges" type=" daterange " ng-model="dates" format="DD/MM/YYYY" separator=" - " callback="dateChanged">
                 </div>
               </div>
             </div>
@@ -126,15 +126,15 @@
               <div class="row ">
                 <div class="col-xs-4 ">
                   <small class="text-muted block ">Year to Date</small>
-                  <span>$1500.00</span>
+                  <span>&pound;{{YearToDateRevenue}}</span>
                 </div>
                 <div class="col-xs-4 ">
                   <small class="text-muted block ">Quarter to Date</small>
-                  <span>$600.00</span>
+                  <span>&pound;{{QuarterToDateRevenue}}</span>
                 </div>
                 <div class="col-xs-4 ">
                   <small class="text-muted block ">Today</small>
-                  <span>$400.00</span>
+                  <span>&pound;{{TodayRevenue}}</span>
                 </div>
               </div>
             </div>
