@@ -171,10 +171,18 @@ app.controller('AdmincompanyCtrl', function($scope, $state, $auth,
       });
   };
 
-  $scope.getRevenueData = function() {
-    $http.get(CONFIG.url + '/companies/' + companyId + '/revenues/')
+  $scope.getRevenueData = function(startDate, endDate) {
+    if (!startDate) {
+      startDate = moment().startOf('quarter');
+      endDate = moment();
+    }
+
+    var startDateFormatted = startDate.format("DD-MM-YYYY");
+    var endDateFormatted = endDate.format("DD-MM-YYYY");
+    $http.get(CONFIG.url + '/companies/' + companyId +
+        '/revenues/expanded/' + startDateFormatted + '/' + endDateFormatted)
       .success(function(data) {
-        console.log(data);
+
         // Get the json with the informations:
         var values = [];
         //Price in the db are stored as 100x time bigger. Restore the right . 
@@ -185,9 +193,6 @@ app.controller('AdmincompanyCtrl', function($scope, $state, $auth,
         for (var i = 0; i < data.length; i++) {
           //Data is sorted by data.dataColumn;
           var finalPrice = Math.floor(data[i].price) / currencyDivision;
-
-          console.log(data[i].dataColumn, moment(data[i].dataColumn, "DD-MM-YY").toDate());
-
           if (!values[currentIndex]) {
             //First Element.
             var object = {};
@@ -233,19 +238,16 @@ app.controller('AdmincompanyCtrl', function($scope, $state, $auth,
             }
           }
         }
-        console.log(labels)
-          // data ready to be displayed in the chart;
+        // data ready to be displayed in the chart;
 
 
         var series = [];
         for (var i = labels.length - 1; i >= 0; i--) {
-          console.log(labels[i].displayName);
           series[i] = {
             color: $scope.app.colorArray[i],
             id: labels[i].id,
             y: labels[i].id,
             axis: 'y',
-            thickness: '2px',
             type: 'column',
             label: labels[i].name
           }
@@ -257,6 +259,7 @@ app.controller('AdmincompanyCtrl', function($scope, $state, $auth,
             right: 30,
             top: 20,
           },
+          columnsHGap: 1,
           stacks: [{
             axis: "y",
             series: [labels[0].id, labels[1].id, labels[2].id]
@@ -265,7 +268,8 @@ app.controller('AdmincompanyCtrl', function($scope, $state, $auth,
             x: {
               zoomable: true,
               type: 'date',
-              ticksFormat: '%B',
+              ticksFormat: '%b',
+              columnsHGap: 0,
               ticks: d3.time.months,
               ticksRotate: 0
             },
@@ -285,21 +289,38 @@ app.controller('AdmincompanyCtrl', function($scope, $state, $auth,
           },
           lineMode: "cardinal",
           series: series,
-          columnsHGap: 0,
         }
-
-
       });
 
 
   };
 
+  $scope.ranges = {
+    'Today': [moment(), moment()],
+    'Yesterday': [moment().subtract(1, 'days'), moment().subtract(1, 'days')],
+    'Last 7 days': [moment().subtract(7, 'days'), moment()],
+    'Last 30 days': [moment().subtract(30,
+      'days'), moment()],
+    'This quarter': [moment().startOf('quarter'), moment()],
+    'Previous quarter': [moment().startOf('quarter').subtract(3, 'months'), moment().endOf('quarter').subtract(3, 'months')]
+  };
+  //Data changer.
+  $scope.dates = {
+    startDate: moment().startOf('quarter'),
+    endDate: moment()
+  };
+
+
+
+  $scope.dateChanged = function(start, end, other, b) {
+    $scope.getRevenueData(start, end);
+  }
 
 
 
 
 
-
+  $scope.dateChanged();
   $scope.updateLabelList();
   $scope.getCompany();
   $scope.getRevenueData();

@@ -107,7 +107,14 @@
         </div>
         <div class="col-lg-8">
           <div class="panel panel-default">
-            <div class="panel-heading font-bold">Revenue Stream</div>
+            <div class="panel-heading font-bold">
+              <div class="row">
+                <div class="col-lg-6 "> Revenue Stream </div>
+                <div class="col-lg-6 text-right">
+                  <input ranges="ranges" type="daterange" ng-model="dates" format="DD/MM/YYYY" separator=" - " callback="dateChanged">
+                </div>
+              </div>
+            </div>
             <div class="panel-body">
               <div class="clearfix text-center m-t">
                 <div class="">

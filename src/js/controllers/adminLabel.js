@@ -267,7 +267,7 @@ app.controller('AdminlabelCtrl', function($location, $scope, $state, $auth,
   };
   //END OF DATA PICKER 
 
-  $scope.dates2 = {
+  $scope.dates = {
     startDate: moment().startOf('quarter'),
     endDate: moment()
   };
