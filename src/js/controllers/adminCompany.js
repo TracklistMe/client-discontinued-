@@ -283,8 +283,8 @@ app.controller('AdmincompanyCtrl', function($scope, $state, $auth,
           tooltip: {
             mode: 'scrubber',
             formatter: function(x, y, series) {
-
-              return moment(x).format("Do MMM, dddd") + " " + y + " " + series.label;
+              return moment(x).format("Do MMM, dddd") + " " +
+                y + " " + series.label;
             }
           },
           lineMode: "cardinal",
@@ -302,7 +302,10 @@ app.controller('AdmincompanyCtrl', function($scope, $state, $auth,
     'Last 30 days': [moment().subtract(30,
       'days'), moment()],
     'This quarter': [moment().startOf('quarter'), moment()],
-    'Previous quarter': [moment().startOf('quarter').subtract(3, 'months'), moment().endOf('quarter').subtract(3, 'months')]
+    'Previous quarter': [
+      moment().startOf('quarter').subtract(3, 'months'),
+      moment().endOf('quarter').subtract(3, 'months')
+    ]
   };
   //Data changer.
   $scope.dates = {
