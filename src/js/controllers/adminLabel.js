@@ -222,7 +222,11 @@ app.controller('AdminlabelCtrl', function($location, $scope, $state, $auth,
     $http.get(CONFIG.url + '/labels/' + labelId + '/revenues/total/' +
         startDateFormatted + '/' + endDateFormatted)
       .success(function(data) {
-        $scope.YearToDateRevenue = Math.floor(data[0].price) / currencyDivision;
+        if (data.length > 0) {
+          $scope.YearToDateRevenue = Math.floor(data[0].price) / currencyDivision;
+        } else {
+          $scope.YearToDateRevenue = 0;
+        }
       });
   };
 
@@ -232,7 +236,11 @@ app.controller('AdminlabelCtrl', function($location, $scope, $state, $auth,
     $http.get(CONFIG.url + '/labels/' + labelId + '/revenues/total/' +
         startDateFormatted + '/' + endDateFormatted)
       .success(function(data) {
-        $scope.QuarterToDateRevenue = Math.floor(data[0].price) / currencyDivision;
+        if (data.length > 0) {
+          $scope.QuarterToDateRevenue = Math.floor(data[0].price) / currencyDivision;
+        } else {
+          $scope.QuarterToDateRevenue = 0;
+        }
       });
 
 
@@ -243,7 +251,11 @@ app.controller('AdminlabelCtrl', function($location, $scope, $state, $auth,
     $http.get(CONFIG.url + '/labels/' + labelId + '/revenues/total/' +
         startDateFormatted + '/' + endDateFormatted)
       .success(function(data) {
-        $scope.TodayRevenue = Math.floor(data[0].price) / currencyDivision;
+        if (data.length > 0) {
+          $scope.TodayRevenue = Math.floor(data[0].price) / currencyDivision;
+        } else {
+          $scope.TodayRevenue = 0;
+        }
       });
 
   };
@@ -267,10 +279,6 @@ app.controller('AdminlabelCtrl', function($location, $scope, $state, $auth,
   };
   //END OF DATA PICKER 
 
-  $scope.dates = {
-    startDate: moment().startOf('quarter'),
-    endDate: moment()
-  };
 
   $scope.dateChanged = function(start, end, other, b) {
     $scope.getRevenueData(start, end);
