@@ -1,93 +1,272 @@
 'use strict';
 
+// This shows a full config file!
 module.exports = function(grunt) {
-
-  var gtx = require('gruntfile-gtx').wrap(grunt);
-  gtx.loadAuto();
-
-  var gruntConfig = require('./grunt');
-  gruntConfig.package = require('./package.json');
-
-  //Configure modules that required specific setup
-  gtx.config({
+  grunt.initConfig({
+    bump: {
+      options: {
+        files: ['package.json'],
+        updateConfigs: [],
+        commit: true,
+        commitMessage: 'Release v%VERSION%',
+        commitFiles: ['package.json'],
+        createTag: true,
+        tagName: 'v%VERSION%',
+        tagMessage: 'Version %VERSION%',
+        push: true,
+        pushTo: 'https://github.com/TracklistMe/client.git',
+        gitDescribeOptions: '--tags --always --abbrev=1 --dirty=-d',
+        globalReplace: false,
+        prereleaseName: false,
+        regExp: false
+      }
+    },
+    watch: {
+      development: {
+        files: ['src/js/{,*/}*.js', 'src/css/{,*/}*.css'],
+        tasks: ['less:development', 'jshint']
+      },
+    },
+    uglify: {
+      production: {
+        /*
+        src: [
+          'angular/js/app.min.js'
+        ],
+        dest: 'angular/js/app.min.js'
+        */
+      }
+    },
+    concat: {
+      production: {
+        src: [
+          'bower_components/jquery/dist/jquery.js',
+          'bower_components/bootstrap/dist/js/bootstrap.js',
+          'bower_components/moment/min/moment.min.js',
+          'bower_components/bootstrap-daterangepicker/daterangepicker.js',
+          'bower_components/angular/angular.js',
+          'bower_components/d3/d3.min.js',
+          'bower_components/n3-line-chart/build/line-chart.js',
+          'bower_components/angular-animate/angular-animate.js',
+          'bower_components/angular-cookies/angular-cookies.js',
+          'bower_components/angular-resource/angular-resource.js',
+          'bower_components/angular-sanitize/angular-sanitize.js',
+          'bower_components/angular-touch/angular-touch.js',
+          'bower_components/angular-ui-router/release/angular-ui-router.js',
+          'bower_components/ngstorage/ngStorage.js',
+          'bower_components/angular-ui-utils/ui-utils.js',
+          'bower_components/satellizer/satellizer.js',
+          'bower_components/html.sortable/dist/html.sortable.js',
+          'bower_components/html.sortable/dist/html.sortable.angular.js',
+          'bower_components/bower-jquery-sparkline/dist/jquery.sparkline.retina.js',
+          'bower_components/bower-jquery-easyPieChart/dist/jquery.easypiechart.fill.js',
+          'bower_components/angular-bootstrap/ui-bootstrap-tpls.js',
+          'bower_components/oclazyload/dist/ocLazyLoad.js',
+          'bower_components/jquery.sparkline/dist/jquery.sparkline.retina.js',
+          'bower_components/angular-smart-table/dist/smart-table.min.js',
+          'bower_components/angular-translate/angular-translate.js',
+          'bower_components/angular-translate-loader-static-files/angular-translate-loader-static-files.js',
+          'bower_components/angular-translate-storage-cookie/angular-translate-storage-cookie.js',
+          'bower_components/angular-translate-storage-local/angular-translate-storage-local.js',
+          'bower_components/angular-stripe/release/angular-stripe.js',
+          'bower_components/angular-credit-cards/release/angular-credit-cards.js',
+          'src/js/*.js',
+          'src/js/directives/*.js',
+          'src/js/services/*.js',
+          'src/js/filters/*.js',
+          'src/js/libs/cart/*.js',
+          'src/js/controllers/bootstrap.js'
+        ],
+        dest: 'angular/js/app.min.js'
+      }
+    },
+    recess: {
+      production: {
+        files: {
+          'angular/css/app.min.css': [
+            'bower_components/bootstrap/dist/css/bootstrap.css',
+            'bower_components/animate.css/animate.css',
+            'bower_components/font-awesome/css/font-awesome.css',
+            'bower_components/simple-line-icons/css/simple-line-icons.css',
+            'src/css/*.css'
+          ]
+        },
+        options: {
+          compress: true
+        }
+      }
+    },
+    copy: {
+      production: {
+        files: [{
+          expand: true,
+          src: "**",
+          cwd: 'bower_components/bootstrap/fonts',
+          dest: "angular/fonts"
+        }, {
+          expand: true,
+          src: "**",
+          cwd: 'bower_components/videogular/',
+          dest: "angular/bower_components/videogular"
+        }, {
+          expand: true,
+          src: "**",
+          cwd: 'bower_components/jquery.sparkline/dist/',
+          dest: "angular/bower_components/jquery.sparkline/dist"
+        }, {
+          expand: true,
+          src: "**",
+          cwd: 'bower_components/angularjs-toaster/',
+          dest: "angular/bower_components/angularjs-toaster"
+        }, {
+          expand: true,
+          src: "**",
+          cwd: 'bower_components/',
+          dest: "angular/bower_components"
+        }, {
+          expand: true,
+          src: "**",
+          cwd: 'bower_components/videogular-buffering/',
+          dest: "angular/bower_components/videogular-buffering"
+        }, {
+          expand: true,
+          src: "**",
+          cwd: 'bower_components/screenfull/',
+          dest: "angular/bower_components/screenfull"
+        }, {
+          expand: true,
+          src: "**",
+          cwd: 'bower_components/videogular-controls/',
+          dest: "angular/bower_components/videogular-controls"
+        }, {
+          expand: true,
+          src: "**",
+          cwd: 'bower_components/videogular-poster/',
+          dest: "angular/bower_components/videogular-poster"
+        }, {
+          expand: true,
+          src: "**",
+          cwd: 'bower_components/videogular-overlay-play/',
+          dest: "angular/bower_components/videogular-overlay-play"
+        }, {
+          expand: true,
+          src: "**",
+          cwd: 'bower_components/font-awesome/fonts',
+          dest: "angular/fonts"
+        }, {
+          expand: true,
+          src: "**",
+          cwd: 'bower_components/jquery.sparkline/dist/',
+          dest: "angular/bower_components/jquery.sparkline/dist"
+        }, {
+          expand: true,
+          src: "**",
+          cwd: 'bower_components/simple-line-icons/fonts',
+          dest: "angular/fonts"
+        }, {
+          expand: true,
+          src: "**",
+          cwd: 'src/fonts',
+          dest: "angular/fonts"
+        }, {
+          expand: true,
+          src: "**",
+          cwd: 'src/l10n',
+          dest: "angular/l10n"
+        }, {
+          expand: true,
+          src: "**",
+          cwd: 'src/img',
+          dest: "angular/img"
+        }, {
+          expand: true,
+          src: "**",
+          cwd: 'src/js',
+          dest: "angular/js"
+        }, {
+          expand: true,
+          src: "**",
+          cwd: 'src/tpl',
+          dest: "angular/tpl"
+        }, {
+          src: 'bower_components/jquery/dist/jquery.min.map',
+          dest: 'angular/js/jquery.min.map'
+        }, {
+          src: 'src/index.min.html',
+          dest: 'angular/index.html'
+        }, {
+          src: 'src/favicon.ico',
+          dest: 'angular/favicon.ico'
+        }]
+      }
+    },
+    clean: {
+      production: ["angular"]
+    },
+    less: {
+      development: {
+        files: {
+          'src/css/app.css': 'src/css/less/app.less'
+        }
+      },
+      production: {
+        files: {
+          'src/css/app.css': 'src/css/less/app.less'
+        }
+      }
+    },
     jshint: {
       options: {
         jshintrc: '.jshintrc',
         reporter: require('jshint-stylish')
-      }
-    }
-  });
-
-  gtx.initConfig({
-    connect: {
-      production: {
-        options: {
-          port: 9000,
-          base: 'angular/'
-        }
       },
-      debug: {
-        options: {
-          port: 9000,
-          base: 'src/'
-        }
-      }
-    }
-  });
-  // Configuration for watch
-  gtx.initConfig({
-    watch: {
-      scripts: {
-        files: ['**/*.js'],
-        tasks: ['lint']
-      },
+      all: ['Gruntfile.js', 'src/js/controllers/{,*/}*.js']
     },
-  });
+    browserSync: {
+      development: {
 
-  // Configuration for concurrent
-  gtx.initConfig({
-    concurrent: {
-      developEnviroment: {
-        tasks: ['watch', 'serve:debug'],
+        bsFiles: {
+          src: [
+            'src/css/{,*/}*.css',
+            'src/*.html'
+          ]
+        },
         options: {
-          logConcurrentOutput: true
+          port: 9000,
+          watchTask: true,
+          server: './src'
         }
       }
     }
   });
 
+  // load npm tasks
+  grunt.loadNpmTasks('grunt-bump');
+  grunt.loadNpmTasks('grunt-contrib-uglify');
+  grunt.loadNpmTasks('grunt-contrib-concat');
+  grunt.loadNpmTasks('grunt-recess');
+  grunt.loadNpmTasks('grunt-contrib-copy');
+  grunt.loadNpmTasks('grunt-contrib-clean');
+  grunt.loadNpmTasks('grunt-contrib-less');
+  grunt.loadNpmTasks('grunt-contrib-jshint');
+  grunt.loadNpmTasks('grunt-contrib-watch');
+  grunt.loadNpmTasks('grunt-browser-sync');
+  grunt.loadNpmTasks('grunt-concurrent');
 
-  gtx.config(gruntConfig);
-  //Built the client 
-  gtx.alias('build:angular', ['recess:less', 'clean:angular', 'copy:angular',
-    'recess:angular', 'concat:angular', 'uglify:angular'
+  // build production, including
+  // 1- clean the current production 
+  // 2- compile all the .less to .css
+  // 3- copy the src to production 
+  // 4- recess and compress all the css 
+  // 5- concat all the js
+  // 6- uglify the js code 
+  grunt.registerTask('build:production', ['clean:production',
+    'less:production',
+    'copy:production',
+    'recess:production',
+    'concat:production',
+    'uglify:production'
   ]);
-  //Build the html miniwebsite 
-  gtx.alias('build:html', ['clean:html', 'copy:html', 'recess:html',
-    'swig:html', 'concat:html', 'uglify:html'
-  ]);
-  //Build the landing page
-  gtx.alias('build:landing', ['copy:landing', 'swig:landing']);
-  //Run the linter
-  gtx.alias('lint', ['jshint']);
-  //Run the webserver on the src/ folder and keep watching the changes.
-  //Every time you save a file the linter starts.
-  gtx.alias('develop', ['concurrent:developEnviroment']);
-  //Start the local webserver with the debug version of the site
-  gtx.alias('serve:debug', ['copy:bowerDevelop', 'connect:debug:keepalive']);
-  //Compile the site and start the local webserver on the production code
-  gtx.alias('serve:production', ['build:angular',
-    'connect:production:keepalive'
-  ]);
-
-  /* Do not use the following command, they are not consistent at the momet.
-  gtx.alias('release', ['bower-install-simple',
-   'build:angular', 'bump-commit']);
-  gtx.alias('release-patch', ['bump-only:patch', 'release']);
-  gtx.alias('release-minor', ['bump-only:minor', 'release']);
-  gtx.alias('release-major', ['bump-only:major', 'release']);
-  gtx.alias('prerelease', ['bump-only:prerelease', 'release']);
-  */
-
-  gtx.finalise();
+  // define default task
+  grunt.registerTask('development', ['browserSync:development', 'watch']);
 };

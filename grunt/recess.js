@@ -1,12 +1,14 @@
 module.exports = {
   less: {
-    files: {
-      'src/css/app.css': [
-        'src/css/less/app.less'
-      ]
-    },
-    options: {
-      compile: true
+    development: {
+      files: {
+        'src/css/app.css': [
+          'src/css/less/app.less'
+        ]
+      },
+      options: {
+        compile: true
+      }
     }
   },
   angular: {
