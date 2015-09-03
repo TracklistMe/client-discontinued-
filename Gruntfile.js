@@ -23,7 +23,7 @@ module.exports = function(grunt) {
     },
     watch: {
       development: {
-        files: ['src/js/{,*/}*.js', 'src/css/{,*/}*.css'],
+        files: ['src/js/{,*/}*.js', 'src/css/{,*/}*.css', 'src/css/less/aphextwin/{,*/}*.css'],
         tasks: ['less:development', 'jshint']
       },
     },
@@ -203,11 +203,15 @@ module.exports = function(grunt) {
     clean: {
       production: ["angular"]
     },
+
     less: {
       development: {
-        files: {
+        files: [{
           'src/css/app.css': 'src/css/less/app.less'
-        }
+        }, {
+          'src/css/aphextwin.css': 'src/css/less/aphextwin/aphextwin.less'
+
+        }]
       },
       production: {
         files: {
@@ -252,17 +256,20 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks('grunt-contrib-watch');
   grunt.loadNpmTasks('grunt-browser-sync');
   grunt.loadNpmTasks('grunt-concurrent');
+  grunt.loadNpmTasks('grunt-uncss');
 
   // build production, including
   // 1- clean the current production 
   // 2- compile all the .less to .css
-  // 3- copy the src to production 
-  // 4- recess and compress all the css 
-  // 5- concat all the js
-  // 6- uglify the js code 
+  // 3- removed all the unused css
+  // 4- copy the src to production 
+  // 5- recess and compress all the css 
+  // 6- concat all the js
+  // 7- uglify the js code 
   grunt.registerTask('build:production', ['clean:production',
     'less:production',
     'copy:production',
+    'uncss:production',
     'recess:production',
     'concat:production',
     'uglify:production'

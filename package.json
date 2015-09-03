@@ -56,6 +56,7 @@
     "grunt-postcss": "^0.6.0",
     "grunt-recess": "^1.0.0",
     "grunt-swig": "^0.2.1",
+    "grunt-uncss": "^0.4.3",
     "gruntfile-gtx": "^0.3.0",
     "http-server": "^0.6.1",
     "jshint-stylish": "^2.0.1",
