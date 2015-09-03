@@ -1,6 +1,6 @@
 {
   "name": "Tracklist.me",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "description": "Admin web application template with Bootstrap 3 and AngularJS.",
   "scripts": {
     "start": "node node_modules/http-server/bin/http-server -o -p 9000"
