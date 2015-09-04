@@ -256,7 +256,6 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks('grunt-contrib-watch');
   grunt.loadNpmTasks('grunt-browser-sync');
   grunt.loadNpmTasks('grunt-concurrent');
-  grunt.loadNpmTasks('grunt-uncss');
 
   // build production, including
   // 1- clean the current production 
@@ -269,7 +268,6 @@ module.exports = function(grunt) {
   grunt.registerTask('build:production', ['clean:production',
     'less:production',
     'copy:production',
-    'uncss:production',
     'recess:production',
     'concat:production',
     'uglify:production'
