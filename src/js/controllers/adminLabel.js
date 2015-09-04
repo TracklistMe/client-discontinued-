@@ -1,4 +1,5 @@
 'use strict';
+/*jslint browser: true*/
 
 /**
  * @ngdoc function
@@ -217,13 +218,14 @@ app.controller('AdminlabelCtrl', function($location, $scope, $state, $auth,
   // REVENUE PART //
 
   $scope.getYearToDateRevenue = function() {
-    var startDateFormatted = moment().startOf('year').format("DD-MM-YYYY");
-    var endDateFormatted = moment().format("DD-MM-YYYY");
+    var startDateFormatted = moment().startOf('year').format('DD-MM-YYYY');
+    var endDateFormatted = moment().format('DD-MM-YYYY');
     $http.get(CONFIG.url + '/labels/' + labelId + '/revenues/total/' +
         startDateFormatted + '/' + endDateFormatted)
       .success(function(data) {
         if (data.length > 0) {
-          $scope.YearToDateRevenue = Math.floor(data[0].price) / currencyDivision;
+          $scope.YearToDateRevenue =
+            Math.floor(data[0].price) / currencyDivision;
         } else {
           $scope.YearToDateRevenue = 0;
         }
@@ -231,13 +233,14 @@ app.controller('AdminlabelCtrl', function($location, $scope, $state, $auth,
   };
 
   $scope.getQuarterToDateRevenue = function() {
-    var startDateFormatted = moment().startOf('quarter').format("DD-MM-YYYY");
-    var endDateFormatted = moment().format("DD-MM-YYYY");
+    var startDateFormatted = moment().startOf('quarter').format('DD-MM-YYYY');
+    var endDateFormatted = moment().format('DD-MM-YYYY');
     $http.get(CONFIG.url + '/labels/' + labelId + '/revenues/total/' +
         startDateFormatted + '/' + endDateFormatted)
       .success(function(data) {
         if (data.length > 0) {
-          $scope.QuarterToDateRevenue = Math.floor(data[0].price) / currencyDivision;
+          $scope.QuarterToDateRevenue =
+            Math.floor(data[0].price) / currencyDivision;
         } else {
           $scope.QuarterToDateRevenue = 0;
         }
@@ -246,8 +249,8 @@ app.controller('AdminlabelCtrl', function($location, $scope, $state, $auth,
 
   };
   $scope.getTodayRevenue = function() {
-    var startDateFormatted = moment().format("DD-MM-YYYY");
-    var endDateFormatted = moment().format("DD-MM-YYYY");
+    var startDateFormatted = moment().format('DD-MM-YYYY');
+    var endDateFormatted = moment().format('DD-MM-YYYY');
     $http.get(CONFIG.url + '/labels/' + labelId + '/revenues/total/' +
         startDateFormatted + '/' + endDateFormatted)
       .success(function(data) {
@@ -275,25 +278,24 @@ app.controller('AdminlabelCtrl', function($location, $scope, $state, $auth,
     'Last 30 days': [moment().subtract(30,
       'days'), moment()],
     'This quarter': [moment().startOf('quarter'), moment()],
-    'Previous quarter': [moment().startOf('quarter').subtract(3, 'months'), moment().endOf('quarter').subtract(3, 'months')]
+    'Previous quarter': [moment().startOf('quarter').subtract(3, 'months'),
+      moment().endOf('quarter').subtract(3, 'months')
+    ]
   };
   //END OF DATA PICKER 
 
 
-  $scope.dateChanged = function(start, end, other, b) {
+  $scope.dateChanged = function(start, end) {
     $scope.getRevenueData(start, end);
-  }
-
-
-
+  };
 
   $scope.getRevenueData = function(startDate, endDate) {
     if (!startDate) {
       startDate = moment().startOf('quarter');
       endDate = moment();
     }
-    var startDateFormatted = startDate.format("DD-MM-YYYY");
-    var endDateFormatted = endDate.format("DD-MM-YYYY");
+    var startDateFormatted = startDate.format('DD-MM-YYYY');
+    var endDateFormatted = endDate.format('DD-MM-YYYY');
     $http.get(CONFIG.url + '/labels/' + labelId +
         '/revenues/expanded/' + startDateFormatted + '/' + endDateFormatted)
       .success(function(data) {
@@ -308,24 +310,26 @@ app.controller('AdminlabelCtrl', function($location, $scope, $state, $auth,
         for (var i = 0; i < data.length; i++) {
           //Data is sorted by data.dataColumn;
           var finalPrice = Math.floor(data[i].price) / currencyDivision;
+          var object = {};
           if (!values[currentIndex]) {
             //First Element.
-            var object = {};
-            object['x'] = moment(data[i].dataColumn, "DD-MM-YY").toDate();
+
+            object.x = moment(data[i].dataColumn, 'DD-MM-YY').toDate();
             object[data[i].Release.catalogNumber] = finalPrice;
             values.push(
               object
             );
           } else {
             // ho almeno un valore 
-            if (values[currentIndex].x.getTime() == moment(data[i].dataColumn, "DD-MM-YY").toDate().getTime()) {
+            if (values[currentIndex].x.getTime() ===
+              moment(data[i].dataColumn, 'DD-MM-YY').toDate().getTime()) {
               //same day
               values[currentIndex][data[i].Release.catalogNumber] = finalPrice;
             } else {
               // me moved to the next data
               currentIndex++;
-              var object = {};
-              object['x'] = moment(data[i].dataColumn, "DD-MM-YY").toDate();
+
+              object.x = moment(data[i].dataColumn, 'DD-MM-YY').toDate();
               object[data[i].Release.catalogNumber] = finalPrice;
               values.push(
                 object
@@ -333,8 +337,9 @@ app.controller('AdminlabelCtrl', function($location, $scope, $state, $auth,
             }
           }
           var found = false;
+
           for (var l = 0; l < labels.length; l++) {
-            if ((labels[l].id) == data[i].Release.catalogNumber) {
+            if ((labels[l].id) === data[i].Release.catalogNumber) {
               found = true;
             }
           }
@@ -342,15 +347,16 @@ app.controller('AdminlabelCtrl', function($location, $scope, $state, $auth,
             labels.push({
               id: data[i].Release.catalogNumber,
               name: data[i].Release.catalogNumber
-            })
+            });
           }
           labels = labels.sort();
         }
+
         // FILLERS: ads for each label a valid number per each time point
         for (var v = 0; v < values.length; v++) {
-          for (var l = 0; l < labels.length; l++) {
-            if (!values[v][labels[l].id]) {
-              values[v][labels[l].id] = 0
+          for (var k = 0; k < labels.length; k++) {
+            if (!values[v][labels[k].id]) {
+              values[v][labels[k].id] = 0;
             }
           }
         }
@@ -365,8 +371,7 @@ app.controller('AdminlabelCtrl', function($location, $scope, $state, $auth,
 
 
         var series = [];
-        for (var i = labels.length - 1; i >= 0; i--) {
-
+        for (i = labels.length - 1; i >= 0; i--) {
           series[i] = {
             color: $scope.app.colorArray[i],
             id: labels[i].id,
@@ -375,9 +380,8 @@ app.controller('AdminlabelCtrl', function($location, $scope, $state, $auth,
             thickness: '2px',
             type: 'column',
             label: labels[i].name
-          }
-        };
-        console.log(JSON.stringify(values));
+          };
+        }
 
         $scope.data = values;
         $scope.options = {
@@ -386,7 +390,7 @@ app.controller('AdminlabelCtrl', function($location, $scope, $state, $auth,
             top: 20,
           },
           stacks: [{
-            axis: "y",
+            axis: 'y',
             series: (labels.map(function(obj) {
               return obj.name;
             }).sort())
@@ -410,13 +414,14 @@ app.controller('AdminlabelCtrl', function($location, $scope, $state, $auth,
             mode: 'scrubber',
             formatter: function(x, y, series) {
 
-              return moment(x).format("Do MMM, dddd") + " " + y + " " + series.label;
+              return moment(x).format('Do MMM, dddd') +
+                ' ' + y + ' ' + series.label;
             }
           },
-          lineMode: "cardinal",
+          lineMode: 'cardinal',
           series: series,
           columnsHGap: 0,
-        }
+        };
       });
 
 

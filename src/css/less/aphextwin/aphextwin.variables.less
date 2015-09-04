@@ -111,7 +111,12 @@
 //** Point at which the navbar begins collapsing.
 @grid-float-breakpoint-max: (@grid-float-breakpoint - 1);
 //** Number of columns in the subgrid system.
-@grid-columns-subsystem:              18;
+
+@grid-columns-subsystem:           18;
+@grid-sub-gutter-xs-width:         4px;
+@grid-sub-gutter-sm-width:         8px;
+@grid-sub-gutter-md-width:         12px;
+@grid-sub-gutter-lg-width:         24px;
 
 //== Container sizes
 //
@@ -131,3 +136,5 @@
 @container-large-desktop:      (1140px + @grid-gutter-lg-width);
 //** For `@screen-lg-min` and up.
 @container-lg:                 @container-large-desktop;
+
+

@@ -46,6 +46,7 @@
 // Common styles for small and large grid columns
 
 .make-grid-columns();
+.make-subgrid-columns();
 
 
 // Extra small grid
@@ -54,8 +55,8 @@
 // smartphones.
 
 .make-grid(xs);
-
-
+.make-subgrid(xs);
+.margin-bottom  {margin-bottom: ceil(@line-height-computed / 4);} 
 // Small grid
 //
 // Columns, offsets, pushes, and pulls for the small device range, from phones
@@ -63,6 +64,8 @@
 
 @media (min-width: @screen-sm-min) {
   .make-grid(sm);
+  .make-subgrid(sm);
+  .margin-bottom  {margin-bottom: ceil(@line-height-computed / 2);}  
 }
 
 
@@ -72,6 +75,8 @@
 
 @media (min-width: @screen-md-min) {
   .make-grid(md);
+  .make-subgrid(md);
+  .margin-bottom {margin-bottom: ceil(@line-height-computed);}  
 }
 
 
@@ -81,4 +86,6 @@
 
 @media (min-width: @screen-lg-min) {
   .make-grid(lg);
+  .make-subgrid(lg);
+  .margin-bottom  {margin-bottom: ceil(@line-height-computed * 2);} 
 }
