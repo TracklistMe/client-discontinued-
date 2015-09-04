@@ -1,0 +1,25 @@
+.header {
+  background-color: @brand-darkest;
+  position: relative;
+  height: 500px;
+  width: 100%;
+  padding: 2em 0;
+  overflow: hidden; // Hide overflow to contain the background
+}
+.header_background {
+    opacity: .2;
+
+    position: absolute;
+    top: -50%;
+    left: 0;
+    width: 100%;
+    // Where the magic happens
+    -webkit-filter: blur(30px);
+    -webkit-transform: translate3d(0, 0, 0);
+}
+.header_title {
+    position: relative;
+    text-align: center;
+    font-size: 5em;
+    color: white;
+}
