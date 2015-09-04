@@ -995,21 +995,25 @@ fieldset[disabled] .navbar-default .btn-link:focus {
   color: #cccccc;
 }
 .header {
-  background-color: #1e1e1e;
   position: relative;
   height: 500px;
   width: 100%;
-  padding: 2em 0;
   overflow: hidden;
 }
 .header_background {
-  opacity: .2;
   position: absolute;
-  top: -50%;
+  top: -50px;
   left: 0;
   width: 100%;
-  -webkit-filter: blur(30px);
+  -webkit-filter: blur(10px);
   -webkit-transform: translate3d(0, 0, 0);
+}
+.header_grey_overlay {
+  position: absolute;
+  top: -50px;
+  height: 550px;
+  width: 100%;
+  background-color: rgba(30, 30, 30, 0.9);
 }
 .header_title {
   position: relative;

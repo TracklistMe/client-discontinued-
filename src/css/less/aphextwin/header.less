@@ -1,23 +1,26 @@
-.header {
-  background-color: @brand-darkest;
+.header { 
   position: relative;
   height: 500px;
-  width: 100%;
-  padding: 2em 0;
+  width: 100%; 
   overflow: hidden; // Hide overflow to contain the background
 }
 .header_background {
-    opacity: .2;
-
     position: absolute;
-    top: -50%;
+    top: -@navbar-height;
     left: 0;
     width: 100%;
     // Where the magic happens
-    -webkit-filter: blur(30px);
+    -webkit-filter: blur(10px);
     -webkit-transform: translate3d(0, 0, 0);
 }
-.header_title {
+.header_grey_overlay{
+  position: absolute;
+  top: -@navbar-height;
+  height: @navbar-height+500px;
+  width: 100%;
+  background-color: fade(@brand-darkest, 90%);
+}
+.header_title { 
     position: relative;
     text-align: center;
     font-size: 5em;
