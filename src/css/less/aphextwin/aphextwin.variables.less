@@ -144,10 +144,11 @@
 //##
 
 // Basics of a navbar
+
 @navbar-height:                    60px;
 @navbar-divider:					8px;
 @navbar-margin-bottom:             @line-height-computed;
-@navbar-padding-horizontal:        floor((@grid-gutter-lg-width / 2));
+@navbar-padding-horizontal:        floor((@grid-gutter-lg-width ));
 @navbar-padding-vertical:          ((@navbar-height - @line-height-computed) / 2);
 @navbar-collapse-max-height:       340px;
 
@@ -174,6 +175,8 @@
 @navbar-default-toggle-icon-bar-bg:        #888;
 @navbar-default-toggle-border-color:       #ddd;
 
+// Navbar background shaders
+@header-background-shades:                 fade(@brand-darkest, 95%);
  
 
 

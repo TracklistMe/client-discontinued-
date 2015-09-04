@@ -6,16 +6,6 @@
 /* fonts */
 /* gradient */
 /* focus */
-.gradientBorder {
-  margin-top: 1px;
-  width: 250px;
-  height: 250px;
-  border: 1px solid transparent;
-  -moz-border-image: -moz-linear-gradient(left, #eb1781 0%, #ff7a14 100%);
-  -webkit-border-image: -webkit-linear-gradient(left, #eb1781 0%, #ff7a14 100%);
-  border-image: linear-gradient(to right, #eb1781 0%, #ff7a14 100%);
-  border-image-slice: 1;
-}
 /* ---------------
 // SubGrid system
 ----------------- */
@@ -91,6 +81,9 @@ output {
   background-image: none;
   border: 1px solid #cccccc;
   border-radius: 0;
+  -webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075) 3px 5px rgba(0, 0, 0, 0.5);
+  -moz-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075) 3px 5px rgba(0, 0, 0, 0.5);
+  box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075) 3px 5px rgba(0, 0, 0, 0.5);
   -webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
   box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
   -webkit-transition: border-color ease-in-out .15s, box-shadow ease-in-out .15s;
@@ -100,6 +93,9 @@ output {
 .form-control:focus {
   border-color: #eb1781;
   outline: 0;
+  -webkit-box-shadow: inset 0 1px 1px rgba(0,0,0,.075), 0 0 8px rgba(235, 23, 129, 0.6) 3px 5px rgba(0, 0, 0, 0.5);
+  -moz-box-shadow: inset 0 1px 1px rgba(0,0,0,.075), 0 0 8px rgba(235, 23, 129, 0.6) 3px 5px rgba(0, 0, 0, 0.5);
+  box-shadow: inset 0 1px 1px rgba(0,0,0,.075), 0 0 8px rgba(235, 23, 129, 0.6) 3px 5px rgba(0, 0, 0, 0.5);
   -webkit-box-shadow: inset 0 1px 1px rgba(0,0,0,.075), 0 0 8px rgba(235, 23, 129, 0.6);
   box-shadow: inset 0 1px 1px rgba(0,0,0,.075), 0 0 8px rgba(235, 23, 129, 0.6);
 }
@@ -455,7 +451,7 @@ select[multiple].input-lg {
 .nav > li > a {
   position: relative;
   display: block;
-  padding: 21px 12px;
+  padding: 21px 24px;
 }
 .nav > li > a:hover,
 .nav > li > a:focus {
@@ -613,7 +609,12 @@ select[multiple].input-lg {
   position: relative;
   min-height: 60px;
   margin-bottom: 18px;
-  border: 1px solid transparent;
+}
+.navbar-background {
+  background-color: rgba(30, 30, 30, 0.95);
+  height: 60px;
+  width: 100%;
+  position: absolute;
 }
 @media (min-width: 768px) {
   .navbar-header {
@@ -622,8 +623,8 @@ select[multiple].input-lg {
 }
 .navbar-collapse {
   overflow-x: visible;
-  padding-right: 12px;
-  padding-left: 12px;
+  padding-right: 24px;
+  padding-left: 24px;
   border-top: 1px solid transparent;
   box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.1);
   -webkit-overflow-scrolling: touch;
@@ -667,8 +668,8 @@ select[multiple].input-lg {
 .container-fluid > .navbar-header,
 .container > .navbar-collapse,
 .container-fluid > .navbar-collapse {
-  margin-right: -12px;
-  margin-left: -12px;
+  margin-right: -24px;
+  margin-left: -24px;
 }
 @media (min-width: 768px) {
   .container > .navbar-header,
@@ -700,8 +701,9 @@ select[multiple].input-lg {
   border-width: 1px 0 0;
 }
 .navbar-brand {
+  position: relative;
   float: left;
-  padding: 21px 12px;
+  padding: 21px 24px;
   line-height: 18px;
   height: 60px;
 }
@@ -715,13 +717,13 @@ select[multiple].input-lg {
 @media (min-width: 768px) {
   .navbar > .container .navbar-brand,
   .navbar > .container-fluid .navbar-brand {
-    margin-left: -12px;
+    margin-left: -24px;
   }
 }
 .navbar-toggle {
   position: relative;
   float: right;
-  margin-right: 12px;
+  margin-right: 24px;
   padding: 9px 10px;
   margin-top: 13px;
   margin-bottom: 13px;
@@ -746,7 +748,7 @@ select[multiple].input-lg {
   }
 }
 .navbar-nav {
-  margin: 10.5px -12px;
+  margin: 10.5px -24px;
 }
 .navbar-nav > li > a {
   padding-top: 10px;
@@ -789,11 +791,14 @@ select[multiple].input-lg {
   }
 }
 .navbar-form {
-  margin-left: -12px;
-  margin-right: -12px;
-  padding: 10px 12px;
+  margin-left: -24px;
+  margin-right: -24px;
+  padding: 10px 24px;
   border-top: 1px solid transparent;
   border-bottom: 1px solid transparent;
+  -webkit-box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.1), 0 1px 0 rgba(255, 255, 255, 0.1) 3px 5px rgba(0, 0, 0, 0.5);
+  -moz-box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.1), 0 1px 0 rgba(255, 255, 255, 0.1) 3px 5px rgba(0, 0, 0, 0.5);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.1), 0 1px 0 rgba(255, 255, 255, 0.1) 3px 5px rgba(0, 0, 0, 0.5);
   -webkit-box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.1), 0 1px 0 rgba(255, 255, 255, 0.1);
   box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.1), 0 1px 0 rgba(255, 255, 255, 0.1);
   margin-top: 14px;
@@ -865,6 +870,9 @@ select[multiple].input-lg {
     margin-right: 0;
     padding-top: 0;
     padding-bottom: 0;
+    -webkit-box-shadow: none 3px 5px rgba(0, 0, 0, 0.5);
+    -moz-box-shadow: none 3px 5px rgba(0, 0, 0, 0.5);
+    box-shadow: none 3px 5px rgba(0, 0, 0, 0.5);
     -webkit-box-shadow: none;
     box-shadow: none;
   }
@@ -896,8 +904,8 @@ select[multiple].input-lg {
 @media (min-width: 768px) {
   .navbar-text {
     float: left;
-    margin-left: 12px;
-    margin-right: 12px;
+    margin-left: 24px;
+    margin-right: 24px;
   }
 }
 @media (min-width: 768px) {
@@ -906,7 +914,7 @@ select[multiple].input-lg {
   }
   .navbar-right {
     float: right !important;
-    margin-right: -12px;
+    margin-right: 12px;
   }
   .navbar-right ~ .navbar-right {
     margin-right: 0;
@@ -1048,6 +1056,13 @@ fieldset[disabled] .navbar-default .btn-link:focus {
   -webkit-border-image: -webkit-linear-gradient(left, #eb1781 0%, #ff7a14 100%);
   border-image: linear-gradient(to right, #eb1781 0%, #ff7a14 100%);
   border-image-slice: 1;
+  -webkit-box-shadow: 0px 5px 20px rgba(0, 0, 0, 0.5);
+  -moz-box-shadow: 0px 5px 20px rgba(0, 0, 0, 0.5);
+  box-shadow: 0px 5px 20px rgba(0, 0, 0, 0.5);
+}
+.dropdownBorder:hover a {
+  margin-top: -2px;
+  margin-left: -1px;
 }
 .dropdownBackground:hover {
   background-color: #1e1e1e;
@@ -1069,20 +1084,25 @@ fieldset[disabled] .navbar-default .btn-link:focus {
   width: 100%;
   overflow: hidden;
 }
+.header_shades_holder {
+  position: absolute;
+  height: 500px;
+  width: 100%;
+  clip: rect(0, auto, auto, 0);
+}
 .header_background {
   position: absolute;
   top: -60px;
   left: 0;
   width: 100%;
-  -webkit-filter: blur(10px);
   -webkit-transform: translate3d(0, 0, 0);
 }
 .header_grey_overlay {
-  position: absolute;
-  top: -60px;
-  height: 560px;
+  position: fixed;
+  top: 60px;
+  height: 440px;
   width: 100%;
-  background-color: rgba(30, 30, 30, 0.9);
+  background-color: rgba(30, 30, 30, 0.95);
 }
 .header_title {
   position: relative;

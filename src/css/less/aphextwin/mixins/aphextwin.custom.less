@@ -30,6 +30,12 @@
    background-image: linear-gradient(@origin, @start, @stop);
  }
 
+ .box-shadow (@x: 0px, @y: 3px, @blur: 5px, @alpha: 0.5) {
+  -webkit-box-shadow: @x @y @blur rgba(0, 0, 0, @alpha);
+  -moz-box-shadow: @x @y @blur rgba(0, 0, 0, @alpha);
+  box-shadow: @x @y @blur rgba(0, 0, 0, @alpha);
+}
+
 /* focus */
 .tab-focus() {
   // Default
@@ -39,13 +45,4 @@
   outline-offset: -2px;
 }
 
-.gradientBorder {
-  margin-top: 1px;
-  width: 250px;
-  height: 250px;
-  border: 1px solid transparent;
-  -moz-border-image: -moz-linear-gradient(left, @brand-primary 0%, @brand-secondary 100%);
-  -webkit-border-image: -webkit-linear-gradient(left, @brand-primary 0%, @brand-secondary 100%);
-  border-image: linear-gradient(to right, @brand-primary 0%, @brand-secondary 100%);
-  border-image-slice: 1;
-}
+ 
