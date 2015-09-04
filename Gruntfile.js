@@ -23,7 +23,7 @@ module.exports = function(grunt) {
     },
     watch: {
       development: {
-        files: ['src/js/{,*/}*.js', 'src/css/{,*/}*.css', 'src/css/less/aphextwin/{,*/}*.css'],
+        files: ['src/js/{,*/}*.js', 'src/css/{,*/}*.css', 'src/css/less/aphextwin/{,*/}*.less'],
         tasks: ['less:development', 'jshint']
       },
     },

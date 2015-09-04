@@ -9,6 +9,7 @@
 // other navbar variations.
 
 .navbar {
+  .fontSubtitle();
   position: relative;
   min-height: @navbar-height; // Ensure a navbar always shows (e.g., without a .navbar-brand in collapsed mode)
   margin-bottom: @navbar-margin-bottom;
@@ -162,7 +163,7 @@
 .navbar-brand {
   float: left;
   padding: @navbar-padding-vertical @navbar-padding-horizontal;
-  font-size: @font-size-large;
+ 
   line-height: @line-height-computed;
   height: @navbar-height;
 
@@ -519,4 +520,78 @@
     }
   }
 }
+
+/* Additinal navbar implementation for dropdowns */
+.navbar ul ul {
+  display: none;
+}
+
+
+.navbar ul li:hover > ul {
+    display: block;
+}
+
+.navbar ul ul li, .navbar ul ul li a{
+  color: @brand-lighter;
+  text-decoration: none;
+  list-style: none;
+}
+
+.navbar ul ul li {
+    font-size: @font-size-small;
+    line-height: @line-height-computed*1.2;
+}
+
+
+.navbar ul ul li:before {
+  /* For a round bullet */
+  content: '\2014';
+  color: @brand-darkest;
+  margin-left: -1px;
+  padding-right: 20px;
+  visibility: none;
+}
+
+.navbar ul ul li:hover:before{
+  color: @brand-primary;
+}
+.navbar ul ul li:hover{
+  visibility: block;
+}
+.navbar ul ul{
+  padding-top: 0px;
+  padding-bottom: 20px;
+  padding-right: 35px;
+  padding-left: 0px;
+}
+.dropdownBorder:hover {
+  margin-top: 1px;
+  border: 1px solid transparent;
+  -moz-border-image: -moz-linear-gradient(left, @brand-primary 0%, @brand-secondary 100%);
+  -webkit-border-image: -webkit-linear-gradient(left, @brand-primary 0%, @brand-secondary 100%);
+  border-image: linear-gradient(to right, @brand-primary 0%, @brand-secondary 100%);
+  border-image-slice: 1;
+}
+
+.dropdownBackground:hover {
+  background-color: @brand-darkest;
+}
+
+
+.navbar .divider-vertical {
+height: @navbar-height - @navbar-divider*2;
+margin-top: @navbar-divider;
+margin-bottom: @navbar-divider;
+border-right: 1px solid darken(@brand-neutral,20%) ; 
+}
+
+ 
+
+@media (max-width: 767px) {
+.navbar-collapse .nav > .divider-vertical {
+    display: none;
+  }
+}
+
+
  

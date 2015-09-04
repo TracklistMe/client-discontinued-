@@ -38,3 +38,14 @@
   outline: 5px auto @brand-secondary;
   outline-offset: -2px;
 }
+
+.gradientBorder {
+  margin-top: 1px;
+  width: 250px;
+  height: 250px;
+  border: 1px solid transparent;
+  -moz-border-image: -moz-linear-gradient(left, @brand-primary 0%, @brand-secondary 100%);
+  -webkit-border-image: -webkit-linear-gradient(left, @brand-primary 0%, @brand-secondary 100%);
+  border-image: linear-gradient(to right, @brand-primary 0%, @brand-secondary 100%);
+  border-image-slice: 1;
+}
