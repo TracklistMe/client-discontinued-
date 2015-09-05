@@ -192,6 +192,12 @@ module.exports = function(grunt) {
           src: 'bower_components/jquery/dist/jquery.min.map',
           dest: 'angular/js/jquery.min.map'
         }, {
+          src: 'src/aphextwin_index.html',
+          dest: 'angular/aphextwin_index.html'
+        }, {
+          src: 'src/css/aphextwin.css',
+          dest: 'angular/css/aphextwin.css'
+        }, {
           src: 'src/index.min.html',
           dest: 'angular/index.html'
         }, {
@@ -214,9 +220,11 @@ module.exports = function(grunt) {
         }]
       },
       production: {
-        files: {
+        files: [{
           'src/css/app.css': 'src/css/less/app.less'
-        }
+        }, {
+          'src/css/aphextwin.css': 'src/css/less/aphextwin/aphextwin.less'
+        }]
       }
     },
     jshint: {
