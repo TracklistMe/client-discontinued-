@@ -20,9 +20,9 @@ angular.module('app', [
   'satellizer',
   'angular-stripe',
   'credit-cards',
-  'n3-line-chart'
+  'n3-line-chart',
 ]).constant("CONFIG", {
-  "url": "https://tracklist.me/api",
-  //"url": "http://localhost:3000",
+  //"url": "https://tracklist.me/api",
+  "url": "http://localhost:3000",
   "imagePath": "image"
 })

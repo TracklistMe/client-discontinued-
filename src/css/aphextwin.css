@@ -1082,6 +1082,7 @@ fieldset[disabled] .navbar-default .btn-link:focus {
   position: relative;
   height: 500px;
   width: 100%;
+  margin-bottom: 110px;
   overflow: hidden;
 }
 .header_shades_holder {
@@ -1109,6 +1110,39 @@ fieldset[disabled] .navbar-default .btn-link:focus {
   text-align: center;
   font-size: 5em;
   color: white;
+}
+.headerContent {
+  width: 100%;
+  top: 60px;
+  position: absolute;
+  z-index: 2;
+  height: 500px;
+}
+.main_header_component {
+  position: relative;
+  overflow: hidden;
+  height: 500px;
+  width: 100%;
+  background-size: cover;
+  padding: 20px;
+}
+.highlight_band {
+  position: relative;
+  top: 330px;
+  width: 100%;
+  height: 130px;
+  background-color: rgba(30, 30, 30, 0.65);
+}
+.highlight_band .cover {
+  position: relative;
+  left: 20px;
+  bottom: 30px;
+  width: 140px;
+  height: 140px;
+}
+.cover img {
+  border: 1px #4d4d4d solid;
+  width: 100%;
 }
 /*! normalize.css v3.0.3 | MIT License | github.com/necolas/normalize.css */
 html {
