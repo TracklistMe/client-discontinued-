@@ -177,8 +177,8 @@ app.controller('AdmincompanyCtrl', function($scope, $state, $auth,
       endDate = moment();
     }
 
-    var startDateFormatted = startDate.format("DD-MM-YYYY");
-    var endDateFormatted = endDate.format("DD-MM-YYYY");
+    var startDateFormatted = startDate.format('DD-MM-YYYY');
+    var endDateFormatted = endDate.format('DD-MM-YYYY');
     $http.get(CONFIG.url + '/companies/' + companyId +
         '/revenues/expanded/' + startDateFormatted + '/' + endDateFormatted)
       .success(function(data) {
@@ -196,21 +196,21 @@ app.controller('AdmincompanyCtrl', function($scope, $state, $auth,
           if (!values[currentIndex]) {
             //First Element.
             var object = {};
-            object['x'] = moment(data[i].dataColumn, "DD-MM-YY").toDate();
+            object.x = moment(data[i].dataColumn, 'DD-MM-YY').toDate();
             object[data[i].LabelId] = finalPrice;
             values.push(
               object
             );
           } else {
             // ho almeno un valore 
-            if (values[currentIndex].x.getTime() == moment(data[i].dataColumn, "DD-MM-YY").toDate().getTime()) {
+            if (values[currentIndex].x.getTime() == moment(data[i].dataColumn, 'DD-MM-YY').toDate().getTime()) {
               //same day
               values[currentIndex][data[i].LabelId] = finalPrice;
             } else {
               // me moved to the next data
               currentIndex++;
               var object = {};
-              object['x'] = moment(data[i].dataColumn, "DD-MM-YY").toDate();
+              object.x = moment(data[i].dataColumn, 'DD-MM-YY').toDate();
               object[data[i].LabelId] = finalPrice;
               values.push(
                 object
@@ -251,7 +251,7 @@ app.controller('AdmincompanyCtrl', function($scope, $state, $auth,
             type: 'column',
             label: labels[i].name
           }
-        };
+        }
 
         $scope.data = values;
         $scope.options = {
@@ -261,7 +261,7 @@ app.controller('AdmincompanyCtrl', function($scope, $state, $auth,
           },
           columnsHGap: 1,
           stacks: [{
-            axis: "y",
+            axis: 'y',
             series: [labels[0].id, labels[1].id, labels[2].id]
           }],
           axes: {
@@ -283,13 +283,13 @@ app.controller('AdmincompanyCtrl', function($scope, $state, $auth,
           tooltip: {
             mode: 'scrubber',
             formatter: function(x, y, series) {
-              return moment(x).format("Do MMM, dddd") + " " +
-                y + " " + series.label;
+              return moment(x).format('Do MMM, dddd') + ' ' +
+                y + ' ' + series.label;
             }
           },
-          lineMode: "cardinal",
+          lineMode: 'cardinal',
           series: series,
-        }
+        };
       });
 
 
@@ -315,9 +315,9 @@ app.controller('AdmincompanyCtrl', function($scope, $state, $auth,
 
 
 
-  $scope.dateChanged = function(start, end, other, b) {
+  $scope.dateChanged = function(start, end) {
     $scope.getRevenueData(start, end);
-  }
+  };
 
 
 

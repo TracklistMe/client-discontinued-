@@ -1,123 +1,122 @@
 <div class="hbox hbox-auto-xs hbox-auto-sm" ng-controller="AdminEditReleaseCtrl">
-    <!-- Button trigger modal -->
-    <script type="text/ng-template" id="modalUploadDropbox">
-        <div ng-include="'tpl/modal.uploadDropbox.html'"></div>
-    </script>
-    <script type="text/ng-template" id="modalSelectFromCDN">
-        <div ng-include="'tpl/modal.selectFromCDN.html'"></div>
-    </script>
-    <!-- main -->
-    <div class="col">
-        <div class="no-pad">
-            <!-- breadcrumb -->
-            <div>
-                <ul class="breadcrumb bg-white col-md-12">
-                    <li><a ui-sref="app.admincompany({id:company[0].id})">{{company[0].displayName}}</a></li>
-                    <li><a ui-sref="app.adminlabel({id:label.id})">{{label.displayName}}</a></li>
-                    <li ng-show="!addMode"> <a ui-sref="app.adminrelease({id:release.id})"> {{release.catalogNumber}} - {{release.title}}</a></li>
-                    <li ng-show="!addMode"> Edit </li>
-                    <li ng-show="addMode"> Create New </li>
-                </ul>
-            </div>
+  <!-- Button trigger modal -->
+  <script type="text/ng-template" id="modalUploadDropbox">
+    <div ng-include="'tpl/modal.uploadDropbox.html'"></div>
+  </script>
+  <script type="text/ng-template" id="modalSelectFromCDN">
+    <div ng-include="'tpl/modal.selectFromCDN.html'"></div>
+  </script>
+  <!-- main -->
+  <div class="col">
+    <div class="no-pad">
+      <!-- breadcrumb -->
+      <div>
+        <ul class="breadcrumb bg-white col-md-12">
+          <li><a ui-sref="app.admincompany({id:company[0].id})">{{company[0].displayName}}</a></li>
+          <li><a ui-sref="app.adminlabel({id:label.id})">{{label.displayName}}</a></li>
+          <li ng-show="!addMode"> <a ui-sref="app.adminrelease({id:release.id})"> {{release.catalogNumber}} - {{release.title}}</a></li>
+          <li ng-show="!addMode"> Edit </li>
+          <li ng-show="addMode"> Create New </li>
+        </ul>
+      </div>
+    </div>
+    <div class="padder-md">
+      <div class="col-md-6">
+        <h4 ng-show="!addMode">Edit Release </h4>
+        <h4 ng-show="addMode">Create Release </h4>
+        <h2 class="m-t-none text-black">{{release.title}}</h2>
+        <p class="text-muted m-b-md">{{release.description}}</p>
+      </div>
+      <div class="col-md-6">
+        <div class="pull-right">
+          <button ng-show="!addMode" ng-click="saveRelease()" class="btn btn-danger">Save Changes Release</button>
+          <button ng-show="addMode" ng-click="saveRelease()" class="btn btn-danger">Create Release</button>
         </div>
-        <div class="padder-md">
-            <div class="col-md-6">
-                <h4 ng-show="!addMode">Edit Release </h4>
-                <h4 ng-show="addMode">Create Release </h4>
-                <h2 class="m-t-none text-black">{{release.title}}</h2>
-                <p class="text-muted m-b-md">{{release.description}}</p>
-            </div>
-            <div class="col-md-6">
-                <div class="pull-right">
-                    <button ng-show="!addMode" ng-click="saveRelease()" class="btn btn-danger">Save Changes Release</button>
-                    <button ng-show="addMode" ng-click="saveRelease()" class="btn btn-danger">Create Release</button>
-                </div>
-            </div>
-        </div>
- 
-        <div class="wrapper-md">
-            <div class="hbox hbox-auto-xs">
-                <div class="col-md-3">
-                    <div nv-file-drop="" uploader="uploader">
-                        <div nv-file-over="" uploader="uploader" over-class="my-drop-zone-over-class" class="  my-drop-zone">
-                            <div class="item">
-                                <div class="pos-rlt">
-                                    <div class="item-overlay bg-black-opacity r r-2x r r-2x">
-                                        <div class="center text-center m-t-n-lg w-full">
-                                            <div class="text-white"> Drag and drop
-                                                <br />or
-                                                <br />
-                                                <label class="uploadAvatar">
-                                                    <input type="file" nv-file-select="" uploader="uploader" />
-                                                    <span class="btn m-b-xs   btn-dark btn-rounded">click to upload </span>
-                                                </label>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <a ui-sref="music.release({id:release.id})"><img src="img/cover.png" ng-src="{{release.cover}}" alt="" class="img-full r r-2x"></a>
-                                </div>
-                            </div>
-                        </div>
+      </div>
+    </div>
+    <div class="wrapper-md">
+      <div class="hbox hbox-auto-xs">
+        <div class="col-md-3">
+          <div nv-file-drop="" uploader="uploader">
+            <div nv-file-over="" uploader="uploader" over-class="my-drop-zone-over-class" class="  my-drop-zone">
+              <div class="item">
+                <div class="pos-rlt">
+                  <div class="item-overlay bg-black-opacity r r-2x r r-2x">
+                    <div class="center text-center m-t-n-lg w-full">
+                      <div class="text-white"> Drag and drop
+                        <br />or
+                        <br />
+                        <label class="uploadAvatar">
+                          <input type="file" nv-file-select="" uploader="uploader" />
+                          <span class="btn m-b-xs   btn-dark btn-rounded">click to upload </span>
+                        </label>
+                      </div>
                     </div>
+                  </div>
+                  <a ui-sref="music.release({id:release.id})"><img src="img/cover.png" ng-src="{{serverURL}}/releases/{{releaseId}}/cover/small" alt="" class="img-full r r-2x"></a>
                 </div>
-                <div class="col-md-9">
-                    <input id="releaseTitle" name="releaseTitle" type="text" ng-model="release.title" value="{{release.title}}" placeholder="Release Title" class="form-control input-md-5 m-b-xs " stop-event>
-                    <input id="releaseTitle" name="releaseTitle" type="text" ng-model="release.catalogNumber" value="{{release.catalogNumber}}" placeholder="Catalog Number" class="form-control input-md-5 m-b-xs" stop-event>
-                    <input id="UPCNumber" name="UPCNumber" type="text" ng-model="release.UPC" value="{{release.UPC}}" placeholder="UPC/EIN Number" class="form-control input-md-5 m-b-xs" stop-event>
-                    <p class="input-group">
-                        <input placeholder="Release Date" type="text" class="form-control" datepicker-popup="dd-MMMM-yyyy" ng-model="release.releaseDate" is-open="opened" min-date="minDate" datepicker-options="dateOptions" ng-required="true" close-text="Close" />
-                        <span class="input-group-btn">
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-9">
+          <input id="releaseTitle" name="releaseTitle" type="text" ng-model="release.title" value="{{release.title}}" placeholder="Release Title" class="form-control input-md-5 m-b-xs " stop-event>
+          <input id="releaseTitle" name="releaseTitle" type="text" ng-model="release.catalogNumber" value="{{release.catalogNumber}}" placeholder="Catalog Number" class="form-control input-md-5 m-b-xs" stop-event>
+          <input id="UPCNumber" name="UPCNumber" type="text" ng-model="release.UPC" value="{{release.UPC}}" placeholder="UPC/EIN Number" class="form-control input-md-5 m-b-xs" stop-event>
+          <p class="input-group">
+            <input placeholder="Release Date" type="text" class="form-control" datepicker-popup="dd-MMMM-yyyy" ng-model="release.releaseDate" is-open="opened" min-date="minDate" datepicker-options="dateOptions" ng-required="true" close-text="Close" />
+            <span class="input-group-btn">
                       <button type="button" class="btn btn-default" ng-click="open($event)"><i class="glyphicon glyphicon-calendar"></i></button>
                     </span>
-                    </p>
-                    Release Status:
-                    <br />
-                    <div class="btn-group">
-                        <button type="button" class="btn btn-primary" ng-class=" " ng-model="release.isActive" btn-checkbox btn-checkbox-true="true" btn-checkbox-false="false">Active</button>
-                        <button type="button" class="btn btn-primary" ng-class=" " ng-model="release.isActive" btn-checkbox btn-checkbox-true="false" btn-checkbox-false="true">Deactive</button>
-                    </div>
-                </div>
-            </div>
+          </p>
+          Release Status:
+          <br />
+          <div class="btn-group">
+            <button type="button" class="btn btn-primary" ng-class=" " ng-model="release.isActive" btn-checkbox btn-checkbox-true="true" btn-checkbox-false="false">Active</button>
+            <button type="button" class="btn btn-primary" ng-class=" " ng-model="release.isActive" btn-checkbox btn-checkbox-true="false" btn-checkbox-false="true">Deactive</button>
+          </div>
         </div>
-        <div class="wrapper-md">
-            <div class="col-md-6">
-                <!-- <h4 class="m-t-none m-b">Tracklist <small>(drag to reorder)</small></h4> Deatached: {{deatachedList}}
+      </div>
+    </div>
+    <div class="wrapper-md">
+      <div class="col-md-6">
+        <!-- <h4 class="m-t-none m-b">Tracklist <small>(drag to reorder)</small></h4> Deatached: {{deatachedList}}
                 <br />assigned: {{assignedList}}
                 <br /> dropZoneFiles: {{dropZoneFiles}}
                  -->
-            </div>
-            <div class="col-md-12 m-b-lg">
-                <button type="button" ng-click="addNewTrack()" class="col-md-12 btn btn-info btn-s">
-                    Add New Track
-                </button>
-            </div>
-            <div class="col-md-12">
-                <ul html-sortable="sortableOptions" html-sortable-callback="sortableCallback" ng-model='release.Tracks' class="list-group gutter list-group-lg list-group-sp">
-                    <li ng-repeat="track in release.Tracks" ng-init="track.isActive = true" class=" ">
-                        <!---   -->
-                        <div ng-init="track.infoVisible == null ? track.infoVisible = false : true" ng-class="{'panel-info' : track.isActive == true}" class="panel  bg-light dker m-b-xs">
-                            <div class="panel-heading">
-                                <span class="pull-right">
+      </div>
+      <div class="col-md-12 m-b-lg">
+        <button type="button" ng-click="addNewTrack()" class="col-md-12 btn btn-info btn-s">
+          Add New Track
+        </button>
+      </div>
+      <div class="col-md-12">
+        <ul html-sortable="sortableOptions" html-sortable-callback="sortableCallback" ng-model='release.Tracks' class="list-group gutter list-group-lg list-group-sp">
+          <li ng-repeat="track in release.Tracks" ng-init="track.isActive = true" class=" ">
+            <!---   -->
+            <div ng-init="track.infoVisible == null ? track.infoVisible = false : true" ng-class="{'panel-info' : track.isActive == true}" class="panel  bg-light dker m-b-xs">
+              <div class="panel-heading">
+                <span class="pull-right">
                                   <a href><i ng-click="track.infoVisible = !track.infoVisible" class="fa fa-pencil fa-fw m-r-xs"></i></a>
                            
                                   <a href ng-show="track.isActive" ng-click="removeTrack(track)"><i class="fa fa-times fa-fw"></i></a> 
                                   <a href ng-hide="track.isActive" ng-click="reactivateTrack(track)"><i class="fa fa-undo"></i>  </a>               
                                 </span>
-                                <span class="pull-left"><i class="fa  fa-arrows-v text-muted fa m-r-sm"> </i>  </span>
-                                <div class="clear">
-                                    <span ng-repeat="producer in track.Producer">{{producer.displayName}}{{$last ? '' : ', '}}  </span> - {{track.title}} ({{track.version}})
-                                </div>
-                            </div>
-                            <div ng-show="track.infoVisible" class="  panel-body bg-white">
-                                <div class="col-md-2 no-padder text-center ">
-                                    <div ng-if="track.path != null">
-                                        <i class="icon-check block m-b-xs fa-2x text-muted   b-light"></i> This track has a file associated.
-                                        <br />
-                                        <a href ng-click="deatach(track)">
-                                            <span class="btn m-b-xs   btn-dark btn-rounded">Deatach </span>
-                                        </a>
-                                    </div>
-                                    <span ng-if="track.path == null">
+                <span class="pull-left"><i class="fa  fa-arrows-v text-muted fa m-r-sm"> </i>  </span>
+                <div class="clear">
+                  <span ng-repeat="producer in track.Producer">{{producer.displayName}}{{$last ? '' : ', '}}  </span> - {{track.title}} ({{track.version}})
+                </div>
+              </div>
+              <div ng-show="track.infoVisible" class="  panel-body bg-white">
+                <div class="col-md-2 no-padder text-center ">
+                  <div ng-if="track.path != null">
+                    <i class="icon-check block m-b-xs fa-2x text-muted   b-light"></i> This track has a file associated.
+                    <br />
+                    <a href ng-click="deatach(track)">
+                      <span class="btn m-b-xs   btn-dark btn-rounded">Deatach </span>
+                    </a>
+                  </div>
+                  <span ng-if="track.path == null">
                                     {{track.path}}
                                     This track doesn't have an audio file associated. 
                                   
@@ -132,101 +131,95 @@
                                         Track from Dropzone
                                     </div>
                                     </span>
-                                </div>
-                                <div class="col-md-2">
-                                    Title:
-                                    <input id="trackTitle " name="trackTitle " type="text " ng-model="track.title " value="{{track.title}} " placeholder="Track Title " class="form-control " stop-event> Version:
-                                    <input id="trackTitle " name="trackVersion " type="text " ng-model="track.version " value="{{track.version}} " placeholder="Track Version " class="form-control " stop-event>
-                                </div>
-                                <div ng-init="track.searchArtist= ''; track.searchRemixer= '' " class="col-md-4 ">
-                                    Artists:
-                                    <br />
-                                    <button ng-repeat="producer in track.Producer " class="btn m-b-xs m-r-xs btn-default btn-sm btn-addon">
-                                        <i ng-click="deleteProducer(producer,track)" class="fa fa-times"></i>{{producer.displayName}}
-                                    </button>
-                                    <button ng-show="!track.showAddArtist" ng-init="track.showAddArtist = false" ng-click="track.showAddArtist = true" class="btn m-n btn-sm btn-addon btn-default">
-                                        <i class="fa fa-plus"></i>Add New
-                                    </button>
-                                    <div ng-show="track.showAddArtist" class="padder-sm input-group">
-                                        <span class="input-group-btn">
+                </div>
+                <div class="col-md-2">
+                  Title:
+                  <input id="trackTitle " name="trackTitle " type="text " ng-model="track.title " value="{{track.title}} " placeholder="Track Title " class="form-control " stop-event> Version:
+                  <input id="trackTitle " name="trackVersion " type="text " ng-model="track.version " value="{{track.version}} " placeholder="Track Version " class="form-control " stop-event>
+                </div>
+                <div ng-init="track.searchArtist= ''; track.searchRemixer= '' " class="col-md-4 ">
+                  Artists:
+                  <br />
+                  <button ng-repeat="producer in track.Producer " class="btn m-b-xs m-r-xs btn-default btn-sm btn-addon">
+                    <i ng-click="deleteProducer(producer,track)" class="fa fa-times"></i>{{producer.displayName}}
+                  </button>
+                  <button ng-show="!track.showAddArtist" ng-init="track.showAddArtist = false" ng-click="track.showAddArtist = true" class="btn m-n btn-sm btn-addon btn-default">
+                    <i class="fa fa-plus"></i>Add New
+                  </button>
+                  <div ng-show="track.showAddArtist" class="padder-sm input-group">
+                    <span class="input-group-btn">
                                         <button ng-click="addAsProducer(track,artist)" class="btn btn-default" type="button">  <i class="fa fa-check"></i>
                                         </button>
                                       </span>
-                                        <input type="text" placeholder="Artist Name" ng-model="track.searchArtist" ng-change="searchArtist(track)" class="text-center  btn-default btn-sm form-control">
-                                        <span class="input-group-btn">
+                    <input type="text" placeholder="Artist Name" ng-model="track.searchArtist" ng-change="searchArtist(track)" class="text-center  btn-default btn-sm form-control">
+                    <span class="input-group-btn">
                                         <button ng-click="stopAddingNewArtist(track)" class="btn btn-default" type="button">
                                           <i class="fa fa-times"></i>
                                         </button>
                                       </span>
-                                    </div>
-                                    <table ng-show="track.showAddArtist && track.searchingArtist" class="table table-border padder-md  bg-white-only b-a">
-                                        <tbody>
-                                            <tr ng-show="!track.resultArrived" class="bg-light lt text-center">
-                                                <td><i class="fa fa-spin fa-spinner "> </i></td>
-                                            </tr>
-                                            <tr ng-repeat="artist in track.artistResults" class="bg-light lt text-center">
-                                                <td>
-                                                    <a href ng-click="candidateArtist(track,artist)">  {{artist.displayName}}  </a>
-                                                </td>
-                                            </tr>
-                                        </tbody>
-                                    </table>
-                                    <br /> Remixers:
-                                    <br />
-                                    <button ng-repeat="remixer in track.Remixer " class="btn  m-b-xs m-r-xs btn-default btn-sm btn-addon">
-                                        <i ng-click="deleteRemixer(remixer,track)" class="fa fa-times"></i>{{remixer.displayName}}
-                                    </button>
-                                    <button ng-show="!track.showAddRemixer" ng-init="track.showAddRemixer = false" ng-click="track.showAddRemixer = true" class="btn m-n btn-sm btn-addon btn-default">
-                                        <i class="fa fa-plus"></i>Add New
-                                    </button>
-                                    <div ng-show="track.showAddRemixer" class="padder-sm input-group">
-                                        <span class="input-group-btn">
+                  </div>
+                  <table ng-show="track.showAddArtist && track.searchingArtist" class="table table-border padder-md  bg-white-only b-a">
+                    <tbody>
+                      <tr ng-show="!track.resultArrived" class="bg-light lt text-center">
+                        <td><i class="fa fa-spin fa-spinner "> </i></td>
+                      </tr>
+                      <tr ng-repeat="artist in track.artistResults" class="bg-light lt text-center">
+                        <td>
+                          <a href ng-click="candidateArtist(track,artist)">  {{artist.displayName}}  </a>
+                        </td>
+                      </tr>
+                    </tbody>
+                  </table>
+                  <br /> Remixers:
+                  <br />
+                  <button ng-repeat="remixer in track.Remixer " class="btn  m-b-xs m-r-xs btn-default btn-sm btn-addon">
+                    <i ng-click="deleteRemixer(remixer,track)" class="fa fa-times"></i>{{remixer.displayName}}
+                  </button>
+                  <button ng-show="!track.showAddRemixer" ng-init="track.showAddRemixer = false" ng-click="track.showAddRemixer = true" class="btn m-n btn-sm btn-addon btn-default">
+                    <i class="fa fa-plus"></i>Add New
+                  </button>
+                  <div ng-show="track.showAddRemixer" class="padder-sm input-group">
+                    <span class="input-group-btn">
                                             <button ng-click="addAsRemixer(track,remixer)" class="btn btn-default" type="button">  <i class="fa fa-check"></i>
                                         </button>
                                          </span>
-                                        <input type="text" placeholder="Remixer Name" ng-model="track.searchRemixer" ng-change="searchRemixer(track)" class="text-center  btn-default btn-sm form-control">
-                                        <span class="input-group-btn">
+                    <input type="text" placeholder="Remixer Name" ng-model="track.searchRemixer" ng-change="searchRemixer(track)" class="text-center  btn-default btn-sm form-control">
+                    <span class="input-group-btn">
                                             <button ng-click="stopAddingNewRemixer(track)" class="btn btn-default" type="button">
                                               <i class="fa fa-times"></i>
                                             </button>
                                           </span>
-                                    </div>
-                                    <table ng-show="track.showAddRemixer && track.searchingRemixer" class="table table-border padder-md  bg-white-only b-a">
-                                        <tbody>
-                                            <tr ng-show="!track.resultRemixerArrived" class="bg-light lt text-center">
-                                                <td><i class="fa fa-spin fa-spinner "> </i></td>
-                                            </tr>
-                                            <tr ng-repeat="remixer in track.remixerResults" class="bg-light lt text-center">
-                                                <td>
-                                                    <a href ng-click="candidateRemixer(track,remixer)">  {{remixer.displayName}}  </a>
-                                                </td>
-                                            </tr>
-                                        </tbody>
-                                    </table>
-                                </div>
-                                <div class="col-md-4 ">
-                                    Genre:
-                                    <br />
-                                    
-
-                                        <select class="form-control m-b-sm ng-dirty ng-valid-parse ng-valid ng-valid-required ng-touched" ng-model="track.Genres[0]"  >
-                                          <option value="">Please choose</option>
-                                          <option ng-repeat="genre in genres" ng-selected="{{genre.id == track.Genres[0].id}} " value="{{genre.id}}">{{genre.name}}</option>
-                                        </select>
-
-
-                                   ISRC:
-                                    <input id="trackTitle " name="trackTitle " type="text " ng-model="track.ISRC " value="{{track.ISRC}} " placeholder="Track ISRC " class="form-control " stop-event>
-                                </div>
-
-                              
-                            </div>
-                        </div>
-                    </li>
-                </ul>
+                  </div>
+                  <table ng-show="track.showAddRemixer && track.searchingRemixer" class="table table-border padder-md  bg-white-only b-a">
+                    <tbody>
+                      <tr ng-show="!track.resultRemixerArrived" class="bg-light lt text-center">
+                        <td><i class="fa fa-spin fa-spinner "> </i></td>
+                      </tr>
+                      <tr ng-repeat="remixer in track.remixerResults" class="bg-light lt text-center">
+                        <td>
+                          <a href ng-click="candidateRemixer(track,remixer)">  {{remixer.displayName}}  </a>
+                        </td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+                <div class="col-md-4 ">
+                  Genre:
+                  <br />
+                  <select class="form-control m-b-sm ng-dirty ng-valid-parse ng-valid ng-valid-required ng-touched" ng-model="track.Genres[0]">
+                    <option value="">Please choose</option>
+                    <option ng-repeat="genre in genres" ng-selected="{{genre.id == track.Genres[0].id}} " value="{{genre.id}}">{{genre.name}}</option>
+                  </select>
+                  ISRC:
+                  <input id="trackTitle " name="trackTitle " type="text " ng-model="track.ISRC " value="{{track.ISRC}} " placeholder="Track ISRC " class="form-control " stop-event>
+                </div>
+              </div>
             </div>
-        </div>
-        <!-- 
+          </li>
+        </ul>
+      </div>
+    </div>
+    <!-- 
     <div class="padder-md m-b-lg">
       <h4 class="m-t-lg m-b">3 Comments</h4>
       <div>
@@ -302,5 +295,5 @@
       </form>
     </div>
     -->
-    </div>
+  </div>
 </div>

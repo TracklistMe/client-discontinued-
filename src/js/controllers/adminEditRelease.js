@@ -555,11 +555,6 @@ app.controller('AdminEditReleaseCtrl', function($location, $scope, $state,
     $http.get(CONFIG.url + '/releases/' + releaseId)
       .success(function(data) {
         $scope.release = data;
-        $scope.release.cover =
-          CONFIG.url + '/releases/' +
-          releaseId +
-          '/cover/small/' +
-          '?d=' + Date.now();
         $scope.labelId = $scope.release.Labels[0].id;
         $scope.getLabel($scope.labelId);
         $scope.getCompany($scope.labelId);
