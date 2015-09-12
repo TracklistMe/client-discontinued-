@@ -19,7 +19,7 @@ app.controller('AdminEditReleaseCtrl', function($location, $scope, $state,
   $scope.deatachedList = [];
   $scope.assignedList = [];
   $scope.dropZoneFiles = [];
-
+  $scope.localPreviewImage = null;
   $scope.randomValueForCoverRefresh = 0;
 
 
@@ -148,26 +148,24 @@ app.controller('AdminEditReleaseCtrl', function($location, $scope, $state,
     console.info('onAfterAddingFile', fileItem);
     var file = fileItem;
     var filename = file._file.name;
-    $http.post(
-      CONFIG.url + '/releases/' + releaseId + '/cover/createFile/', {
-        filename: filename,
-      }).success(function(data) {
 
-      var formDataArray = [{
-        'GoogleAccessId': data.GoogleAccessId,
-        'signature': data.signature,
-        'policy': data.policy,
-        'key': data.key
-      }];
-      file.url = data.action;
-      file.formData = formDataArray;
-      file.upload();
-    });
+    // Display the image without uploading, straight from the filesystem.
+    var type = fileItem.file.type;
+    if ((type == 'image/jpeg') || (type == 'image/png')) {
+      console.log("IS AN IMAGE!!");
+      var reader = new FileReader();
+      reader.onload = function(e) {
+        $scope.localPreviewImage = e.target.result;
+        $scope.$apply();
+        console.log($scope.localPreviewImage);
+      }
+      reader.readAsDataURL(fileItem._file);
+    }
   };
 
   uploader.onCompleteAll = function() {
     console.info('onCompleteAll');
-    $scope.getRelease();
+    //$scope.getRelease();
   };
 
   uploader.onCompleteItem = function(fileItem, response, status, headers) {
@@ -179,8 +177,10 @@ app.controller('AdminEditReleaseCtrl', function($location, $scope, $state,
         releaseId +
         '/cover/confirmFile/', {})
       .success(function(data) {
-        $scope.randomValueForCoverRefresh = Math.floor(Math.random() * 10000);
+        console.log(data);
+        $scope.saveMetadata();
       });
+
   };
 
   $scope.uploadToDropZone = function(track) {
@@ -197,6 +197,8 @@ app.controller('AdminEditReleaseCtrl', function($location, $scope, $state,
 
   trackUploader.onAfterAddingFile = function() {
     $scope.processCDNNegotiation();
+
+
   };
 
   $scope.processCDNNegotiation = function() {
@@ -572,6 +574,35 @@ app.controller('AdminEditReleaseCtrl', function($location, $scope, $state,
      Otherwise it will just update the exisit information with a PUT. 
   */
   $scope.saveRelease = function() {
+    // start uploading the cover only if there is a cover in the queue of the
+    // uploader
+    if (uploader.queue.length > 0) {
+      var file = uploader.queue[0];
+      var filename = file._file.name;
+      console.log("UPLOAD -------->")
+      $http.post(
+        CONFIG.url + '/releases/' + releaseId + '/cover/createFile/', {
+          filename: filename,
+        }).success(function(data) {
+
+        var formDataArray = [{
+          'GoogleAccessId': data.GoogleAccessId,
+          'signature': data.signature,
+          'policy': data.policy,
+          'key': data.key
+        }];
+        file.url = data.action;
+        file.formData = formDataArray;
+        file.upload();
+        //upload is asyncronous, therefore we move a call to saveMetadata
+        //on the callback of onCompleteItem
+      });
+    } else {
+      $scope.saveMetadata();
+    }
+  };
+
+  $scope.saveMetadata = function() {
     for (var i = $scope.release.Tracks.length - 1; i >= 0; i--) {
       $scope.release.Tracks[i].ReleaseTracks.position = i + 1;
     }
@@ -592,7 +623,7 @@ app.controller('AdminEditReleaseCtrl', function($location, $scope, $state,
         $location.path('app/adminRelease/' + $scope.releaseId);
       });
     }
-  };
+  }
 
 
   $scope.initialize = function() {
