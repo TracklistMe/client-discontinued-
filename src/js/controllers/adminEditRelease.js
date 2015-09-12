@@ -178,6 +178,7 @@ app.controller('AdminEditReleaseCtrl', function($location, $scope, $state,
         '/cover/confirmFile/', {})
       .success(function(data) {
         console.log(data);
+        delete $scope.release.cover;
         $scope.saveMetadata();
       });
 
@@ -619,7 +620,8 @@ app.controller('AdminEditReleaseCtrl', function($location, $scope, $state,
       // update an already existing release
       $http.put(CONFIG.url + '/releases/' + $scope.releaseId, {
         release: $scope.release
-      }).success(function() {
+      }).success(function(data) {
+
         $location.path('app/adminRelease/' + $scope.releaseId);
       });
     }
