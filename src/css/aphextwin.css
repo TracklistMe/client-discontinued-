@@ -1156,15 +1156,14 @@ release_cover {
   top: 0px;
   width: 100%;
   position: relative;
-  height: 100%;
   display: block;
   overflow: hidden;
   margin: 0px;
   padding: 0px;
 }
 release_cover img {
+  display: block;
   z-index: 1;
-  postion: absolute;
   width: 100%;
   height: 100%;
 }
@@ -1191,13 +1190,18 @@ release_label {
 release_component:hover > release_title {
   color: #eb1781;
 }
+release_component:hover overlay_controllers {
+  visibility: visible;
+}
 overlay_controllers {
+  visibility: hidden;
   z-index: 2;
+  bottom: 0%;
   position: absolute;
-  bottom: 2%;
-  height: 20%;
+  margin-top: ;
+  height: 24%;
   width: 100%;
-  background-color: #eb1781;
+  background-color: #1e1e1e;
 }
 /*! normalize.css v3.0.3 | MIT License | github.com/necolas/normalize.css */
 html {
