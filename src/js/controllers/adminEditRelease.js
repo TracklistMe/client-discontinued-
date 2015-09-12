@@ -20,6 +20,7 @@ app.controller('AdminEditReleaseCtrl', function($location, $scope, $state,
   $scope.assignedList = [];
   $scope.dropZoneFiles = [];
 
+  $scope.randomValueForCoverRefresh = 0;
 
 
   // DATA PICHER 
@@ -177,7 +178,9 @@ app.controller('AdminEditReleaseCtrl', function($location, $scope, $state,
         '/releases/' +
         releaseId +
         '/cover/confirmFile/', {})
-      .success(function() {});
+      .success(function(data) {
+        $scope.randomValueForCoverRefresh = Math.floor(Math.random() * 10000);
+      });
   };
 
   $scope.uploadToDropZone = function(track) {

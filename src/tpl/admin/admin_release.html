@@ -35,7 +35,7 @@
                   <a ng-click="addRelease($index)"><i class="fa fa-4x fa-play-circle-o text-white"></i></a>
                 </div>
               </div>
-              <a ui-sref="music.release({id:release.id})"><img ng-src="{{serverURL}}/releases/{{release.id}}/cover/small" alt="" class="img-full r r-2x"></a>
+              <a ui-sref="music.release({id:release.id})"><img ng-src="{{serverURL}}/releases/{{release.id}}/cover/small/?d={{randomValueForCoverRefresh}}" alt="" class="img-full r r-2x"></a>
             </div>
           </div>
         </div>
