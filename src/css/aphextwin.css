@@ -6,6 +6,8 @@
 /* fonts */
 /* gradient */
 /* focus */
+/* Gradient text */
+/* gradient text */
 /* ---------------
 // SubGrid system
 ----------------- */
@@ -1143,6 +1145,59 @@ fieldset[disabled] .navbar-default .btn-link:focus {
 .cover img {
   border: 1px #4d4d4d solid;
   width: 100%;
+}
+release_component {
+  width: 100%;
+  cursor: pointer;
+  cursor: hand;
+  position: relative;
+}
+release_cover {
+  top: 0px;
+  width: 100%;
+  position: relative;
+  height: 100%;
+  display: block;
+  overflow: hidden;
+  margin: 0px;
+  padding: 0px;
+}
+release_cover img {
+  z-index: 1;
+  postion: absolute;
+  width: 100%;
+  height: 100%;
+}
+release_title {
+  font-family: 'Raleway', sans-serif;
+  font-weight: 700;
+  font-size: 14px;
+}
+release_artists {
+  font-family: 'Raleway', sans-serif;
+  display: inline-block;
+  font-size: 11px;
+  white-space: nowrap;
+  width: 100%;
+  overflow: hidden;
+  /* "overflow" value must be different from "visible" */
+  text-overflow: ellipsis;
+  line-height: 13px;
+}
+release_label {
+  font-family: 'Raleway', sans-serif;
+  font-size: 9px;
+}
+release_component:hover > release_title {
+  color: #eb1781;
+}
+overlay_controllers {
+  z-index: 2;
+  position: absolute;
+  bottom: 2%;
+  height: 20%;
+  width: 100%;
+  background-color: #eb1781;
 }
 /*! normalize.css v3.0.3 | MIT License | github.com/necolas/normalize.css */
 html {
