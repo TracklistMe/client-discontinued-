@@ -151,13 +151,11 @@ app.controller('AdminEditReleaseCtrl', function($location, $scope, $state,
 
     // Display the image without uploading, straight from the filesystem.
     var type = fileItem.file.type;
-    if ((type == 'image/jpeg') || (type == 'image/png')) {
-      console.log("IS AN IMAGE!!");
+    if ((type === 'image/jpeg') || (type === 'image/png')) {
       var reader = new FileReader();
       reader.onload = function(e) {
         $scope.localPreviewImage = e.target.result;
         $scope.$apply();
-        console.log($scope.localPreviewImage);
       }
       reader.readAsDataURL(fileItem._file);
     }
@@ -177,7 +175,6 @@ app.controller('AdminEditReleaseCtrl', function($location, $scope, $state,
         releaseId +
         '/cover/confirmFile/', {})
       .success(function(data) {
-        console.log(data);
         delete $scope.release.cover;
         $scope.saveMetadata();
       });

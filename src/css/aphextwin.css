@@ -1236,14 +1236,60 @@ release_component:hover overlay_controllers {
   visibility: visible;
 }
 overlay_controllers {
-  visibility: hidden;
+  /* visibility: hidden; */
   z-index: 2;
   bottom: 0%;
   position: absolute;
-  margin-top: ;
-  height: 24%;
+  margin-top: 75% ;
+  height: 25%;
   width: 100%;
+  padding: 0px;
+  color: #e0e0e0;
   background-color: #1e1e1e;
+}
+overlay_controllers ul {
+  height: 100%;
+  margin: 0px;
+  padding: 0px;
+  list-style: none;
+}
+overlay_controllers ul.flexbox {
+  width: 100%;
+  align-items: center;
+  display: -webkit-box;
+  /* OLD - iOS 6-, Safari 3.1-6 */
+  display: -moz-box;
+  /* OLD - Firefox 19- (buggy but mostly works) */
+  display: -ms-flexbox;
+  /* TWEENER - IE 10 */
+  display: -webkit-flex;
+  /* NEW - Chrome */
+  display: flex;
+  /* NEW, Spec - Opera 12.1, Firefox 20+ */
+}
+overlay_controllers li {
+  align-items: center;
+  display: flex;
+  justify-content: center;
+}
+overlay_controllers .oneSlotButton {
+  vertical-align: middle;
+  line-height: 100%;
+  padding: 0px;
+  position: relative;
+  border-right: 1px #2e2e2e solid;
+  margin: 0px;
+  width: 25%;
+  height: 100%;
+  text-align: center;
+}
+overlay_controllers .twoSlotButton {
+  padding: 0px;
+  position: relative;
+  margin: 0px;
+  width: 50%;
+  height: 100%;
+  text-align: center;
 }
 /*! normalize.css v3.0.3 | MIT License | github.com/necolas/normalize.css */
 html {
