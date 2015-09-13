@@ -1080,6 +1080,46 @@ fieldset[disabled] .navbar-default .btn-link:focus {
     display: none;
   }
 }
+#custom-search-form {
+  margin-top: 10px;
+  padding-left: 24px;
+  padding-right: 24px;
+}
+#custom-search-form input[type="text"] {
+  padding-top: 10px;
+  padding-bottom: 10px;
+  padding-left: 10px;
+  background: transparent;
+  outline: none;
+  border: none;
+  border: 1px solid #ff7a14;
+}
+#custom-search-form input[type=text]:focus {
+  border: 1px solid #eb1781;
+}
+#custom-search-form .search-query {
+  padding-right: 3px;
+  padding-right: 4px \9;
+  padding-left: 3px;
+  padding-left: 4px \9;
+  /* IE7-8 doesn't have border-radius, so don't indent the padding */
+  margin-bottom: 0;
+}
+#custom-search-form button {
+  border: 0;
+  background: none;
+  /** belows styles are working good */
+  padding: 2px 5px;
+  margin-top: 2px;
+  position: relative;
+  color: #eb1781;
+  left: -28px;
+  /* IE7-8 doesn't have border-radius, so don't indent the padding */
+  margin-bottom: 0;
+}
+.search-query:focus + button {
+  z-index: 3;
+}
 .header {
   position: relative;
   height: 500px;

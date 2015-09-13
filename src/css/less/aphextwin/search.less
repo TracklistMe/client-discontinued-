@@ -1,0 +1,45 @@
+    #custom-search-form {
+      margin-top: 10px;
+      padding-left: @navbar-padding-horizontal;
+      padding-right: @navbar-padding-horizontal;
+    }
+    
+    #custom-search-form input[type="text"] {
+      padding-top: 10px;
+      padding-bottom: 10px;
+      padding-left: 10px;
+      background: transparent;
+      outline: none;
+      border: none;
+      border: 1px solid @brand-secondary;
+    }
+    
+    #custom-search-form input[type=text]:focus {
+      border: 1px solid @brand-primary;
+    }
+    
+    #custom-search-form .search-query {
+      padding-right: 3px;
+      padding-right: 4px \9;
+      padding-left: 3px;
+      padding-left: 4px \9;
+      /* IE7-8 doesn't have border-radius, so don't indent the padding */
+      margin-bottom: 0;
+    }
+    
+    #custom-search-form button {
+      border: 0;
+      background: none;
+      /** belows styles are working good */
+      padding: 2px 5px;
+      margin-top: 2px;
+      position: relative;
+      color: @brand-primary;
+      left: -28px;
+      /* IE7-8 doesn't have border-radius, so don't indent the padding */
+      margin-bottom: 0;
+    }
+    
+    .search-query:focus + button {
+      z-index: 3;
+    }
