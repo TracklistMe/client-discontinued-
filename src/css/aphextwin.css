@@ -1202,13 +1202,36 @@ mini_header_component {
   display: block;
   overflow: hidden;
   position: relative;
+  line-height: 240px;
 }
 mini_header_component img {
-  position: relative;
-  opacity: 0.4;
-  display: block;
-  height: 100%;
+  position: absolute;
+  z-index: 1;
+  vertical-align: middle;
   width: 100%;
+}
+mini_header_component description {
+  position: absolute;
+  z-index: 2;
+  padding-top: 70px;
+  height: 200px;
+  top: 20px;
+  left: 20px;
+  right: 20px;
+  background-color: rgba(235, 23, 129, 0.65);
+  padding-left: 20px;
+  line-height: 20px;
+}
+mini_header_component author {
+  color: #ffffff;
+  margin-left: 4px;
+}
+mini_header_component title {
+  font-size: 44px;
+  margin-top: 4px;
+  color: #ffffff;
+  line-height: 38px;
+  display: block;
 }
 release_component {
   width: 100%;
