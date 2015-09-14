@@ -50,7 +50,7 @@ release_component:hover overlay_controllers{
 	visibility: visible;
 };
 overlay_controllers{
-	/* visibility: hidden; */
+	visibility: hidden;
 	z-index: 2;
 	bottom: 0%;
     position: absolute;
@@ -59,7 +59,7 @@ overlay_controllers{
     width: 100%; 
     padding: 0px;
     color: @brand-lighter;
-	background-color: @brand-darkest;
+	background-color: fade(@brand-darkest, 90);
 }
 
 overlay_controllers ul{
@@ -82,7 +82,9 @@ overlay_controllers li {
 	align-items: center; 
 	display: flex; 
 	justify-content: center; 
-
+}
+overlay_controllers .price_tag{
+	padding-right: 3px;
 }
 overlay_controllers .oneSlotButton{
     vertical-align: middle;

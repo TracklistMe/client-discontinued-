@@ -1188,6 +1188,28 @@ fieldset[disabled] .navbar-default .btn-link:focus {
   border: 1px #4d4d4d solid;
   width: 100%;
 }
+mini_header_component {
+  width: 100%;
+  max-height: 240px;
+  min-height: 240px;
+  margin-bottom: 20px;
+  background-color: #eb1781;
+  background-image: -webkit-linear-gradient(left, #eb1781, #ff7a14);
+  background-image: -moz-linear-gradient(left, #eb1781, #ff7a14);
+  background-image: -o-linear-gradient(left, #eb1781, #ff7a14);
+  background-image: -ms-linear-gradient(left, #eb1781, #ff7a14);
+  background-image: linear-gradient(left, #eb1781, #ff7a14);
+  display: block;
+  overflow: hidden;
+  position: relative;
+}
+mini_header_component img {
+  position: relative;
+  opacity: 0.4;
+  display: block;
+  height: 100%;
+  width: 100%;
+}
 release_component {
   width: 100%;
   cursor: pointer;
@@ -1236,7 +1258,7 @@ release_component:hover overlay_controllers {
   visibility: visible;
 }
 overlay_controllers {
-  /* visibility: hidden; */
+  visibility: hidden;
   z-index: 2;
   bottom: 0%;
   position: absolute;
@@ -1245,7 +1267,7 @@ overlay_controllers {
   width: 100%;
   padding: 0px;
   color: #e0e0e0;
-  background-color: #1e1e1e;
+  background-color: rgba(30, 30, 30, 0.9);
 }
 overlay_controllers ul {
   height: 100%;
@@ -1271,6 +1293,9 @@ overlay_controllers li {
   align-items: center;
   display: flex;
   justify-content: center;
+}
+overlay_controllers .price_tag {
+  padding-right: 3px;
 }
 overlay_controllers .oneSlotButton {
   vertical-align: middle;
@@ -3466,4 +3491,7 @@ a:focus {
 }
 [role="button"] {
   cursor: pointer;
+}
+.pictoFont {
+  font-size: 1.2em;
 }
