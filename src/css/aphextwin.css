@@ -1,5 +1,5 @@
 @import url(https://fonts.googleapis.com/css?family=Montserrat);
-@import url(https://fonts.googleapis.com/css?family=Raleway:400,500,600,700);
+@import url(https://fonts.googleapis.com/css?family=Raleway:300,400,500,600,700);
 @import '../../../fonts/SocialNetworks/style.css';
 @import '../../../fonts/Basic-picto/style.css';
 /*Main Brand Color*/
@@ -1124,7 +1124,7 @@ fieldset[disabled] .navbar-default .btn-link:focus {
 }
 .header {
   position: relative;
-  height: 500px;
+  height: 440px;
   width: 100%;
   margin-bottom: 110px;
   overflow: hidden;
@@ -1162,6 +1162,44 @@ fieldset[disabled] .navbar-default .btn-link:focus {
   z-index: 2;
   height: 500px;
 }
+section_title {
+  padding-top: 40px;
+  padding-bottom: 20px;
+  font-size: 23px;
+  font-family: 'Raleway', sans-serif;
+  font-weight: 600;
+  color: #1e1e1e;
+}
+section_title hr {
+  border: 0px solid;
+  border-top: 1px solid #e0e0e0;
+}
+section_title hr:before {
+  content: '';
+  display: inline-block;
+  position: relative;
+  top: -21px;
+  left: 0px;
+  width: 40px;
+  height: 5px;
+  padding: 0 3px;
+  background-color: #eb1781;
+  background-image: -webkit-linear-gradient(left, #eb1781, #ff7a14);
+  background-image: -moz-linear-gradient(left, #eb1781, #ff7a14);
+  background-image: -o-linear-gradient(left, #eb1781, #ff7a14);
+  background-image: -ms-linear-gradient(left, #eb1781, #ff7a14);
+  background-image: linear-gradient(left, #eb1781, #ff7a14);
+  color: #8c8b8b;
+}
+.darkrow hr {
+  border-top: 1px solid #2e2e2e;
+}
+.darkrow section_title {
+  color: #ffffff;
+}
+.darkrow section_title {
+  font-weight: 500;
+}
 .main_header_component {
   position: relative;
   overflow: hidden;
@@ -1187,6 +1225,39 @@ fieldset[disabled] .navbar-default .btn-link:focus {
 .cover img {
   border: 1px #4d4d4d solid;
   width: 100%;
+}
+play_all_button {
+  border: 1px #808080 solid;
+  -webkit-border-radius: 2px;
+  -moz-border-radius: 2px;
+  border-radius: 2px;
+  font-size: 12px;
+  text-decoration: none;
+  color: #808080;
+  padding-top: 2px;
+  padding-left: 5px;
+  padding-bottom: 4px;
+  padding-right: 10px;
+  cursor: pointer;
+  display: inline-block;
+  cursor: hand;
+}
+play_all_button text {
+  font-size: 11px;
+}
+play_all_button:hover > text {
+  color: #2e2e2e;
+}
+play_all_button icon {
+  padding-left: 3px;
+  vertical-align: middle;
+  font-size: 13px !important;
+}
+play_all_button:hover {
+  border: 1px #eb1781 solid;
+}
+play_all_button:hover > icon {
+  color: #eb1781;
 }
 mini_header_component {
   width: 100%;
@@ -3530,6 +3601,9 @@ a:focus {
   margin: 0;
   overflow: visible;
   clip: auto;
+}
+.darkrow {
+  background-color: #1e1e1e;
 }
 [role="button"] {
   cursor: pointer;
