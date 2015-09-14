@@ -1,5 +1,5 @@
 @import url(https://fonts.googleapis.com/css?family=Montserrat);
-@import url(https://fonts.googleapis.com/css?family=Raleway:400,700);
+@import url(https://fonts.googleapis.com/css?family=Raleway:400,500,600,700);
 @import '../../../fonts/SocialNetworks/style.css';
 @import '../../../fonts/Basic-picto/style.css';
 /*Main Brand Color*/
@@ -1210,7 +1210,7 @@ mini_header_component img {
   vertical-align: middle;
   min-width: 100%;
   max-width: 120%;
-  min-height: 240px;
+  min-height: 100%;
 }
 mini_header_component description {
   position: absolute;
@@ -1221,25 +1221,36 @@ mini_header_component description {
   left: 20px;
   right: 20px;
   background-color: rgba(30, 30, 30, 0.65);
-  padding-left: 20px;
   line-height: 20px;
+}
+mini_header_component text_description {
+  position: absolute;
+  left: 20px;
+  bottom: 20px;
 }
 mini_header_component author {
   color: #ffffff;
+  font-family: 'Raleway', sans-serif;
+  text-transform: lowercase;
+  font-weight: 400;
   margin-left: 4px;
 }
 mini_header_component title {
-  font-size: 44px;
+  text-transform: uppercase;
+  font-size: 33px;
   margin-top: 4px;
+  font-family: 'Raleway', sans-serif;
+  font-weight: 600;
   color: #ffffff;
-  line-height: 38px;
+  line-height: 31px;
   display: block;
 }
 mini_header_component img {
-  transition: all 0.4s ease-in-out;
+  -webkit-backface-visibility: hidden;
+  transition: all 0.2s ease-out;
 }
 mini_header_component:hover > img {
-  transform: scale(1.1);
+  transform: scale(1.05);
 }
 release_component {
   width: 100%;
