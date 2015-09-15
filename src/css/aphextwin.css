@@ -1165,12 +1165,12 @@ fieldset[disabled] .navbar-default .btn-link:focus {
 section_title {
   padding-top: 40px;
   padding-bottom: 20px;
-  font-size: 23px;
   font-family: 'Raleway', sans-serif;
   font-weight: 600;
   color: #1e1e1e;
 }
 section_title hr {
+  margin-top: 8px;
   border: 0px solid;
   border-top: 1px solid #e0e0e0;
 }
@@ -1178,7 +1178,7 @@ section_title hr:before {
   content: '';
   display: inline-block;
   position: relative;
-  top: -21px;
+  top: -11px;
   left: 0px;
   width: 40px;
   height: 5px;
@@ -1190,6 +1190,10 @@ section_title hr:before {
   background-image: -ms-linear-gradient(left, #eb1781, #ff7a14);
   background-image: linear-gradient(left, #eb1781, #ff7a14);
   color: #8c8b8b;
+}
+section_title > headline > text {
+  padding-right: 25px;
+  font-size: 23px;
 }
 .darkrow hr {
   border-top: 1px solid #2e2e2e;
@@ -1210,23 +1214,25 @@ section_title hr:before {
 }
 .highlight_band {
   position: relative;
-  top: 330px;
+  top: 310px;
   width: 100%;
-  height: 130px;
+  height: 150px;
   background-color: rgba(30, 30, 30, 0.65);
 }
 .highlight_band .cover {
   position: relative;
   left: 20px;
   bottom: 30px;
-  width: 140px;
-  height: 140px;
+  width: 160px;
+  height: 160px;
 }
 .cover img {
   border: 1px #4d4d4d solid;
   width: 100%;
 }
 play_all_button {
+  font-family: 'Montserrat', sans-serif;
+  margin-left: 20px;
   border: 1px #808080 solid;
   -webkit-border-radius: 2px;
   -moz-border-radius: 2px;
@@ -1234,12 +1240,13 @@ play_all_button {
   font-size: 12px;
   text-decoration: none;
   color: #808080;
-  padding-top: 2px;
+  padding-top: 3px;
   padding-left: 5px;
-  padding-bottom: 4px;
+  padding-bottom: 5px;
   padding-right: 10px;
+  margin: 0px;
   cursor: pointer;
-  display: inline-block;
+  display: inline;
   cursor: hand;
 }
 play_all_button text {
@@ -1258,6 +1265,15 @@ play_all_button:hover {
 }
 play_all_button:hover > icon {
   color: #eb1781;
+}
+.darkrow play_all_button:hover {
+  border: 1px #ff7a14 solid;
+}
+.darkrow play_all_button:hover > icon {
+  color: #ff7a14;
+}
+.darkrow play_all_button:hover > text {
+  color: #e0e0e0;
 }
 mini_header_component {
   width: 100%;

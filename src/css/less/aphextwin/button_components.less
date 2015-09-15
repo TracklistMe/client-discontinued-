@@ -1,4 +1,6 @@
 play_all_button {
+	.fontText();
+	margin-left: 20px;
 	border: 1px @brand-neutral solid;
 	-webkit-border-radius: 2px;
 	-moz-border-radius: 2px;
@@ -6,12 +8,13 @@ play_all_button {
   	font-size: @font-size-small;
 	text-decoration:none;
 	color: @brand-neutral;
-	padding-top: 2px;
+	padding-top: 3px;
 	padding-left: 5px;
-	padding-bottom: 4px;
-	padding-right: 10px;  
+	padding-bottom: 5px;
+	padding-right: 10px;
+	margin: 0px;  
 	cursor: pointer; 
-	display: inline-block;
+	display: inline;
 	cursor: hand;
 }
 play_all_button text{   
@@ -29,10 +32,17 @@ play_all_button icon{
 play_all_button:hover  {
 	border: 1px @brand-primary solid;
 }
-
 play_all_button:hover > icon {
 	color: @brand-primary;
 }
+.darkrow play_all_button:hover  {
+	border: 1px @brand-secondary solid;
+}
+.darkrow play_all_button:hover > icon {
+	color: @brand-secondary;
+}
 
-
+.darkrow play_all_button:hover > text{  
+	color: @brand-lighter; 
+}
 
