@@ -528,13 +528,20 @@
 
 /* Additinal navbar implementation for dropdowns */
 .navbar ul ul {
-  display: none;
+  visibility: hidden;
 }
 
+.navbar ul ul li{ 
+  visibility: hidden;
+}
+.navbar ul li:hover li {
+    visibility: visible;  
+}
 
 .navbar ul li:hover > ul {
-    display: block;
+    visibility: visible; 
 }
+ 
 
 .navbar ul ul li, .navbar ul ul li a{
   color: @brand-lighter;
@@ -570,7 +577,9 @@
   padding-left: 0px;
 }
 .dropdownBorder:hover {
+  z-index: 2;
   margin-top: 1px; 
+  margin-right: -1px;
   border: 1px solid transparent;
   -moz-border-image: -moz-linear-gradient(left, @brand-primary 0%, @brand-secondary 100%);
   -webkit-border-image: -webkit-linear-gradient(left, @brand-primary 0%, @brand-secondary 100%);
@@ -589,6 +598,7 @@
 
 
 .navbar .divider-vertical {
+   z-index: 1;
   height: @navbar-height - @navbar-divider*2;
   margin-top: @navbar-divider;
   margin-bottom: @navbar-divider;

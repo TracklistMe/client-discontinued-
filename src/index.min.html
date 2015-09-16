@@ -1,20 +1,21 @@
 <!DOCTYPE html>
 <html lang="en" data-ng-app="app">
+
 <head>
   <meta charset="utf-8" />
-    <title>Tracklist.me</title>
-    <meta name="description" content="Tracklist.me - Your next music store " />
-    <meta name="keywords" content="Music, Dj, Producers, Electronic Music" />
-    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+  <title>Tracklist.me</title>
+  <meta name="description" content="Tracklist.me - Your next music store " />
+  <meta name="keywords" content="Music, Dj, Producers, Electronic Music" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
   <link rel="stylesheet" href="css/app.min.css" type="text/css" />
 </head>
+
 <body ng-controller="AppCtrl">
   <div class="app" id="app" ng-class="{'app-header-fixed':app.settings.headerFixed, 'app-aside-fixed':app.settings.asideFixed, 'app-aside-folded':app.settings.asideFolded, 'app-aside-dock':app.settings.asideDock, 'container':app.settings.container}" ui-view></div>
-  
   <!-- jQuery -->
   <script src="https://js.stripe.com/v2/"></script>
   <script src="js/app.min.js"></script>
   <!-- Lazy loading -->
-
 </body>
+
 </html>

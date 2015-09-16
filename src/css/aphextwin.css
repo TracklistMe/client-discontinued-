@@ -1018,10 +1018,16 @@ fieldset[disabled] .navbar-default .btn-link:focus {
 }
 /* Additinal navbar implementation for dropdowns */
 .navbar ul ul {
-  display: none;
+  visibility: hidden;
+}
+.navbar ul ul li {
+  visibility: hidden;
+}
+.navbar ul li:hover li {
+  visibility: visible;
 }
 .navbar ul li:hover > ul {
-  display: block;
+  visibility: visible;
 }
 .navbar ul ul li,
 .navbar ul ul li a {
@@ -1054,7 +1060,9 @@ fieldset[disabled] .navbar-default .btn-link:focus {
   padding-left: 0px;
 }
 .dropdownBorder:hover {
+  z-index: 2;
   margin-top: 1px;
+  margin-right: -1px;
   border: 1px solid transparent;
   -moz-border-image: -moz-linear-gradient(left, #eb1781 0%, #ff7a14 100%);
   -webkit-border-image: -webkit-linear-gradient(left, #eb1781 0%, #ff7a14 100%);
@@ -1072,6 +1080,7 @@ fieldset[disabled] .navbar-default .btn-link:focus {
   background-color: #1e1e1e;
 }
 .navbar .divider-vertical {
+  z-index: 1;
   height: 44px;
   margin-top: 8px;
   margin-bottom: 8px;
@@ -1210,10 +1219,8 @@ search_component input#search:focus {
   z-index: 2;
   height: 500px;
 }
-body {
-  background-color: #2e2e2e !important;
-}
 .landingPage {
+  background-color: #2e2e2e !important;
   opacity: .2;
   position: absolute;
   width: 100%;
@@ -1306,6 +1313,9 @@ input#friendEmail:-ms-input-placeholder {
   color: #fff;
   line-height: 50px;
   padding-left: 15px;
+}
+.spacer {
+  padding-top: 20px;
 }
 .container-4 button.icon,
 #yesArtist,
@@ -3902,6 +3912,7 @@ th {
   box-sizing: border-box;
 }
 html {
+  overflow-x: hidden;
   font-size: 10px;
   -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
 }
