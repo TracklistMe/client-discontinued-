@@ -1039,6 +1039,9 @@ fieldset[disabled] .navbar-default .btn-link:focus {
   font-size: 12px;
   line-height: 21.6px;
 }
+.navbar ul li .icon {
+  font-size: 17px;
+}
 .navbar ul ul li:before {
   /* For a round bullet */
   content: '\2014';
