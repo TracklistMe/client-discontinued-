@@ -195,6 +195,9 @@ module.exports = function(grunt) {
           src: 'src/aphextwin_index.html',
           dest: 'angular/aphextwin_index.html'
         }, {
+          src: 'src/landing_page.html',
+          dest: 'angular/landing_page.html'
+        }, {
           src: 'src/css/aphextwin.css',
           dest: 'angular/css/aphextwin.css'
         }, {
