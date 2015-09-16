@@ -1210,6 +1210,207 @@ search_component input#search:focus {
   z-index: 2;
   height: 500px;
 }
+body {
+  background-color: #2e2e2e !important;
+}
+.landingPage {
+  opacity: .2;
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background: url('../img/landing_page/main_background.jpg') no-repeat 50% 50% fixed;
+  background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  -webkit-background-size: cover;
+}
+register_panel {
+  display: block;
+  position: absolute;
+  right: 20%;
+  top: 50%;
+  height: 300px;
+  margin-top: -300px;
+}
+#landingPage h2 {
+  font-size: 48px;
+  line-height: 55px;
+  font-weight: 300;
+  color: #ffffff;
+  font-family: 'Raleway', sans-serif;
+  margin-top: 60px;
+  margin-bottom: 0px;
+}
+#landingPage h3 {
+  margin: 0px;
+  line-height: 35px;
+  font-size: 24px;
+  font-weight: 300;
+  color: #ffffff;
+  font-family: 'Raleway', sans-serif;
+}
+#landingPage p {
+  margin-top: 20px;
+  font-family: 'Raleway', sans-serif;
+  font-weight: 400;
+  color: #ffffff;
+}
+.container-4 {
+  margin-top: 80px;
+  display: block;
+  height: 50px;
+  overflow: hidden;
+  width: 300px;
+  vertical-align: middle;
+  white-space: nowrap;
+  position: relative;
+  background-color: rgba(224, 224, 224, 0.15);
+  -webkit-border-radius: 2px;
+  -moz-border-radius: 2px;
+  border-radius: 2px;
+}
+.container-4 input#email {
+  width: 300px;
+  height: 50px;
+  background-color: transparent;
+  border: none;
+  font-size: 10pt;
+  color: #fff;
+  position: relative;
+  padding-left: 15px;
+}
+.container-4 input#email::-webkit-input-placeholder {
+  color: #fff;
+}
+.container-4 input#email:-moz-placeholder {
+  /* Firefox 18- */
+  color: #fff;
+}
+.container-4 input#email::-moz-placeholder {
+  /* Firefox 19+ */
+  color: #fff;
+}
+.container-4 input#email:-ms-input-placeholder {
+  color: #fff;
+}
+#artistBlock,
+#labelBlock {
+  display: none;
+}
+.question {
+  color: #fff;
+  line-height: 50px;
+  padding-left: 15px;
+}
+.container-4 button.icon,
+#yesArtist,
+#noArtist,
+#yesLabel,
+#noLabel {
+  position: absolute;
+  right: 5px;
+  -webkit-border-radius: 3px;
+  -moz-border-radius: 3px;
+  border-radius: 3px;
+  outline: none;
+  line-height: 38px;
+  border: none;
+  height: 40px;
+  margin-top: 5px;
+  width: 40px;
+  color: #e0e0e0;
+  opacity: 1;
+  font-size: 13pt;
+  background-color: #eb1781;
+  background-image: -webkit-linear-gradient(45deg, #eb1781, #ff7a14);
+  background-image: -moz-linear-gradient(45deg, #eb1781, #ff7a14);
+  background-image: -o-linear-gradient(45deg, #eb1781, #ff7a14);
+  background-image: -ms-linear-gradient(45deg, #eb1781, #ff7a14);
+  background-image: linear-gradient(45deg, #eb1781, #ff7a14);
+}
+#noArtist,
+#noLabel {
+  background-color: #eb1781;
+  background-image: -webkit-linear-gradient(-45deg, #eb1781, #ff7a14);
+  background-image: -moz-linear-gradient(-45deg, #eb1781, #ff7a14);
+  background-image: -o-linear-gradient(-45deg, #eb1781, #ff7a14);
+  background-image: -ms-linear-gradient(-45deg, #eb1781, #ff7a14);
+  background-image: linear-gradient(-45deg, #eb1781, #ff7a14);
+  right: 50px !important;
+}
+.container-4:hover button.icon,
+.container-4:active button.icon,
+.container-4:focus button.icon {
+  outline: none;
+  opacity: 1;
+  margin-left: -50px;
+}
+.container-4:hover button.icon {
+  font-weight: 500;
+  color: #ffffff;
+}
+@-moz-keyframes spin {
+  from {
+    -moz-transform: rotate(0deg);
+  }
+  to {
+    -moz-transform: rotate(360deg);
+  }
+}
+@-webkit-keyframes spin {
+  from {
+    -webkit-transform: rotate(0deg);
+  }
+  to {
+    -webkit-transform: rotate(360deg);
+  }
+}
+@keyframes spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+#position {
+  display: none;
+  padding-top: 105px;
+  width: 300px;
+  font-size: 16px;
+  color: white;
+}
+.inviteFriend {
+  color: #ff7a14;
+}
+.iconSpin {
+  display: none;
+  -webkit-animation-name: spin;
+  -webkit-animation-duration: 1000ms;
+  -webkit-animation-iteration-count: infinite;
+  -webkit-animation-timing-function: linear;
+  -moz-animation-name: spin;
+  -moz-animation-duration: 1000ms;
+  -moz-animation-iteration-count: infinite;
+  -moz-animation-timing-function: linear;
+  -ms-animation-name: spin;
+  -ms-animation-duration: 1000ms;
+  -ms-animation-iteration-count: infinite;
+  -ms-animation-timing-function: linear;
+  animation-name: spin;
+  animation-duration: 1000ms;
+  animation-iteration-count: infinite;
+  animation-timing-function: linear;
+}
+.highlight {
+  color: #eb1781;
+  font-size: 22px;
+}
+#validationError {
+  margin-top: 10px;
+  display: none;
+  color: #eb1781;
+}
 section_title {
   padding-top: 40px;
   padding-bottom: 20px;

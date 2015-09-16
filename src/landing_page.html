@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en" data-ng-app="app">
+
+<head>
+  <meta charset="utf-8" />
+  <title>Tracklist.me</title>
+  <meta name="description" content="Tracklist.me - Your next music hub " />
+  <meta name="keywords" content="Music, Dj, Producers, Electronic Music" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+  <link rel="stylesheet" href="css/aphextwin.css" type="text/css" />
+  <link rel="apple-touch-icon" sizes="57x57" href="favicon/apple-icon-57x57.png">
+  <link rel="apple-touch-icon" sizes="60x60" href="favicon/apple-icon-60x60.png">
+  <link rel="apple-touch-icon" sizes="72x72" href="favicon/apple-icon-72x72.png">
+  <link rel="apple-touch-icon" sizes="76x76" href="favicon/apple-icon-76x76.png">
+  <link rel="apple-touch-icon" sizes="114x114" href="favicon/apple-icon-114x114.png">
+  <link rel="apple-touch-icon" sizes="120x120" href="favicon/apple-icon-120x120.png">
+  <link rel="apple-touch-icon" sizes="144x144" href="favicon/apple-icon-144x144.png">
+  <link rel="apple-touch-icon" sizes="152x152" href="favicon/apple-icon-152x152.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="favicon/apple-icon-180x180.png">
+  <link rel="icon" type="image/png" sizes="192x192" href="favicon/android-icon-192x192.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="favicon/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="96x96" href="favicon/favicon-96x96.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="favicon/favicon-16x16.png">
+  <link rel="manifest" href="favicon/manifest.json">
+  <meta name="msapplication-TileImage" content="favicon/ms-icon-144x144.png">
+  <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+  <!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+      <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <![endif]-->
+</head>
+
+<body id="landingPage">
+  <div class="landingPage">
+  </div>
+  <register_panel>
+    <h1>
+      <a href="https://tracklist.me">
+      <img src="/img/logo_big.png" alt="Tracklist.me" /></a>
+    </h1>
+    <h2> Your Music Hub </h2>
+    <h3> fair for the artists, fair for you </h3>
+    <p id="registerMessage"> Register now and get early beta access </p>
+    <div class="box">
+      <div id="position">In queue at position <span class="highlight">1234</span>.
+        <br />Thank you, an email has been sent. Please confirm it.
+        <br /> Want to skip the queue?
+        <br /><span id="inviteFriend"> Invite your friends! </span>
+      </div>
+      <div id="registration" class="container-4">
+        <div id="emailBlock">
+          <input type="email" id="email" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Email'" placeholder="Email" />
+          <button id="sendButton" class="icon">
+            <span id="send" class="basic-pictosimply-right"></span>
+            <span id="loading" class="basic-pictoloader iconSpin"></span>
+          </button>
+        </div>
+        <div id="artistBlock">
+          <span class="question"> Are you an Artist? </span>
+          <button id="yesArtist" class="icon">
+            <span id="send" class="basic-pictocheck"></span>
+          </button>
+          <button id="noArtist" class="icon">
+            <span id="send" class=" basic-pictocross"></span>
+          </button>
+        </div>
+        <div id="labelBlock">
+          <span class="question"> Are you a Label? </span>
+          <button id="yesLabel" class="icon">
+            <span id="send" class="basic-pictocheck"></span>
+          </button>
+          <button id="noLabel" class="icon">
+            <span id="send" class=" basic-pictocross"></span>
+          </button>
+        </div>
+      </div>
+      <div id="validationError"> Invalid email address </div>
+    </div>
+  </register_panel>
+</body>
+<script src="https://code.jquery.com/jquery-2.1.4.min.js" />
+<script type='text/javascript' id="__bs_script__">
+//<![CDATA[
+document.write("<script async src='http://HOST:3001/browser-sync/browser-sync-client.2.8.2.js'><\/script>".replace("HOST", location.hostname));
+//]]>
+</script>
+<script>
+function validateEmail(email) {
+  var re = /^([\w-]+(?:\.[\w-]+)*)@((?:[\w-]+\.)*\w[\w-]{0,66})\.([a-z]{2,6}(?:\.[a-z]{2})?)$/i;
+  return re.test(email);
+}
+
+
+function showPosition() {
+  $('#position').fadeIn();
+  $('#registerMessage').hide();
+  $('#registration').hide();
+}
+
+function showArtistQuestion() {
+  $('#emailBlock').fadeOut();
+  $('#artistBlock').fadeIn();
+}
+
+function showLabelQuestion() {
+  $('#artistBlock').fadeOut();
+  $('#labelBlock').fadeIn();
+}
+
+
+$(function() {
+  $('#email').focus(function() {
+    $('#validationError').hide();
+  })
+
+  $('#sendButton').click(function() {
+    console.log(validateEmail($('#email').val()));
+    if (validateEmail($('#email').val())) {
+      $('#loading').show();
+      $('#send').hide();
+      showArtistQuestion();
+    } else {
+      console.log("SHOW ERROR")
+      $('#validationError').show();
+    }
+  });
+
+
+  $('#yesArtist').click(function() {
+    //It's an artist
+    showLabelQuestion();
+  })
+  $('#noArtist').click(function() {
+    //It's not an artist
+    showLabelQuestion();
+  })
+
+  $('#yesLabel').click(function() {
+    //It's an artist
+    showPosition();
+  })
+  $('#noLabel').click(function() {
+    //It's not an artist
+    showPosition();
+  })
+
+
+});
+</script>
+
+</html>
