@@ -1082,45 +1082,93 @@ fieldset[disabled] .navbar-default .btn-link:focus {
     display: none;
   }
 }
-#custom-search-form {
-  margin-top: 10px;
-  padding-left: 24px;
-  padding-right: 24px;
-}
-#custom-search-form input[type="text"] {
-  padding-top: 10px;
-  padding-bottom: 10px;
-  padding-left: 10px;
-  background: transparent;
-  outline: none;
-  border: none;
-  border: 1px solid #ff7a14;
-}
-#custom-search-form input[type=text]:focus {
-  border: 1px solid #eb1781;
-}
-#custom-search-form .search-query {
-  padding-right: 3px;
-  padding-right: 4px \9;
-  padding-left: 3px;
-  padding-left: 4px \9;
-  /* IE7-8 doesn't have border-radius, so don't indent the padding */
-  margin-bottom: 0;
-}
-#custom-search-form button {
-  border: 0;
-  background: none;
-  /** belows styles are working good */
-  padding: 2px 5px;
-  margin-top: 2px;
+search_component {
+  width: 300px;
+  display: block;
+  vertical-align: middle;
+  white-space: nowrap;
   position: relative;
-  color: #eb1781;
-  left: -28px;
-  /* IE7-8 doesn't have border-radius, so don't indent the padding */
-  margin-bottom: 0;
+  height: 60px;
+  padding: 0px;
 }
-.search-query:focus + button {
-  z-index: 3;
+search_component input#search {
+  font-family: 'Raleway', sans-serif;
+  font-size: 12px;
+  width: 300px;
+  background-color: transparent;
+  height: 60px;
+  padding: 0px;
+  margin: 0px;
+  line-height: 60px;
+  border: none;
+  font-style: italic;
+  font-size: 10pt;
+  color: #808080;
+  padding-left: 45px;
+  color: #fff;
+}
+search_component input#search::-webkit-input-placeholder {
+  -webkit-transition: all .2s ease;
+  -moz-transition: all .2s ease;
+  -ms-transition: all .2s ease;
+  -o-transition: all .2s ease;
+  transition: all .2s ease;
+  color: #808080;
+}
+search_component input#search:-moz-placeholder {
+  /* Firefox 18- */
+  -webkit-transition: all .2s ease;
+  -moz-transition: all .2s ease;
+  -ms-transition: all .2s ease;
+  -o-transition: all .2s ease;
+  transition: all .2s ease;
+  color: #808080;
+}
+search_component input#search::-moz-placeholder {
+  /* Firefox 19+ */
+  -webkit-transition: all .2s ease;
+  -moz-transition: all .2s ease;
+  -ms-transition: all .2s ease;
+  -o-transition: all .2s ease;
+  transition: all .2s ease;
+  color: #808080;
+}
+search_component input#search:-ms-input-placeholder {
+  -webkit-transition: all .2s ease;
+  -moz-transition: all .2s ease;
+  -ms-transition: all .2s ease;
+  -o-transition: all .2s ease;
+  transition: all .2s ease;
+  color: #808080;
+}
+search_component input#search:focus::-webkit-input-placeholder {
+  color: #ffffff;
+}
+search_component input#search:focus:-moz-placeholder {
+  /* Firefox 18- */
+  color: #ffffff;
+}
+search_component input#search:focus::-moz-placeholder {
+  /* Firefox 19+ */
+  color: #ffffff;
+}
+search_component input#search:focus:-ms-input-placeholder {
+  color: #ffffff;
+}
+search_component .icon {
+  position: absolute;
+  line-height: 60px;
+  margin-left: 17px;
+  z-index: 1;
+  font-size: 17px;
+  color: #ffffff;
+}
+textarea:focus,
+input:focus {
+  outline: 0;
+}
+search_component input#search:focus {
+  color: #ffffff;
 }
 .header {
   position: relative;
