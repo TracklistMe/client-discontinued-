@@ -47,12 +47,24 @@
         <br /> Want to skip the queue?
         <br /><span id="inviteFriend"> Invite your friends! </span>
       </div>
+      <div id="positionFriend">An email has been sent to your friend.
+        <br />Once confirmed, you will notified and your beta will be closer!
+        <br />For now you are still in position <span class="highlight">1234</span>.
+        <br /><span id="inviteMoreFriend"> Invite more friends! </span>
+      </div>
       <div id="registration" class="container-4">
         <div id="emailBlock">
           <input type="email" id="email" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Email'" placeholder="Email" />
           <button id="sendButton" class="icon">
             <span id="send" class="basic-pictosimply-right"></span>
             <span id="loading" class="basic-pictoloader iconSpin"></span>
+          </button>
+        </div>
+        <div id="inviteFriendBlock">
+          <input type="email" id="friendEmail" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Friend\'s Email'" placeholder="Friend's Email" />
+          <button id="sendFriendButton" class="icon">
+            <span id="sendFriend" class="basic-pictosimply-right"></span>
+            <span id="loadingFriend" class="basic-pictoloader iconSpin"></span>
           </button>
         </div>
         <div id="artistBlock">
@@ -90,11 +102,32 @@ function validateEmail(email) {
   return re.test(email);
 }
 
+showArtistQuestion();
+showLabelQuestion();
+showPosition();
+showInviteFriend();
+
+
+function showInviteFriend() {
+
+  $('#friendEmail').val("");
+  $('#positionFriend').hide();
+  $('#position').hide();
+  $('#registration').show();
+  $('#inviteFriendBlock').show();
+}
 
 function showPosition() {
   $('#position').fadeIn();
+  $('#labelBlock').hide();
   $('#registerMessage').hide();
   $('#registration').hide();
+}
+
+function showPositionAfterFriendInvite() {
+  $('#positionFriend').show();
+  $('#registration').hide();
+  $('#inviteFriendBlock').hide();
 }
 
 function showArtistQuestion() {
@@ -118,6 +151,8 @@ $(function() {
     if (validateEmail($('#email').val())) {
       $('#loading').show();
       $('#send').hide();
+      $('#validationError').hide();
+      // REMEMBER TO REMOVE THE LOADER AND RESTORE THE ARROW
       showArtistQuestion();
     } else {
       console.log("SHOW ERROR")
@@ -125,7 +160,24 @@ $(function() {
     }
   });
 
+  $('#sendFriendButton').click(function() {
+    if (validateEmail($('#friendEmail').val())) {
+      $('#loadingFriend').show();
+      $('#sendFriend').hide();
+      $('#validationError').hide();
+      showPositionAfterFriendInvite();
+    } else {
 
+      $('#validationError').show();
+    }
+  });
+
+  $('#inviteFriend').click(function() {
+    showInviteFriend();
+  })
+  $('#inviteMoreFriend').click(function() {
+    showInviteFriend();
+  })
   $('#yesArtist').click(function() {
     //It's an artist
     showLabelQuestion();

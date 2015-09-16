@@ -1269,7 +1269,8 @@ register_panel {
   -moz-border-radius: 2px;
   border-radius: 2px;
 }
-.container-4 input#email {
+.container-4 input#email,
+input#friendEmail {
   width: 300px;
   height: 50px;
   background-color: transparent;
@@ -1279,18 +1280,22 @@ register_panel {
   position: relative;
   padding-left: 15px;
 }
-.container-4 input#email::-webkit-input-placeholder {
+.container-4 input#email::-webkit-input-placeholder,
+input#friendEmail::-webkit-input-placeholder {
   color: #fff;
 }
-.container-4 input#email:-moz-placeholder {
+.container-4 input#email:-moz-placeholder,
+input#friendEmail:-moz-placeholder {
   /* Firefox 18- */
   color: #fff;
 }
-.container-4 input#email::-moz-placeholder {
+.container-4 input#email::-moz-placeholder,
+input#friendEmail::-moz-placeholder {
   /* Firefox 19+ */
   color: #fff;
 }
-.container-4 input#email:-ms-input-placeholder {
+.container-4 input#email:-ms-input-placeholder,
+input#friendEmail:-ms-input-placeholder {
   color: #fff;
 }
 #artistBlock,
@@ -1373,15 +1378,20 @@ register_panel {
     transform: rotate(360deg);
   }
 }
-#position {
+#position,
+#positionFriend {
   display: none;
   padding-top: 105px;
-  width: 300px;
+  width: 340px;
   font-size: 16px;
   color: white;
 }
-.inviteFriend {
-  color: #ff7a14;
+#inviteFriendBlock {
+  display: none;
+}
+#inviteFriend,
+#inviteMoreFriend {
+  color: #eb1781;
 }
 .iconSpin {
   display: none;

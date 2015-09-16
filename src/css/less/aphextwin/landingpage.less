@@ -68,7 +68,7 @@ margin-top: 80px;
   border-radius: 2px;
 }
 
-.container-4 input#email{
+.container-4 input#email, input#friendEmail{
   width: 300px;
   height: 50px;
   background-color: transparent;
@@ -80,19 +80,19 @@ margin-top: 80px;
   padding-left: 15px;
 }
 
-.container-4 input#email::-webkit-input-placeholder {
+.container-4 input#email::-webkit-input-placeholder, input#friendEmail::-webkit-input-placeholder{
    color: #fff;
 }
  
-.container-4 input#email:-moz-placeholder { /* Firefox 18- */
+.container-4 input#email:-moz-placeholder, input#friendEmail:-moz-placeholder { /* Firefox 18- */
    color: #fff;  
 }
  
-.container-4 input#email::-moz-placeholder {  /* Firefox 19+ */
+.container-4 input#email::-moz-placeholder,input#friendEmail::-moz-placeholder {  /* Firefox 19+ */
    color: #fff;  
 }
  
-.container-4 input#email:-ms-input-placeholder {  
+.container-4 input#email:-ms-input-placeholder, input#friendEmail:-ms-input-placeholder {  
    color: #fff;  
 }
 #artistBlock, #labelBlock{
@@ -150,15 +150,18 @@ margin-top: 80px;
     from {transform:rotate(0deg);}
     to {transform:rotate(360deg);}
 }
-#position{
+#position, #positionFriend{
 	display: none;
 	padding-top: 105px;
-	width: 300px;
+	width: 340px;
 	font-size: 16px;
 	color: white;
 }
-.inviteFriend{
-	color: @brand-secondary;
+#inviteFriendBlock{
+	display: none;
+}
+#inviteFriend , #inviteMoreFriend{
+	color: @brand-primary;
 }
 .iconSpin{
 	display: none;
