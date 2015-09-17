@@ -418,6 +418,8 @@ select[multiple].input-lg {
   min-height: 25px;
 }
 .form-horizontal .form-group {
+  padding-left: 2%;
+  padding-right: 2%;
   margin-left: -2px;
   margin-right: -2px;
 }
@@ -1185,7 +1187,7 @@ search_component input#search:focus {
 }
 .header {
   position: relative;
-  height: 440px;
+  height: 500px;
   width: 100%;
   margin-bottom: 110px;
   overflow: hidden;
@@ -2129,6 +2131,8 @@ th {
   padding-right: 2px;
 }
 .row {
+  padding-left: 2%;
+  padding-right: 2%;
   margin-left: -2px;
   margin-right: -2px;
 }

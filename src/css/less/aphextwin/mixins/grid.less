@@ -13,6 +13,8 @@
 
 // Creates a wrapper for a series of columns
 .make-row(@gutter: @grid-gutter-xs-width) {
+  padding-left: 2%;
+  padding-right: 2%;
   margin-left:  ceil((@gutter / -2));
   margin-right: floor((@gutter / -2));
   &:extend(.clearfix all);
