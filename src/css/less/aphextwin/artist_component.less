@@ -28,8 +28,7 @@ artist_component artist_image {
  
  
 
-artist_image {
-	background-color: #fc0;
+artist_image { 
  	position: relative;
 	display: block;	
  }
@@ -82,7 +81,12 @@ artist_component description artist_details{
 	font-size: @font-size-very-small;
 }
 
-artist_component img{ 
-	-webkit-backface-visibility: hidden;
-	transition: all .2s ease-out; }
-artist_component:hover > artist_image > img{ transform: scale(1.05); }
+artist_component img{  
+	-webkit-transition: all .2s ease-out; 
+	-moz-transition: all .2s ease-out; 
+	-o-transition: all .2s ease-out; 
+	transition: all .2s ease-out; 
+}
+artist_component:hover > artist_image > img{  
+	transform: scale(1.05); 
+}

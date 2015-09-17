@@ -36,6 +36,22 @@ mini_header_component description{
 	background-color: fade(@brand-darkest, 65);
 	line-height: 20px;
 }
+
+mini_header_component description:after { 
+  content: ''; 
+  transition: all .2s ease-out;
+  display: inline-block; 
+  position: absolute; 
+  bottom: 0px; 
+  left: 20px; 
+  width: 40px;
+  height: 5px;
+  padding: 0 3px; 
+  .gradient(); 
+  color: #8c8b8b;  
+}
+
+
 mini_header_component text_description{
 	position: absolute;
 	left: @mini_header_overlay_margin;
@@ -61,5 +77,4 @@ mini_header_component title{
 
 mini_header_component img{ 
 	-webkit-backface-visibility: hidden;
-	transition: all .2s ease-out; }
-mini_header_component:hover > img{ transform: scale(1.05); }
+	transition: all .2s ease-out; } 

@@ -1040,7 +1040,8 @@ fieldset[disabled] .navbar-default .btn-link:focus {
   line-height: 21.6px;
 }
 .navbar ul li .icon {
-  font-size: 17px;
+  font-size: 15px;
+  padding-right: 5px;
 }
 .navbar ul ul li:before {
   /* For a round bullet */
@@ -1476,6 +1477,39 @@ section_title > headline > text {
 .darkrow section_title {
   font-weight: 500;
 }
+section_title_component {
+  display: block;
+  padding: 20px;
+  background-color: #ffffff;
+  width: 100%;
+  max-height: 240px;
+  min-height: 240px;
+}
+section_title_component more {
+  position: absolute;
+  bottom: 20px;
+  color: #808080;
+  font-family: 'Raleway', sans-serif;
+  text-transform: lowercase;
+  font-weight: 400;
+  margin-left: 4px;
+}
+section_title_component title {
+  text-transform: uppercase;
+  font-size: 23px;
+  line-height: 23px;
+  font-family: 'Raleway', sans-serif;
+  font-weight: 700;
+  color: #1e1e1e;
+  display: block;
+}
+section_title_component img {
+  -webkit-backface-visibility: hidden;
+  transition: all 0.2s ease-out;
+}
+section_title_component:hover > img {
+  transform: scale(1.05);
+}
 .main_header_component {
   position: relative;
   overflow: hidden;
@@ -1571,7 +1605,6 @@ artist_component artist_image {
   overflow: hidden;
 }
 artist_image {
-  background-color: #fc0;
   position: relative;
   display: block;
 }
@@ -1626,7 +1659,9 @@ artist_component description artist_details {
   font-size: 11px;
 }
 artist_component img {
-  -webkit-backface-visibility: hidden;
+  -webkit-transition: all 0.2s ease-out;
+  -moz-transition: all 0.2s ease-out;
+  -o-transition: all 0.2s ease-out;
   transition: all 0.2s ease-out;
 }
 artist_component:hover > artist_image > img {
@@ -1667,6 +1702,24 @@ mini_header_component description {
   background-color: rgba(30, 30, 30, 0.65);
   line-height: 20px;
 }
+mini_header_component description:after {
+  content: '';
+  transition: all 0.2s ease-out;
+  display: inline-block;
+  position: absolute;
+  bottom: 0px;
+  left: 20px;
+  width: 40px;
+  height: 5px;
+  padding: 0 3px;
+  background-color: #eb1781;
+  background-image: -webkit-linear-gradient(left, #eb1781, #ff7a14);
+  background-image: -moz-linear-gradient(left, #eb1781, #ff7a14);
+  background-image: -o-linear-gradient(left, #eb1781, #ff7a14);
+  background-image: -ms-linear-gradient(left, #eb1781, #ff7a14);
+  background-image: linear-gradient(left, #eb1781, #ff7a14);
+  color: #8c8b8b;
+}
 mini_header_component text_description {
   position: absolute;
   left: 20px;
@@ -1692,9 +1745,6 @@ mini_header_component title {
 mini_header_component img {
   -webkit-backface-visibility: hidden;
   transition: all 0.2s ease-out;
-}
-mini_header_component:hover > img {
-  transform: scale(1.05);
 }
 release_component {
   width: 100%;
@@ -3977,6 +4027,7 @@ a:focus {
   clip: auto;
 }
 .darkrow {
+  padding-top: 20px;
   background-color: #1e1e1e;
 }
 [role="button"] {
