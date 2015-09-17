@@ -175,7 +175,22 @@ app.controller('AdminEditReleaseCtrl', function($location, $scope, $state,
         releaseId +
         '/cover/confirmFile/', {})
       .success(function(data) {
-        delete $scope.release.cover;
+        // The following records are update on the server side,
+        // we don't want to create a race condition on that field in the DB.
+        if ($scope.release.cover) {
+          delete $scope.release.cover;
+        }
+        if ($scope.release.smallCover) {
+          delete $scope.release.smallCover;
+        }
+        if ($scope.release.largeCover) {
+          delete $scope.release.largeCover;
+        }
+        if ($scope.release.mediumCover) {
+          delete $scope.release.mediumCover;
+        }
+
+
         $scope.saveMetadata();
       });
 
@@ -615,6 +630,7 @@ app.controller('AdminEditReleaseCtrl', function($location, $scope, $state,
       });
     } else {
       // update an already existing release
+      console.log($scope.release)
       $http.put(CONFIG.url + '/releases/' + $scope.releaseId, {
         release: $scope.release
       }).success(function(data) {
