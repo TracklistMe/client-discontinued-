@@ -1746,6 +1746,9 @@ mini_header_component img {
   -webkit-backface-visibility: hidden;
   transition: all 0.2s ease-out;
 }
+mini_header_component:hover > img {
+  transform: scale(1.05);
+}
 release_component {
   width: 100%;
   cursor: pointer;
@@ -1768,6 +1771,8 @@ release_cover img {
   height: 100%;
 }
 release_title {
+  display: block;
+  margin-top: 10px;
   font-family: 'Raleway', sans-serif;
   font-weight: 700;
   font-size: 14px;
