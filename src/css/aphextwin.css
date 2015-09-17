@@ -1436,7 +1436,7 @@ input#friendEmail:-ms-input-placeholder {
   color: #eb1781;
 }
 section_title {
-  padding-top: 40px;
+  padding-top: 20px;
   padding-bottom: 20px;
   font-family: 'Raleway', sans-serif;
   font-weight: 600;
@@ -1468,13 +1468,13 @@ section_title > headline > text {
   padding-right: 25px;
   font-size: 23px;
 }
-.darkrow hr {
+.darkestrow hr {
   border-top: 1px solid #2e2e2e;
 }
-.darkrow section_title {
+.darkestrow section_title {
   color: #ffffff;
 }
-.darkrow section_title {
+.darkestrow section_title {
   font-weight: 500;
 }
 section_title_component {
@@ -1572,13 +1572,13 @@ play_all_button:hover {
 play_all_button:hover > icon {
   color: #eb1781;
 }
-.darkrow play_all_button:hover {
+.darkestrow play_all_button:hover {
   border: 1px #ff7a14 solid;
 }
-.darkrow play_all_button:hover > icon {
+.darkestrow play_all_button:hover > icon {
   color: #ff7a14;
 }
-.darkrow play_all_button:hover > text {
+.darkestrow play_all_button:hover > text {
   color: #e0e0e0;
 }
 artist_component {
@@ -1754,6 +1754,7 @@ release_component {
   cursor: pointer;
   cursor: hand;
   position: relative;
+  margin-bottom: 40px;
 }
 release_cover {
   top: 0px;
@@ -4031,13 +4032,23 @@ a:focus {
   overflow: visible;
   clip: auto;
 }
-.darkrow {
+.darkestrow {
   padding-top: 20px;
   background-color: #1e1e1e;
+}
+.darkestrow p {
+  color: #808080;
+}
+.darkerrow {
+  padding-top: 20px;
+  background-color: #2e2e2e;
 }
 [role="button"] {
   cursor: pointer;
 }
 .pictoFont {
   font-size: 1.2em;
+}
+footer {
+  height: 500px;
 }
