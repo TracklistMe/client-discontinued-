@@ -53,6 +53,9 @@
                       </div>
                     </div>
                   </div>
+                  addMode = {{addMode}}
+                  {{ (localPreviewImage || 'img/cover.png') }}
+                  {{ (localPreviewImage || serverURL+'/releases/'+releaseId+'/cover/large/?d='+randomValueForCoverRefresh) }}
                   <a ui-sref="music.release({id:release.id})"><img src="img/cover.png" ng-src="{{addMode? (localPreviewImage || 'img/cover.png') : (localPreviewImage || serverURL+'/releases/'+releaseId+'/cover/large/?d='+randomValueForCoverRefresh)}}" alt="" class="img-full r r-2x"></a>
                 </div>
               </div>
