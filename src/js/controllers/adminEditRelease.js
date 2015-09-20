@@ -13,6 +13,7 @@ app.controller('AdminEditReleaseCtrl', function($location, $scope, $state,
   // of potential file to added back. Those files will not fetched back 
   // from the call dropzone/ so must be handled manually 
 
+  console.log("---------- NEW EDIT RELEASE")
   $scope.serverURL = CONFIG.url;
 
 
@@ -642,12 +643,16 @@ app.controller('AdminEditReleaseCtrl', function($location, $scope, $state,
 
 
   $scope.initialize = function() {
-    if ($stateParams.id !== null) {
+    console.log($stateParams)
+    if ($stateParams.id) {
       // WE GOT A RELEASE 
+      console.log("is a release")
       $scope.releaseId = $stateParams.id;
       $scope.addMode = false;
       $scope.getRelease();
     } else {
+
+      console.log("is a label")
       // we are creating a release
       $scope.labelId = $stateParams.labelId;
       $scope.addMode = true;
