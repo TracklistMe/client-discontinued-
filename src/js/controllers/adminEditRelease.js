@@ -601,6 +601,7 @@ app.controller('AdminEditReleaseCtrl', function($location, $scope, $state,
                 //  $scope.getRelease();
                 //$scope.editedTrack = null
                 console.log("I created the release and now i have an id");
+                $scope.releaseId = data.id;
                 releaseId = data.id;
                 console.log(releaseId);
                 $scope.uploadCoverForRelease();
@@ -657,11 +658,11 @@ app.controller('AdminEditReleaseCtrl', function($location, $scope, $state,
 
         // update an already existing release
         console.log($scope.release)
-        $http.put(CONFIG.url + '/releases/' + $scope.releaseId, {
+        $http.put(CONFIG.url + '/releases/' + releaseId, {
             release: $scope.release
         }).success(function(data) {
 
-            $location.path('app/adminRelease/' + $scope.releaseId);
+            $location.path('app/adminRelease/' + releaseId);
         });
 
     }
