@@ -169,12 +169,21 @@ app.controller('AdminEditReleaseCtrl', function($location, $scope, $state,
 
     uploader.onCompleteItem = function(fileItem, response, status, headers) {
         console.info('onCompleteItem', fileItem, response, status, headers);
+        var fname = fileItem._file.name;
+        var filename =
+            fname.substr(0, (Math.min(fname.lastIndexOf('.'), fname.length)));
+        var extension =
+            fname.substr((Math.max(0, fname.lastIndexOf('.')) || Infinity) + 1);
+
 
         $http.post(
                 CONFIG.url +
                 '/releases/' +
                 releaseId +
-                '/cover/confirmFile/', {})
+                '/cover/confirmFile/', {
+                    filename: filename,
+                    extension: extension
+                })
             .success(function(data) {
                console.log("Cover file confirmed");
                 // The following records are update on the server side,
