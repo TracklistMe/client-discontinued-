@@ -1,30 +1,24 @@
 <!-- Upload Track(s) to Drop Zone -->
-                <div class="bg">
-                  
-                            <div class="modal-header">
-                                <button type="button" class="close" ng-click="closeUploadToDropbox( )" ><span aria-hidden="true">&times;</span>
-                                </button>
-                                <h4 class="modal-title" id="myModalLabel">Upload to Dropzone</h4>
-                            </div>
-                            <div class="modal-body">
-                                        <div class="center text-center m-t-n-lg w-full">
-                                            
-                                                <label class="uploadAvatar">
-                                                    <input type="file" nv-file-select="" uploader="trackUploader" />
-                                                    <span class="btn m-b-xs   btn-dark btn-rounded">click to upload </span>
-                                                </label>
-                                            </div>
-                                        </div>
-
-                             
-                                 <div ng-show="trackUploader.queue.length > 0"class="progress-xs progress bg-dark lter ng-isolate-scope" value="{{item.progress}}" type="info">
-                                    <div class="progress-bar   progress-bar-info" ng-class="type &amp;&amp; 'progress-bar-' + type" role="progressbar" aria-valuenow="55" aria-valuemin="0" aria-valuemax="100" ng-style="{ 'width': trackUploader.progress + '%' }"  ></div>
-                                </div>
-                            </div>
-                            <div class="modal-footer">
-                                <button type="button" class="btn btn-default"  ng-click="closeUploadToDropbox( )">Close without changing</button>
-                                <button ng-if="selectFileFromDropZone" ng-click="assignDropZoneFileToTrack(selectTrackToChangeFile)" type="button" data-dismiss="modal" class="btn btn-primary">Ok,you still need to save later</button>
-                            </div>
-               
-                </div>
-
+<div class="bg">
+  <div class="modal-header">
+    <button type="button" class="close" ng-click="closeUploadToDropbox( )"><span aria-hidden="true">&times;</span>
+    </button>
+    <h4 class="modal-title" id="myModalLabel">Upload to Dropzone</h4>
+  </div>
+  <div class="modal-body">
+    <div class="center text-center m-t-n-lg w-full">
+      <label class="uploadAvatar">
+        <input type="file" nv-file-select="" uploader="trackUploader" />
+        <span class="btn m-b-xs   btn-dark btn-rounded">click to upload </span>
+      </label>
+    </div>
+  </div>
+  <div ng-show="trackUploader.queue.length > 0" class="progress-xs progress bg-dark lter ng-isolate-scope" value="{{item.progress}}" type="info">
+    <div class="progress-bar   progress-bar-info" ng-class="type &amp;&amp; 'progress-bar-' + type" role="progressbar" aria-valuenow="55" aria-valuemin="0" aria-valuemax="100" ng-style="{ 'width': trackUploader.progress + '%' }"></div>
+  </div>
+</div>
+<div class="modal-footer">
+  <button type="button" class="btn btn-default" ng-click="closeUploadToDropbox( )">Close without changing</button>
+  <button ng-if="selectedFileFromDropZone" ng-click="assignDropZoneFileToTrack(); closeUploadToDropbox();" type="button" data-dismiss="modal" class="btn btn-primary">Ok,you still need to save later</button>
+</div>
+</div>

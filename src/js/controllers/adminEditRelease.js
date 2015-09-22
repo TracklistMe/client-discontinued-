@@ -86,7 +86,7 @@ app.controller('AdminEditReleaseCtrl', function($location, $scope, $state,
     $scope.modalSelectFromCDN = null;
     $scope.modalUploadDropbox = null;
     $scope.selectedTrack = null;
-    $scope.selectFileFromDropZone = null;
+    $scope.selectedFileFromDropZone = null;
     $scope.addMode = null;
     // MODAL ADMIN
     // 
@@ -128,14 +128,14 @@ app.controller('AdminEditReleaseCtrl', function($location, $scope, $state,
         $scope.modalSelectFromCDN.close();
     };
 
-    $scope.assignDropZoneFileToTrack = function(file) {
-        $scope.closeSelectFromCDN();
-        $scope.selectedTrack.path = file.path;
+    $scope.assignDropZoneFileToTrack = function() {
+        //$scope.closeSelectFromCDN();
+        $scope.selectedTrack.path = $scope.selectedFileFromDropZone.path;
 
         // add the path to a blacklist for the dropzone, this because we are
         // maintaining consistent a status that is not saved in the server yet.
         $scope.assignedList.push({
-            path: file.path
+            path: $scope.selectedFileFromDropZone.path
         });
     };
 
@@ -273,11 +273,14 @@ app.controller('AdminEditReleaseCtrl', function($location, $scope, $state,
                 filename: filename,
                 extension: extension
             }).success(function() {
-            $scope.selectFileFromDropZone = {
+                console.log("UPLOAD FINISHED ASIGN THE NEW OBBJECT");
+
+            $scope.selectedFileFromDropZone = {
                 filaName: filename,
                 extension: extension,
                 path: 'dropZone/' + $scope.labelId + '/' + fname
             };
+            console.log($scope.selectedFileFromDropZone)
         });
         $scope.getDropZoneFiles();
     };
@@ -567,7 +570,7 @@ app.controller('AdminEditReleaseCtrl', function($location, $scope, $state,
 
     $scope.selectFromDropZone = function(track) {
         $scope.selectTrackToChangeFile = track;
-        $scope.selectFileFromDropZone = null;
+        $scope.selectedFileFromDropZone = null;
         $scope.getDropZoneFiles();
     };
 
